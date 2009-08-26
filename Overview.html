@@ -29,7 +29,42 @@
     <section>
       <h2>Requirements</h2>
       <p>
-        ...
+        The Camera API:
+      </p>
+      <ul>
+        <li>MUST enable capture of static images</li>
+        <li>MUST enable capture of videos</li>
+        <li>MUST enable listing the available cameras</li>
+        <li>MUST enable listing the available formats and codecs, per camera</li>
+        <li>MUST enable retrieval of the captured content</li>
+        <li>MUST provide some metadata about the captured content (e.g. width, height, format, duration)</li>
+        <li>MUST enable choosing preferred aspects of the captured content (e.g. width, height, format, frame rate)</li>
+        <li>MUST enable displaying a viewfinder</li>
+        <li>MUST support asynchronous, cancellable capture</li>
+        <li>SHOULD enable displaying a viewfinder as part of the document (e.g. as a <code>video</code> element [[HTML5]])</li>
+        <li>SHOULD enable control of the camera's capabilities (e.g. zoom, luminosity, night mode, focus mode)</li>
+      </ul>
+      <p class='issue'>
+        Given support for capturing video, we need to take sound capture into account. Once that's supported,
+        is there any reason not to support capturing sound on its own? If we go there, isn't this a Capture API,
+        with the ability to list mikes?
+      </p>
+      <div class='issue'>
+        <p>
+          If the user requests a given capture size which isn't available, do we refuse or do we fall back? If the
+          latter (which is likely) what is the algorithm that is used to find the fallback? It could be (given a request
+          for 1000x50):
+          <ul>
+            <li>the camera's preferred default</li>
+            <li>500x100 (closest number of pixels)</li>
+            <li>1000x700 (closest longest side)</li>
+            <li>2000x100 (closest ratio)</li>
+          </ul>
+        </p>
+      </div>
+      <p class='issue'>
+        We could very easily get bogged down in specifying camera capabilities and format feature variants — 
+        how do we decide which ones are reasonably in?
       </p>
     </section>
     
