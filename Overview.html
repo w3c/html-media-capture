@@ -180,7 +180,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
 </li></ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCallback callback </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of images user can take. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+<dl class="parameters"><dt>CaptureCallback successCallback </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of images user can take. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd><dt>PendingOperation captureVideo () </dt><dd>
 <p>Launch device native camera application for recording video(s).</p>
@@ -196,7 +196,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
 </li></ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCallback callback </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in seconds. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+<dl class="parameters"><dt>CaptureCallback successCallback </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in seconds. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd><dt>PendingOperation captureAudio () </dt><dd>
 <p>Launch device native audio recorder application for recording audio clip(s).</p>
@@ -212,7 +212,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
 </li></ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCallback callback </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of sound clips user can record.
+<dl class="parameters"><dt>CaptureCallback successCallback </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of sound clips user can record.
 </dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in seconds. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
@@ -232,11 +232,10 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </dd><dt>attribute double duration </dt><dd>The duration attribute represents length of the video or sound clip in seconds. Not applicable for a image.
 </dd><dt>attribute unsigned long width </dt><dd>The width attribute represents width of the image or video in pixels. Not applicable for a sound clip.
 </dd></dl>
-</section><section id="successcallbak"><h3><a>SuccessCallback</a> interface</h3>
-<p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
+</section><section id="capturecallbak"><h3><a>CaptureCallback</a> interface</h3>
 <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface SuccessCallback" class="idl">
 <dt>void onSuccess () </dt><dd>
-<dl class="parameters"><dt>optional Object obj </dt><dd>The return object of a successful asynchronous operation. This parameter is OPTIONAL.
+<dl class="parameters"><dt>MediaArray capturedMedia </dt><dd>Sequence of MediaData successfully captured by the device</dd>
 </dd></dl>
 </dd></dl>
 </section><section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
