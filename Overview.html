@@ -249,7 +249,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <p class="note">More error codes to be defined here. </p>
 <p>The <a>CaptureError</a> interface encapsulates all errors in the Capture API. </p>
 <dl title="[NoInterfaceObject] interface CaptureError : GenericError" class="idl">
-<dt>const unsigned short CAPTURE_INTERNAL_ERR = 0 </dt><dd>Camera failed to take image. </dd><dt>readonly attribute unsigned short code </dt><dd>An error code assigned by an implementation when an error has occurred in Capture API processing.
+<dt>const unsigned short CAPTURE_INTERNAL_ERR = 0 </dt><dd>Camera or mike failed to capture image or sound. </dd><dt>readonly attribute unsigned short code </dt><dd>An error code assigned by an implementation when an error has occurred in Capture API processing.
 </dd></dl>
 </section><section> id="pendingoperation"><h3><a>PendingOperation</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
