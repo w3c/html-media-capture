@@ -155,7 +155,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </section>
 <section id="api">
 <h2>API Description</h2>
-<h3><a>Capture</a> interface</h3>
+<h3 id="capture"><a>Capture</a> interface</h3>
 <p>The <code>Capture</code> interface exposes an interface to the camera and microphone of the hosting device.</p>
 <dl title="[NoInterfaceObject] interface Camera" class="idl"><dt>readonly attribute sequence&lt;FormatData&gt; supportedImageFormats
 </dt><dd>A sequence of FormatData objects which contains image sizes and formats supported by the hosting device camera.
@@ -211,14 +211,14 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in seconds. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
-<h3><a>MediaData</a> interface</h3>
+<h3 id="mediadata"><a>MediaData</a> interface</h3>
 <p><code>MediaData</code> captures a single photo, video or sound captured by the device native capture application.
 </p>
 <dl title="[NoInterfaceObject] interface MediaData" class="idl"><dt>attribute DOMString uri
 </dt><dd>The uri attribute attribute specifies the path to the media file taken by native application as a Uniform Resource Identifier (URI) conforming to [[RFC3986]].
 </dd><dt>attribute FormatData format </dt><dd>The format attribute represents the media <a href="#formatdata-interface"><code>FormatData</code></a> object.
 </dd></dl>
-<h3><a>FormatData</a> interface</h3>
+<h3 id="formatdata"><a>FormatData</a> interface</h3>
 <p><code>FormatData</code> captures format information of a media file captured by the device native capture application.
 </p>
 <dl title="[NoInterfaceObject] interface FormatData" class="idl"><dt>attribute DOMString type
@@ -227,34 +227,34 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </dd><dt>attribute int duration </dt><dd>The duration attribute represents length of the video or sound clip in seconds. Not applicable for a image.
 </dd><dt>attribute int width </dt><dd>The width attribute represents width of the image or video in pixels. Not applicable for a sound clip.
 </dd></dl>
-<h3><a>SuccessCallback</a> interface</h3>
+<h3 id="successcallbak"><a>SuccessCallback</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface SuccessCallback" class="idl">
 <dt>void onSuccess () </dt><dd>
 <dl class="parameters"><dt>optional Object obj </dt><dd>The return object of a successful asynchronous operation. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
-<h3><a>MediaArray</a> typedef</h3>
+<h3 id="mediaarray"><a>MediaArray</a> typedef</h3>
 <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of <a href="#mediadata-interface">
 <code>MediaData</code></a> objects. </p>
 <dl title="typedef sequence&lt;MediaData&gt; MediaArray" class="idl"></dl>
-<h3><a>ErrorCallback</a> interface</h3>
+<h3 id="errorcallback"><a>ErrorCallback</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface ErrorCallback" class="idl">
 <dt>void onError () </dt><dd>
 <dl class="parameters"><dt>GenericError error </dt><dd>The error object of an unsuccessful asynchronous operation. </dd></dl>
 </dd></dl>
-<h3><a>CaptureError</a> interface</h3>
+<h3 id="captureerror"><a>CaptureError</a> interface</h3>
 <p class="note">More error codes to be defined here. </p>
 <p>The <a>CaptureError</a> interface encapsulates all errors in the Capture API. </p>
 <dl title="[NoInterfaceObject] interface CaptureError : GenericError" class="idl">
 <dt>const unsigned short CAMERA_INTERNAL_ERR = 0 </dt><dd>Camera failed to take image. </dd><dt>readonly attribute unsigned short code </dt><dd>An error code assigned by an implementation when an error has occurred in Capture API processing.
 </dd></dl>
-<h3><a>PendingOperation</a> interface</h3>
+<h3 id="pendingoperation"><a>PendingOperation</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[NoInterfaceObject] interface PendingOperation" class="idl"><dt>void cancel ()
 </dt><dd>Cancel/clear the pending asynchronous operation. </dd></dl>
-<h3>Discussion</h3>
+<h3 id="discussion">Discussion</h3>
 <p>To avoid latency while sending the captured voice sample to the network based speech recognizer, the voice should be recorded in a compressed format. The API should allow to select a compression format.
 </p>
 </section>
