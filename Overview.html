@@ -116,7 +116,7 @@ to monitor for movement and trigger a notification such as email or alert to the
             var img = document.createElement(&quot;img&quot;);
             img.src = data[i].uri;
             // If the image width exceeds that of the browser viewport, the image
-            // i scaled to fit the screen keeping the aspect ratio intact.
+            // is scaled to fit the screen keeping the aspect ratio intact.
             if (data[i].format.width &gt; screenWidth) {
                 img.style.width = screenWidth &#43; &quot;px&quot;;
                 img.style.height = (data[i].format.height/data[i].format.width)*screenWidth &#43; &quot;px&quot;;    
