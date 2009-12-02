@@ -34,47 +34,45 @@
 </p>
 <div>
 <p>Launching a device camera application and retrieving the pictures taken. </p>
-<pre class="example sh_javascript_dom"> 
-    // Create a container div element and append it to the document body.
-    var container = document.createElement(&quot;div&quot;);
-    document.body.appendChild(container);
+<pre class="example sh_javascript_dom">// Create a container div element and append it to the document body.
+var container = document.createElement(&quot;div&quot;);
+document.body.appendChild(container);
  
-    // The browser viewport width in pixels.
-    var screenWidth = window.innerWidth;
-    
-    function successCallback(data) {
-        for (var i in data) {
-            var img = document.createElement(&quot;img&quot;);
-            img.src = data[i].uri;
-            // If the image width exceeds that of the browser viewport, the image
-            // is scaled to fit the screen keeping the aspect ratio intact.
-            if (data[i].format.width &gt; screenWidth) {
-                img.style.width = screenWidth &#43; &quot;px&quot;;
-                img.style.height = (data[i].format.height/data[i].format.width)*screenWidth &#43; &quot;px&quot;;    
-            }
-            container.appendChild(img);
-        }
-    }
+// The browser viewport width in pixels.
+var screenWidth = window.innerWidth;
+
+function successCallback(data) {
+for (var i in data) {
+var img = document.createElement(&quot;img&quot;);
+img.src = data[i].uri;
+// If the image width exceeds that of the browser viewport, the image
+// is scaled to fit the screen keeping the aspect ratio intact.
+if (data[i].format.width &gt; screenWidth) {
+img.style.width = screenWidth &#43; &quot;px&quot;;
+img.style.height = (data[i].format.height/data[i].format.width)*screenWidth &#43; &quot;px&quot;;
+}
+container.appendChild(img);
+}
+}
  
-    function errorCallback(err) {
-        alert(err.message &#43; &quot; (&quot; &#43; err.code &#43; &quot;)&quot;); 
-    }
+function errorCallback(err) {
+alert(err.message &#43; &quot; (&quot; &#43; err.code &#43; &quot;)&quot;); 
+}
  
-    // Launch the device camera application and invoke the callback once 
-    // the user exits the camera application.
-    transactionId = navigator.device.captureImage(successCallback, 1, errorCallback);
-    </pre>
+// Launch the device camera application and invoke the callback once 
+// the user exits the camera application.
+transactionId = navigator.device.captureImage(successCallback, 1, errorCallback);</pre>
 </div>
 <div>
 <p>Example of retrieving image sizes and formats supported by hosting device camera.</p>
 <pre class="example sh_javascript_dom">var summary;
-    var formats = navigator.device.supportedImageFormats;
-    
-    for (var key in formats) {
-        summary &#43;= key &#43; &quot;: &quot; &#43; formats[key] &#43; &quot;\n&quot;;
-    }
-    
-    alert(summary);</pre>
+var formats = navigator.device.supportedImageFormats;
+
+for (var key in formats) {
+summary &#43;= key &#43; &quot;: &quot; &#43; formats[key] &#43; &quot;\n&quot;;
+}
+
+alert(summary);</pre>
 </div>
 </section>
 </section>
