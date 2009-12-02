@@ -158,7 +158,11 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <section id="capture">
 <h3><a>Capture</a> interface</h3>
 <p>The <code>Capture</code> interface exposes an interface to the camera and microphone of the hosting device.</p>
-<dl title="[NoInterfaceObject] interface Capture" class="idl"><dt>readonly attribute sequence&lt;FormatData&gt; supportedImageFormats
+
+<p class="issue">Where does it hang off of? Example given above assumes navigator.device — in which case we need to define a <code>NavigatorDevice/<code> interface somewhere.</p>
+<p>Objects implementing the <code>NavigatorDevice</code> interface (e.g. the <code>window.navigator.device</code> object in Web browsers [[NAVIGATOR]]) provide access to the <code>Capture</code> interface through the <code>Capture</code> interface . An instance of <code>Capture</code> would be then obtained by using binding-specific casting methods on an instance of <code>NavigatorDevice</code>.</p>
+
+<dl title="[Supplemental, NoInterfaceObject] interface Capture" class="idl"><dt>readonly attribute sequence&lt;FormatData&gt; supportedImageFormats
 </dt><dd>A sequence of FormatData objects which contains image sizes and formats supported by the hosting device camera.
 </dd><dt>readonly attribute sequence&lt;FormatData&gt; supportedVideoFormats </dt><dd>A sequence of FormatData objects which contains video resolutions and formats supported by the hosting device camera.
 </dd><dt>readonly attribute sequence&lt;FormatData&gt; supportedAudioFormats </dt><dd>A sequence of FormatData objects which contains audio formats supported by the hosting device microphone.
