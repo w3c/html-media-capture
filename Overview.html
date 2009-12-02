@@ -229,10 +229,13 @@ another on the other side pointing at the subject. This allows for such usage as
 <h3>Use cases</h3>
 <p>This section contains a set of use cases collected for the Capture API. Note that this section might be removed in future versions of the document.
 </p>
-<h4>Picture Capture</h4>
+<h4>Picture Capture and Picture upload</h4>
 <p>A (web-based) camera application that allow the user to capture image with and without preview mode using the device camera capability.
-Also allow the user to capture multiple images in burst mode.
+Also allow the user to capture multiple images in burst mode and upload the image(s) to a server using XHR.
 </p>
+<div class="issue">
+  <p>The image is returned as URI from captureImage() callback? How do we XHR upload? Do we need the FileAPI or is there a need to return the image (captured object) as binary data?</p>
+</div>
 <h4>Panorama Image Capture</h4>
 <p>A (web-based) camera application that allow the user to capture panorama images with and without preview mode using the device camera capability.
 When the user select panorama mode, the view finder displays an indication that it is ready to take the 1st image of 3. 
