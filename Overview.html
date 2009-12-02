@@ -22,9 +22,8 @@
     </section>
     <section class='introductory'>
 			<h2>Introduction</h2>
-    </section>
 <p>The Capture API defines a high-level interface for accessing the microphone and camera of a hosting device.</p>
-<h2>Requirements</h2>
+<h3>Requirements</h3>
 <p>The Capture API: </p>
 <ul>
 <li>MUST enable capture of static images </li>
@@ -58,14 +57,14 @@
 another on the other side pointing at the subject. This allows for such usage as see-what-I-see.
 </p>
 </div>
-<h2>Use cases</h2>
+<h3>Use cases</h3>
 <p>This section contains a set of use cases collected for the Capture API. Note that this section might be removed in future versions of the document.
 </p>
-<h3>Picture Capture</h3>
+<h4>Picture Capture</h4>
 <p>A (web-based) camera application that allow the user to capture image with and without preview mode using the device camera capability.
 Also allow the user to capture multiple images in burst mode.
 </p>
-<h3>Panorama Image Capture</h3>
+<h4>Panorama Image Capture</h4>
 <p>A (web-based) camera application that allow the user to capture panorama images with and without preview mode using the device camera capability.
 When the user select panorama mode, the view finder displays an indication that it is ready to take the 1st image of 3. 
 the user points the device starting from the left and presses the Take button. The device takes the image indicated 
@@ -74,11 +73,11 @@ The view finder displays a 1/8 overlay of previous image on the left side so the
 After taking all 3 images that makes up the panorama picture, the device displays the picture on the screen for a 
 second before going back to the view finder mode. 
 </p>
-<h3>Video chat</h3>
+<h4>Video chat</h4>
 <p>The use case is to be able to write a web app that implements a voice/video chat client. This could be as part of an instant messaging client, or might be a standalone videophone or 'telephone'. Another example might be an online 'chat with customer service'
  link on the web site that downloaded the web app that allowed the customer to do this directly.
 </p>
-<h4>Discussion</h4>
+<h5>Discussion</h5>
 <p>Video output can be handled with the &lt;video&gt; tag. However, video input is not so easy as there is no obvious way to pass captured video in real time to the server. You might think that you could use the preview URL as proposed in one API as a way, but there
  is no obvious way to pass the data coming out of this URL down (for example) a websocket.
 </p>
@@ -87,17 +86,18 @@ second before going back to the view finder mode.
 <p>An ideal approach would be to define a websocket like interface onto the camera/microphone (it might even be as simple as defining a method to get a web sockets URL for the camera/microphone). Another alternative (which would cause more upheaval) would be
  to add the websocket read/write interface onto XmlHttpRequest and then have the camera expose an HTTP URL for the full audio/video data stream.
 </p>
-<h3>Web cam</h3>
+<h4>Web cam</h4>
 <p>A (web-based) surveillance application that would allow the user to survey their property remotely. The camera would allow for 
 some type of control such as moving the camera left, right, up and down. Another usage would allow for the surveillance web application 
 to monitor for movement and trigger a notification such as email or alert to the user</p>
-<h3>Voice search</h3>
+<h4>Voice search</h4>
 <p>A (web-based) search application might offer the user to speak the search query into the device, e.g. while holding a push-to-talk button or triggered by a proximity sensor (use case for sensor API). The users utterance has to be recorded (captured) and
  may be sent over the network to a network based speech recognizer. </p>
 
-<h3>Voice memo</h3>
+<h4>Voice memo</h4>
 <p>A (web-based) voice recorder application which allow the user to record a memo for later playback.</p>
-
+</section>
+<section id="examples">
 <h2>Usage Examples</h2>
 <p>The following code extracts illustrate how to work with a camera service in the hosting device:
 </p>
@@ -145,13 +145,17 @@ to monitor for movement and trigger a notification such as email or alert to the
     
     alert(summary);</pre>
 </div>
+</section>
+<section id="security">
 <h2>Security and Privacy Considerations</h2>
 The API defined in this specification launches the capture application which allows the user to take pictures, record voice or record video and provides a handle to the content. This information can potentially compromise user privacy and a conforming implementation of this specification
  MUST provide a mechanism that protects the user's privacy and this mechanism should ensure that such operations MUST be authenticated.
-<h2>Privacy considerations for implementers of Capture API</h2>
+<h3>Privacy considerations for implementers of Capture API</h3>
 A conforming implementation of this specification MUST provide a mechanism that protects the user's privacy and this mechanism SHOULD ensure that privacy information is not revealed without user's informed consent.
+</section>
+<section id="api">
 <h2>API Description</h2>
-<h2><a>Capture</a> interface</h2>
+<h3><a>Capture</a> interface</h3>
 <p>The <code>Capture</code> interface exposes an interface to the camera and microphone of the hosting device.</p>
 <dl title="[NoInterfaceObject] interface Camera" class="idl"><dt>readonly attribute sequence&lt;FormatData&gt; supportedImageFormats
 </dt><dd>A sequence of FormatData objects which contains image sizes and formats supported by the hosting device camera.
@@ -207,14 +211,14 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in seconds. </dd><dt>optional ErrorCallback errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
-<h2><a>MediaData</a> interface</h2>
+<h3><a>MediaData</a> interface</h3>
 <p><code>MediaData</code> captures a single photo, video or sound captured by the device native capture application.
 </p>
 <dl title="[NoInterfaceObject] interface MediaData" class="idl"><dt>attribute DOMString uri
 </dt><dd>The uri attribute attribute specifies the path to the media file taken by native application as a Uniform Resource Identifier (URI) conforming to [[RFC3986]].
 </dd><dt>attribute FormatData format </dt><dd>The format attribute represents the media <a href="#formatdata-interface"><code>FormatData</code></a> object.
 </dd></dl>
-<h2><a>FormatData</a> interface</h2>
+<h3><a>FormatData</a> interface</h3>
 <p><code>FormatData</code> captures format information of a media file captured by the device native capture application.
 </p>
 <dl title="[NoInterfaceObject] interface FormatData" class="idl"><dt>attribute DOMString type
@@ -223,36 +227,38 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </dd><dt>attribute int duration </dt><dd>The duration attribute represents length of the video or sound clip in seconds. Not applicable for a image.
 </dd><dt>attribute int width </dt><dd>The width attribute represents width of the image or video in pixels. Not applicable for a sound clip.
 </dd></dl>
-<h2><a>SuccessCallback</a> interface</h2>
+<h3><a>SuccessCallback</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface SuccessCallback" class="idl">
 <dt>void onSuccess () </dt><dd>
 <dl class="parameters"><dt>optional Object obj </dt><dd>The return object of a successful asynchronous operation. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
-<h2><a>MediaArray</a> typedef</h2>
+<h3><a>MediaArray</a> typedef</h3>
 <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of <a href="#mediadata-interface">
 <code>MediaData</code></a> objects. </p>
 <dl title="typedef sequence&lt;MediaData&gt; MediaArray" class="idl"></dl>
-<h2><a>ErrorCallback</a> interface</h2>
+<h3><a>ErrorCallback</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface ErrorCallback" class="idl">
 <dt>void onError () </dt><dd>
 <dl class="parameters"><dt>GenericError error </dt><dd>The error object of an unsuccessful asynchronous operation. </dd></dl>
 </dd></dl>
-<h2><a>CaptureError</a> interface</h2>
+<h3><a>CaptureError</a> interface</h3>
 <p class="note">More error codes to be defined here. </p>
 <p>The <a>CaptureError</a> interface encapsulates all errors in the Capture API. </p>
 <dl title="[NoInterfaceObject] interface CaptureError : GenericError" class="idl">
 <dt>const unsigned short CAMERA_INTERNAL_ERR = 0 </dt><dd>Camera failed to take image. </dd><dt>readonly attribute unsigned short code </dt><dd>An error code assigned by an implementation when an error has occurred in Capture API processing.
 </dd></dl>
-<h2><a>PendingOperation</a> interface</h2>
+<h3><a>PendingOperation</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[NoInterfaceObject] interface PendingOperation" class="idl"><dt>void cancel ()
 </dt><dd>Cancel/clear the pending asynchronous operation. </dd></dl>
-<h4>Discussion</h4>
+<h3>Discussion</h3>
 <p>To avoid latency while sending the captured voice sample to the network based speech recognizer, the voice should be recorded in a compressed format. The API should allow to select a compression format.
 </p>
+</section>
+<section id="related">
 <h2>Related documents</h2>
 <p>This section contains a list of related information for editorial purposes. Note that this section will be removed in later versions of the document.
 </p>
@@ -261,13 +267,18 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </li><li><a href="redir.aspx?C=a80e3c073aeb4bacbe5718db26f3c9bd&amp;URL=http%3a%2f%2fbondi.omtp.org%2f1.1%2fCR%2fapis%2fcamera.html" target="_blank">BONDI 1.1 camera API</a>
 </li><li><a href="redir.aspx?C=a80e3c073aeb4bacbe5718db26f3c9bd&amp;URL=http%3a%2f%2flists.w3.org%2fArchives%2fPublic%2fpublic-device-apis%2f2009Apr%2fatt-0001%2fcamera.html" target="_blank">Nokia Camara API</a>
 </li></ul>
+</section>
+<section id="future">
 <h2>Features for Future Consideration</h2>
 <p>This is a list of features that have been discussed with respect to this version of the API but for which it has been decided that if they are included it will be in a future revision.
 </p>
 <ul>
 <li>... </li></ul>
+</section>
+<section id="ack">
 <h2>Acknowledgements</h2>
 <p>Many thanks to Google, Nokia, and OMTP BONDI who provided the initial input into this specification.
 </p>
+</section>
 </body>
 </html>
