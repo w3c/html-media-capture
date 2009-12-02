@@ -183,7 +183,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
 </li></ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of images user can take. </dd><dt>optional ErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of images user can take. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd><dt>PendingOperation captureVideo () </dt><dd>
 <p>Launch device native camera application for recording video(s).</p>
@@ -199,7 +199,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
 </li></ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in seconds. </dd><dt>optional ErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in seconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd><dt>PendingOperation captureAudio () </dt><dd>
 <p>Launch device native audio recorder application for recording audio clip(s).</p>
@@ -216,7 +216,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </li></ol>
 <p></p>
 <dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of sound clips user can record.
-</dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in seconds. </dd><dt>optional ErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+</dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in seconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
 </section><section id="mediadata"><h3><a>MediaData</a> interface</h3>
@@ -245,11 +245,10 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of <a href="#mediadata-interface">
 <code>MediaData</code></a> objects. </p>
 <dl title="typedef sequence&lt;MediaData&gt; MediaArray" class="idl"></dl>
-</section><section  id="errorcallback"><h3><a>ErrorCB</a> interface</h3>
-<p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
-<dl title="[Callback=FunctionOnly, NoInterfaceObject] interface ErrorCB" class="idl">
+</section><section  id="errorcallback"><h3><a>CaptureErrorCB</a> interface</h3>
+<dl title="[Callback=FunctionOnly, NoInterfaceObject] interface CaptureErrorCB" class="idl">
 <dt>void onError () </dt><dd>
-<dl class="parameters"><dt>GenericError error </dt><dd>The error object of an unsuccessful asynchronous operation. </dd></dl>
+<dl class="parameters"><dt>CaptureError error </dt><dd>The error object of an unsuccessful capture asynchronous operation. </dd></dl>
 </dd></dl>
 </section><section id="captureerror"><h3><a>CaptureError</a> interface</h3>
 <p class="note">More error codes to be defined here. </p>
