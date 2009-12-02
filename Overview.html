@@ -93,7 +93,9 @@ to monitor for movement and trigger a notification such as email or alert to the
 <h4>Voice search</h4>
 <p>A (web-based) search application might offer the user to speak the search query into the device, e.g. while holding a push-to-talk button or triggered by a proximity sensor (use case for sensor API). The users utterance has to be recorded (captured) and
  may be sent over the network to a network based speech recognizer. </p>
-
+<h5>Discussion</h5>
+<p>To avoid latency while sending the captured voice sample to the network based speech recognizer, the voice should be recorded in a compressed format. The API should allow to select a compression format.
+</p>
 <h4>Voice memo</h4>
 <p>A (web-based) voice recorder application which allow the user to record a memo for later playback.</p>
 </section>
@@ -258,9 +260,6 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[NoInterfaceObject] interface PendingOperation" class="idl"><dt>void cancel ()
 </dt><dd>Cancel/clear the pending asynchronous operation. </dd></dl>
-</section><section id="discussion"><h3>Discussion</h3>
-<p>To avoid latency while sending the captured voice sample to the network based speech recognizer, the voice should be recorded in a compressed format. The API should allow to select a compression format.
-</p>
 </section>
 </section>
 <section id="related">
