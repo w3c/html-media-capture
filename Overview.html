@@ -126,7 +126,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
 </li></ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in seconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in milliseconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd><dt>PendingOperation captureAudio () </dt><dd>
 <p>Launch device native audio recorder application for recording audio clip(s).</p>
@@ -143,7 +143,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 </li></ol>
 <p></p>
 <dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of sound clips user can record.
-</dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in seconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
+</dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in milliseconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
 </dd></dl>
 </dd></dl>
 </section><section id="mediadata"><h3><a>MediaData</a> interface</h3>
@@ -159,7 +159,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <dl title="[NoInterfaceObject] interface FormatData" class="idl"><dt>attribute DOMString type
 </dt><dd>The type attribute represents the MIME type of the captured image, video or sound. For example, a valid MIME type for JPEG images is image/jpeg. A valid MIME type for WAV sound file is audio/x-wav.
 </dd><dt>attribute unsigned long height </dt><dd>The height attribute represents height of the image or video in pixels. Not applicable for a sound clip.
-</dd><dt>attribute double duration </dt><dd>The duration attribute represents length of the video or sound clip in seconds. Not applicable for a image.
+</dd><dt>attribute double duration </dt><dd>The duration attribute represents length of the video or sound clip in milliseconds. Not applicable for a image.
 </dd><dt>attribute unsigned long width </dt><dd>The width attribute represents width of the image or video in pixels. Not applicable for a sound clip.
 </dd></dl>
 </section><section id="capturecallbak"><h3><a>CaptureCB</a> interface</h3>
