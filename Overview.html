@@ -253,7 +253,7 @@ second before going back to the view finder mode.
 <p>Video output can be handled with the &lt;video&gt; tag. However, video input is not so easy as there is no obvious way to pass captured video in real time to the server. You might think that you could use the preview URL as proposed in one API as a way, but there
  is no obvious way to pass the data coming out of this URL down (for example) a websocket.
 </p>
-<p>The approach of rendering the preview into a %lt;canvas&gt; and then scraping the canvas, re-encoding the data and transmitting it seems too ugly (and too inefficient) to be useful. The rendering approach also doesn't work for the associated audio stream. Worse,
+<p>The approach of rendering the preview into a &lt;canvas&gt; and then scraping the canvas, re-encoding the data and transmitting it seems too ugly (and too inefficient) to be useful. The rendering approach also doesn't work for the associated audio stream. Worse,
  the preview data stream might not include the audio anyway. </p>
 <p>An ideal approach would be to define a websocket like interface onto the camera/microphone (it might even be as simple as defining a method to get a web sockets URL for the camera/microphone). Another alternative (which would cause more upheaval) would be
  to add the websocket read/write interface onto XmlHttpRequest and then have the camera expose an HTTP URL for the full audio/video data stream.
