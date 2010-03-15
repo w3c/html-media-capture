@@ -25,57 +25,50 @@
 	This specification defines an Application Programming Interface (<acronym title="Application Programming Interface">API</acronym>) that provides access to the audio, image and video capture capabilities of the device.
     </section>
 
-    <section>
-			<h2>Introduction</h2>
+<section>
+<h2>Introduction</h2>
+
 <p>The Capture API defines a high-level interface for accessing the microphone and camera of a hosting device.</p>
+
 <section id="examples">
 <h2>Usage Examples</h2>
 <p>The following code extracts illustrate how to work with a camera service in the hosting device:
 </p>
 <div>
 <p>Launching a device camera application and retrieving the pictures taken. </p>
-<pre class="example sh_javascript_dom">// Create a container div element and append it to the document body.
-var container = document.createElement(&quot;div&quot;);
-document.body.appendChild(container);
- 
-// The browser viewport width in pixels.
-var screenWidth = window.innerWidth;
-
-function successCallback(data) {
-for (var i in data) {
-var img = document.createElement(&quot;img&quot;);
-img.src = data[i].uri;
-// If the image width exceeds that of the browser viewport, the image
-// is scaled to fit the screen keeping the aspect ratio intact.
-if (data[i].format.width &gt; screenWidth) {
-img.style.width = screenWidth &#43; &quot;px&quot;;
-img.style.height = (data[i].format.height/data[i].format.width)*screenWidth &#43; &quot;px&quot;;
-}
-container.appendChild(img);
-}
+<pre class="example sh_javascript_dom">
+function success(data) {
+  var container = document.createElement(&quot;div&quot;);
+  document.body.appendChild(container);
+  
+  for (var i in data) {
+    var img = document.createElement(&quot;img&quot;);
+    img.src = data[i].uri;
+    container.appendChild(img);
+  }
 }
  
-function errorCallback(err) {
-alert(err.message &#43; &quot; (&quot; &#43; err.code &#43; &quot;)&quot;); 
+function error(err) {
+  alert(err.message &#43; &quot; (&quot; &#43; err.code &#43; &quot;)&quot;); 
 }
  
-// Launch the device camera application and invoke the callback once 
-// the user exits the camera application.
-transactionId = navigator.device.captureImage(successCallback, 1, errorCallback);</pre>
+navigator.device.captureImage(success, error, { limit: 1 });
+</pre>
 </div>
 <div>
 <p>Example of retrieving image sizes and formats supported by hosting device camera.</p>
-<pre class="example sh_javascript_dom">var summary;
-var formats = navigator.device.supportedImageFormats;
+<pre class="example sh_javascript_dom">var summary,
+    formats = navigator.device.supportedImageFormats;
 
 for (var key in formats) {
-summary &#43;= key &#43; &quot;: &quot; &#43; formats[key] &#43; &quot;\n&quot;;
+  summary &#43;= key &#43; &quot;: &quot; &#43; formats[key] &#43; &quot;\n&quot;;
 }
 
 alert(summary);</pre>
 </div>
 </section>
 </section>
+
 <section id="security">
 <h2>Security and Privacy Considerations</h2>
 The API defined in this specification launches the capture application which allows the user to take pictures, record voice or record video and provides a handle to the content. This information can potentially compromise user privacy and a conforming implementation of this specification
@@ -83,6 +76,7 @@ The API defined in this specification launches the capture application which all
 <h3>Privacy considerations for implementers of Capture API</h3>
 A conforming implementation of this specification MUST provide a mechanism that protects the user's privacy and this mechanism SHOULD ensure that privacy information is not revealed without user's informed consent.
 </section>
+
 <section id="api">
 <h2>API Description</h2>
 <section id="capture">
@@ -90,7 +84,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <p>The <code>Capture</code> interface exposes an interface to the camera and microphone of the hosting device.</p>
 
 <p class="issue">Where does it hang off of? Example given above assumes navigator.device — in which case we need to define a <code>NavigatorDevice</code> interface somewhere.</p>
-<p>Objects implementing the <code>NavigatorDevice</code> interface (e.g. the <code>window.navigator.device</code> object in Web browsers [[NAVIGATOR]]) provide access to the <code>Capture</code> interface through the <code>Capture</code> interface . An instance of <code>Capture</code> would be then obtained by using binding-specific casting methods on an instance of <code>NavigatorDevice</code>.</p>
+<p>Objects implementing the <code>NavigatorDevice</code> interface (e.g. the <code>window.navigator.device</code> object in Web browsers [[NAVIGATOR]]) provide access to the <code>Capture</code> interface through the <code>Capture</code> interface. An instance of <code>Capture</code> would be then obtained by using binding-specific casting methods on an instance of <code>NavigatorDevice</code>.</p>
 
 <dl title="[Supplemental, NoInterfaceObject] interface Capture" class="idl"><dt>readonly attribute sequence&lt;FormatData&gt; supportedImageFormats
 </dt><dd>A sequence of FormatData objects which contains image sizes and formats supported by the hosting device camera.
@@ -103,15 +97,28 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <em>capture image</em> process defined as follows:</p>
 <p></p>
 <ol>
-<li>Start native camera application. Allow end user to take picture(s) and return.
-</li><li>If successful, invoke the associated <code>successCB</code> with a <a href="#mediaarray-typedef">
-<code>MediaArray</code></a> argument. If the attempt fails, and the method was invoked with a non-null
-<code>errorCallback</code> argument, this method must invoke the <code>errorCallback</code> with a
-<a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
-</li></ol>
+  <li>Start native camera application. Allow end user to take picture(s).</li>
+  <li>If successful, invoke the associated <code>successCB</code> with a <a href="#mediaarray-typedef">
+  <code>MediaArray</code></a> argument. If the attempt fails, and the method was invoked with a non-null
+  <code>errorCallback</code> argument, this method must invoke the <code>errorCallback</code> with a
+  <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
+  </li>
+  <li>If a <code>CaptureImageOptions</code> parameter was present, and its <code>limit</code> attribute was defined,   
+	<code>successCB</code> MUST be invoked after the user has captured a number of images defined in <code>limit</code>.
+	If user exited the native camera application prematurely, <code>errorCB</code> must be invoked. 
+  </li>
+</ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of images user can take. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
-</dd></dl>
+
+<dl class="parameters">
+  <dt>CaptureCB successCB </dt>
+  <dd>Function to call when the asynchronous operation completes </dd>
+  <dt>optional CaptureErrorCB errorCB </dt>
+  <dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.</dd>
+  <dt>optional CaptureImageOptions options </dt>
+  <dd>Image capture options. This parameter is OPTIONAL.</dd>
+</dl>
+
 </dd><dt>PendingOperation captureVideo () </dt><dd>
 <p>Launch device native camera application for recording video(s).</p>
 <p>This method takes three or four arguments. When called, it immediately returns a
@@ -124,10 +131,28 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <code>MediaArray</code></a> argument. If the attempt fails, and the method was invoked with a non-null
 <code>errorCallback</code> argument, this method must invoke the <code>errorCallback</code> with a
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
-</li></ol>
+</li>
+<li>If a <code>CaptureVideoOptions</code> parameter was present, and its <code>limit</code> attribute was defined,   
+	<code>successCB</code> MUST be invoked after the user has captured a number of video clips defined in <code>limit</code>.
+	If user exited the native camera application prematurely, <code>errorCB</code> must be invoked. 
+</li>
+<li>If a <code>CaptureVideoOptions</code> parameter was present, and its <code>duration</code> attribute was defined,   
+	<code>successCB</code> MUST be invoked after the video has been captured for the number of milliseconds defined in
+	<code>duration</code>.
+	If user exited the native camera application prematurely, <code>errorCB</code> must be invoked. 
+</li>
+</ol>
 <p></p>
-<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of videos user can record. </dd><dt>double duration </dt><dd>Maxium duration of a single video clip in milliseconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
-</dd></dl>
+
+<dl class="parameters">
+  <dt>CaptureCB successCB </dt>
+  <dd>Function to call when the asynchronous operation completes </dd>
+  <dt>optional CaptureErrorCB errorCB</dt>
+  <dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.</dd>
+  <dt>optional CaptureVideoOptions options </dt>
+  <dd>Image capture options. This parameter is OPTIONAL.</dd>
+</dl>
+
 </dd><dt>PendingOperation captureAudio () </dt><dd>
 <p>Launch device native audio recorder application for recording audio clip(s).</p>
 <p>This method takes two or three arguments. When called, it immediately returns a
@@ -136,15 +161,27 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <p></p>
 <ol>
 <li>Start native audio recorder application. Allow end user to record audio clip(s) and return.
-</li><li>If successful, invoke the associated <code>successCB</code> with a <a href="#mediaarray-typedef">
+</li>
+<li>If successful, invoke the associated <code>successCB</code> with a <a href="#mediaarray-typedef">
 <code>MediaArray</code></a> argument. If the attempt fails, and the method was invoked with a non-null
 <code>errorCallback</code> argument, this method must invoke the <code>errorCallback</code> with a
 <a href="#captureerror-interface"><code>CaptureError</code></a> object as an argument.
-</li></ol>
+</li>
+<li>If a <code>CaptureAudioOptions</code> parameter was present, and its <code>limit</code> attribute was defined,   
+	<code>successCB</code> MUST be invoked after the user has captured a number of audio clips defined in <code>limit</code>.
+	If user exited the native camera application prematurely, <code>errorCB</code> must be invoked. 
+</li>
+</ol>
+
 <p></p>
-<dl class="parameters"><dt>CaptureCB successCB </dt><dd>Function to call when the asynchronous operation completes </dd><dt>unsigned long limit </dt><dd>Upper limit of sound clips user can record.
-</dd><dt>double duration </dt><dd>Maxium duration of a single sound clip in milliseconds. </dd><dt>optional CaptureErrorCB errorCB </dt><dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.
-</dd></dl>
+<dl class="parameters">
+  <dt>CaptureCB successCB </dt>
+  <dd>Function to call when the asynchronous operation completes </dd>
+  <dt>optional CaptureErrorCB errorCB </dt>
+  <dd>Function to call when the asynchronous operation fails. This parameter is OPTIONAL.</dd>
+  <dt>optional CaptureAudiOptions options </dt>
+  <dd>Audio capture options. This parameter is OPTIONAL.</dd>
+</dl>
 </dd></dl>
 </section><section id="mediadata"><h3><a>MediaData</a> interface</h3>
 <p><code>MediaData</code> captures a single photo, video or sound captured by the device native capture application.
@@ -159,7 +196,7 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <dl title="[NoInterfaceObject] interface FormatData" class="idl"><dt>attribute DOMString type
 </dt><dd>The type attribute represents the MIME type of the captured image, video or sound. For example, a valid MIME type for JPEG images is image/jpeg. A valid MIME type for WAV sound file is audio/x-wav.
 </dd><dt>attribute unsigned long height </dt><dd>The height attribute represents height of the image or video in pixels. Not applicable for a sound clip.
-</dd><dt>attribute double duration </dt><dd>The duration attribute represents length of the video or sound clip in milliseconds. Not applicable for a image.
+</dd><dt>attribute double duration </dt><dd>The duration attribute represents length of the video or sound clip in milliseconds. Not applicable for an image.
 </dd><dt>attribute unsigned long width </dt><dd>The width attribute represents width of the image or video in pixels. Not applicable for a sound clip.
 </dd></dl>
 </section><section id="capturecallbak"><h3><a>CaptureCB</a> interface</h3>
@@ -168,7 +205,9 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <dl class="parameters"><dt>MediaArray capturedMedia </dt><dd>Sequence of MediaData successfully captured by the device</dd>
 </dd></dl>
 </dd></dl>
-</section><section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
+</section>
+
+<section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
 <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of <a href="#mediadata-interface">
 <code>MediaData</code></a> objects. </p>
 <dl title="typedef sequence&lt;MediaData&gt; MediaArray" class="idl"></dl>
@@ -177,18 +216,171 @@ A conforming implementation of this specification MUST provide a mechanism that 
 <dt>void onError () </dt><dd>
 <dl class="parameters"><dt>CaptureError error </dt><dd>The error object of an unsuccessful capture asynchronous operation. </dd></dl>
 </dd></dl>
-</section><section id="captureerror"><h3><a>CaptureError</a> interface</h3>
-<p class="note">More error codes to be defined here. </p>
+</section>
+
+<section id="captureerror"><h3><a>CaptureError</a> interface</h3>
 <p>The <a>CaptureError</a> interface encapsulates all errors in the Capture API. </p>
+<p class="note">More error codes to be defined here. </p>
 <dl title="[NoInterfaceObject] interface CaptureError" class="idl">
-<dt>const unsigned short CAPTURE_INTERNAL_ERR = 0 </dt><dd>Camera or mike failed to capture image or sound. </dd><dt>readonly attribute unsigned short code </dt><dd>An error code assigned by an implementation when an error has occurred in Capture API processing.
-</dd></dl>
+  <dt>const unsigned short CAPTURE_INTERNAL_ERR = 0 </dt>
+  <dd>Camera or microphone failed to capture image or sound. </dd>
+  <dt>readonly attribute unsigned short code </dt>
+  <dd>An error code assigned by an implementation when an error has occurred in Capture API processing.</dd>
+</dl>
+</section>
+
+<section id="captureimageoptions"><h3><a>CaptureImageOptions</a> interface</h3>
+<p>The <a>CaptureImageOptions</a> interface encapsulates all image capture operation configuration options.</p>
+<p class="note">Additional attributes proposed: <code>width</code> and <code>height</code>.</p>
+<dl title="[NoInterfaceObject] interface CaptureImageOptions" class="idl">
+  <dt>attribute unsigned long limit</dt>
+  <dd>Upper limit of images user can take.</dd>
+</dl>
+</section>
+
+<section id="capturevideooptions"><h3><a>CaptureVideoOptions</a> interface</h3>
+<dl title="[NoInterfaceObject] interface CaptureVideoOptions" class="idl">
+  <dt>attribute unsigned long limit</dt>
+  <dd>Upper limit of videos user can record.</dd>
+  <dt>attribute double duration</dt>
+  <dd>Maximum duration of a single video clip in milliseconds.</dd>
+</dl>
+</section>
+
+<section id="captureaudiooptions"><h3><a>CaptureAudioOptions</a> interface</h3>
+<p class="note">Additional attributes proposed: <code>duration</code>.</p>
+<dl title="[NoInterfaceObject] interface CaptureAudioOptions" class="idl">
+  <dt>attribute unsigned long limit</dt>
+  <dd>Upper limit of sound clips user can record.</dd>
+</dl>
+</section>
+
 </section><section id="pendingoperation"><h3><a>PendingOperation</a> interface</h3>
 <p class="note">This may be a general interface for use throughout all APIs. Included here for now for completion.</p>
 <dl title="[NoInterfaceObject] interface PendingOperation" class="idl"><dt>void cancel ()
 </dt><dd>Cancel/clear the pending asynchronous operation. </dd></dl>
 </section>
 </section>
+
+<section id="formaccess">
+<h2>Capture Input Selection</h2>
+<p>In addition to programmable API, content can be acquired from capture devices through a file-select control.</p>
+
+<section id="capture">
+<h2>Capture aware file-select control</h2>
+
+<p>This section is non-normative.</p>
+
+If input element in the File Upload state [[HTML5]] contains accept
+attribute with values <code>image/*</code>, <code>sound/*</code>,
+or <code>video/*</code>, the user agent can invoke a file picker 
+that allows respectively the user to take a picture, record a sound file, or
+record a video in addition to selecting an existing
+file from the file system. 
+
+In case the user chooses to capture video, audio, or image content, the user agent creates media files on the fly as specified in [[HTML5]].
+
+<pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
+
+<p>In trusted environments the click event of file input element can be synthesised as follows:</p>
+
+<pre class="example sh_javascript_dom">&lt;input id="cameraInput" onchange="successCB();" type="file" accept="image/*"&gt; 
+
+&lt;script&gt;
+
+function successCB() {
+  // Read the image using file-reader or submit the form
+}
+
+document.getElementById('cameraInput').click();
+
+&lt;/script&gt;
+
+</pre>
+
+</section>
+
+<section id="viewfinder">
+<h2><code>ViewFinder</code> interface</h2>
+
+<p>
+This interface represents a camera viewfinder. It inherits from <code>File</code> [[FILE-API]] and provides a method to embed a viewfinder to web content.
+</p>
+
+<dl title='[NoInterfaceObject] interface ViewFinder : File' class='idl'>
+
+  <dt>void startCapture ()</dt>
+  <dd>
+    <p>
+      Starts the capture process.
+    </p>
+    <dl class='parameters'>
+      <dt>Blob data</dt>
+      <dd>
+        The blob to write.
+      </dd>
+    </dl>
+  </dd>
+  <dt>void stopCapture ()</dt>
+  <dd>
+    <p>
+      Stops the capture process.
+    </p>
+  </dd>
+
+</dl>
+
+<p>Conforming user agents MUST provide the user a file picker from which it is possible to select any of the available capture devices in addition to possibility to select one or more files from the file system.</p>
+
+<p>If a user selects camera device, the <code>FileList</code> object that represents the currently selected files in the input element in the File Upload state MUST contain one or more <code>ViewFinder</code> objects instead of <code>File</code> objects as in [[FILE-API]].</p>
+
+
+<pre class="example example sh_javascript_dom">
+    &lt;input id="cameraInput" onchange="successCB();" type="file" accept="image/*"&gt; 
+
+    &lt;script&gt;
+
+      function getVideo (sucCB) {
+        var inp = document.createElement("input");
+        inp.type = "file";
+        inp.accept = "video/*";
+        inp.onchange = function () { sucCB(this.files[0]); };
+        inp.click();
+      }
+
+      var blob;
+
+      function setupVideo (vf) {
+        document.getElementById("my-video").src = vf.URL;
+	var bb = new BlobBuilder();
+        document.getElementById("start").onclick = function () { vf.startCapture(bb.getBlob()); }
+        document.getElementById("stop").onclick = function () { vf.stopCapture(); }
+      }
+
+      function send () {
+        if (!blob) {
+           alert("You didn't capture anything!")
+           return;
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://my-server/video-upload");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) alert("Video uploaded!");
+        }
+        xhr.send(blob);
+      }
+    &lt;/script&gt;
+
+    &lt;button onclick='getVideo(setupVideo);'&gt;Film your face!&lt;/button&gt;
+    &lt;video id='my-video'&gt;&lt;/video&gt;
+    &lt;button id='start'&gt;Start&lt;/button&gt;
+    &lt;button id='stop'&gt;Stop&lt;/button&gt;
+</pre>
+
+<p class="issue">Currently version of XHR.send() that can take a blob as an input parameter doesn't exist. This must be probably fixed in XHR 2 specification.</p>
+</section>
+</section>
+
 <section class='appendix'>
 <h3>Requirements</h3>
 <p>The Capture API: </p>
@@ -250,10 +442,10 @@ second before going back to the view finder mode.
  link on the web site that downloaded the web app that allowed the customer to do this directly.
 </p>
 <h5>Discussion</h5>
-<p>Video output can be handled with the &lt;video&gt; tag. However, video input is not so easy as there is no obvious way to pass captured video in real time to the server. You might think that you could use the preview URL as proposed in one API as a way, but there
+<p>Video output can be handled with the <code>&lt;video&gt;</code> tag. However, video input is not so easy as there is no obvious way to pass captured video in real time to the server. You might think that you could use the preview URL as proposed in one API as a way, but there
  is no obvious way to pass the data coming out of this URL down (for example) a websocket.
 </p>
-<p>The approach of rendering the preview into a &lt;canvas&gt; and then scraping the canvas, re-encoding the data and transmitting it seems too ugly (and too inefficient) to be useful. The rendering approach also doesn't work for the associated audio stream. Worse,
+<p>The approach of rendering the preview into a <code>&lt;canvas&gt;</code> and then scraping the canvas, re-encoding the data and transmitting it seems too ugly (and too inefficient) to be useful. The rendering approach also doesn't work for the associated audio stream. Worse,
  the preview data stream might not include the audio anyway. </p>
 <p>An ideal approach would be to define a websocket like interface onto the camera/microphone (it might even be as simple as defining a method to get a web sockets URL for the camera/microphone). Another alternative (which would cause more upheaval) would be
  to add the websocket read/write interface onto XmlHttpRequest and then have the camera expose an HTTP URL for the full audio/video data stream.
