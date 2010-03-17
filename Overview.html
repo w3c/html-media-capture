@@ -342,7 +342,7 @@ This interface represents a camera viewfinder. It inherits from <code>File</code
         var inp = document.createElement("input");
         inp.type = "file";
         inp.accept = "video/*";
-        inp.onchange = function () { sucCB(this.files[0]); };
+        inp.onchange = setupVideo(this.files[0]);
         // this is only possible in trusted environments
         // the click event cannot be synthetized by default
         inp.click();
@@ -372,7 +372,7 @@ This interface represents a camera viewfinder. It inherits from <code>File</code
       }
     &lt;/script&gt;
 
-    &lt;button onclick='getVideo(setupVideo);'&gt;Film your face!&lt;/button&gt;
+    &lt;button onclick='getVideo();'&gt;Film your face!&lt;/button&gt;
     &lt;video id='my-video'&gt;&lt;/video&gt;
     &lt;button id='start'&gt;Start&lt;/button&gt;
     &lt;button id='stop'&gt;Stop&lt;/button&gt;
