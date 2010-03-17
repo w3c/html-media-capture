@@ -353,6 +353,7 @@ This interface represents a camera viewfinder. It inherits from <code>File</code
       function setupVideo (vf) {
         document.getElementById("my-video").src = vf.URL;
 	var bb = new BlobBuilder();
+        blob = bb.getBlob();
         document.getElementById("start").onclick = function () { vf.startCapture(bb.getBlob()); }
         document.getElementById("stop").onclick = function () { vf.stopCapture(); }
       }
