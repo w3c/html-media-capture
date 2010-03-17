@@ -343,6 +343,8 @@ This interface represents a camera viewfinder. It inherits from <code>File</code
         inp.type = "file";
         inp.accept = "video/*";
         inp.onchange = function () { sucCB(this.files[0]); };
+        // this is only possible in trusted environments
+        // the click event cannot be synthetized by default
         inp.click();
       }
 
