@@ -356,6 +356,7 @@ This interface represents a camera viewfinder. It inherits from <code>File</code
         blob = bb.getBlob();
         document.getElementById("start").onclick = function () { vf.startCapture(bb.getBlob()); }
         document.getElementById("stop").onclick = function () { vf.stopCapture(); }
+        document.getElementById("send").onclick = function () { send(); }
       }
 
       function send () {
@@ -376,6 +377,7 @@ This interface represents a camera viewfinder. It inherits from <code>File</code
     &lt;video id='my-video'&gt;&lt;/video&gt;
     &lt;button id='start'&gt;Start&lt;/button&gt;
     &lt;button id='stop'&gt;Stop&lt;/button&gt;
+    &lt;button id='send'&gt;Upload&lt;/button&gt;
 </pre>
 
 <p class="issue">Currently version of XHR.send() that can take a blob as an input parameter doesn't exist. This must be probably fixed in XHR 2 specification.</p>
