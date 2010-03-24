@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Requirements &amp; Use Cases for The Capture API</title>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <script src='../ReSpec.js/js/respec.js' class='remove'></script>
+    <script class='remove'>
+      var respecConfig = {
+          specStatus:           "ED",
+          shortName:            "capture-api-req",
+          editors: [{name: "Dzung D Tran", company: "Intel"},
+                    {name: "Ilkka Oksanen", company: "Nokia"},
+                    {name: "Ingmar Kliche", company: "Deutsche Telekom"},
+                    //{name: "Dominique Hazaël-Massieux", company: "W3C"}
+      ],
+          // publishDate:  "2009-08-06",
+          // previousPublishDate:  "1977-03-15",
+          edDraftURI:           "http://dev.w3.org/2009/dap/camera-req/",
+          // lcEnd: "2009-08-05",
+      };
+    </script>
+    <script src='../common/config.js' class='remove'></script>
+  </head>
+  <body>
+    <section id='abstract'>
+      <p>This specification defines the requirements and introduces use cases for the Capture API [[CAPTUREAPI]]</p>
+    </section>
+
+    <section id="sotd">
+      <p>This document represents the early consensus of the group on
+      the requirements and use cases of the proposed Capture API
+      API. Issues and editors notes in the document highlight some of
+      the points on which the group is still working and would
+      particularly like to get feedback.</p>
+    </section>
+    <section>
+      <h3>Requirements</h3>
+      
+      <p>The Capture API: </p>
+      <ul> 
+      <li>MUST enable capture of static images </li>
+      <li>MUST enable capture of videos (including audio) </li>
+      <li>MUST enable listing the available cameras </li>
+      <li>MUST enable listing the available formats and codecs, per camera </li>
+      <li>MUST enable displaying a viewfinder </li>
+      <li>SHOULD enable control of the camera's capabilities (e.g. zoom, luminosity, night mode, focus mode)</li>
+      <li>SHOULD enable setting of brightness, contrast, gain</li>
+      <li>SHOULD enable displaying a viewfinder as part of the
+      document (e.g. as a <code>video</code> element [[HTML5]]) </li>
+      <li>MUST enable capture of audio </li>
+      <li>MUST enable listing the available audio input devices </li>
+      <li>MUST enable listing the available formats and codecs, per audio input device </li>
+      <li>SHOULD enable setting microphone audio level</li>
+      <li>MUST enable retrieval of the captured content </li>
+      <li>MUST provide some metadata about the captured content (e.g. width, height, format, duration)</li>
+      <li>MUST enable choosing preferred aspects of the captured
+      content (e.g. width, height, format, frame rate)</li>
+      <li>MUST support asynchronous, cancellable capture </li>
+</ul>
+<div class="issue">
+
+<p>If the user requests a given capture size which isn't available, do
+we refuse or do we fall back? If the latter (which is likely) what is
+the algorithm that is used to find the fallback? It could be (given a
+request for 1000x50):
+
+</p>
+<ul>
+
+<li>the camera's preferred default </li><li>500x100 (closest number of
+pixels) </li><li>1000x700 (closest longest side) </li><li>2000x100
+(closest ratio) </li></ul>
+
+<p></p>
+</div>
+
+<p class="issue">We could very easily get bogged down in specifying
+camera capabilities and format feature variants &#8212; how do we
+decide which ones are reasonably in?
+
+</p>
+<div class="issue">
+
+<p>We probably need to support more than 1 camera. On some of the
+newer device, there is a camera point at the user and another on the
+other side pointing at the subject. This allows for such usage as
+see-what-I-see.</p>
+
+</div>
+    </section>
+
+    <section>
+      <h3>Use Cases</h3>
+
+<p>This section contains a set of use cases collected for the Capture
+API. 
+
+</p>
+<h4>Picture Capture and Picture upload</h4>
+
+<p>A (web-based) camera application that allow the user to capture
+image with and without preview mode using the device camera
+capability.  Also allow the user to capture multiple images in burst
+mode and upload the image(s) to a server using XHR.
+</p>
+
+<div class="issue">
+
+<p>The image is returned as URI from captureImage() callback? How do
+we XHR upload? Do we need the FileAPI or is there a need to return
+the image (captured object) as binary data?</p>
+
+</div>
+<h4>Panorama Image Capture</h4>
+
+<p>A (web-based) camera application that allow the user to capture
+panorama images with and without preview mode using the device camera
+capability.  When the user select panorama mode, the view finder
+displays an indication that it is ready to take the 1st image of 3.
+the user points the device starting from the left and presses the Take
+button. The device takes the image indicated by an alert, then goes
+back to take mode for the next image in the sequence.  The view finder
+displays a 1/8 overlay of previous image on the left side so the user
+can line up for the next image.  After taking all 3 images that makes
+up the panorama picture, the device displays the picture on the screen
+for a second before going back to the view finder mode.
+</p>
+
+<h4>Video chat</h4>
+
+<p>The use case is to be able to write a web app that implements a
+ voice/video chat client. This could be as part of an instant
+ messaging client, or might be a standalone videophone or
+ 'telephone'. Another example might be an online 'chat with customer
+ service' link on the web site that downloaded the web app that
+ allowed the customer to do this directly.
+</p>
+
+<h5>Discussion</h5>
+
+<p>Video output can be handled with the <code>&lt;video&gt;</code>
+ tag. However, video input is not so easy as there is no obvious way
+ to pass captured video in real time to the server. You might think
+ that you could use the preview URL as proposed in one API as a way,
+ but there is no obvious way to pass the data coming out of this URL
+ down (for example) a websocket.
+</p>
+
+<p>The approach of rendering the preview into a
+ <code>&lt;canvas&gt;</code> and then scraping the canvas, re-encoding
+ the data and transmitting it seems too ugly (and too inefficient) to
+ be useful. The rendering approach also doesn't work for the
+ associated audio stream. Worse, the preview data stream might not
+ include the audio anyway. </p>
+
+<p>An ideal approach would be to define a websocket like interface
+ onto the camera/microphone (it might even be as simple as defining a
+ method to get a web sockets URL for the camera/microphone). Another
+ alternative (which would cause more upheaval) would be to add the
+ websocket read/write interface onto XmlHttpRequest and then have the
+ camera expose an HTTP URL for the full audio/video data stream.
+</p>
+
+<h4>Web cam</h4>
+
+<p>A (web-based) surveillance application that would allow the user to
+survey their property remotely. The camera would allow for some type
+of control such as moving the camera left, right, up and down. Another
+usage would allow for the surveillance web application to monitor for
+movement and trigger a notification such as email or alert to the
+user</p>
+
+<h4>Voice search</h4>
+
+<p>A (web-based) search application might offer the user to speak the
+ search query into the device, e.g. while holding a push-to-talk
+ button or triggered by a proximity sensor (use case for sensor
+ API). The users utterance has to be recorded (captured) and may be
+ sent over the network to a network based speech recognizer. </p>
+
+<h5>Discussion</h5>
+
+<p>To avoid latency while sending the captured voice sample to the
+network based speech recognizer, the voice should be recorded in a
+compressed format. The API should allow to select a compression
+format.
+
+</p>
+<h4>Voice memo</h4>
+
+<p>A (web-based) voice recorder application which allow the user to
+record a memo for later playback.</p>
+    </section>
+
+    <!--************************************* /Requirements ******************************************-->
+  </body>
+</html>
