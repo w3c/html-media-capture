@@ -308,17 +308,13 @@ alert(summary);
       </dd></dl>
     </section>
 
-    <section id="mediadata"><h3><a>MediaData</a> interface</h3>
+    <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
 
-    <p><code>MediaData</code> captures a single photo, video or sound
-    captured by the device native capture application.</p>
+    <p><code>MediaFile</code> captures a single photo, video or sound
+    captured by the device native capture application. It inherits
+    from <code>File</code> [[FILE-API]]</p>
 
-    <dl title="[NoInterfaceObject] interface MediaData" class="idl">
-    <dt>attribute DOMString uri</dt>
-
-    <dd>The uri attribute attribute specifies the path to the media file
-    taken by native application as a Uniform Resource Identifier (URI)
-    conforming to [[URI]].</dd>
+    <dl title="[NoInterfaceObject] interface MediaFile : File" class="idl">
 
     <dt>attribute FormatData format </dt>
 
@@ -359,7 +355,7 @@ alert(summary);
     <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface CaptureCB" class="idl">
       <dt>void onSuccess () </dt><dd>
       <dl class="parameters"><dt>MediaArray capturedMedia </dt><dd>Sequence
-      of MediaData successfully captured by the device</dd>
+      of MediaFile successfully captured by the device</dd>
     </dd></dl>
     </dd></dl>
 
@@ -368,10 +364,10 @@ alert(summary);
     <section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
 
     <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of
-    <a href="#mediadata-interface"> <code>MediaData</code></a>
+    <a href="#mediafile-interface"> <code>MediaFile</code></a>
     objects. </p>
 
-    <dl title="typedef sequence&lt;MediaData&gt; MediaArray" class="idl"></dl>
+    <dl title="typedef sequence&lt;MediaFile&gt; MediaArray" class="idl"></dl>
 
     </section>
 
