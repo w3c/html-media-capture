@@ -305,7 +305,38 @@ alert(summary);
 	<dt>optional CaptureAudioOptions options </dt>
 	<dd>Audio capture options. This parameter is OPTIONAL.</dd>
       </dl>
-      </dd></dl>
+      </dd>
+
+
+      <dt>PendingOperation getViewFinder () </dt>
+      <dd><p>...</p>
+
+      <p>This method takes one or two arguments. When called, it
+      immediately returns a <a
+      href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      object and then tries asynchronously return ViewFinder object of the
+      active capture device selected by the system or user.</p>
+      
+      <p class='note'>User consent must be verified.</p>   
+
+      <p>If successful, invoke the associated <code>successCB</code>
+      with a <a href="#mediaarray-typedef"> <code>ViewFinder</code></a>
+      argument. If the attempt fails, and the method was invoked with a
+      non-null <code>errorCallback</code> argument, this method must invoke
+      the <code>errorCallback</code> with a <a
+      href="#captureerror-interface"><code>CaptureError</code></a> object as
+      an argument.</p>
+
+      <dl class="parameters">
+        <dt>CaptureCB successCB </dt>
+        <dd>Function to call when the asynchronous operation completes </dd>
+
+        <dt>optional CaptureErrorCB? errorCB </dt>
+        <dd>Function to call when the asynchronous operation
+        fails. This parameter is OPTIONAL.</dd>
+      </dl>	
+      </dd>
+      </dl>
     </section>
 
     <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
@@ -337,15 +368,15 @@ alert(summary);
 
       <dt>attribute unsigned long height </dt>
       <dd>The height attribute represents height of the image or video
-      in pixels. Not applicable for a sound clip.</dd>
+      in pixels. In the case of a sound clip this attribute has value 0.</dd>
 
       <dt>attribute double duration </dt>
       <dd>The duration attribute represents length of the video or sound
-      clip in milliseconds. Not applicable for an image.</dd>
+      clip in milliseconds. In the case of a image this attribute has value 0.</dd>
 
       <dt>attribute unsigned long width </dt>
       <dd>The width attribute represents width of the image or video
-      in pixels. Not applicable for a sound clip.</dd>
+      in pixels. In the case of a sound clip this attribute has value 0.</dd>
     </dl>
     
     </section>
@@ -432,7 +463,6 @@ alert(summary);
     </dl>
 
     </section>
-  </section>
 
   <section id="pendingoperation"><h3><a>PendingOperation</a> interface</h3>
 
@@ -442,6 +472,38 @@ alert(summary);
   <dl title="[NoInterfaceObject] interface PendingOperation" class="idl">
     <dt>void cancel ()</dt>
     <dd>Cancel/clear the pending asynchronous operation. </dd>
+  </dl>
+
+  </section>
+
+  <section id="viewfinder">
+  <h3><a>ViewFinder</a> interface</h3>
+
+  <p>This interface represents a camera viewfinder. It inherits from
+  <code>File</code> [[FILE-API]] and provides a method to embed a
+  viewfinder to web content.</p>
+
+  <dl title='[NoInterfaceObject] interface ViewFinder : File' class='idl'>
+
+  <dt>void startCapture ()</dt>
+  <dd>
+    <p>
+      Starts the capture process.
+    </p>
+    <dl class='parameters'>
+      <dt>Blob data</dt>
+      <dd>
+        The blob to write.
+      </dd>
+    </dl>
+  </dd>
+  <dt>void stopCapture ()</dt>
+  <dd>
+    <p>
+      Stops the capture process.
+    </p>
+  </dd>
+
   </dl>
 
   </section>
@@ -494,36 +556,8 @@ document.getElementById('cameraInput').click();
 </pre>
 
 </section>
-
 <section id="viewfinder">
-<h2><code>ViewFinder</code> interface</h2>
-
-<p>
-This interface represents a camera viewfinder. It inherits from <code>File</code> [[FILE-API]] and provides a method to embed a viewfinder to web content.
-</p>
-
-<dl title='[NoInterfaceObject] interface ViewFinder : File' class='idl'>
-
-  <dt>void startCapture ()</dt>
-  <dd>
-    <p>
-      Starts the capture process.
-    </p>
-    <dl class='parameters'>
-      <dt>Blob data</dt>
-      <dd>
-        The blob to write.
-      </dd>
-    </dl>
-  </dd>
-  <dt>void stopCapture ()</dt>
-  <dd>
-    <p>
-      Stops the capture process.
-    </p>
-  </dd>
-
-</dl>
+<h2>ViewFinder aware file-select control</h2>
 
 <p>Conforming user agents MUST provide the user a file picker from
 which it is possible to select any of the available capture devices in
@@ -535,11 +569,10 @@ that represents the currently selected files in the input element in
 the File Upload state MUST contain one or more <code>ViewFinder</code>
 objects instead of <code>File</code> objects as in [[FILE-API]].</p>
 
-
 <pre class="example example sh_javascript_dom">
     &lt;script&gt;
 
-      function getVideo (sucCB) {
+      function getVideo () {
         var inp = document.createElement("input");
         inp.type = "file";
         inp.accept = "video/*";
@@ -582,6 +615,7 @@ objects instead of <code>File</code> objects as in [[FILE-API]].</p>
 </pre>
 
 </section>
+
 </section>
 
 <section class='appendix' id="related">
