@@ -305,29 +305,29 @@ alert(summary);
 
 
       <dt>PendingOperation getViewFinder () </dt>
-      <dd><p>...</p>
+      <dd>
 
       <p>This method takes one or two arguments. When called, it
       immediately returns a <a
       href="#pendingoperation-interface"><code>PendingOperation</code></a>
-      object and then tries asynchronously return ViewFinder object of the
+      object and then tries asynchronously to return the ViewFinder object of the
       active capture device selected by the system or user.</p>
       
       <p class='note'>User consent must be verified.</p>   
 
-      <p>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray-typedef"> <code>ViewFinder</code></a>
+      <p>If successful, invokes the associated <code>ViewFinderCB</code>
+      with a <a href="#viewfinder"> <code>ViewFinder</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
-      the <code>errorCallback</code> with a <a
+      the <code>errorCB</code> with a <a
       href="#captureerror-interface"><code>CaptureError</code></a> object as
       an argument.</p>
 
       <dl class="parameters">
-        <dt>CaptureCB successCB </dt>
+        <dt>ViewFinderCB successCB </dt>
         <dd>Function to call when the asynchronous operation completes </dd>
 
-        <dt>optional CaptureErrorCB? errorCB </dt>
+        <dt>optional ViewFinderErrorCB? errorCB </dt>
         <dd>Function to call when the asynchronous operation
         fails. This parameter is OPTIONAL.</dd>
       </dl>	
@@ -345,8 +345,8 @@ alert(summary);
 
     <dt>attribute FormatData format </dt>
 
-    <dd>The format attribute represents the media <a
-    href="#formatdata-interface"><code>FormatData</code></a>
+    <dd>The format attribute represents the format information of <a
+    href="#formatdata-interface"><code>MediaFile</code></a>
     object.</dd></dl>
 
     </section>
@@ -405,6 +405,23 @@ alert(summary);
       object of an unsuccessful capture asynchronous operation. </dd></dl>
     </dd></dl>
     
+    </section>
+
+    <section  id="viewfindercallback"><h3><a>ViewFinderCB</a> interface</h3>
+    <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface ViewFinderCB" class="idl">
+      <dt>void onSuccess () </dt><dd>
+      <dl class="parameters"><dt>ViewFinder viewfinder </dt><dd>The
+      ViewFinder object of the selected capture device.</dd></dl>
+    </dd></dl>
+    
+    </section>
+
+    <section  id="viewfindererrorcallback"><h3><a>ViewFinderErrorCB</a> interface</h3>
+    <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface ViewFinderErrorCB" class="idl">
+      <dt>void onError () </dt><dd>
+      <dl class="parameters"><dt>CaptureError error</dt><dd> The error
+      object of an unsuccessful asynchronous viewfinder acquisition operation. </dd></dl>
+      </dd></dl>
     </section>
 
     <section id="captureerror"><h3><a>CaptureError</a> interface</h3>
@@ -562,8 +579,8 @@ system.</p>
 
 <p>If a user selects camera device, the <code>FileList</code> object
 that represents the currently selected files in the input element in
-the File Upload state MUST contain one or more <code>ViewFinder</code>
-objects instead of <code>File</code> objects as in [[FILE-API]].</p>
+the File Upload state MUST contain one <code>ViewFinder</code>
+object instead of <code>File</code> objects as in [[FILE-API]].</p>
 
 <pre class="example example sh_javascript_dom">
     &lt;script&gt;
