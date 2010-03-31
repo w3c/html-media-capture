@@ -565,7 +565,7 @@ interface <span class="idlInterfaceID">Capture</span> {
       recording audio clip(s).</p>
       
       <p>This method takes two or three arguments. When called, it
-      immediately returns a <a href="#pendingoperation-interface">
+      immediately returns a <a href="#pendingoperation">
       <code>PendingOperation</code></a> object and then asynchronously
       start a <em>capture audio</em> process defined as follows:</p>
 
@@ -577,10 +577,10 @@ interface <span class="idlInterfaceID">Capture</span> {
       audio clip(s) and return.</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray-typedef"> <code>MediaArray</code></a>
+      with a <a href="#mediaarray"> <code>MediaArray</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
-      the <code>errorCallback</code> with a <a href="#captureerror-interface"><code>CaptureError</code></a> object as
+      the <code>errorCallback</code> with a <a href="#captureerror"><code>CaptureError</code></a> object as
       an argument.</li>
 
       <li>If a <code>CaptureAudioOptions</code> parameter was present,
@@ -601,7 +601,7 @@ interface <span class="idlInterfaceID">Capture</span> {
       image(s).</p>
 
       <p>This method takes two or three arguments. When called, it
-      immediately returns a <a href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      immediately returns a <a href="#pendingoperation"><code>PendingOperation</code></a>
       object and then asynchronously start a <em>capture image</em>
       process defined as follows:</p>
 
@@ -613,10 +613,10 @@ interface <span class="idlInterfaceID">Capture</span> {
       picture(s).</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray-typedef"> <code>MediaArray</code></a>
+      with a <a href="#mediaarray"> <code>MediaArray</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must
-      invoke the <code>errorCallback</code> with a <a href="#captureerror-interface"><code>CaptureError</code></a> object
+      invoke the <code>errorCallback</code> with a <a href="#captureerror"><code>CaptureError</code></a> object
       as an argument.</li>
 
       <li>If a <code>CaptureImageOptions</code> parameter was present,
@@ -637,7 +637,7 @@ interface <span class="idlInterfaceID">Capture</span> {
       video(s).</p>
 
       <p>This method takes three or four arguments. When called, it
-      immediately returns a <a href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      immediately returns a <a href="#pendingoperation"><code>PendingOperation</code></a>
       object and then asynchronously start a <em>capture video</em> process
       defined as follows:</p>
 
@@ -647,10 +647,10 @@ interface <span class="idlInterfaceID">Capture</span> {
 
       <li>Start native video camera application. Allow end user to
       take video(s) and return.  </li><li>If successful, invoke the
-      associated <code>successCB</code> with a <a href="#mediaarray-typedef"> <code>MediaArray</code></a> argument. If
+      associated <code>successCB</code> with a <a href="#mediaarray"> <code>MediaArray</code></a> argument. If
       the attempt fails, and the method was invoked with a non-null
       <code>errorCallback</code> argument, this method must invoke the
-      <code>errorCallback</code> with a <a href="#captureerror-interface"><code>CaptureError</code></a> object as
+      <code>errorCallback</code> with a <a href="#captureerror"><code>CaptureError</code></a> object as
       an argument.</li>
 
       <li>If a <code>CaptureVideoOptions</code> parameter was present, and
@@ -678,7 +678,7 @@ interface <span class="idlInterfaceID">Capture</span> {
 	parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr><tr><td class="prmName">options</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureVideoOptions"><code>CaptureVideoOptions</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Image capture options. This parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></code></div></dd><dt id="widl-Capture-getViewFinder"><code>getViewFinder</code></dt><dd>
 
       <p>This method takes one or two arguments. When called, it
-      immediately returns a <a href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      immediately returns a <a href="#pendingoperation"><code>PendingOperation</code></a>
       object and then tries asynchronously to return the ViewFinder object of the
       active capture device selected by the system or user.</p>
       
@@ -688,7 +688,7 @@ interface <span class="idlInterfaceID">Capture</span> {
       with a <a href="#viewfinder-interface"> <code>ViewFinder</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
-      the <code>errorCB</code> with a <a href="#captureerror-interface"><code>CaptureError</code></a> object as
+      the <code>errorCB</code> with a <a href="#captureerror"><code>CaptureError</code></a> object as
       an argument.</p>
 
       	
@@ -706,7 +706,7 @@ interface <span class="idlInterfaceID">Capture</span> {
 interface <span class="idlInterfaceID">MediaFile</span> : <span class="idlSuperclass"><a>File</a></span> {
 <span class="idlAttribute">    attribute <span class="idlAttrType"><a class="idlType" href="#idl-def-FormatData"><code>FormatData</code></a></span> <span class="idlAttrName"><a href="#widl-MediaFile-format">format</a></span>;</span>
 };</span>
-</pre><div class="section" id="attributes-1"><h4 id="x3.2.1-attributes"><span class="secno">3.2.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-MediaFile-format"><code>format</code> of type <span class="idlAttrType"><a class="idlType" href="#idl-def-FormatData"><code>FormatData</code></a></span></dt><dd>The format attribute represents the format information of <a href="#formatdata-interface"><code>MediaFile</code></a>
+</pre><div class="section" id="attributes-1"><h4 id="x3.2.1-attributes"><span class="secno">3.2.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-MediaFile-format"><code>format</code> of type <span class="idlAttrType"><a class="idlType" href="#idl-def-FormatData"><code>FormatData</code></a></span></dt><dd>The format attribute represents the format information of <a href="#formatdata"><code>MediaFile</code></a>
     object.<div><em>No exceptions.</em></div></dd></dl></div>
 
     </div>
@@ -748,7 +748,7 @@ interface <span class="idlInterfaceID">CaptureCB</span> {
     <div class="section" id="mediaarray"><h3 id="x3.5-mediaarray-typedef"><span class="secno">3.5 </span><a>MediaArray</a> typedef</h3>
 
     <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of
-    <a href="#mediafile-interface"> <code>MediaFile</code></a>
+    <a href="#mediafile"> <code>MediaFile</code></a>
     objects. </p>
 
     <pre class="idl"><span class="idlTypedef" id="idl-def-MediaArray">typedef <span class="idlTypedefType">sequence&lt;<a class="idlType" href="#idl-def-MediaFile"><code>MediaFile</code></a>&gt;</span> <span class="idlTypedefID">MediaArray</span>;</span></pre><div class="idlTypedefDesc">Throughout this specification, the identifier <span class="idlTypedefID">MediaArray</span> is used to refer to the <span class="idlTypedefType">sequence&lt;<a class="idlType" href="#idl-def-MediaFile"><code>MediaFile</code></a>&gt;</span> type.</div>
@@ -1028,5 +1028,5 @@ initial input into this specification.
 </div>
 <div class="appendix section" id="references"><!--OddPage--><h2 id="e.-references"><span class="secno">E. </span>References</h2><div class="section" id="normative-references"><h3 id="e.1-normative-references"><span class="secno">E.1 </span>Normative references</h3><p>No normative references.</p></div><div class="section" id="informative-references"><h3 id="e.2-informative-references"><span class="secno">E.2 </span>Informative references</h3><dl class="bibliography"><dt id="bib-FILE-API">[FILE-API]</dt><dd>Arun Ranganathan. <a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/"><cite>File API.</cite></a> 17 November 2009. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a> 
 </dd><dt id="bib-HTML5">[HTML5]</dt><dd>Ian Hickson; David Hyatt. <a href="http://www.w3.org/TR/2009/WD-html5-20090825/"><cite>HTML 5.</cite></a> 25 August 2009. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2009/WD-html5-20090825/">http://www.w3.org/TR/2009/WD-html5-20090825/</a> 
-</dd><dt id="bib-NAVIGATOR">[NAVIGATOR]</dt><dd>Ian Hickson, David Hyatt. <a href="http://dev.w3.org/html5/spec/browsers.html#navigator"><cite>Navigator interface in HTML5</cite></a>, Editors draft (Work in progress). URL: <a href="http://dev.w3.org/html5/spec/browsers.html#navigator">http://dev.w3.org/html5/spec/browsers.html#navigator</a> 
+</dd><dt id="bib-NAVIGATOR">[NAVIGATOR]</dt><dd>Ian Hickson, David Hyatt. <a href="http://dev.w3.org/html5/spec/webappapis.html#navigator"><cite>Navigator interface in HTML5</cite></a>, Editors draft (Work in progress). URL: <a href="http://dev.w3.org/html5/spec/webappapis.html#navigator">http://dev.w3.org/html5/spec/webappapis.html#navigator</a> 
 </dd></dl></div></div></body></html>
