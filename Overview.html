@@ -160,7 +160,7 @@ alert(summary);
 
       <p>This method takes two or three arguments. When called, it
       immediately returns a <a
-      href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      href="#pendingoperation"><code>PendingOperation</code></a>
       object and then asynchronously start a <em>capture image</em>
       process defined as follows:</p>
 
@@ -172,11 +172,11 @@ alert(summary);
       picture(s).</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray-typedef"> <code>MediaArray</code></a>
+      with a <a href="#mediaarray"> <code>MediaArray</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must
       invoke the <code>errorCallback</code> with a <a
-      href="#captureerror-interface"><code>CaptureError</code></a> object
+      href="#captureerror"><code>CaptureError</code></a> object
       as an argument.</li>
 
       <li>If a <code>CaptureImageOptions</code> parameter was present,
@@ -211,7 +211,7 @@ alert(summary);
 
       <p>This method takes three or four arguments. When called, it
       immediately returns a <a
-      href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      href="#pendingoperation"><code>PendingOperation</code></a>
       object and then asynchronously start a <em>capture video</em> process
       defined as follows:</p>
 
@@ -222,11 +222,11 @@ alert(summary);
       <li>Start native video camera application. Allow end user to
       take video(s) and return.  </li><li>If successful, invoke the
       associated <code>successCB</code> with a <a
-      href="#mediaarray-typedef"> <code>MediaArray</code></a> argument. If
+      href="#mediaarray"> <code>MediaArray</code></a> argument. If
       the attempt fails, and the method was invoked with a non-null
       <code>errorCallback</code> argument, this method must invoke the
       <code>errorCallback</code> with a <a
-      href="#captureerror-interface"><code>CaptureError</code></a> object as
+      href="#captureerror"><code>CaptureError</code></a> object as
       an argument.</li>
 
       <li>If a <code>CaptureVideoOptions</code> parameter was present, and
@@ -267,7 +267,7 @@ alert(summary);
       recording audio clip(s).</p>
       
       <p>This method takes two or three arguments. When called, it
-      immediately returns a <a href="#pendingoperation-interface">
+      immediately returns a <a href="#pendingoperation">
       <code>PendingOperation</code></a> object and then asynchronously
       start a <em>capture audio</em> process defined as follows:</p>
 
@@ -279,11 +279,11 @@ alert(summary);
       audio clip(s) and return.</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray-typedef"> <code>MediaArray</code></a>
+      with a <a href="#mediaarray"> <code>MediaArray</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
       the <code>errorCallback</code> with a <a
-      href="#captureerror-interface"><code>CaptureError</code></a> object as
+      href="#captureerror"><code>CaptureError</code></a> object as
       an argument.</li>
 
       <li>If a <code>CaptureAudioOptions</code> parameter was present,
@@ -317,7 +317,7 @@ alert(summary);
 
       <p>This method takes one or two arguments. When called, it
       immediately returns a <a
-      href="#pendingoperation-interface"><code>PendingOperation</code></a>
+      href="#pendingoperation"><code>PendingOperation</code></a>
       object and then tries asynchronously to return the ViewFinder object of the
       active capture device selected by the system or user.</p>
       
@@ -328,7 +328,7 @@ alert(summary);
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
       the <code>errorCB</code> with a <a
-      href="#captureerror-interface"><code>CaptureError</code></a> object as
+      href="#captureerror"><code>CaptureError</code></a> object as
       an argument.</p>
 
       <dl class="parameters">
@@ -354,7 +354,7 @@ alert(summary);
     <dt>attribute FormatData format </dt>
 
     <dd>The format attribute represents the format information of <a
-    href="#formatdata-interface"><code>MediaFile</code></a>
+    href="#formatdata"><code>MediaFile</code></a>
     object.</dd></dl>
 
     </section>
@@ -399,7 +399,7 @@ alert(summary);
     <section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
 
     <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of
-    <a href="#mediafile-interface"> <code>MediaFile</code></a>
+    <a href="#mediafile"> <code>MediaFile</code></a>
     objects. </p>
 
     <dl title="typedef sequence&lt;MediaFile&gt; MediaArray" class="idl"></dl>
