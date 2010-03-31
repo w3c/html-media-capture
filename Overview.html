@@ -122,7 +122,7 @@ alert(summary);
     <section id="api">
     <h2>API Description</h2>
 
-      <section id="capture">
+      <section>
       <h3><a>Capture</a> interface</h3>
 
       <p>The <code>Capture</code> interface exposes an interface to the
@@ -324,7 +324,7 @@ alert(summary);
       <p class='note'>User consent must be verified.</p>   
 
       <p>If successful, invokes the associated <code>ViewFinderCB</code>
-      with a <a href="#viewfinder"> <code>ViewFinder</code></a>
+      with a <a href="#viewfinder-interface"> <code>ViewFinder</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
       the <code>errorCB</code> with a <a
@@ -497,7 +497,7 @@ alert(summary);
 
   </section>
 
-  <section id="viewfinder">
+  <section id="viewfinder-interface">
   <h3><a>ViewFinder</a> interface</h3>
 
   <p>This interface represents a camera viewfinder. It inherits from
