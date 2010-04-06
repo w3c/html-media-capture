@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>The Capture API</title>
+    <title>The Media Capture API</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <script src='../ReSpec.js/js/respec.js' class='remove'></script>
     <script class='remove'>
@@ -290,7 +290,7 @@ alert(summary);
       and its <code>maxNumberOfMediaFiles</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
       captured a number of audio clips defined in
-      <code>maxNumberOfMediaFiles</code>.  If user exited the native camera
+      <code>maxNumberOfMediaFiles</code>.  If user exited the native audio recorder
       application prematurely, <code>errorCB</code> must be invoked.
       </li> 
 
@@ -370,17 +370,31 @@ alert(summary);
       video or sound. For example, a valid MIME type for JPEG images is
       image/jpeg. A valid MIME type for WAV sound file is audio/x-wav.</dd>
 
+      <dt>attribute DOMString codecs</dt>
+      <dd>The type attribute is not enough to determine the format of the
+      content since it only specifies the container type. The codecs attribute
+      represents the actual format that the audio and video of the content.
+      The codecs attribute must conforms to the [[RFC4281]].
+      For example, a valid value for H.263 video and AAC low
+      complexity would be codecs="s263, mp4a.40.2".</dd>
+
+      <dt>attribute long bitrate </dt>
+      <dd>The codecs attribute only specifies the profile and level of the encoded content
+      which doesn't specify the actual bitrate. It only specifies the maximum encoded 
+      bitrate, thus this bitrate attribute is the average bitrate of the content. In the case
+      of a image this attribute has value 0.</dd>
+
       <dt>attribute unsigned long height </dt>
       <dd>The height attribute represents height of the image or video
+      in pixels. In the case of a sound clip this attribute has value 0.</dd>
+
+      <dt>attribute unsigned long width </dt>
+      <dd>The width attribute represents width of the image or video
       in pixels. In the case of a sound clip this attribute has value 0.</dd>
 
       <dt>attribute double duration </dt>
       <dd>The duration attribute represents length of the video or sound
       clip in milliseconds. In the case of a image this attribute has value 0.</dd>
-
-      <dt>attribute unsigned long width </dt>
-      <dd>The width attribute represents width of the image or video
-      in pixels. In the case of a sound clip this attribute has value 0.</dd>
     </dl>
     
     </section>
