@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Capture Input Selection</title>
+    <title>HTML Form Based Media Capturing</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <script src='../ReSpec.js/js/respec.js' class='remove'></script>
     <script class='remove'>
       var respecConfig = {
           specStatus:           "FPWD",
-          shortName:            "capture-api",
+          shortName:            "capture-forms",
           editors: [{name: "Dzung D Tran", company: "Intel"},
                     {name: "Ilkka Oksanen", company: "Nokia"},
                     {name: "Ingmar Kliche", company: "Deutsche Telekom"},
@@ -24,16 +24,14 @@
   <body>
   
     <section id='abstract'>
-      This specification defines an Application Programming Interface
-      (<acronym title="Application Programming Interface">API</acronym>)
-      that provides access to the audio, image and video capture
+      This specification defines a HTML form enhancements that provide access to the audio, image and video capture
       capabilities of the device.  
     </section>
 
     <section id="sotd">
       <p>This document represents the early consensus of the group on
       the scope and features of the proposed Capture
-      API. Issues and editors notes in the document highlight some of
+      functionality. Issues and editors notes in the document highlight some of
       the points on which the group is still working and would
       particularly like to get feedback.</p>
     </section>
@@ -41,9 +39,11 @@
     <section>
     <h2>Introduction</h2>
 
-    <p>The Capture API defines a high-level interface for accessing the
-    microphone and camera of a hosting device.</p>
-    </section>
+    <p>The HTML Form Based Media Capturing specification defines a new
+    interface for media files, a new attribute for input element in
+    file upload state, and recomendations for
+    providing optimised access to the microphone and camera of a
+    hosting device.</p> </section>
 
     <section id="security">
     <h2>Security and Privacy Considerations</h2>
@@ -51,19 +51,11 @@
     <p class='note'>
     <strong>The overall architecture for addressing privacy in DAP is still  
     under construction. As it is finalized, there may be changes made to  
-    this API to reflect requirements or support for privacy-related  
+    this specification to reflect requirements or support for privacy-related  
     functionality.</strong>
     </p>   
 
-    <p>The API defined in this specification launches the capture
-    application which allows the user to take pictures, record voice or
-    record video and provides a handle to the content. This information
-    can potentially compromise user privacy and a conforming
-    implementation of this specification MUST provide a mechanism that
-    protects the user's privacy and this mechanism should ensure that such
-    operations MUST be authenticated.</p>
-
-    <h3>Privacy considerations for implementers of Capture API</h3>
+    <h3>Privacy considerations for implementers of Capture functionality</h3>
 
     <p>A conforming implementation of this specification MUST provide a
     mechanism that protects the user's privacy and this mechanism SHOULD
@@ -78,7 +70,7 @@
     <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
 
     <p><code>MediaFile</code> captures a single photo, video or sound
-    captured by the device native capture application. It inherits
+    captured by the device. It inherits
     from <code>File</code> [[FILE-API]]</p>
 
     <dl title="[NoInterfaceObject] interface MediaFile : File" class="idl">
@@ -94,7 +86,7 @@
     <section  id="formatdata"><h3><a>FormatData</a> interface</h3>
 
     <p><code>FormatData</code> captures format information of a media
-    file captured by the device native capture application.</p>
+    file captured by the device.</p>
 
     <dl title="[NoInterfaceObject] interface FormatData" class="idl">
       <dt>attribute DOMString type</dt>
@@ -106,7 +98,7 @@
       <dd>The type attribute is not enough to determine the format of the
       content since it only specifies the container type. The codecs attribute
       represents the actual format that the audio and video of the content.
-      The codecs attribute must conforms to the [[RFC4281]].
+      The codecs attribute MUST conforms to the [[RFC4281]].
       For example, a valid value for H.263 video and AAC low
       complexity would be codecs="s263, mp4a.40.2".</dd>
 
@@ -132,15 +124,18 @@
     </section>
   </section>
 
+  <section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
+    <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of
+    <a href="#mediafile"> <code>MediaFile</code></a>
+    objects. </p>
+
+    <dl title="typedef sequence&lt;MediaFile&gt; MediaArray" class="idl"></dl>
+  </section>
+
   <section id="formaccess">
     <h2>Capture aware file-select control</h2>
 
-
-    <p class='note'>
-    Add 'source' attribute and make this section normative.
-    </p>   
-
-    <p>This section is non-normative.</p>
+    <p>This section is normative.</p>
 
     <p>If input element in the File Upload state [[HTML5]] contains
     accept attribute with values <code>image/*</code>,
@@ -154,6 +149,12 @@
     <p>In case the user chooses to capture video, audio, or image
     content, the user agent creates media files on the fly as
     specified in [[HTML5]].</p>
+
+    <p>If the user captures media files successfully, the
+    <code>files</code> attribute [[HTML5]] MUST return a <a
+    href="#mediaarray">MediaArray</a> object that represents the
+    current captured content instead of <code>FileList</code>
+    [[FILE-API]] object as specified in [[HTML5]].
 
     <pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
 
@@ -175,8 +176,23 @@ document.getElementById('cameraInput').click();
 &lt;/script&gt;
 
 </pre>
-
 </section>
+
+  <section id="formaccess">
+    <h2>The <code>Capture</code> Attribute</h2>
+
+    <p>This section is normative.</p>
+
+    <p>The <code>capture</code> attribute may be specified to provide
+user agents with a hint of that by the default a file picker should be
+in media capturing mode.</p>
+
+    <p>The input element with type attribute in the File Upload state
+may have the <code>capture</code> attribute set. The
+<code>capture</code> attribute is a boolean attribute. When specified
+on an element, it indicates that the user agent should automatically
+set the file picker to mode suitable for capturing video and/or audio
+content.</p> </section>
 
 <section class='appendix' id="uiexamples">
 <h2>User Interface Examples</h2>
