@@ -403,56 +403,6 @@ alert(summary);
   </section>
   </section>
 
-  <section id="formaccess">
-
-  <h2>Capture Input Selection</h2>
-
-  <p>In addition to programmable API, content can be acquired from
-  capture devices through a file-select control.</p>
-
-    <section id="capture">
-    <h2>Capture aware file-select control</h2>
-
-    <p>This section is non-normative.</p>
-
-    <p>If input element in the File Upload state [[HTML5]] contains
-    accept attribute with values <code>image/*</code>,
-    <code>sound/*</code>, or <code>video/*</code>, the user agent can
-    invoke a file picker that allows respectively the user to take a
-    picture, record a sound file, or record a video in addition to
-    selecting an existing file from the file system.</p>
-
-    <p>See the <a href="#uiexamples">User Interface Examples</a> appendix for the illustration.
-
-    <p>In case the user chooses to capture video, audio, or image
-    content, the user agent creates media files on the fly as
-    specified in [[HTML5]].</p>
-
-    <pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
-
-    <p>In trusted environments the click event of file input element
-    can be synthesised as follows:</p>
-
-    <pre class="example sh_javascript_dom">
-
-&lt;input id="cameraInput" onchange="successCB();" type="file" accept="image/*"&gt; 
-
-&lt;script&gt;
-
-function successCB() {
-  // Read the image using file-reader or submit the form
-}
-
-document.getElementById('cameraInput').click();
-
-&lt;/script&gt;
-
-</pre>
-
-</section>
-
-</section>
-
 <section class='appendix' id="related">
 <h2>Related documents</h2>
 <p>The API described in this document took inspiration from the following documents:</p>
@@ -461,14 +411,6 @@ document.getElementById('cameraInput').click();
 </li><li><a href="http://bondi.omtp.org/1.0/apis/camera.html">BONDI 1.1 camera API</a>
 </li><li><a href="http://lists.w3.org/Archives/Public/public-device-apis/2009Apr/att-0001/camera.html">Nokia Camara API</a>
 </li></ul>
-</section>
-
-<section class='appendix' id="uiexamples">
-<h2>User Interface Examples</h2>
-
-<p>Capture API aware file picker might render as:
-
-<p><img alt="A File picker with camera support" src="capture-api-file-picker-concept.png"></p> 
 </section>
 
 <section class='appendix' id="future">
