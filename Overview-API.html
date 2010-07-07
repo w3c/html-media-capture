@@ -175,7 +175,7 @@ alert(summary);
       picture(s).</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray"> <code>MediaArray</code></a>
+      with a <a href="Overview.html#mediaarray"> <code>MediaArray</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must
       invoke the <code>errorCallback</code> with a <a
@@ -225,7 +225,7 @@ alert(summary);
       <li>Start native video camera application. Allow end user to
       take video(s) and return.  </li><li>If successful, invoke the
       associated <code>successCB</code> with a <a
-      href="#mediaarray"> <code>MediaArray</code></a> argument. If
+      href="Overview.html#mediaarray"> <code>MediaArray</code></a> argument. If
       the attempt fails, and the method was invoked with a non-null
       <code>errorCallback</code> argument, this method must invoke the
       <code>errorCallback</code> with a <a
@@ -282,7 +282,7 @@ alert(summary);
       audio clip(s) and return.</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="#mediaarray"> <code>MediaArray</code></a>
+      with a <a href="Overview.html#mediaarray"> <code>MediaArray</code></a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
       the <code>errorCallback</code> with a <a
@@ -317,62 +317,6 @@ alert(summary);
       </dl>
     </section>
 
-    <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
-
-    <p><code>MediaFile</code> captures a single photo, video or sound
-    captured by the device native capture application. It inherits
-    from <code>File</code> [[FILE-API]]</p>
-
-    <dl title="[NoInterfaceObject] interface MediaFile : File" class="idl">
-
-    <dt>attribute FormatData format </dt>
-
-    <dd>The format attribute represents the format information of <a
-    href="#formatdata"><code>MediaFile</code></a>
-    object.</dd></dl>
-
-    </section>
-
-    <section  id="formatdata"><h3><a>FormatData</a> interface</h3>
-
-    <p><code>FormatData</code> captures format information of a media
-    file captured by the device native capture application.</p>
-
-    <dl title="[NoInterfaceObject] interface FormatData" class="idl">
-      <dt>attribute DOMString type</dt>
-      <dd>The type attribute represents the MIME type of the captured image,
-      video or sound. For example, a valid MIME type for images is
-      image/jpeg. A valid MIME type for audio files is audio/x-speex or audio/ogg.</dd>
-
-      <dt>attribute DOMString codecs</dt>
-      <dd>The type attribute is not enough to determine the format of the
-      content since it only specifies the container type. The codecs attribute
-      represents the actual format that the audio and video of the content.
-      The codecs attribute must conforms to the [[RFC4281]].
-      For example, a valid value for H.263 video and AAC low
-      complexity would be codecs="s263, mp4a.40.2".</dd>
-
-      <dt>attribute long bitrate </dt>
-      <dd>The codecs attribute only specifies the profile and level of the encoded content
-      which doesn't specify the actual bitrate. It only specifies the maximum encoded 
-      bitrate, thus this bitrate attribute is the average bitrate of the content. In the case
-      of a image this attribute has value 0.</dd>
-
-      <dt>attribute unsigned long height </dt>
-      <dd>The height attribute represents height of the image or video
-      in pixels. In the case of a sound clip this attribute has value 0.</dd>
-
-      <dt>attribute unsigned long width </dt>
-      <dd>The width attribute represents width of the image or video
-      in pixels. In the case of a sound clip this attribute has value 0.</dd>
-
-      <dt>attribute double duration </dt>
-      <dd>The duration attribute represents length of the video or sound
-      clip in milliseconds. In the case of a image this attribute has value 0.</dd>
-    </dl>
-    
-    </section>
-
     <section id="capturecallbak"><h3><a>CaptureCB</a> interface</h3>
 
     <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface CaptureCB" class="idl">
@@ -381,16 +325,6 @@ alert(summary);
       of MediaFile successfully captured by the device</dd>
     </dd></dl>
     </dd></dl>
-
-    </section>
-
-    <section id="mediaarray"><h3><a>MediaArray</a> typedef</h3>
-
-    <p>The <a>MediaArray</a> typedef represents a <code>sequence</code> of
-    <a href="#mediafile"> <code>MediaFile</code></a>
-    objects. </p>
-
-    <dl title="typedef sequence&lt;MediaFile&gt; MediaArray" class="idl"></dl>
 
     </section>
 
