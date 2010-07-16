@@ -159,23 +159,20 @@
 
     <pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
 
+    <!-- @@@ note on streaming and &lt;device&gt; -->
+
 </section>
 
   <section id="formaccess">
-    <h2>The <code>Capture</code> Attribute</h2>
+    <h2>The <code>Capture</code> parameter</h2>
 
     <p>This section is normative.</p>
 
-    <p>The <code>capture</code> attribute may be specified to provide
-user agents with a hint of that by the default a file picker should be
-in media capturing mode.</p>
+    <p>The <code>capture</code> parameter may be specified on the media type values of the <code>accept</code> attribute to provide user agents with a hint of that by the default a file picker should be in media capturing mode.</p>
 
-    <p>The input element with type attribute in the File Upload state
-may have the <code>capture</code> attribute set. The
-<code>capture</code> attribute is a boolean attribute. When specified
-on an element, it indicates that the user agent should automatically
-set the file picker to mode suitable for capturing video and/or audio
-content.</p> </section>
+    <p>The <code>capture</code> parameter can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>. These values indicate which source the file picker interface should preferably present to the user by default.</p>
+
+</section>
 
 <section class='appendix' id="uiexamples">
 <h2>User Interface Examples</h2>
