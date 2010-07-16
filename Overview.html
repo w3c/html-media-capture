@@ -77,8 +77,57 @@ feedback.</p>
 
     </section>
 
+
+  <section id="formaccess">
+    <h2>Capture aware file-select control</h2>
+
+    <p>This section is normative.</p>
+
+    <p class="note">[[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">links <code>&lt;input type="file"&gt;</code></a> to the File interface. This specification defines a refined <code>MediaFile</code> interface to be used when the <code>accept</code> attribute take certain values — this will require coordination with the HTML5 Working Group.</p>
+
+    <p>If input element in the File Upload state [[!HTML5]] contains
+    accept attribute with values <code>image/*</code>,
+    <code>sound/*</code>, or <code>video/*</code>, the user agent can
+    invoke a file picker that allows respectively the user to take a
+    picture, record a sound file, or record a video in addition to
+    selecting an existing file from the file system.</p>
+
+    <p>See the <a href="#uiexamples">User Interface Examples</a> appendix for the illustration.
+
+    <p>In case the user chooses to capture video, audio, or image
+    content, the user agent creates media files on the fly <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">as
+    specified</a> in [[HTML5]].</p>
+
+    <p>If the user captures media files successfully, the
+    <code>files</code> attribute [[HTML5]] MUST return a <a
+    href="#medialist">MediaList</a> object that represents the
+    current captured content instead of <code>FileList</code>
+    [[!FILE-API]] object as specified in [[!HTML5]].
+
+    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*"&gt; </pre>
+</section>
+
+  <section id="formaccess">
+    <h2>The <code>capture</code> parameter</h2>
+
+    <p>This section is normative.</p>
+
+
+    <p>The <code>capture</code> parameter may be specified on the media type values of the <code>accept</code> attribute to provide user agents with a hint of that by the default a file picker should be in media capturing mode.</p>
+
+    <p class="note">[[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#attr-input-accept">defines the <code>accept</code> attribute to take no parameters on MIME types</a>. This specification proposes to use a MIME type parameter — this will require coordination with the HTML5 Working Group.</p>
+
+
+    <p>The <code>capture</code> parameter can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>, <code>filesystem</code>. These values indicate which source the file picker interface should preferably present to the user by default.</p>
+    <p class="note">The values and their exact meaning are still very much in flux.</p>
+
+    <p>For example, the following code indicates that the user is expected to upload an image from the device camera:</p>
+    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*;capture=camera"&gt; </pre>
+    <p>A possible rendering of a file picker taking this parameter into account is offered in the <a href="#uiexamples">User Interface Examples appendix</a>.</p>
+</section>
+
     <section id="api">
-    <h2>API Description</h2>
+    <h2>WebIDL interfaces</h2>
 
     <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
 
@@ -147,54 +196,6 @@ feedback.</p>
     <dl title="typedef sequence&lt;MediaFile&gt; MediaList" class="idl"></dl>
   </section>
 
-  <section id="formaccess">
-    <h2>Capture aware file-select control</h2>
-
-    <p>This section is normative.</p>
-
-    <p class="note">[[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">links <code>&lt;input type="file"&gt;</code></a> to the File interface. This specification defines a refined MediaFile interface to be used when the <code>accept</code> attribute take certain values — this will require coordination with the HTML5 Working Group.</p>
-
-    <p>If input element in the File Upload state [[!HTML5]] contains
-    accept attribute with values <code>image/*</code>,
-    <code>sound/*</code>, or <code>video/*</code>, the user agent can
-    invoke a file picker that allows respectively the user to take a
-    picture, record a sound file, or record a video in addition to
-    selecting an existing file from the file system.</p>
-
-    <p>See the <a href="#uiexamples">User Interface Examples</a> appendix for the illustration.
-
-    <p>In case the user chooses to capture video, audio, or image
-    content, the user agent creates media files on the fly <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">as
-    specified</a> in [[HTML5]].</p>
-
-    <p>If the user captures media files successfully, the
-    <code>files</code> attribute [[HTML5]] MUST return a <a
-    href="#medialist">MediaList</a> object that represents the
-    current captured content instead of <code>FileList</code>
-    [[!FILE-API]] object as specified in [[!HTML5]].
-
-    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*"&gt; </pre>
-
-
-</section>
-
-  <section id="formaccess">
-    <h2>The <code>Capture</code> parameter</h2>
-
-    <p>This section is normative.</p>
-
-
-    <p>The <code>capture</code> parameter may be specified on the media type values of the <code>accept</code> attribute to provide user agents with a hint of that by the default a file picker should be in media capturing mode.</p>
-
-    <p class="note">[[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#attr-input-accept">defines the <code>accept</code> attribute to take no parameters on MIME types</a>. This specification proposes to use a MIME type parameter — this will require coordination with the HTML5 Working Group.</p>
-
-
-    <p>The <code>capture</code> parameter can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>, <code>filesystem</code>. These values indicate which source the file picker interface should preferably present to the user by default.</p>
-    <p class="note">The values and their exact meaning are still very much in flux.</p>
-
-    <p>For example, the following code indicates that the user is expected to upload an image from the device camera:</p>
-    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*;capture=camera"&gt; </pre>
-</section>
 
 <section class='appendix' id="uiexamples">
 <h2>User Interface Examples</h2>
