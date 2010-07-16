@@ -138,7 +138,9 @@
 
     <p>This section is normative.</p>
 
-    <p>If input element in the File Upload state [[HTML5]] contains
+    <p class="note">[[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">links <code>&lt;input type="file"&gt;</code></a> to the File interface. This specification defines a refined MediaFile interface to be used when the <code>accept</code> attribute take certain values — this will require coordination with the HTML5 Working Group.</p>
+
+    <p>If input element in the File Upload state [[!HTML5]] contains
     accept attribute with values <code>image/*</code>,
     <code>sound/*</code>, or <code>video/*</code>, the user agent can
     invoke a file picker that allows respectively the user to take a
@@ -168,7 +170,11 @@
 
     <p>This section is normative.</p>
 
+
     <p>The <code>capture</code> parameter may be specified on the media type values of the <code>accept</code> attribute to provide user agents with a hint of that by the default a file picker should be in media capturing mode.</p>
+
+    <p class="note">[[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#attr-input-accept">defines the <code>accept</code> attribute to take no parameters on MIME types</a>. This specification proposes to use a MIME type parameter — this will require coordination with the HTML5 Working Group.</p>
+
 
     <p>The <code>capture</code> parameter can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>. These values indicate which source the file picker interface should preferably present to the user by default.</p>
 
