@@ -46,10 +46,13 @@ feedback.</p>
     <h2>Introduction</h2>
 
     <p>The HTML Form Based Media Capturing specification defines a new
-    interface for media files, a new attribute for input element in
-    file upload state, and recomendations for
+    interface for media files, a new paramer the accept attribute of the HTML input element in file upload state, and recommendations for
     providing optimised access to the microphone and camera of a
-    hosting device.</p> </section>
+    hosting device.</p> 
+
+    <p>Providing streaming access to these capabilities is outside of the scope of this specification.</p>
+    <p class="note">The Working Group is investigating the opportunity to specify streaming access via the <a href="http://dev.w3.org/html5/html-device/">proposed <code>&lt;device&gt;</code> element</a>.</p>
+    </section>
 
     <section id="conformance">
       <p>
@@ -171,7 +174,6 @@ feedback.</p>
 
     <pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
 
-    <!-- @@@ note on streaming and &lt;device&gt; -->
 
 </section>
 
