@@ -173,7 +173,7 @@ feedback.</p>
     current captured content instead of <code>FileList</code>
     [[!FILE-API]] object as specified in [[!HTML5]].
 
-    <pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
+    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*"&gt; </pre>
 
 
 </section>
@@ -191,6 +191,8 @@ feedback.</p>
 
     <p>The <code>capture</code> parameter can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>, <code>filesystem</code>. These values indicate which source the file picker interface should preferably present to the user by default.</p>
     <p class="note">The values and their exact meaning are still very much in flux.</p>
+
+    <pre class="example sh_javascript_dom">&lt;input  type="file" accept="image/*;capture=camera"&gt; </pre>
 </section>
 
 <section class='appendix' id="uiexamples">
