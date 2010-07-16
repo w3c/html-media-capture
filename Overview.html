@@ -24,7 +24,7 @@
   <body>
   
     <section id='abstract'>
-      This specification defines a HTML form enhancements that provide access to the audio, image and video capture
+      This specification defines HTML form enhancements that provide access to the audio, image and video capture
       capabilities of the device.  
     </section>
 
@@ -47,7 +47,8 @@
 
     <section id="security">
     <h2>Security and Privacy Considerations</h2>
-
+    <!-- @@@ get inspiration from FileAPI spec -->
+    <!-- @@@ make note of leaking private date through EXIF -->
     <p class='note'>
     <strong>The overall architecture for addressing privacy in DAP is still  
     under construction. As it is finalized, there may be changes made to  
@@ -158,24 +159,6 @@
 
     <pre class="example sh_javascript_dom">&lt;input id="cameraInput" type="file" accept="image/*"&gt; </pre>
 
-    <p>In trusted environments the click event of file input element
-    can be synthesised as follows:</p>
-
-    <pre class="example sh_javascript_dom">
-
-&lt;input id="cameraInput" onchange="successCB();" type="file" accept="image/*"&gt; 
-
-&lt;script&gt;
-
-function successCB() {
-  // Read the image using file-reader or submit the form
-}
-
-document.getElementById('cameraInput').click();
-
-&lt;/script&gt;
-
-</pre>
 </section>
 
   <section id="formaccess">
