@@ -98,11 +98,8 @@ feedback.</p>
     content, the user agent creates media files on the fly <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">as
     specified</a> in [[HTML5]].</p>
 
-    <p>If the user captures media files successfully, the
-    <code>files</code> attribute [[HTML5]] MUST return a <a
-    href="#medialist">MediaList</a> object that represents the
-    current captured content instead of <code>FileList</code>
-    [[!FILE-API]] object as specified in [[!HTML5]].
+    <p>If the user selects files of whose MIME types match <code>image/*</code>,
+    <code>sound/*</code>, or <code>video/*</code> (on the filesystem or via a successful media capture), the relevant files in the <code>files</code> attribute [[HTML5]] MUST implement the <code>MediaFile</code> interface.</p>
 
     <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*"&gt; </pre>
 </section>
@@ -186,14 +183,6 @@ feedback.</p>
     <p class="note">Some of the proposed attributes of the <code>FormatData</code> interface could possibly be integrated as parameters of the MIME type, or as MIME options object.</p>
     
     </section>
-  </section>
-
-  <section id="medialist"><h3><a>MediaList</a> typedef</h3>
-    <p>The <a>MediaList</a> typedef represents a <code>sequence</code> of
-    <a href="#mediafile"> <code>MediaFile</code></a>
-    objects. </p>
-
-    <dl title="typedef sequence&lt;MediaFile&gt; MediaList" class="idl"></dl>
   </section>
 
 
