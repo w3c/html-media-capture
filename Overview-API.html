@@ -7,7 +7,7 @@
     <script class='remove'>
       var respecConfig = {
           specStatus:           "ED",
-          shortName:            "capture-api",
+          shortName:            "media-capture-api",
           editors: [{name: "Dzung D Tran", company: "Intel"},
                     {name: "Ilkka Oksanen", company: "Nokia"},
                     {name: "Ingmar Kliche", company: "Deutsche Telekom"},
@@ -42,7 +42,8 @@
     <h2>Introduction</h2>
 
     <p>The Capture API defines a high-level interface for accessing the
-    microphone and camera of a hosting device.</p>
+    microphone and camera of a hosting device. The HTML Form Based Media 
+      Capturing specification can be found at [[!HTMLMEDIACAPTURE]]</p>
 
       <section id="examples">
       <h2>Usage Examples</h2>
@@ -92,6 +93,10 @@ alert(summary);
 
         </pre>
         </div>
+
+    <p class='note'>
+    The FormatData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
+    </p>   
       </section>
     </section>
 
@@ -120,6 +125,13 @@ alert(summary);
     ensure that privacy information is not revealed without user's
     informed consent.</p>
 
+    <p class='note'>
+    <strong>Note that there is a minimization issue with EXIF headers. 
+    Implementations MUST not embed information in the EXIF header which 
+    could be used for non-intended purposes (such as geolocation or device id).
+    </strong>
+    </p>   
+
     </section>
 
     <section id="api">
@@ -143,18 +155,18 @@ alert(summary);
       class="idl"><dt>readonly attribute FormatData[]
       supportedImageFormats</dt>
 
-      <dd>An array of FormatData objects which contains image sizes
+      <dd>An array of FormatData [[!HTMLMEDIACAPTURE]] objects which contains image sizes
       and formats supported by the hosting device camera.</dd>
 
       <dt>readonly attribute FormatData[]
       supportedVideoFormats </dt>
-      <dd>An array of FormatData objects which contains video
+      <dd>An array of FormatData [[!HTMLMEDIACAPTURE]] objects which contains video
       resolutions and formats supported by the hosting device
       camera.</dd>
 
       <dt>readonly attribute FormatData[]
       supportedAudioFormats</dt>
-      <dd>An array of FormatData objects which contains audio
+      <dd>An array of FormatData [[!HTMLMEDIACAPTURE]] objects which contains audio
       formats supported by the hosting device microphone.</dd>
 
       <dt>PendingOperation captureImage () </dt>
@@ -175,7 +187,7 @@ alert(summary);
       picture(s).</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="Overview.html#medialist"> <code>MediaList</code></a>
+      with a <code>FileList</code> [[!FILE-API]]</a>
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must
       invoke the <code>errorCallback</code> with a <a
@@ -195,7 +207,7 @@ alert(summary);
         <dt>CaptureCB successCB </dt>
         <dd>Function to call when the asynchronous operation completes </dd>
 
-        <dt>optional CaptureErrorCB? errorCB </dt>
+        <dt>optional CaptureErrorCB errorCB </dt>
         <dd>Function to call when the asynchronous operation
         fails. This parameter is OPTIONAL.</dd>
 
@@ -224,8 +236,8 @@ alert(summary);
 
       <li>Start native video camera application. Allow end user to
       take video(s) and return.  </li><li>If successful, invoke the
-      associated <code>successCB</code> with a <a
-      href="Overview.html#medialist"> <code>MediaList</code></a> argument. If
+      associated <code>successCB</code> with a <code>FileList</code> 
+      [[!FILE-API]] argument. If
       the attempt fails, and the method was invoked with a non-null
       <code>errorCallback</code> argument, this method must invoke the
       <code>errorCallback</code> with a <a
@@ -255,7 +267,7 @@ alert(summary);
         <dt>CaptureCB successCB </dt>
 	<dd>Function to call when the asynchronous operation completes </dd>
 
-	<dt>optional CaptureErrorCB? errorCB</dt>
+	<dt>optional CaptureErrorCB errorCB</dt>
 	<dd>Function to call when the asynchronous operation fails. This
 	parameter is OPTIONAL.</dd>
 
@@ -282,7 +294,7 @@ alert(summary);
       audio clip(s) and return.</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <a href="Overview.html#medialist"> <code>MediaList</code></a>
+      with a <code>FileList</code> [[!FILE-API]] 
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must invoke
       the <code>errorCallback</code> with a <a
@@ -305,7 +317,7 @@ alert(summary);
         <dt>CaptureCB successCB </dt>
 	<dd>Function to call when the asynchronous operation completes </dd>
 
-	<dt>optional CaptureErrorCB? errorCB </dt>
+	<dt>optional CaptureErrorCB errorCB </dt>
 	<dd>Function to call when the asynchronous operation fails. This
 	parameter is OPTIONAL.</dd>
 
@@ -317,12 +329,12 @@ alert(summary);
       </dl>
     </section>
 
-    <section id="capturecallbak"><h3><a>CaptureCB</a> interface</h3>
+    <section id="capturecallback"><h3><a>CaptureCB</a> interface</h3>
 
     <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface CaptureCB" class="idl">
       <dt>void onSuccess () </dt><dd>
-      <dl class="parameters"><dt>MediaList capturedMedia </dt><dd>Sequence
-      of MediaFile successfully captured by the device</dd>
+      <dl class="parameters"><dt>FileList capturedMedia </dt><dd>Sequence
+      of Files [[!FILE-API]] (implementing the MediaFile [[!HTMLMEDIACAPTURE]] interface) successfully captured by the device</dd>
     </dd></dl>
     </dd></dl>
 
