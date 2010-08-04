@@ -129,22 +129,26 @@ feedback.</p>
     <section id="jsexample"><h3>Example</h3>
       <p>After the user successfully captured or selected an existing media file, the format properties of the file can be retrieved as follow:</p>
       <pre class="example sh_javascript_dom"><code>var captureInput = document.getElementById('capture');
+// Accessing the file object from the input element with id capture
 var file = captureInput.files[0];
 if (file) {
+  // getting format data asynchronously
   file.<strong>getFormatData(displayFormatData, errorHandler)</strong>;
 }
 
+// success callback when getting format data
 function displayFormatData(formatData) {  
   var mainType = file.type.split("/")[0]; // "image", "video" or "audio"
   var mediaDescriptionNode = document.createElement("p");
   if (mainType === "image") {
-    mediaDescriptionNode.appendChild(document.createNode("This is an image of dimensions " + <strong>formatData.width</strong> + "x" + <strong>formatData.height</strong>);
+    mediaDescriptionNode.appendChild(document.createTextNode("This is an image of dimensions " + <strong>formatData.width</strong> + "x" + <strong>formatData.height</strong>);
   } else {
-    mediaDescriptionNode.appendChild(document.createNode("Duration: " + (<strong>formatData.duration</strong> / 1000) + "s");
+    mediaDescriptionNode.appendChild(document.createTextNode("Duration: " + (<strong>formatData.duration</strong> / 1000) + "s");
   }
   captureInput.parentNode.insertBefore(mediaDescriptionNode, captureInput);
 }
 
+// error callback if getting format data fails
 function errorHandler(error) {
   alert("Couldn’t retrieve format properties for the selected file (error code " + error.code + ")");
 }
