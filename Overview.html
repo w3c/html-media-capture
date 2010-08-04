@@ -101,7 +101,7 @@ feedback.</p>
     <p>If the user selects files of whose MIME types match <code>image/*</code>,
     <code>sound/*</code>, or <code>video/*</code> (on the filesystem or via a successful media capture), the relevant files in the <code>files</code> attribute [[HTML5]] MUST implement the <code>MediaFile</code> interface.</p>
 
-    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*" id="capture"&gt; </pre>
+    <pre class="example sh_html">&lt;input type="file" accept="image/*" id="capture"&gt; </pre>
 </section>
 
   <section id="captureparam">
@@ -128,7 +128,7 @@ feedback.</p>
 
     <section id="jsexample"><h3>Example</h3>
       <p>After the user successfully captured or selected an existing media file, the format properties of the file can be retrieved as follow:</p>
-      <pre class="example sh_html"><code>var captureInput = document.getElementById('capture');
+      <pre class="example sh_javascript_dom"><code>var captureInput = document.getElementById('capture');
 // Accessing the file object from the input element with id capture
 var file = captureInput.files[0];
 if (file) {
