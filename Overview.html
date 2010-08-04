@@ -134,24 +134,24 @@ feedback.</p>
 
     <dl title="[NoInterfaceObject] interface MediaFile : File" class="idl">
 
-    <dt>readonly attribute FormatData format </dt>
+    <dt>readonly attribute MediaFileData format </dt>
 
     <dd>The format attribute represents the format information of <a
     href="#formatdata"><code>MediaFile</code></a>
     object.
-    <p class="note">The Working Group is considering whether the indirection provided by the <code>format</code> attribute is useful or if the <code>MediaFile</code> interface should inherit directly from <code>FormatData</code>.</p>
+    <p class="note">The Working Group is considering whether the indirection provided by the <code>format</code> attribute is useful or if the <code>MediaFile</code> interface should inherit directly from <code>MediaFileData</code>.</p>
     </dd></dl>
 
     </section>
 
-    <section  id="formatdata"><h3><a>FormatData</a> interface</h3>
+    <section  id="formatdata"><h3><a>MediaFileData</a> interface</h3>
 
-    <p><code>FormatData</code> captures format information of a media
+    <p><code>MediaFileData</code> captures format information of a media
     file captured by the device.</p>
 
-    <p class="note">The relationship between this <code>FormatData</code> interface and the properties made available through the API for Media Resource 1.0 [[MEDIAONT-API]] needs further investigation.</p>
+    <p class="note">The relationship between this <code>MediaFileData</code> interface and the properties made available through the API for Media Resource 1.0 [[MEDIAONT-API]] needs further investigation.</p>
 
-    <dl title="[NoInterfaceObject] interface FormatData" class="idl">
+    <dl title="[NoInterfaceObject] interface MediaFileData" class="idl">
 
       <dt>attribute DOMString codecs</dt>
       <dd>The type attribute of the Blob interface (inherited from the File interface) is not sufficient to determine the format of the
@@ -180,7 +180,7 @@ feedback.</p>
       clip in milliseconds. In the case of an image this attribute has value 0.</dd>
     </dl>
 
-    <p class="note">Some of the proposed attributes of the <code>FormatData</code> interface could possibly be integrated as parameters of the MIME type, or as MIME options object.</p>
+    <p class="note">Some of the proposed attributes of the <code>MediaFileData</code> interface could possibly be integrated as parameters of the MIME type, or as MIME options object.</p>
     
     </section>
   </section>
