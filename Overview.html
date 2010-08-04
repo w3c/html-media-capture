@@ -119,7 +119,7 @@ feedback.</p>
     <p class="note">The values and their exact meaning are still very much in flux.</p>
 
     <p>For example, the following code indicates that the user is expected to upload an image from the device camera:</p>
-    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*;capture=camera" id="capture"&gt; </pre>
+    <pre class="example sh_html">&lt;input type="file" accept="image/*;capture=camera" id="capture"&gt; </pre>
     <p>A possible rendering of a file picker taking this parameter into account is offered in the <a href="#uiexamples">User Interface Examples appendix</a>.</p>
 </section>
 
@@ -128,7 +128,7 @@ feedback.</p>
 
     <section id="jsexample"><h3>Example</h3>
       <p>After the user successfully captured or selected an existing media file, the format properties of the file can be retrieved as follow:</p>
-      <pre class="example sh_javascript_dom"><code>var captureInput = document.getElementById('capture');
+      <pre class="example sh_html"><code>var captureInput = document.getElementById('capture');
 // Accessing the file object from the input element with id capture
 var file = captureInput.files[0];
 if (file) {
