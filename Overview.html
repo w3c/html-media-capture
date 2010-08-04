@@ -101,7 +101,7 @@ feedback.</p>
     <p>If the user selects files of whose MIME types match <code>image/*</code>,
     <code>sound/*</code>, or <code>video/*</code> (on the filesystem or via a successful media capture), the relevant files in the <code>files</code> attribute [[HTML5]] MUST implement the <code>MediaFile</code> interface.</p>
 
-    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*"&gt; </pre>
+    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*" id="capture"&gt; </pre>
 </section>
 
   <section id="captureparam">
@@ -119,12 +119,38 @@ feedback.</p>
     <p class="note">The values and their exact meaning are still very much in flux.</p>
 
     <p>For example, the following code indicates that the user is expected to upload an image from the device camera:</p>
-    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*;capture=camera"&gt; </pre>
+    <pre class="example sh_javascript_dom">&lt;input type="file" accept="image/*;capture=camera" id="capture"&gt; </pre>
     <p>A possible rendering of a file picker taking this parameter into account is offered in the <a href="#uiexamples">User Interface Examples appendix</a>.</p>
 </section>
 
     <section id="api">
     <h2>WebIDL interfaces</h2>
+
+    <section id="jsexample"><h3>Example</h3>
+      <p>After the user successfully captured or selected an existing media file, the format properties of the file can be retrieved as follow:</p>
+      <pre class="example sh_javascript_dom"><code>var captureInput = document.getElementById('capture');
+var file = captureInput.files[0];
+if (file) {
+  file.<strong>getFormatData(displayFormatData, errorHandler)</strong>;
+}
+
+function displayFormatData(formatData) {  
+  var mainType = file.type.split("/")[0]; // "image", "video" or "audio"
+  var mediaDescriptionNode = document.createElement("p");
+  if (mainType === "image") {
+    mediaDescriptionNode.appendChild(document.createNode("This is an image of dimensions " + <strong>formatData.width</strong> + "x" + <strong>formatData.height</strong>);
+  } else {
+    mediaDescriptionNode.appendChild(document.createNode("Duration: " + (<strong>formatData.duration</strong> / 1000) + "s");
+  }
+  captureInput.parentNode.insertBefore(mediaDescriptionNode, captureInput);
+}
+
+function errorHandler(error) {
+  alert("Couldn’t retrieve format properties for the selected file (error code " + error.code + ")");
+}
+</code></pre>
+</section>
+
 
     <section  id="formatdata"><h3><a>MediaFileData</a> interface</h3>
 
@@ -230,6 +256,8 @@ feedback.</p>
           <dd>
             The requested method timed out before it could be completed.
           </dd>
+	  <dt>readonly attribute unsigned short code</dt>
+	  <dd>An error code assigned by an implementation when an error has occurred in retrieving format data.</dd>
 	</dl>
 
     </section>
