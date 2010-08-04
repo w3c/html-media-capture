@@ -126,28 +126,10 @@ feedback.</p>
     <section id="api">
     <h2>WebIDL interfaces</h2>
 
-    <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
-
-    <p><code>MediaFile</code> captures a single photo, video or sound
-    captured by the device. It inherits
-    from <code>File</code> [[!FILE-API]].</p>
-
-    <dl title="[NoInterfaceObject] interface MediaFile : File" class="idl">
-
-    <dt>readonly attribute MediaFileData format </dt>
-
-    <dd>The format attribute represents the format information of <a
-    href="#formatdata"><code>MediaFile</code></a>
-    object.
-    <p class="note">The Working Group is considering whether the indirection provided by the <code>format</code> attribute is useful or if the <code>MediaFile</code> interface should inherit directly from <code>MediaFileData</code>.</p>
-    </dd></dl>
-
-    </section>
-
     <section  id="formatdata"><h3><a>MediaFileData</a> interface</h3>
 
-    <p><code>MediaFileData</code> captures format information of a media
-    file captured by the device.</p>
+    <p><code>MediaFileData</code> encapsulates format information of a media
+    file.</p>
 
     <p class="note">The relationship between this <code>MediaFileData</code> interface and the properties made available through the API for Media Resource 1.0 [[MEDIAONT-API]] needs further investigation.</p>
 
@@ -185,6 +167,73 @@ feedback.</p>
     <p class="note">Some of the proposed attributes of the <code>MediaFileData</code> interface could possibly be integrated as parameters of the MIME type, or as MIME options object.</p>
     
     </section>
+
+
+    <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
+
+    <p><code>MediaFile</code> encapsulates a single photo, video or sound
+    from the device. It inherits
+    from <code><a href="http://www.w3.org/TR/FileAPI/#dfn-file">File</a></code> [[!FILE-API]].</p>
+
+    <dl title="[NoInterfaceObject] interface MediaFile : File" class="idl">
+
+    <dt>void getFormatData (in MediaFileDataSuccessCallback successCallback,
+                           in optional MediaFileDataErrorCallback errorCallback) </dt>
+
+    <dd>The <code>getFormatdata()</code> method takes one or two arguments. When called, it returns immediately and then asynchronously attempts to obtain the format data of the given media file. If the attempt is successful, the <code>successCallback</code> is invoked with a new <code>MediaFileData</code> object, reflecting the format data of the file. If the attempt fails, the <code>errorCallback</code> is invoked with a new MediaFileDataError object, reflecting the reason for the failure.
+    </dd></dl>
+    </section>
+    <section id="mediafiledatasuccesscallback"><h3><a>MediaFileDataSuccessCallback</a> interface</h3>
+    <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface MediaFileDataSuccessCallback" class="idl">
+      <dt>void onSuccess()</dt>
+      <dd>
+        <dl class='parameters'>
+              <dt>
+                MediaFileData formatData
+              </dt>
+              <dd>
+		The MediaFileData object describing the relevant properties of the given media file.
+              </dd>
+            </dl>
+
+    </dl>
+    </section>
+    <section id="mediafiledataerrorcallback"><h3><a>MediaFileDataErrorCallback</a> interface</h3>
+    <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface MediaFileDataErrorCallback" class="idl">
+      <dt>void onError()</dt>
+      <dd>
+        <dl class='parameters'>
+              <dt>
+                MediaFileDataError error
+              </dt>
+              <dd>
+		The <code>MediaFileDataError</code> object describing the error encountered while retrieving the format data.
+              </dd>
+            </dl>
+
+    </dl>
+    </section>
+    <section id="mediafiledataerror"><h3><a>MediaFileDataError</a> interface</h3>
+<p>The <code>MediaFileDataError</code> interface encapsulates all errors in the retrieval of format data associated with a <code>MediaFile</code> object.</p>
+        <dl
+         title='[NoInterfaceObject] interface MediaFileDataError'
+         class='idl'>
+          <dt>
+            const unsigned short UNKNOWN_ERROR = 0
+          </dt>
+          <dd>
+            An unknown error occurred.
+          </dd>
+          <dt>
+            const unsigned short TIMEOUT_ERROR = 1
+          </dt>
+          <dd>
+            The requested method timed out before it could be completed.
+          </dd>
+	</dl>
+
+    </section>
+
   </section>
 
 
