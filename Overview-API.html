@@ -95,7 +95,7 @@ alert(summary);
         </div>
 
     <p class='note'>
-    The FormatData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
+    The MediaFileData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
     </p>   
       </section>
     </section>
@@ -152,21 +152,21 @@ alert(summary);
       instance of <code>NavigatorDevice</code>.</p>
 
       <dl title="[Supplemental, NoInterfaceObject] interface Capture"
-      class="idl"><dt>readonly attribute FormatData[]
+      class="idl"><dt>readonly attribute MediaFileData[]
       supportedImageFormats</dt>
 
-      <dd>An array of FormatData [[!HTMLMEDIACAPTURE]] objects which contains image sizes
+      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains image sizes
       and formats supported by the hosting device camera.</dd>
 
-      <dt>readonly attribute FormatData[]
+      <dt>readonly attribute MediaFileData[]
       supportedVideoFormats </dt>
-      <dd>An array of FormatData [[!HTMLMEDIACAPTURE]] objects which contains video
+      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains video
       resolutions and formats supported by the hosting device
       camera.</dd>
 
-      <dt>readonly attribute FormatData[]
+      <dt>readonly attribute MediaFileData[]
       supportedAudioFormats</dt>
-      <dd>An array of FormatData [[!HTMLMEDIACAPTURE]] objects which contains audio
+      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains audio
       formats supported by the hosting device microphone.</dd>
 
       <dt>PendingOperation captureImage () </dt>
