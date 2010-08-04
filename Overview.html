@@ -159,7 +159,9 @@ feedback.</p>
       represents the actual format that the audio and video of the content.
       The codecs attribute MUST conform to the [[!RFC4281]].
       For example, a valid value for H.263 video and AAC low
-      complexity would be codecs="s263, mp4a.40.2".</dd>
+      complexity would be codecs="s263, mp4a.40.2".
+	<p class="note">This <a href="http://lists.w3.org/Archives/Public/public-device-apis/2010Jul/0133.html">could be turned into a list of DOMString</a> rather than keeping it as a comma-separated values list; this needs some care with regard to the RFC ref.</p>
+</dd>
 
       <dt>attribute unsigned long bitrate </dt>
       <dd>The codecs attribute only specifies the profile and level of the encoded content
