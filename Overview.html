@@ -133,7 +133,7 @@ feedback.</p>
 var file = captureInput.files[0];
 if (file) {
   // getting format data asynchronously
-  file.<strong>getFormatData(displayFormatData, errorHandler)</strong>;
+  file.<a href="#widl-MediaFile-getFormatData">getFormatData</a>(displayFormatData, errorHandler);
 }
 
 // success callback when getting format data
@@ -141,16 +141,16 @@ function displayFormatData(formatData) {
   var mainType = file.type.split("/")[0]; // "image", "video" or "audio"
   var mediaDescriptionNode = document.createElement("p");
   if (mainType === "image") {
-    mediaDescriptionNode.appendChild(document.createTextNode("This is an image of dimensions " + <strong>formatData.width</strong> + "x" + <strong>formatData.height</strong>);
+    mediaDescriptionNode.appendChild(document.createTextNode("This is an image of dimensions " + <a href="#widl-MediaFileData-width">formatData.width</a> + "x" + <a href="#widl-MediaFileData-height">formatData.height</a>);
   } else {
-    mediaDescriptionNode.appendChild(document.createTextNode("Duration: " + (<strong>formatData.duration</strong> / 1000) + "s");
+    mediaDescriptionNode.appendChild(document.createTextNode("Duration: " + (<a href="#widl-MediaFileData-duration">formatData.duration</a> / 1000) + "s");
   }
   captureInput.parentNode.insertBefore(mediaDescriptionNode, captureInput);
 }
 
 // error callback if getting format data fails
 function errorHandler(error) {
-  alert("Couldn’t retrieve format properties for the selected file (error code " + error.code + ")");
+  alert("Couldn’t retrieve format properties for the selected file (error code " + <a href="#widl-MediaFileDataError-code">error.code</a> + ")");
 }
 </code></pre>
 </section>
