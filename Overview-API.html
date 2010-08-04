@@ -254,7 +254,7 @@ alert(summary);
       <li>If a <code>CaptureVideoOptions</code> parameter was present,
       and its <code>duration</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the video has
-      been captured for the number of milliseconds defined in
+      been captured for the number of seconds defined in
       <code>duration</code>.  If user exited the native camera
       application prematurely, <code>errorCB</code> must be invoked.
       </li>
@@ -391,8 +391,8 @@ alert(summary);
     <dl title="[NoInterfaceObject] interface CaptureVideoOptions" class="idl">
       <dt>attribute unsigned long maxNumberOfMediaFiles</dt>
       <dd>Upper limit of videos user can record.</dd>
-      <dt>attribute double duration</dt>
-      <dd>Maximum duration of a single video clip in milliseconds.</dd>
+      <dt>attribute float duration</dt>
+      <dd>Maximum duration of a single video clip in seconds.</dd>
     </dl>
 
     </section>
