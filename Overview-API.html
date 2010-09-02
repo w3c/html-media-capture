@@ -69,7 +69,11 @@ function success(data) {
 }
  
 function error(err) {
-  alert(err.message &#43; &quot; (&quot; &#43; err.code &#43; &quot;)&quot;); 
+
+  if (err.code === err.CAPTURE_INTERNAL_ERR) {
+    alert("The capture failed due to an internal error");
+  }
+
 }
  
 navigator.device.captureImage(success, error, { maxNumberOfMediaFiles: 1 });
