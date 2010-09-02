@@ -69,7 +69,6 @@ function success(data) {
 }
  
 function error(err) {
-
   if (err.code === err.CAPTURE_INTERNAL_ERR) {
     alert("The capture failed due to an internal error");
   }
@@ -117,7 +116,7 @@ alert(summary);
     can potentially compromise user privacy and a conforming
     implementation of this specification MUST provide a mechanism that
     protects the user's privacy and this mechanism should ensure that such
-    operations MUST be authenticated.</p>
+    operations MUST NOT happen without user consent.</p>
 
     <h3>Privacy considerations for implementers of Capture API</h3>
 
