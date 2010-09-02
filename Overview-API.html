@@ -58,13 +58,14 @@
 
 function success(data) {
   var container = document.createElement(&quot;div&quot;);
-  document.body.appendChild(container);
   
   for (var i in data) {
     var img = document.createElement(&quot;img&quot;);
     img.src = data[i].url;
     container.appendChild(img);
   }
+  document.body.appendChild(container);
+
 }
  
 function error(err) {
