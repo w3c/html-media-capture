@@ -51,7 +51,7 @@
         camera service in the hosting device:</p>
 
 	<div>
-	<p>Launching a device camera application and retrieving the
+	<p>Launching a camera application and retrieving the
 	pictures taken. </p>
 
         <pre class="example sh_javascript_dom">
@@ -98,6 +98,17 @@ alert(summary);
         </div>
 
       </section>
+
+    <section>
+    <h2>Terminology</h2>
+
+      The terms <b>camera application</b>, <b>video camera
+      application</b>, and <b>audio capture application</b> are used
+      to refer piece of an interactive software implemented either by
+      the user agent or the underlying operating environment that
+      carry out the actual capture operation.
+
+    </section>
     </section>
 
     <section id="security">
@@ -175,8 +186,7 @@ alert(summary);
       formats supported by the hosting device microphone.</dd>
 
       <dt>PendingOperation captureImage () </dt>
-      <dd><p>Launch device native camera application for taking
-      image(s).</p>
+      <dd><p>Launch camera application for taking image(s).</p>
 
       <p>This method takes two or three arguments. When called, it
       immediately returns a <a
@@ -188,7 +198,7 @@ alert(summary);
 
       <ol>
 
-      <li>Start native camera application. Allow end user to take
+      <li>Start camera application. Allow end user to take
       picture(s).</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
@@ -203,7 +213,7 @@ alert(summary);
       and its <code>maxNumberOfMediaFiles</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
       captured a number of images defined in <code>maxNumberOfMediaFiles</code>.  If
-      user exited the native camera application prematurely,
+      user exited the camera application without capturing any images,
       <code>errorCB</code> must be invoked.</li> </ol>
       
       <p></p>
@@ -226,7 +236,7 @@ alert(summary);
 
       <dd>
 
-      <p>Launch device native camera application for recording
+      <p>Launch device camera application for recording
       video(s).</p>
 
       <p>This method takes three or four arguments. When called, it
@@ -239,7 +249,7 @@ alert(summary);
 
       <ol>
 
-      <li>Start native video camera application. Allow end user to
+      <li>Start video camera application. Allow end user to
       take video(s) and return.  </li><li>If successful, invoke the
       associated <code>successCB</code> with a <code>FileList</code> 
       [[!FILE-API]] argument. If
@@ -253,15 +263,15 @@ alert(summary);
       its <code>maxNumberOfMediaFiles</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
       captured a number of video clips defined in
-      <code>maxNumberOfMediaFiles</code>.  If user exited the native camera
-      application prematurely, <code>errorCB</code> must be invoked.</li>
+      <code>maxNumberOfMediaFiles</code>.  If user exited the camera
+      application without capturing any videos, <code>errorCB</code> must be invoked.</li>
 
       <li>If a <code>CaptureVideoOptions</code> parameter was present,
       and its <code>duration</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the video has
       been captured for the number of seconds defined in
-      <code>duration</code>.  If user exited the native camera
-      application prematurely, <code>errorCB</code> must be invoked.
+      <code>duration</code>.  If user exited the camera
+      application without capturing any audio clips, <code>errorCB</code> must be invoked.
       </li>
 
       </ol> 
@@ -283,7 +293,7 @@ alert(summary);
       </dd>
       <dt>PendingOperation captureAudio () </dt>
 
-      <dd><p>Launch device native audio recorder application for
+      <dd><p>Launch audio recorder application for
       recording audio clip(s).</p>
       
       <p>This method takes two or three arguments. When called, it
@@ -295,7 +305,7 @@ alert(summary);
 
       <ol>
 
-      <li>Start native audio recorder application. Allow end user to record
+      <li>Start audio recorder application. Allow end user to record
       audio clip(s) and return.</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
@@ -310,7 +320,7 @@ alert(summary);
       and its <code>maxNumberOfMediaFiles</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
       captured a number of audio clips defined in
-      <code>maxNumberOfMediaFiles</code>.  If user exited the native audio recorder
+      <code>maxNumberOfMediaFiles</code>.  If user exited the audio recorder
       application prematurely, <code>errorCB</code> must be invoked.
       </li> 
 
