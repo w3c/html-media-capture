@@ -75,7 +75,7 @@ function error(err) {
 
 }
  
-navigator.device.captureImage(success, error, { maxNumberOfMediaFiles: 1 });
+navigator.device.captureImage(success, error, { limit: 1 });
 
         </pre>
         </div>
@@ -210,9 +210,9 @@ alert(summary);
       as an argument.</li>
 
       <li>If a <code>CaptureImageOptions</code> parameter was present,
-      and its <code>maxNumberOfMediaFiles</code> attribute was defined,
+      and its <code>limit</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
-      captured a number of images defined in <code>maxNumberOfMediaFiles</code>.  If
+      captured a number of images defined in <code>limit</code>.  If
       user exited the camera application without capturing any images,
       <code>errorCB</code> must be invoked.</li> </ol>
       
@@ -260,10 +260,10 @@ alert(summary);
       an argument.</li>
 
       <li>If a <code>CaptureVideoOptions</code> parameter was present, and
-      its <code>maxNumberOfMediaFiles</code> attribute was defined,
+      its <code>limit</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
       captured a number of video clips defined in
-      <code>maxNumberOfMediaFiles</code>.  If user exited the camera
+      <code>limit</code>.  If user exited the camera
       application without capturing any videos, <code>errorCB</code> must be invoked.</li>
 
       <li>If a <code>CaptureVideoOptions</code> parameter was present,
@@ -317,10 +317,10 @@ alert(summary);
       an argument.</li>
 
       <li>If a <code>CaptureAudioOptions</code> parameter was present,
-      and its <code>maxNumberOfMediaFiles</code> attribute was defined,
+      and its <code>limit</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the user has
       captured a number of audio clips defined in
-      <code>maxNumberOfMediaFiles</code>.  If user exited the audio recorder
+      <code>limit</code>.  If user exited the audio recorder
       application prematurely, <code>errorCB</code> must be invoked.
       </li> 
 
@@ -392,7 +392,7 @@ alert(summary);
     over the capture format.</p>
 
     <dl title="[NoInterfaceObject] interface CaptureImageOptions" class="idl">
-      <dt>attribute unsigned long maxNumberOfMediaFiles</dt>
+      <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of images user can take.</dd>
     </dl>
 
@@ -404,7 +404,7 @@ alert(summary);
     over the capture format.</p>
 
     <dl title="[NoInterfaceObject] interface CaptureVideoOptions" class="idl">
-      <dt>attribute unsigned long maxNumberOfMediaFiles</dt>
+      <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of videos user can record.</dd>
       <dt>attribute float duration</dt>
       <dd>Maximum duration of a single video clip in seconds.</dd>
@@ -418,7 +418,7 @@ alert(summary);
     over the capture format.</p>
 
     <dl title="[NoInterfaceObject] interface CaptureAudioOptions" class="idl">
-      <dt>attribute unsigned long maxNumberOfMediaFiles</dt>
+      <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of sound clips user can record.</dd>
     </dl>
 
