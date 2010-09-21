@@ -75,7 +75,7 @@ function error(err) {
 
 }
  
-navigator.device.captureImage(success, error, { limit: 1 });
+navigator.device.capture.captureImage(success, error, { limit: 1 });
 
         </pre>
         </div>
@@ -86,7 +86,7 @@ navigator.device.captureImage(success, error, { limit: 1 });
 
 	<pre class="example sh_javascript_dom">var summary;
 
-formats = navigator.device.supportedImageFormats;
+formats = navigator.device.capture.supportedImageFormats;
 
 for (var key in formats) {
   summary &#43;= key &#43; &quot;: &quot; &#43; formats[key] &#43; &quot;\n&quot;;
@@ -102,7 +102,7 @@ alert(summary);
     <section>
     <h2>Terminology</h2>
 
-      The terms <b>camera application</b>, <b>video camera
+      The terms <b>camera application</b>, <b>camcorder
       application</b>, and <b>audio capture application</b> are used
       to refer piece of an interactive software implemented either by
       the user agent or the underlying operating environment that
@@ -149,23 +149,39 @@ alert(summary);
     <h2>API Description</h2>
 
       <section>
-      <h3><a>Capture</a> interface</h3>
+      <h3><a>DeviceCapture</a> interface</h3>
 
-      <p>The <code>Capture</code> interface exposes an interface to the
-      camera and microphone of the hosting device.</p>
+      <p>The <a href='#devicecapture-interface'><code>DeviceCapture</code></a> interface is exposed on the <code>navigator.device</code> object, as defined in [[!CORE-DEVICE]]. 
+      </p>
+        <div
+         class='idl'
+         title='Device implements DeviceCapture'>
+          &nbsp;
+        </div>
+        <dl
+         title='[NoInterfaceObject] interface DeviceCapture'
+         class='idl'>
+          <dt>
+            readonly attribute Capture capture
+          </dt>
+          <dd>
+            The root node from which the capture functionality can be accessed.
+          </dd>
+        </dl>
 
-      <p>Objects implementing the <code>NavigatorDevice</code>
-      interface (e.g. the <code>window.navigator.device</code> object
-      in Web browsers [[NAVIGATOR]]) provide access to the
-      <code>Capture</code> interface through the <code>Capture</code>
-      interface. An instance of <code>Capture</code> would be then
-      obtained by using binding-specific casting methods on an
-      instance of <code>NavigatorDevice</code>.</p>
+    </section>
+    <section>
+    <h3><a>Capture</a> interface</h3>
+
+    <p>The <a href='#capture-interface'><code>Capture</code></a> interface exposes an interface to the camera and microphone of the hosting device.
 
     <p class='note'>
     The MediaFileData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
     </p>   
 
+    <p class='note'>
+    Duration and bitrate attributes of MediaFileData object make no sense in case of supportedImageFormats. Use of more well suited interface to be considered. 
+    </p>   
 
       <dl title="[Supplemental, NoInterfaceObject] interface Capture"
       class="idl"><dt>readonly attribute MediaFileData[]
@@ -249,7 +265,7 @@ alert(summary);
 
       <ol>
 
-      <li>Start video camera application. Allow end user to
+      <li>Start camcorder application. Allow end user to
       take video(s) and return.  </li><li>If successful, invoke the
       associated <code>successCB</code> with a <code>FileList</code> 
       [[!FILE-API]] argument. If
@@ -270,8 +286,8 @@ alert(summary);
       and its <code>duration</code> attribute was defined,
       <code>successCB</code> MUST be invoked after the video has
       been captured for the number of seconds defined in
-      <code>duration</code>.  If user exited the camera
-      application without capturing any audio clips, <code>errorCB</code> must be invoked.
+      <code>duration</code>.  If user exited the camcorder
+      application without capturing any video clips, <code>errorCB</code> must be invoked.
       </li>
 
       </ol> 
@@ -321,7 +337,7 @@ alert(summary);
       <code>successCB</code> MUST be invoked after the user has
       captured a number of audio clips defined in
       <code>limit</code>.  If user exited the audio recorder
-      application prematurely, <code>errorCB</code> must be invoked.
+      application prematurely without recording any audio clips, <code>errorCB</code> must be invoked.
       </li> 
 
       </ol>
@@ -376,6 +392,8 @@ alert(summary);
       <dd>Camera or microphone failed to capture image or sound. </dd>
       <dt>const unsigned short CAPTURE_APPLICATION_BUSY = 1 </dt>
       <dd>Camera application or audio capture application is currently serving other capture request.</dd>
+      <dt>const unsigned short CAPTURE_INVALID_ARGUMENT = 1 </dt>
+      <dd>Invalid use of the API (e.g. limit parameter has value less than one).</dd>
       <dt>readonly attribute unsigned short code </dt>
       <dd>An error code assigned by an implementation when an error has
       occurred in Capture API processing.</dd>
@@ -395,7 +413,7 @@ alert(summary);
 
     <dl title="[NoInterfaceObject] interface CaptureImageOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
-      <dd>Upper limit of images user can take.</dd>
+      <dd>Upper limit of images user can take. Value MUST be equal or greater than one.</dd>
     </dl>
 
     </section>
@@ -407,7 +425,7 @@ alert(summary);
 
     <dl title="[NoInterfaceObject] interface CaptureVideoOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
-      <dd>Upper limit of videos user can record.</dd>
+      <dd>Upper limit of videos user can record. Value MUST be equal or greater than one</dd>
       <dt>attribute float duration</dt>
       <dd>Maximum duration of a single video clip in seconds.</dd>
     </dl>
@@ -421,7 +439,7 @@ alert(summary);
 
     <dl title="[NoInterfaceObject] interface CaptureAudioOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
-      <dd>Upper limit of sound clips user can record.</dd>
+      <dd>Upper limit of sound clips user can record. Value MUST be equal or greater than one</dd>
     </dl>
 
     </section>
@@ -433,11 +451,21 @@ alert(summary);
 
   <dl title="[NoInterfaceObject] interface PendingOperation" class="idl">
     <dt>void cancel ()</dt>
-    <dd>Cancel/clear the pending asynchronous operation. </dd>
+    <dd>Cancel the pending asynchronous operation and close the native recording application automatically. No success or error callback for the pending operation will be invoked. Possible incomplete set of capture files will be deleted.</dd>
   </dl>
 
   </section>
   </section>
+
+<section>
+<h2>Captured Files</h2>
+      
+<section>
+<h2>Lifetime</h2>
+  <p>User agents SHOULD discard the captured files only after the <u>top-level browsing context</u> [[HTML5]] related to the script is destroyed. In a special cases where the UA detects limited storage space, files MAY be deleted earlier.</p>
+  </p>
+<section>
+</section>
 
 <section class='appendix' id="related">
 <h2>Related documents</h2>
