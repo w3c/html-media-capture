@@ -70,9 +70,11 @@ function success(data) {
  
 function error(err) {
   if (err.code === err.CAPTURE_INTERNAL_ERR) {
-    alert("The capture failed due to an internal error");
+    alert("The capture failed due to an internal error.");
   }
-
+  else {
+    alert("Other error occured.");
+  }
 }
  
 navigator.device.capture.captureImage(success, error, { limit: 1 });
@@ -396,8 +398,10 @@ alert(summary);
       <dd>Camera or microphone failed to capture image or sound. </dd>
       <dt>const unsigned short CAPTURE_APPLICATION_BUSY = 1 </dt>
       <dd>Camera application or audio capture application is currently serving other capture request.</dd>
-      <dt>const unsigned short CAPTURE_INVALID_ARGUMENT = 1 </dt>
+      <dt>const unsigned short CAPTURE_INVALID_ARGUMENT = 2 </dt>
       <dd>Invalid use of the API (e.g. limit parameter has value less than one).</dd>
+      <dt>const unsigned short CAPTURE_NO_MEDIA_FILES = 3 </dt>
+      <dd>User exited camera application or audio capture application before capturing anything.</dd>
       <dt>readonly attribute unsigned short code </dt>
       <dd>An error code assigned by an implementation when an error has
       occurred in Capture API processing.</dd>
