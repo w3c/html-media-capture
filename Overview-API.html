@@ -459,7 +459,13 @@ alert(summary);
 
   <dl title="[NoInterfaceObject] interface PendingOperation" class="idl">
     <dt>void cancel ()</dt>
-    <dd>Cancel the pending asynchronous operation and close the native recording application automatically. No success or error callback for the pending operation will be invoked. Possible incomplete set of capture files will be deleted.</dd>
+    <dd>Cancel the pending asynchronous operation and close the native recording application automatically. No success or error callback for the pending operation will be invoked. Possible incomplete set of capture files will be deleted.
+  
+    <p class='note'>
+       The effect of cancel method is currently under discussion in the working group. Is it necessary to delete files? Which callbacks (if any) should be invoked?
+    </p>   
+
+  </dd>
   </dl>
 
   </section>
