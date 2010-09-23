@@ -1,0 +1,908 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html lang="en" dir="ltr">
+<head>
+
+  
+    <title>The Media Capture API</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    
+    
+    
+  <style type="text/css">
+/*****************************************************************
+ * ReSpec CSS
+ * Robin Berjon (robin at berjon dot com)
+ * v0.05 - 2009-07-31
+ *****************************************************************/
+
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  medium solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  medium dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+code {
+    color:  #ff4500;
+}
+
+
+/* --- WEB IDL --- */
+pre.idl {
+    border-top: 1px solid #90b8de;
+    border-bottom: 1px solid #90b8de;
+    padding:    1em;
+    line-height:    120%;
+}
+
+pre.idl::before {
+    content:    "WebIDL";
+    display:    block;
+    width:      150px;
+    background: #90b8de;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+.idlType {
+    color:  #ff4500;
+    font-weight:    bold;
+    text-decoration:    none;
+}
+
+/*.idlModule*/
+/*.idlModuleID*/
+/*.idlInterface*/
+.idlInterfaceID {
+    font-weight:    bold;
+    color:  #005a9c;
+}
+
+.idlSuperclass {
+    font-style: italic;
+    color:  #005a9c;
+}
+
+/*.idlAttribute*/
+.idlAttrType, .idlFieldType {
+    color:  #005a9c;
+}
+.idlAttrName, .idlFieldName {
+    color:  #ff4500;
+}
+.idlAttrName a, .idlFieldName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlMethod*/
+.idlMethType {
+    color:  #005a9c;
+}
+.idlMethName {
+    color:  #ff4500;
+}
+.idlMethName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlParam*/
+.idlParamType {
+    color:  #005a9c;
+}
+.idlParamName {
+    font-style: italic;
+}
+
+.extAttr {
+    color:  #666;
+}
+
+/*.idlConst*/
+.idlConstType {
+    color:  #005a9c;
+}
+.idlConstName {
+    color:  #ff4500;
+}
+.idlConstName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlException*/
+.idlExceptionID {
+    font-weight:    bold;
+    color:  #c00;
+}
+
+.idlTypedefID, .idlTypedefType {
+    color:  #005a9c;
+}
+
+.idlRaises, .idlRaises a.idlType, .idlRaises a.idlType code, .excName a, .excName a code {
+    color:  #c00;
+    font-weight:    normal;
+}
+
+.excName a {
+    font-family:    monospace;
+}
+
+.idlRaises a.idlType, .excName a.idlType {
+    border-bottom:  1px dotted #c00;
+}
+
+.excGetSetTrue, .excGetSetFalse, .prmNullTrue, .prmNullFalse, .prmOptTrue, .prmOptFalse {
+    width:  45px;
+    text-align: center;
+}
+.excGetSetTrue, .prmNullTrue, .prmOptTrue { color:  #0c0; }
+.excGetSetFalse, .prmNullFalse, .prmOptFalse { color:  #c00; }
+
+.idlImplements a {
+    font-weight:    bold;
+}
+
+dl.attributes, dl.methods, dl.constants, dl.fields {
+    margin-left:    2em;
+}
+
+.attributes dt, .methods dt, .constants dt, .fields dt {
+    font-weight:    normal;
+}
+
+.attributes dt code, .methods dt code, .constants dt code, .fields dt code {
+    font-weight:    bold;
+    color:  #000;
+    font-family:    monospace;
+}
+
+.attributes dt code, .fields dt code {
+    background:  #ffffd2;
+}
+
+.attributes dt .idlAttrType code, .fields dt .idlFieldType code {
+    color:  #005a9c;
+    background:  transparent;
+    font-family:    inherit;
+    font-weight:    normal;
+    font-style: italic;
+}
+
+.methods dt code {
+    background:  #d9e6f8;
+}
+
+.constants dt code {
+    background:  #ddffd2;
+}
+
+.attributes dd, .methods dd, .constants dd, .fields dd {
+    margin-bottom:  1em;
+}
+
+table.parameters, table.exceptions {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    margin: 0.5em 0;
+    width:  100%;
+}
+table.parameters { border-bottom:  1px solid #90b8de; }
+table.exceptions { border-bottom:  1px solid #deb890; }
+
+.parameters th, .exceptions th {
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+    font-family:    initial;
+    font-weight:    normal;
+    text-shadow:    #666 1px 1px 0;
+}
+.parameters th { background: #90b8de; }
+.exceptions th { background: #deb890; }
+
+.parameters td, .exceptions td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.parameters tr:first-child td, .exceptions tr:first-child td {
+    border-top: none;
+}
+
+.parameters td.prmName, .exceptions td.excName, .exceptions td.excCodeName {
+    width:  100px;
+}
+
+.parameters td.prmType {
+    width:  120px;
+}
+
+table.exceptions table {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    width:  100%;
+}
+
+/* --- TOC --- */
+.toc a {
+    text-decoration:    none;
+}
+
+a .secno {
+    color:  #000;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+/* --- EXAMPLES --- */
+pre.example {
+    border-top: 1px solid #ff4500;
+    border-bottom: 1px solid #ff4500;
+    padding:    1em;
+    margin-top: 1em;
+}
+
+pre.example::before {
+    content:    "Example";
+    display:    block;
+    width:      150px;
+    background: #ff4500;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+/* --- EDITORIAL NOTES --- */
+.issue {
+    padding:    1em;
+    margin: 1em 0em 0em;
+    border: 1px solid #f00;
+    background: #ffc;
+}
+
+.issue::before {
+    content:    "Issue";
+    display:    block;
+    width:  150px;
+    margin: -1.5em 0 0.5em 0;
+    font-weight:    bold;
+    border: 1px solid #f00;
+    background: #fff;
+    padding:    3px 1em;
+}
+
+.note {
+    margin: 1em 0em 0em;
+    padding:    1em;
+    border: 2px solid #cff6d9;
+    background: #e2fff0;
+}
+
+.note::before {
+    content:    "Note";
+    display:    block;
+    width:  150px;
+    margin: -1.5em 0 0.5em 0;
+    font-weight:    bold;
+    border: 1px solid #cff6d9;
+    background: #fff;
+    padding:    3px 1em;
+}
+
+/* --- Best Practices --- */
+div.practice {
+    border: solid #bebebe 1px;
+    margin: 2em 1em 1em 2em;
+}
+
+span.practicelab {
+    margin: 1.5em 0.5em 1em 1em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+span.practicelab   { background: #dfffff; }
+
+span.practicelab {
+    position: relative;
+    padding: 0 0.5em;
+    top: -1.5em;
+}
+
+p.practicedesc {
+    margin: 1.5em 0.5em 1em 1em;
+}
+
+@media screen {
+    p.practicedesc {
+        position: relative;
+        top: -2em;
+        padding: 0;
+        margin: 1.5em 0.5em -1em 1em;
+}
+
+/* --- SYNTAX HIGHLIGHTING --- */
+pre.sh_sourceCode {
+  background-color: white;
+  color: black;
+  font-style: normal;
+  font-weight: normal;
+}
+
+pre.sh_sourceCode .sh_keyword { color: #005a9c; font-weight: bold; }           /* language keywords */
+pre.sh_sourceCode .sh_type { color: #666; }                            /* basic types */
+pre.sh_sourceCode .sh_usertype { color: teal; }                             /* user defined types */
+pre.sh_sourceCode .sh_string { color: red; font-family: monospace; }        /* strings and chars */
+pre.sh_sourceCode .sh_regexp { color: orange; font-family: monospace; }     /* regular expressions */
+pre.sh_sourceCode .sh_specialchar { color: 	#ffc0cb; font-family: monospace; }  /* e.g., \n, \t, \\ */
+pre.sh_sourceCode .sh_comment { color: #A52A2A; font-style: italic; }         /* comments */
+pre.sh_sourceCode .sh_number { color: purple; }                             /* literal numbers */
+pre.sh_sourceCode .sh_preproc { color: #00008B; font-weight: bold; }       /* e.g., #include, import */
+pre.sh_sourceCode .sh_symbol { color: blue; }                            /* e.g., *, + */
+pre.sh_sourceCode .sh_function { color: black; font-weight: bold; }         /* function calls and declarations */
+pre.sh_sourceCode .sh_cbracket { color: red; }                              /* block brackets (e.g., {, }) */
+pre.sh_sourceCode .sh_todo { font-weight: bold; background-color: #00FFFF; }   /* TODO and FIXME */
+
+/* Predefined variables and functions (for instance glsl) */
+pre.sh_sourceCode .sh_predef_var { color: #00008B; }
+pre.sh_sourceCode .sh_predef_func { color: #00008B; font-weight: bold; }
+
+/* for OOP */
+pre.sh_sourceCode .sh_classname { color: teal; }
+
+/* line numbers (not yet implemented) */
+pre.sh_sourceCode .sh_linenum { display: none; }
+
+/* Internet related */
+pre.sh_sourceCode .sh_url { color: blue; text-decoration: underline; font-family: monospace; }
+
+/* for ChangeLog and Log files */
+pre.sh_sourceCode .sh_date { color: blue; font-weight: bold; }
+pre.sh_sourceCode .sh_time, pre.sh_sourceCode .sh_file { color: #00008B; font-weight: bold; }
+pre.sh_sourceCode .sh_ip, pre.sh_sourceCode .sh_name { color: #006400; }
+
+/* for Prolog, Perl... */
+pre.sh_sourceCode .sh_variable { color: #006400; }
+
+/* for LaTeX */
+pre.sh_sourceCode .sh_italics { color: #006400; font-style: italic; }
+pre.sh_sourceCode .sh_bold { color: #006400; font-weight: bold; }
+pre.sh_sourceCode .sh_underline { color: #006400; text-decoration: underline; }
+pre.sh_sourceCode .sh_fixed { color: green; font-family: monospace; }
+pre.sh_sourceCode .sh_argument { color: #006400; }
+pre.sh_sourceCode .sh_optionalargument { color: purple; }
+pre.sh_sourceCode .sh_math { color: orange; }
+pre.sh_sourceCode .sh_bibtex { color: blue; }
+
+/* for diffs */
+pre.sh_sourceCode .sh_oldfile { color: orange; }
+pre.sh_sourceCode .sh_newfile { color: #006400; }
+pre.sh_sourceCode .sh_difflines { color: blue; }
+
+/* for css */
+pre.sh_sourceCode .sh_selector { color: purple; }
+pre.sh_sourceCode .sh_property { color: blue; }
+pre.sh_sourceCode .sh_value { color: #006400; font-style: italic; }
+
+/* other */
+pre.sh_sourceCode .sh_section { color: black; font-weight: bold; }
+pre.sh_sourceCode .sh_paren { color: red; }
+pre.sh_sourceCode .sh_attribute { color: #006400; }
+
+</style><link charset="utf-8" type="text/css" rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-WD"></head><body style="display: inherit;"><div class="head"><p><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" alt="W3C" height="48" width="72"></a></p><h1 class="title" id="title">The Media Capture API</h1><h2 id="w3c-working-draft-28-september-2010">W3C Working Draft 28 September 2010</h2><dl><dt>This version:</dt><dd><a href="http://www.w3.org/TR/2010/WD-media-capture-api-20100928/">http://www.w3.org/TR/2010/WD-media-capture-api-20100928/</a></dd><dt>Latest published version:</dt><dd><a href="http://www.w3.org/TR/media-capture-api/">http://www.w3.org/TR/media-capture-api/</a></dd><dt>Latest editor's draft:</dt><dd><a href="http://dev.w3.org/2009/dap/camera/Overview-API">http://dev.w3.org/2009/dap/camera/Overview-API</a></dd><dt>Editors:</dt><dd><span>Dzung D Tran</span>, Intel</dd>
+<dd><span>Ilkka Oksanen</span>, Nokia</dd>
+<dd><span>Ingmar Kliche</span>, Deutsche Telekom</dd>
+</dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2010 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p><hr></div>
+  
+    <div class="introductory section" id="abstract"><h2>Abstract</h2>
+      This specification defines an Application Programming Interface
+      (<acronym title="Application Programming Interface">API</acronym>)
+      that provides access to the audio, image and video capture
+      capabilities of the device.  
+    </div><div id="sotd" class="introductory section"><h2>Status of This Document</h2><p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
+      <p>This document represents the early consensus of the group on
+      the scope and features of the proposed Capture
+      API. Issues and editors notes in the document highlight some of
+      the points on which the group is still working and would
+      particularly like to get feedback.</p>
+    <p>This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs and Policy Working Group</a> as a First Public Working Draft. This document is intended to become a W3C Recommendation. If you wish to make comments regarding this document, please send them to <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a> (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>). All feedback is welcome.</p><p>Publication as a Working Draft does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.</p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>.</p></div><div class="section" id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><span class="secno">1. </span>Introduction</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#examples"><span class="secno">1.1 </span>Usage Examples</a></li><li class="tocline"><a class="tocxref" href="#terminology"><span class="secno">1.2 </span>Terminology</a></li></ul></li><li class="tocline"><a class="tocxref" href="#security"><span class="secno">2. </span>Security and Privacy Considerations</a></li><li class="tocline"><a class="tocxref" href="#api"><span class="secno">3. </span>API Description</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#devicecapture-interface"><span class="secno">3.1 </span><span class="idlType formerLink idlType"><code>DeviceCapture</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes"><span class="secno">3.1.1 </span>Attributes</a></li></ul></li><li class="tocline"><a class="tocxref" href="#capture-interface"><span class="secno">3.2 </span><span class="idlType formerLink idlType"><code>Capture</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-1"><span class="secno">3.2.1 </span>Attributes</a></li><li class="tocline"><a class="tocxref" href="#methods"><span class="secno">3.2.2 </span>Methods</a></li></ul></li><li class="tocline"><a class="tocxref" href="#capturecallback"><span class="secno">3.3 </span><span class="idlType formerLink idlType"><code>CaptureCB</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#methods-1"><span class="secno">3.3.1 </span>Methods</a></li></ul></li><li class="tocline"><a class="tocxref" href="#errorcallback"><span class="secno">3.4 </span><span class="idlType formerLink idlType"><code>CaptureErrorCB</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#methods-2"><span class="secno">3.4.1 </span>Methods</a></li></ul></li><li class="tocline"><a class="tocxref" href="#captureerror"><span class="secno">3.5 </span><span class="idlType formerLink idlType"><code>CaptureError</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-2"><span class="secno">3.5.1 </span>Attributes</a></li><li class="tocline"><a class="tocxref" href="#constants"><span class="secno">3.5.2 </span>Constants</a></li></ul></li><li class="tocline"><a class="tocxref" href="#captureimageoptions"><span class="secno">3.6 </span><span class="idlType formerLink idlType"><code>CaptureImageOptions</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-3"><span class="secno">3.6.1 </span>Attributes</a></li></ul></li><li class="tocline"><a class="tocxref" href="#capturevideooptions"><span class="secno">3.7 </span><span class="idlType formerLink idlType"><code>CaptureVideoOptions</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-4"><span class="secno">3.7.1 </span>Attributes</a></li></ul></li><li class="tocline"><a class="tocxref" href="#captureaudiooptions"><span class="secno">3.8 </span><span class="idlType formerLink idlType"><code>CaptureAudioOptions</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-5"><span class="secno">3.8.1 </span>Attributes</a></li></ul></li><li class="tocline"><a class="tocxref" href="#pendingoperation"><span class="secno">3.9 </span><span class="idlType formerLink idlType"><code>PendingOperation</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#methods-3"><span class="secno">3.9.1 </span>Methods</a></li></ul></li></ul></li><li class="tocline"><a class="tocxref" href="#captured-files"><span class="secno">4. </span>Captured Files</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#lifetime"><span class="secno">4.1 </span>Lifetime</a></li></ul></li><li class="tocline"><a class="tocxref" href="#related"><span class="secno">A. </span>Related documents</a></li><li class="tocline"><a class="tocxref" href="#ack"><span class="secno">B. </span>Acknowledgements</a></li><li class="tocline"><a class="tocxref" href="#references"><span class="secno">C. </span>References</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><span class="secno">C.1 </span>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><span class="secno">C.2 </span>Informative references</a></li></ul></li></ul></div>
+
+    
+
+    <div class="section" id="introduction">
+    <!--OddPage--><h2><span class="secno">1. </span>Introduction</h2>
+
+    <p>The Capture API defines a high-level interface for accessing the
+    microphone and camera of a hosting device. It completes the HTML Form Based Media Capturing specification [<cite><a href="#bib-HTMLMEDIACAPTURE" rel="biblioentry" class="bibref">HTMLMEDIACAPTURE</a></cite>] with a programmatic access to start a parametrized capture process.</p>
+
+      <div class="section" id="examples">
+      <h3><span class="secno">1.1 </span>Usage Examples</h3>
+
+        <p>The following code extracts illustrate how to work with a
+        camera service in the hosting device:</p>
+
+	<div>
+	<p>Launching a camera application and retrieving the
+	pictures taken. </p>
+
+        <pre class="example sh_javascript_dom sh_sourceCode"><span class="sh_keyword">function</span> <span class="sh_function">success</span><span class="sh_symbol">(</span>data<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">var</span> container <span class="sh_symbol">=</span> <span class="sh_predef_var">document</span><span class="sh_symbol">.</span><span class="sh_function">createElement</span><span class="sh_symbol">(</span><span class="sh_string">"div"</span><span class="sh_symbol">);</span>
+  
+  <span class="sh_keyword">for</span> <span class="sh_symbol">(</span><span class="sh_keyword">var</span> i <span class="sh_keyword">in</span> data<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_keyword">var</span> img <span class="sh_symbol">=</span> <span class="sh_predef_var">document</span><span class="sh_symbol">.</span><span class="sh_function">createElement</span><span class="sh_symbol">(</span><span class="sh_string">"img"</span><span class="sh_symbol">);</span>
+    img<span class="sh_symbol">.</span>src <span class="sh_symbol">=</span> data<span class="sh_symbol">[</span>i<span class="sh_symbol">].</span>url<span class="sh_symbol">;</span>
+    container<span class="sh_symbol">.</span><span class="sh_function">appendChild</span><span class="sh_symbol">(</span>img<span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+  <span class="sh_predef_var">document</span><span class="sh_symbol">.</span>body<span class="sh_symbol">.</span><span class="sh_function">appendChild</span><span class="sh_symbol">(</span>container<span class="sh_symbol">);</span>
+
+<span class="sh_cbracket">}</span>
+ 
+<span class="sh_keyword">function</span> <span class="sh_function">error</span><span class="sh_symbol">(</span>err<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>err<span class="sh_symbol">.</span>code <span class="sh_symbol">===</span> err<span class="sh_symbol">.</span>CAPTURE_INTERNAL_ERR<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    <span class="sh_predef_func">alert</span><span class="sh_symbol">(</span><span class="sh_string">"The capture failed due to an internal error."</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+  <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    <span class="sh_predef_func">alert</span><span class="sh_symbol">(</span><span class="sh_string">"Other error occured."</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+<span class="sh_cbracket">}</span>
+ 
+<span class="sh_predef_var">navigator</span><span class="sh_symbol">.</span>device<span class="sh_symbol">.</span>capture<span class="sh_symbol">.</span><span class="sh_function">captureImage</span><span class="sh_symbol">(</span>success<span class="sh_symbol">,</span> error<span class="sh_symbol">,</span> <span class="sh_cbracket">{</span> limit<span class="sh_symbol">:</span> <span class="sh_number">1</span> <span class="sh_cbracket">}</span><span class="sh_symbol">);</span></pre>
+        </div>
+        <div>	
+
+	<p>Example of retrieving image sizes and formats supported by hosting
+        device camera.</p>
+
+	<pre class="example sh_javascript_dom sh_sourceCode"><span class="sh_keyword">var</span> summary<span class="sh_symbol">;</span>
+
+formats <span class="sh_symbol">=</span> <span class="sh_predef_var">navigator</span><span class="sh_symbol">.</span>device<span class="sh_symbol">.</span>capture<span class="sh_symbol">.</span>supportedImageFormats<span class="sh_symbol">;</span>
+
+<span class="sh_keyword">for</span> <span class="sh_symbol">(</span><span class="sh_keyword">var</span> key <span class="sh_keyword">in</span> formats<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  summary <span class="sh_symbol">+=</span> key <span class="sh_symbol">+</span> <span class="sh_string">": "</span> <span class="sh_symbol">+</span> formats<span class="sh_symbol">[</span>key<span class="sh_symbol">]</span> <span class="sh_symbol">+</span> <span class="sh_string">"</span><span class="sh_specialchar">\n</span><span class="sh_string">"</span><span class="sh_symbol">;</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_predef_func">alert</span><span class="sh_symbol">(</span>summary<span class="sh_symbol">);</span></pre>
+        </div>
+
+      </div>
+
+    <div class="section" id="terminology">
+    <h3><span class="secno">1.2 </span>Terminology</h3>
+
+      The terms <b>camera application</b>, <b>camcorder
+      application</b>, and <b>audio capture application</b> are used
+      to refer piece of an interactive software implemented either by
+      the user agent or the underlying operating environment that
+      carry out the actual capture operation.
+
+    </div>
+    </div>
+
+    <div class="section" id="security">
+    <!--OddPage--><h2><span class="secno">2. </span>Security and Privacy Considerations</h2>
+
+    <p class="note">
+    <strong>The overall architecture for addressing privacy in DAP is still  
+    under construction. As it is finalized, there may be changes made to  
+    this API to reflect requirements or support for privacy-related  
+    functionality.</strong>
+    </p>   
+
+    <p>The API defined in this specification launches the capture
+    application which allows the user to take pictures, record voice or
+    record video and provides a handle to the content. This information
+    can potentially compromise user privacy and a conforming
+    implementation of this specification <em title="must" class="rfc2119">must</em> provide a mechanism that
+    protects the user's privacy and this mechanism should ensure that such
+    operations <em title="must not" class="rfc2119">must not</em> happen without user consent.</p>
+
+    <h3 id="privacy-considerations-for-implementers-of-capture-api">Privacy considerations for implementers of Capture API</h3>
+
+    <p>A conforming implementation of this specification <em title="must" class="rfc2119">must</em> provide a
+    mechanism that protects the user's privacy and this mechanism <em title="should" class="rfc2119">should</em>
+    ensure that privacy information is not revealed without user's
+    informed consent.</p>
+
+    <p class="note">
+    <strong>Note that there is a minimization issue with EXIF headers. 
+    Implementations are assumed to avoid embeding information in the EXIF header which 
+    could be used for non-intended purposes (such as geolocation or device id).
+    </strong>
+    </p>   
+
+    </div>
+
+    <div class="section" id="api">
+    <!--OddPage--><h2><span class="secno">3. </span>API Description</h2>
+
+      <div class="section" id="devicecapture-interface">
+      <h3><span class="secno">3.1 </span><a class="idlType" href="#idl-def-DeviceCapture"><code>DeviceCapture</code></a> interface</h3>
+
+      <p>The <a href="#devicecapture-interface"><code>DeviceCapture</code></a> interface is exposed on the <code>navigator.device</code> object, as defined in [<cite><a href="#bib-CORE-DEVICE" rel="biblioentry" class="bibref">CORE-DEVICE</a></cite>]. 
+      </p>
+        <pre class="idl"><span class="idlImplements"><a>Device</a> implements <a class="idlType" href="#idl-def-DeviceCapture"><code>DeviceCapture</code></a>;</span></pre><div class="idlImplementsDesc">
+          &nbsp;
+        </div>
+        <pre class="idl"><span class="idlInterface" id="idl-def-DeviceCapture">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">DeviceCapture</span> {
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a class="idlType" href="#idl-def-Capture"><code>Capture</code></a></span> <span class="idlAttrName"><a href="#widl-DeviceCapture-capture">capture</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes"><h4><span class="secno">3.1.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-DeviceCapture-capture"><code>capture</code> of type <span class="idlAttrType"><a class="idlType" href="#idl-def-Capture"><code>Capture</code></a></span>, readonly</dt><dd>
+            The root node from which the capture functionality can be accessed.
+          <div><em>No exceptions.</em></div></dd></dl></div>
+
+    </div>
+    <div class="section" id="capture-interface">
+    <h3><span class="secno">3.2 </span><a class="idlType" href="#idl-def-Capture"><code>Capture</code></a> interface</h3>
+
+    <p>The <a href="#capture-interface"><code>Capture</code></a> interface exposes an interface to the camera and microphone of the hosting device.
+    </p>
+
+    <p class="note">
+    The MediaFileData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
+    </p>   
+
+    <p class="note">
+    Should the default audio, video, and image codec be defined that all implementations need to support? If yes, which codecs should be selected?
+    </p>
+
+    <p class="note">
+    Duration and bitrate attributes of MediaFileData object make no sense in case of supportedImageFormats. Use of more well suited interface to be considered. 
+    </p>   
+
+      <pre class="idl"><span class="idlInterface" id="idl-def-Capture">[<span class="extAttr">Supplemental, NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">Capture</span> {
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>MediaFileData</a>[]</span> <span class="idlAttrName"><a href="#widl-Capture-supportedImageFormats">supportedImageFormats</a></span>;</span>
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>MediaFileData</a>[]</span> <span class="idlAttrName"><a href="#widl-Capture-supportedVideoFormats">supportedVideoFormats</a></span>;</span>
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>MediaFileData</a>[]</span> <span class="idlAttrName"><a href="#widl-Capture-supportedAudioFormats">supportedAudioFormats</a></span>;</span>
+<span class="idlMethod">    <span class="idlMethType"><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></span> <span class="idlMethName"><a href="#widl-Capture-captureImage">captureImage</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a></span> <span class="idlParamName">successCB</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a></span> <span class="idlParamName">errorCB</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureImageOptions"><code>CaptureImageOptions</code></a></span> <span class="idlParamName">options</span></span>);</span>
+<span class="idlMethod">    <span class="idlMethType"><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></span> <span class="idlMethName"><a href="#widl-Capture-captureVideo">captureVideo</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a></span> <span class="idlParamName">successCB</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a></span> <span class="idlParamName">errorCB</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureVideoOptions"><code>CaptureVideoOptions</code></a></span> <span class="idlParamName">options</span></span>);</span>
+<span class="idlMethod">    <span class="idlMethType"><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></span> <span class="idlMethName"><a href="#widl-Capture-captureAudio">captureAudio</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a></span> <span class="idlParamName">successCB</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a></span> <span class="idlParamName">errorCB</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureAudioOptions"><code>CaptureAudioOptions</code></a></span> <span class="idlParamName">options</span></span>);</span>
+};</span>
+</pre><div class="section" id="attributes-1"><h4><span class="secno">3.2.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-Capture-supportedAudioFormats"><code>supportedAudioFormats</code> of type array of <span class="idlAttrType"><a>MediaFileData</a></span>, readonly</dt><dd>An array of MediaFileData [<cite><a href="#bib-HTMLMEDIACAPTURE" rel="biblioentry" class="bibref">HTMLMEDIACAPTURE</a></cite>] objects which contains audio
+      formats supported by the hosting device microphone.<div><em>No exceptions.</em></div></dd><dt id="widl-Capture-supportedImageFormats"><code>supportedImageFormats</code> of type array of <span class="idlAttrType"><a>MediaFileData</a></span>, readonly</dt><dd>An array of MediaFileData [<cite><a href="#bib-HTMLMEDIACAPTURE" rel="biblioentry" class="bibref">HTMLMEDIACAPTURE</a></cite>] objects which contains image sizes
+      and formats supported by the hosting device camera.<div><em>No exceptions.</em></div></dd><dt id="widl-Capture-supportedVideoFormats"><code>supportedVideoFormats</code> of type array of <span class="idlAttrType"><a>MediaFileData</a></span>, readonly</dt><dd>An array of MediaFileData [<cite><a href="#bib-HTMLMEDIACAPTURE" rel="biblioentry" class="bibref">HTMLMEDIACAPTURE</a></cite>] objects which contains video
+      resolutions and formats supported by the hosting device
+      camera.<div><em>No exceptions.</em></div></dd></dl></div><div class="section" id="methods"><h4><span class="secno">3.2.2 </span>Methods</h4><dl class="methods"><dt id="widl-Capture-captureAudio"><code>captureAudio</code></dt><dd><p>Launch audio recorder application for
+      recording audio clip(s).</p>
+      
+      <p>This method takes two or three arguments. When called, it
+      immediately returns a <a href="#pendingoperation">
+      <code>PendingOperation</code></a> object and then asynchronously
+      start a <em>capture audio</em> process defined as follows:</p>
+
+      <p></p>
+
+      <ol>
+
+      <li>Start audio recorder application. Allow end user to record
+      audio clip(s) and return.</li>
+
+      <li>If successful, invoke the associated <code>successCB</code>
+      with a <code>FileList</code> [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>] 
+      argument. If the attempt fails, and the method was invoked with a
+      non-null <code>errorCallback</code> argument, this method must invoke
+      the <code>errorCallback</code> with a <a href="#captureerror"><code>CaptureError</code></a> object as
+      an argument.</li>
+
+      <li>If a <code>CaptureAudioOptions</code> parameter was present,
+      and its <code>limit</code> attribute was defined,
+      <code>successCB</code> <em title="must" class="rfc2119">must</em> be invoked after the user has
+      captured a number of audio clips defined in
+      <code>limit</code>.  If user exited the audio recorder
+      application prematurely without recording any audio clips, <code>errorCB</code> must be invoked.
+      </li> 
+
+      </ol>
+
+      <p></p>
+
+      
+      <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">successCB</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">Function to call when the asynchronous operation completes </td></tr><tr><td class="prmName">errorCB</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Function to call when the asynchronous operation fails. This
+	parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr><tr><td class="prmName">options</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureAudioOptions"><code>CaptureAudioOptions</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Audio capture options. This parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></code></div></dd><dt id="widl-Capture-captureImage"><code>captureImage</code></dt><dd><p>Launch camera application for taking image(s).</p>
+
+      <p>This method takes two or three arguments. When called, it
+      immediately returns a <a href="#pendingoperation"><code>PendingOperation</code></a>
+      object and then asynchronously start a <em>capture image</em>
+      process defined as follows:</p>
+
+      <p></p>
+
+      <ol>
+
+      <li>Start camera application. Allow end user to take
+      picture(s).</li>
+
+      <li>If successful, invoke the associated <code>successCB</code>
+      with a <code>FileList</code> [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>]
+      argument. If the attempt fails, and the method was invoked with a
+      non-null <code>errorCallback</code> argument, this method must
+      invoke the <code>errorCallback</code> with a <a href="#captureerror"><code>CaptureError</code></a> object
+      as an argument.</li>
+
+      <li>If a <code>CaptureImageOptions</code> parameter was present,
+      and its <code>limit</code> attribute was defined,
+      <code>successCB</code> <em title="must" class="rfc2119">must</em> be invoked after the user has
+      captured a number of images defined in <code>limit</code>.  If
+      user exited the camera application without capturing any images,
+      <code>errorCB</code> must be invoked.</li> </ol>
+      
+      <p></p>
+
+      	
+    
+      <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">successCB</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">Function to call when the asynchronous operation completes </td></tr><tr><td class="prmName">errorCB</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Function to call when the asynchronous operation
+        fails. This parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr><tr><td class="prmName">options</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureImageOptions"><code>CaptureImageOptions</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Image capture options. This parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></code></div></dd><dt id="widl-Capture-captureVideo"><code>captureVideo</code></dt><dd>
+
+      <p>Launch device camera application for recording
+      video(s).</p>
+
+      <p>This method takes three or four arguments. When called, it
+      immediately returns a <a href="#pendingoperation"><code>PendingOperation</code></a>
+      object and then asynchronously start a <em>capture video</em> process
+      defined as follows:</p>
+
+      <p></p>
+
+      <ol>
+
+      <li>Start camcorder application. Allow end user to
+      take video(s) and return.  </li><li>If successful, invoke the
+      associated <code>successCB</code> with a <code>FileList</code> 
+      [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>] argument. If
+      the attempt fails, and the method was invoked with a non-null
+      <code>errorCallback</code> argument, this method must invoke the
+      <code>errorCallback</code> with a <a href="#captureerror"><code>CaptureError</code></a> object as
+      an argument.</li>
+
+      <li>If a <code>CaptureVideoOptions</code> parameter was present, and
+      its <code>limit</code> attribute was defined,
+      <code>successCB</code> <em title="must" class="rfc2119">must</em> be invoked after the user has
+      captured a number of video clips defined in
+      <code>limit</code>.  If user exited the camera
+      application without capturing any videos, <code>errorCB</code> must be invoked.</li>
+
+      <li>If a <code>CaptureVideoOptions</code> parameter was present,
+      and its <code>duration</code> attribute was defined,
+      <code>successCB</code> <em title="must" class="rfc2119">must</em> be invoked after the video has
+      been captured for the number of seconds defined in
+      <code>duration</code>.  If user exited the camcorder
+      application without capturing any video clips, <code>errorCB</code> must be invoked.
+      </li>
+
+      </ol> 
+
+      <p></p>
+
+      
+
+      <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">successCB</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">Function to call when the asynchronous operation completes </td></tr><tr><td class="prmName">errorCB</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Function to call when the asynchronous operation fails. This
+	parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr><tr><td class="prmName">options</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureVideoOptions"><code>CaptureVideoOptions</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc">Image capture options. This parameter is <em title="optional" class="rfc2119">optional</em>.</td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a></code></div></dd></dl></div>
+    </div>
+
+    <div class="section" id="capturecallback"><h3><span class="secno">3.3 </span><a class="idlType" href="#idl-def-CaptureCB"><code>CaptureCB</code></a> interface</h3>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-CaptureCB">[<span class="extAttr">Callback=FunctionOnly, NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">CaptureCB</span> {
+<span class="idlMethod">    <span class="idlMethType"><a>void</a></span> <span class="idlMethName"><a href="#widl-CaptureCB-onSuccess">onSuccess</a></span> (<span class="idlParam">in <span class="idlParamType"><a>FileList</a></span> <span class="idlParamName">capturedMedia</span></span>);</span>
+};</span>
+</pre><div class="section" id="methods-1"><h4><span class="secno">3.3.1 </span>Methods</h4><dl class="methods"><dt id="widl-CaptureCB-onSuccess"><code>onSuccess</code></dt><dd>
+        
+      <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">capturedMedia</td><td class="prmType"><code><a>FileList</a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">
+            Sequence of Files [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>] (implementing the MediaFile [<cite><a href="#bib-HTMLMEDIACAPTURE" rel="biblioentry" class="bibref">HTMLMEDIACAPTURE</a></cite>] interface) successfully captured by the device
+          </td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a>void</a></code></div></dd></dl></div>
+
+    </div>
+
+    <div class="section" id="errorcallback"><h3><span class="secno">3.4 </span><a class="idlType" href="#idl-def-CaptureErrorCB"><code>CaptureErrorCB</code></a> interface</h3>
+    <pre class="idl"><span class="idlInterface" id="idl-def-CaptureErrorCB">[<span class="extAttr">Callback=FunctionOnly, NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">CaptureErrorCB</span> {
+<span class="idlMethod">    <span class="idlMethType"><a>void</a></span> <span class="idlMethName"><a href="#widl-CaptureErrorCB-onError">onError</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-CaptureError"><code>CaptureError</code></a></span> <span class="idlParamName">error</span></span>);</span>
+};</span>
+</pre><div class="section" id="methods-2"><h4><span class="secno">3.4.1 </span>Methods</h4><dl class="methods"><dt id="widl-CaptureErrorCB-onError"><code>onError</code></dt><dd>
+      
+    <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">error</td><td class="prmType"><code><a class="idlType" href="#idl-def-CaptureError"><code>CaptureError</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">The error
+      object of an unsuccessful capture asynchronous operation. </td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a>void</a></code></div></dd></dl></div>
+    
+    </div>
+
+    <div class="section" id="captureerror"><h3><span class="secno">3.5 </span><a class="idlType" href="#idl-def-CaptureError"><code>CaptureError</code></a> interface</h3>
+
+    <p>The <a class="idlType" href="#idl-def-CaptureError"><code>CaptureError</code></a> interface encapsulates all errors in the
+    Capture API. </p>
+
+    <p class="note">More error codes to be defined here. </p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-CaptureError">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">CaptureError</span> {
+<span class="idlConst">    const <span class="idlConstType"><a>unsigned short</a></span> <span class="idlConstName"><a href="#widl-CaptureError-CAPTURE_INTERNAL_ERR">CAPTURE_INTERNAL_ERR</a></span> = <span class="idlConstValue">0</span>;</span>
+<span class="idlConst">    const <span class="idlConstType"><a>unsigned short</a></span> <span class="idlConstName"><a href="#widl-CaptureError-CAPTURE_APPLICATION_BUSY">CAPTURE_APPLICATION_BUSY</a></span> = <span class="idlConstValue">1</span>;</span>
+<span class="idlConst">    const <span class="idlConstType"><a>unsigned short</a></span> <span class="idlConstName"><a href="#widl-CaptureError-CAPTURE_INVALID_ARGUMENT">CAPTURE_INVALID_ARGUMENT</a></span> = <span class="idlConstValue">2</span>;</span>
+<span class="idlConst">    const <span class="idlConstType"><a>unsigned short</a></span> <span class="idlConstName"><a href="#widl-CaptureError-CAPTURE_NO_MEDIA_FILES">CAPTURE_NO_MEDIA_FILES</a></span> = <span class="idlConstValue">3</span>;</span>
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>unsigned short</a></span> <span class="idlAttrName"><a href="#widl-CaptureError-code">code</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes-2"><h4><span class="secno">3.5.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-CaptureError-code"><code>code</code> of type <span class="idlAttrType"><a>unsigned short</a></span>, readonly</dt><dd>An error code assigned by an implementation when an error has
+      occurred in Capture API processing.<div><em>No exceptions.</em></div></dd></dl></div><div class="section" id="constants"><h4><span class="secno">3.5.2 </span>Constants</h4><dl class="constants"><dt id="widl-CaptureError-CAPTURE_APPLICATION_BUSY"><code>CAPTURE_APPLICATION_BUSY</code> of type <span class="idlConstType"><a>unsigned short</a></span></dt><dd>Camera application or audio capture application is currently serving other capture request.</dd><dt id="widl-CaptureError-CAPTURE_INTERNAL_ERR"><code>CAPTURE_INTERNAL_ERR</code> of type <span class="idlConstType"><a>unsigned short</a></span></dt><dd>Camera or microphone failed to capture image or sound. </dd><dt id="widl-CaptureError-CAPTURE_INVALID_ARGUMENT"><code>CAPTURE_INVALID_ARGUMENT</code> of type <span class="idlConstType"><a>unsigned short</a></span></dt><dd>Invalid use of the API (e.g. limit parameter has value less than one).</dd><dt id="widl-CaptureError-CAPTURE_NO_MEDIA_FILES"><code>CAPTURE_NO_MEDIA_FILES</code> of type <span class="idlConstType"><a>unsigned short</a></span></dt><dd>User exited camera application or audio capture application before capturing anything.</dd></dl></div>
+  
+    </div>
+
+    <div class="section" id="captureimageoptions"><h3><span class="secno">3.6 </span><a class="idlType" href="#idl-def-CaptureImageOptions"><code>CaptureImageOptions</code></a> interface</h3>
+
+    <p>The <a class="idlType" href="#idl-def-CaptureImageOptions"><code>CaptureImageOptions</code></a> interface encapsulates all image
+    capture operation configuration options.</p>
+
+    <p class="note">Additional attributes proposed: <code>width</code>
+    and <code>height</code>.</p>
+    <p class="note">We might want to add <code>format</code> to give author control 
+    over the capture format.</p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-CaptureImageOptions">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">CaptureImageOptions</span> {
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>unsigned long</a></span> <span class="idlAttrName"><a href="#widl-CaptureImageOptions-limit">limit</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes-3"><h4><span class="secno">3.6.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-CaptureImageOptions-limit"><code>limit</code> of type <span class="idlAttrType"><a>unsigned long</a></span></dt><dd>Upper limit of images user can take. Value <em title="must" class="rfc2119">must</em> be equal or greater than one.<div><em>No exceptions.</em></div></dd></dl></div>
+
+    </div>
+
+    <div class="section" id="capturevideooptions"><h3><span class="secno">3.7 </span><a class="idlType" href="#idl-def-CaptureVideoOptions"><code>CaptureVideoOptions</code></a> interface</h3>
+
+    <p class="note">We might want to add <code>format</code> to give author control 
+    over the capture format.</p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-CaptureVideoOptions">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">CaptureVideoOptions</span> {
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>unsigned long</a></span> <span class="idlAttrName"><a href="#widl-CaptureVideoOptions-limit">limit</a></span>;</span>
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>float</a></span>         <span class="idlAttrName"><a href="#widl-CaptureVideoOptions-duration">duration</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes-4"><h4><span class="secno">3.7.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-CaptureVideoOptions-duration"><code>duration</code> of type <span class="idlAttrType"><a>float</a></span></dt><dd>Maximum duration of a single video clip in seconds.<div><em>No exceptions.</em></div></dd><dt id="widl-CaptureVideoOptions-limit"><code>limit</code> of type <span class="idlAttrType"><a>unsigned long</a></span></dt><dd>Upper limit of videos user can record. Value <em title="must" class="rfc2119">must</em> be equal or greater than one<div><em>No exceptions.</em></div></dd></dl></div>
+
+    </div>
+
+    <div class="section" id="captureaudiooptions"><h3><span class="secno">3.8 </span><a class="idlType" href="#idl-def-CaptureAudioOptions"><code>CaptureAudioOptions</code></a> interface</h3>
+    <p class="note">Additional attributes proposed: <code>duration</code>.</p>
+    <p class="note">We might want to add <code>format</code> to give author control 
+    over the capture format.</p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-CaptureAudioOptions">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">CaptureAudioOptions</span> {
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>unsigned long</a></span> <span class="idlAttrName"><a href="#widl-CaptureAudioOptions-limit">limit</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes-5"><h4><span class="secno">3.8.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-CaptureAudioOptions-limit"><code>limit</code> of type <span class="idlAttrType"><a>unsigned long</a></span></dt><dd>Upper limit of sound clips user can record. Value <em title="must" class="rfc2119">must</em> be equal or greater than one<div><em>No exceptions.</em></div></dd></dl></div>
+
+    </div>
+
+  <div class="section" id="pendingoperation"><h3><span class="secno">3.9 </span><a class="idlType" href="#idl-def-PendingOperation"><code>PendingOperation</code></a> interface</h3>
+
+  <p class="note">This may be a general interface for use throughout
+  all APIs. Included here for now for completion.</p>
+
+  <pre class="idl"><span class="idlInterface" id="idl-def-PendingOperation">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">PendingOperation</span> {
+<span class="idlMethod">    <span class="idlMethType"><a>void</a></span> <span class="idlMethName"><a href="#widl-PendingOperation-cancel">cancel</a></span> ();</span>
+};</span>
+</pre><div class="section" id="methods-3"><h4><span class="secno">3.9.1 </span>Methods</h4><dl class="methods"><dt id="widl-PendingOperation-cancel"><code>cancel</code></dt><dd>Cancel the pending asynchronous operation and close the native recording application automatically. No success or error callback for the pending operation will be invoked. Possible incomplete set of capture files will be deleted.
+  
+    <p class="note">
+       The effect of cancel method is currently under discussion in the working group. Is it necessary to delete files? Which callbacks (if any) should be invoked?
+    </p>   
+
+  <div><em>No parameters.</em></div><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a>void</a></code></div></dd></dl></div>
+
+  </div>
+  </div>
+
+<div class="section" id="captured-files">
+<!--OddPage--><h2><span class="secno">4. </span>Captured Files</h2>
+      
+<div class="section" id="lifetime">
+<h3><span class="secno">4.1 </span>Lifetime</h3>
+  <p>User agents <em title="should" class="rfc2119">should</em> discard the captured files only after the <u>top-level browsing context</u> [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] related to the script is destroyed. In a special cases where the UA detects limited storage space, files <em title="may" class="rfc2119">may</em> be deleted earlier.</p>
+</div>
+</div>
+
+<div class="appendix section" id="related">
+<!--OddPage--><h2><span class="secno">A. </span>Related documents</h2>
+<p>The API described in this document took inspiration from the following documents:</p>
+<ul>
+<li><a href="http://code.google.com/p/gears/wiki/CameraAPI">Google Camera API</a>
+</li><li><a href="http://bondi.omtp.org/1.0/apis/camera.html">BONDI 1.1 camera API</a>
+</li><li><a href="http://lists.w3.org/Archives/Public/public-device-apis/2009Apr/att-0001/camera.html">Nokia Camera API</a>
+</li></ul>
+</div>
+
+<div class="appendix section" id="ack">
+<!--OddPage--><h2><span class="secno">B. </span>Acknowledgements</h2>
+
+<p>Many thanks to Google, Nokia, and OMTP BONDI who provided the
+initial input into this specification.
+
+</p>
+</div>
+<div class="appendix section" id="references"><!--OddPage--><h2><span class="secno">C. </span>References</h2><div class="section" id="normative-references"><h3><span class="secno">C.1 </span>Normative references</h3><dl class="bibliography"><dt id="bib-CORE-DEVICE">[CORE-DEVICE]</dt><dd>Robin Berjon. <a href="http://dev.w3.org/2009/dap/device/"><cite>Core Device Interfaces.</cite></a> 02 December 2009. W3C Editor's Draft. (Work in progress.) URL: <a href="http://dev.w3.org/2009/dap/device/">http://dev.w3.org/2009/dap/device/</a> 
+</dd><dt id="bib-FILE-API">[FILE-API]</dt><dd>Arun Ranganathan. <a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/"><cite>File API.</cite></a> 17 November 2009. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a> 
+</dd><dt id="bib-HTMLMEDIACAPTURE">[HTMLMEDIACAPTURE]</dt><dd>Ilkka Oksanen, Dominique Hazaël-Massieux, eds. <a href="http://www.w3.org/TR/2010/WD-html-media-capture-20100720/"><cite>The Capture API</cite></a>, 20 July 2010, W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2010/WD-html-media-capture-20100720/">http://www.w3.org/TR/2010/WD-html-media-capture-20100720/</a>
+</dd></dl></div><div class="section" id="informative-references"><h3><span class="secno">C.2 </span>Informative references</h3><dl class="bibliography"><dt id="bib-HTML5">[HTML5]</dt><dd>Ian Hickson; David Hyatt. <a href="http://www.w3.org/TR/2010/WD-html5-20100304/"><cite>HTML 5.</cite></a> 4 March 2010. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2010/WD-html5-20100304/">http://www.w3.org/TR/2010/WD-html5-20100304/</a> 
+</dd></dl></div></div></body></html>
