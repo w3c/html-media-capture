@@ -1,0 +1,718 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html lang="en" dir="ltr">
+<head>
+
+  
+    <title>HTML Media Capture</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    
+    
+    
+  <style type="text/css">
+/*****************************************************************
+ * ReSpec CSS
+ * Robin Berjon (robin at berjon dot com)
+ * v0.05 - 2009-07-31
+ *****************************************************************/
+
+
+/* --- INLINES --- */
+em.rfc2119 { 
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  medium solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  medium dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+code {
+    color:  #ff4500;
+}
+
+
+/* --- WEB IDL --- */
+pre.idl {
+    border-top: 1px solid #90b8de;
+    border-bottom: 1px solid #90b8de;
+    padding:    1em;
+    line-height:    120%;
+}
+
+pre.idl::before {
+    content:    "WebIDL";
+    display:    block;
+    width:      150px;
+    background: #90b8de;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+.idlType {
+    color:  #ff4500;
+    font-weight:    bold;
+    text-decoration:    none;
+}
+
+/*.idlModule*/
+/*.idlModuleID*/
+/*.idlInterface*/
+.idlInterfaceID {
+    font-weight:    bold;
+    color:  #005a9c;
+}
+
+.idlSuperclass {
+    font-style: italic;
+    color:  #005a9c;
+}
+
+/*.idlAttribute*/
+.idlAttrType, .idlFieldType {
+    color:  #005a9c;
+}
+.idlAttrName, .idlFieldName {
+    color:  #ff4500;
+}
+.idlAttrName a, .idlFieldName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlMethod*/
+.idlMethType {
+    color:  #005a9c;
+}
+.idlMethName {
+    color:  #ff4500;
+}
+.idlMethName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlParam*/
+.idlParamType {
+    color:  #005a9c;
+}
+.idlParamName {
+    font-style: italic;
+}
+
+.extAttr {
+    color:  #666;
+}
+
+/*.idlConst*/
+.idlConstType {
+    color:  #005a9c;
+}
+.idlConstName {
+    color:  #ff4500;
+}
+.idlConstName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlException*/
+.idlExceptionID {
+    font-weight:    bold;
+    color:  #c00;
+}
+
+.idlTypedefID, .idlTypedefType {
+    color:  #005a9c;
+}
+
+.idlRaises, .idlRaises a.idlType, .idlRaises a.idlType code, .excName a, .excName a code {
+    color:  #c00;
+    font-weight:    normal;
+}
+
+.excName a {
+    font-family:    monospace;
+}
+
+.idlRaises a.idlType, .excName a.idlType {
+    border-bottom:  1px dotted #c00;
+}
+
+.excGetSetTrue, .excGetSetFalse, .prmNullTrue, .prmNullFalse, .prmOptTrue, .prmOptFalse {
+    width:  45px;
+    text-align: center;
+}
+.excGetSetTrue, .prmNullTrue, .prmOptTrue { color:  #0c0; }
+.excGetSetFalse, .prmNullFalse, .prmOptFalse { color:  #c00; }
+
+.idlImplements a {
+    font-weight:    bold;
+}
+
+dl.attributes, dl.methods, dl.constants, dl.fields {
+    margin-left:    2em;
+}
+
+.attributes dt, .methods dt, .constants dt, .fields dt {
+    font-weight:    normal;
+}
+
+.attributes dt code, .methods dt code, .constants dt code, .fields dt code {
+    font-weight:    bold;
+    color:  #000;
+    font-family:    monospace;
+}
+
+.attributes dt code, .fields dt code {
+    background:  #ffffd2;
+}
+
+.attributes dt .idlAttrType code, .fields dt .idlFieldType code {
+    color:  #005a9c;
+    background:  transparent;
+    font-family:    inherit;
+    font-weight:    normal;
+    font-style: italic;
+}
+
+.methods dt code {
+    background:  #d9e6f8;
+}
+
+.constants dt code {
+    background:  #ddffd2;
+}
+
+.attributes dd, .methods dd, .constants dd, .fields dd {
+    margin-bottom:  1em;
+}
+
+table.parameters, table.exceptions {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    margin: 0.5em 0;
+    width:  100%;
+}
+table.parameters { border-bottom:  1px solid #90b8de; }
+table.exceptions { border-bottom:  1px solid #deb890; }
+
+.parameters th, .exceptions th {
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+    font-family:    initial;
+    font-weight:    normal;
+    text-shadow:    #666 1px 1px 0;
+}
+.parameters th { background: #90b8de; }
+.exceptions th { background: #deb890; }
+
+.parameters td, .exceptions td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.parameters tr:first-child td, .exceptions tr:first-child td {
+    border-top: none;
+}
+
+.parameters td.prmName, .exceptions td.excName, .exceptions td.excCodeName {
+    width:  100px;
+}
+
+.parameters td.prmType {
+    width:  120px;
+}
+
+table.exceptions table {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    width:  100%;
+}
+
+/* --- TOC --- */
+.toc a {
+    text-decoration:    none;
+}
+
+a .secno {
+    color:  #000;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+/* --- EXAMPLES --- */
+pre.example {
+    border-top: 1px solid #ff4500;
+    border-bottom: 1px solid #ff4500;
+    padding:    1em;
+    margin-top: 1em;
+}
+
+pre.example::before {
+    content:    "Example";
+    display:    block;
+    width:      150px;
+    background: #ff4500;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+/* --- EDITORIAL NOTES --- */
+.issue {
+    padding:    1em;
+    margin: 1em 0em 0em;
+    border: 1px solid #f00;
+    background: #ffc;
+}
+
+.issue::before {
+    content:    "Issue";
+    display:    block;
+    width:  150px;
+    margin: -1.5em 0 0.5em 0;
+    font-weight:    bold;
+    border: 1px solid #f00;
+    background: #fff;
+    padding:    3px 1em;
+}
+
+.note {
+    margin: 1em 0em 0em;
+    padding:    1em;
+    border: 2px solid #cff6d9;
+    background: #e2fff0;
+}
+
+.note::before {
+    content:    "Note";
+    display:    block;
+    width:  150px;
+    margin: -1.5em 0 0.5em 0;
+    font-weight:    bold;
+    border: 1px solid #cff6d9;
+    background: #fff;
+    padding:    3px 1em;
+}
+
+/* --- Best Practices --- */
+div.practice {
+    border: solid #bebebe 1px;
+    margin: 2em 1em 1em 2em;
+}
+
+span.practicelab {
+    margin: 1.5em 0.5em 1em 1em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+span.practicelab   { background: #dfffff; }
+
+span.practicelab {
+    position: relative;
+    padding: 0 0.5em;
+    top: -1.5em;
+}
+
+p.practicedesc {
+    margin: 1.5em 0.5em 1em 1em;
+}
+
+@media screen {
+    p.practicedesc {
+        position: relative;
+        top: -2em;
+        padding: 0;
+        margin: 1.5em 0.5em -1em 1em;
+}
+
+/* --- SYNTAX HIGHLIGHTING --- */
+pre.sh_sourceCode {
+  background-color: white;
+  color: black;
+  font-style: normal;
+  font-weight: normal;
+}
+
+pre.sh_sourceCode .sh_keyword { color: #005a9c; font-weight: bold; }           /* language keywords */
+pre.sh_sourceCode .sh_type { color: #666; }                            /* basic types */
+pre.sh_sourceCode .sh_usertype { color: teal; }                             /* user defined types */
+pre.sh_sourceCode .sh_string { color: red; font-family: monospace; }        /* strings and chars */
+pre.sh_sourceCode .sh_regexp { color: orange; font-family: monospace; }     /* regular expressions */
+pre.sh_sourceCode .sh_specialchar { color: 	#ffc0cb; font-family: monospace; }  /* e.g., \n, \t, \\ */
+pre.sh_sourceCode .sh_comment { color: #A52A2A; font-style: italic; }         /* comments */
+pre.sh_sourceCode .sh_number { color: purple; }                             /* literal numbers */
+pre.sh_sourceCode .sh_preproc { color: #00008B; font-weight: bold; }       /* e.g., #include, import */
+pre.sh_sourceCode .sh_symbol { color: blue; }                            /* e.g., *, + */
+pre.sh_sourceCode .sh_function { color: black; font-weight: bold; }         /* function calls and declarations */
+pre.sh_sourceCode .sh_cbracket { color: red; }                              /* block brackets (e.g., {, }) */
+pre.sh_sourceCode .sh_todo { font-weight: bold; background-color: #00FFFF; }   /* TODO and FIXME */
+
+/* Predefined variables and functions (for instance glsl) */
+pre.sh_sourceCode .sh_predef_var { color: #00008B; }
+pre.sh_sourceCode .sh_predef_func { color: #00008B; font-weight: bold; }
+
+/* for OOP */
+pre.sh_sourceCode .sh_classname { color: teal; }
+
+/* line numbers (not yet implemented) */
+pre.sh_sourceCode .sh_linenum { display: none; }
+
+/* Internet related */
+pre.sh_sourceCode .sh_url { color: blue; text-decoration: underline; font-family: monospace; }
+
+/* for ChangeLog and Log files */
+pre.sh_sourceCode .sh_date { color: blue; font-weight: bold; }
+pre.sh_sourceCode .sh_time, pre.sh_sourceCode .sh_file { color: #00008B; font-weight: bold; }
+pre.sh_sourceCode .sh_ip, pre.sh_sourceCode .sh_name { color: #006400; }
+
+/* for Prolog, Perl... */
+pre.sh_sourceCode .sh_variable { color: #006400; }
+
+/* for LaTeX */
+pre.sh_sourceCode .sh_italics { color: #006400; font-style: italic; }
+pre.sh_sourceCode .sh_bold { color: #006400; font-weight: bold; }
+pre.sh_sourceCode .sh_underline { color: #006400; text-decoration: underline; }
+pre.sh_sourceCode .sh_fixed { color: green; font-family: monospace; }
+pre.sh_sourceCode .sh_argument { color: #006400; }
+pre.sh_sourceCode .sh_optionalargument { color: purple; }
+pre.sh_sourceCode .sh_math { color: orange; }
+pre.sh_sourceCode .sh_bibtex { color: blue; }
+
+/* for diffs */
+pre.sh_sourceCode .sh_oldfile { color: orange; }
+pre.sh_sourceCode .sh_newfile { color: #006400; }
+pre.sh_sourceCode .sh_difflines { color: blue; }
+
+/* for css */
+pre.sh_sourceCode .sh_selector { color: purple; }
+pre.sh_sourceCode .sh_property { color: blue; }
+pre.sh_sourceCode .sh_value { color: #006400; font-style: italic; }
+
+/* other */
+pre.sh_sourceCode .sh_section { color: black; font-weight: bold; }
+pre.sh_sourceCode .sh_paren { color: red; }
+pre.sh_sourceCode .sh_attribute { color: #006400; }
+
+</style><link charset="utf-8" type="text/css" rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-WD"></head><body style="display: inherit;"><div class="head"><p><a href="http://www.w3.org/"><img src="http://www.w3.org/Icons/w3c_home" alt="W3C" height="48" width="72"></a></p><h1 class="title" id="title">HTML Media Capture</h1><h2 id="w3c-working-draft-28-september-2010">W3C Working Draft 28 September 2010</h2><dl><dt>This version:</dt><dd><a href="http://www.w3.org/TR/2010/WD-html-media-capture-20100928/">http://www.w3.org/TR/2010/WD-html-media-capture-20100928/</a></dd><dt>Latest published version:</dt><dd><a href="http://www.w3.org/TR/html-media-capture/">http://www.w3.org/TR/html-media-capture/</a></dd><dt>Latest editor's draft:</dt><dd><a href="http://dev.w3.org/2009/dap/camera/">http://dev.w3.org/2009/dap/camera/</a></dd><dt>Previous version:</dt><dd><a href="http://www.w3.org/TR/2010/WD-html-media-capture-20100720/">http://www.w3.org/TR/2010/WD-html-media-capture-20100720/</a></dd><dt>Editors:</dt><dd><span>Ilkka Oksanen</span>, Nokia</dd>
+<dd><span>Dominique Hazaël-Massieux</span>, W3C</dd>
+</dl><p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2010 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p><hr></div>
+  
+    <div class="introductory section" id="abstract"><h2>Abstract</h2>
+      This specification defines HTML form enhancements that provide access to the audio, image and video capture
+      capabilities of the device.  
+    </div><div id="sotd" class="introductory section"><h2>Status of This Document</h2><p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
+<p>This document is a the first part of the split of the <a href="http://www.w3.org/TR/2010/WD-capture-api-20100401/">previous version</a>
+of this document, focused on the integration of media capture in HTML
+forms based on an extension to the <a href="http://www.w3.org/TR/FileAPI/">FileAPI</a>. The second part of the split focused on programmatic access to the capture devices will be published separately.</p>
+
+<p>The Working Group is looking for feedback on the general approach of
+this new version, and will coordinate with the HTML and Web Applications
+Working Group to ensure the proper progress of this document.</p>
+
+<p>Issues and editors notes in the document highlight some of the points on
+which the group is still working and would particularly like to get
+feedback.</p>
+    <p>This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs and Policy Working Group</a> as a Working Draft. This document is intended to become a W3C Recommendation. If you wish to make comments regarding this document, please send them to <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a> (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>). All feedback is welcome.</p><p>Publication as a Working Draft does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.</p><p>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>.</p></div><div class="section" id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a class="tocxref" href="#conformance"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a class="tocxref" href="#security"><span class="secno">3. </span>Security and Privacy Considerations</a></li><li class="tocline"><a class="tocxref" href="#formaccess"><span class="secno">4. </span>Capture aware file-select control</a></li><li class="tocline"><a class="tocxref" href="#captureparam"><span class="secno">5. </span>The <code>capture</code> parameter</a></li><li class="tocline"><a class="tocxref" href="#api"><span class="secno">6. </span>WebIDL interfaces</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#jsexample"><span class="secno">6.1 </span>Example</a></li><li class="tocline"><a class="tocxref" href="#formatdata"><span class="secno">6.2 </span><span class="idlType formerLink idlType"><code>MediaFileData</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes"><span class="secno">6.2.1 </span>Attributes</a></li></ul></li><li class="tocline"><a class="tocxref" href="#mediafile"><span class="secno">6.3 </span><span class="idlType formerLink idlType"><code>MediaFile</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#methods"><span class="secno">6.3.1 </span>Methods</a></li></ul></li><li class="tocline"><a class="tocxref" href="#mediafiledatasuccesscallback"><span class="secno">6.4 </span><span class="idlType formerLink idlType"><code>MediaFileDataSuccessCallback</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#methods-1"><span class="secno">6.4.1 </span>Methods</a></li></ul></li><li class="tocline"><a class="tocxref" href="#mediafiledataerrorcallback"><span class="secno">6.5 </span><span class="idlType formerLink idlType"><code>MediaFileDataErrorCallback</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#methods-2"><span class="secno">6.5.1 </span>Methods</a></li></ul></li><li class="tocline"><a class="tocxref" href="#mediafiledataerror"><span class="secno">6.6 </span><span class="idlType formerLink idlType"><code>MediaFileDataError</code></span> interface</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#attributes-1"><span class="secno">6.6.1 </span>Attributes</a></li><li class="tocline"><a class="tocxref" href="#constants"><span class="secno">6.6.2 </span>Constants</a></li></ul></li></ul></li><li class="tocline"><a class="tocxref" href="#uiexamples"><span class="secno">A. </span>User Interface Examples</a></li><li class="tocline"><a class="tocxref" href="#references"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></div>
+
+    
+
+    <div class="section" id="introduction">
+    <!--OddPage--><h2><span class="secno">1. </span>Introduction</h2>
+
+    <p>The HTML Form Based Media Capturing specification defines a new
+    interface for media files, a new parameter for the accept attribute of the HTML input element in file upload state, and recommendations for
+    providing optimized access to the microphone and camera of a
+    hosting device.</p> 
+
+    <p>Providing streaming access to these capabilities is outside of the scope of this specification.</p>
+    <p class="note">The Working Group is investigating the opportunity to specify streaming access via the <a href="http://dev.w3.org/html5/html-device/">proposed <code>&lt;device&gt;</code> element</a>.</p>
+    </div>
+
+    <div class="section" id="conformance"><!--OddPage--><h2><span class="secno">2. </span>Conformance</h2><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p>
+<p>The key words <em title="must" class="rfc2119">must</em>, <em title="must not" class="rfc2119">must not</em>, <em title="required" class="rfc2119">required</em>, <em title="should" class="rfc2119">should</em>, <em title="should not" class="rfc2119">should not</em>, <em title="recommended" class="rfc2119">recommended</em>, <em title="may" class="rfc2119">may</em>, and <em title="optional" class="rfc2119">optional</em> in this specification are to be interpreted as described in [<cite><a href="#bib-RFC2119" rel="biblioentry" class="bibref">RFC2119</a></cite>].</p>
+
+      <p>
+        This specification defines conformance criteria that apply to a single product: the <dfn id="dfn-user-agent">user agent</dfn> that implements the
+        interfaces that it contains.
+      </p>
+      <p>
+
+        Implementations that use ECMAScript to implement the APIs defined in this specification must implement them in a manner consistent
+        with the ECMAScript Bindings defined in the Web IDL specification [<cite><a href="#bib-WEBIDL" rel="biblioentry" class="bibref">WEBIDL</a></cite>], as this specification uses that specification and
+        terminology.
+      </p>
+
+    </div>
+
+    <div class="section" id="security">
+    <!--OddPage--><h2><span class="secno">3. </span>Security and Privacy Considerations</h2>
+    <p>This specification builds upon the security and privacy protections provided by the [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] <code>&lt;input type="file"&gt;</code> and the [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>] specifications; in particular, it is expected that any offer to start capturing content from the user’s device would require a specific user interaction on an HTML element that is entirely controlled by the user agent.</p>
+
+    <p>In addition to the requirements already highlighted in the [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] and [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>] specifications, implementors should take care of additional leakage of privacy-sensitive data from captured media. For instance, embedding the user’s location in a captured media metadata (e.g. EXIF) might transmit more private data than the user might be expecting.</p>
+
+    </div>
+
+
+  <div class="section" id="formaccess">
+    <!--OddPage--><h2><span class="secno">4. </span>Capture aware file-select control</h2>
+
+    <p>This section is normative.</p>
+
+    <p class="note">[<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">links <code>&lt;input type="file"&gt;</code></a> to the File interface. This specification defines a refined <code>MediaFile</code> interface to be used when the <code>accept</code> attribute take certain values — this will require coordination with the HTML5 Working Group.</p>
+
+    <p>If an input element in the File Upload state [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] contains
+    accept attribute with values <code>image/*</code>,
+    <code>sound/*</code>, or <code>video/*</code>, the user agent can
+    invoke a file picker that allows respectively the user to take a
+    picture, record a sound file, or record a video in addition to
+    selecting an existing file from the file system.</p>
+
+    <p>See the <a href="#uiexamples">User Interface Examples</a> appendix for the illustration.
+
+    </p><p>In case the user chooses to capture video, audio, or image
+    content, the user agent creates media files on the fly <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">as
+    specified</a> in [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>].</p>
+
+    <p>If the user selects files of whose MIME types match <code>image/*</code>,
+    <code>sound/*</code>, or <code>video/*</code> (on the filesystem or via a successful media capture), the relevant files in the <code>files</code> attribute [<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] <em title="must" class="rfc2119">must</em> implement the <code>MediaFile</code> interface.</p>
+
+    <pre class="example sh_html sh_sourceCode"><span class="sh_keyword">&lt;input</span> <span class="sh_type">type</span><span class="sh_symbol">=</span><span class="sh_string">"file"</span> <span class="sh_type">accept</span><span class="sh_symbol">=</span><span class="sh_string">"image/*"</span> <span class="sh_type">id</span><span class="sh_symbol">=</span><span class="sh_string">"capture"</span><span class="sh_keyword">&gt;</span> </pre>
+</div>
+
+  <div class="section" id="captureparam">
+    <!--OddPage--><h2><span class="secno">5. </span>The <code>capture</code> parameter</h2>
+
+    <p>This section is normative.</p>
+
+
+    <p>The <code>capture</code> parameter may be specified on the media type values of the <code>accept</code> attribute to provide user agents with a hint of that by the default a file picker should be in media capturing mode.</p>
+
+    <p class="note">[<cite><a href="#bib-HTML5" rel="biblioentry" class="bibref">HTML5</a></cite>] <a href="http://dev.w3.org/html5/spec/number-state.html#attr-input-accept">defines the <code>accept</code> attribute to take no parameters on MIME types</a>. This specification proposes to use a MIME type parameter — this will require coordination with the HTML5 Working Group.</p>
+
+
+    <p>The <code>capture</code> parameter can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>, <code>filesystem</code>. These values indicate which source the file picker interface should preferably present to the user by default.</p>
+    <p class="note">The values and their exact meaning are still very much in flux.</p>
+
+    <p>For example, the following code indicates that the user is expected to upload an image from the device camera:</p>
+    <pre class="example sh_html sh_sourceCode"><span class="sh_keyword">&lt;input</span> <span class="sh_type">type</span><span class="sh_symbol">=</span><span class="sh_string">"file"</span> <span class="sh_type">accept</span><span class="sh_symbol">=</span><span class="sh_string">"image/*;capture=camera"</span> <span class="sh_type">id</span><span class="sh_symbol">=</span><span class="sh_string">"capture"</span><span class="sh_keyword">&gt;</span> </pre>
+    <p>A possible rendering of a file picker taking this parameter into account is offered in the <a href="#uiexamples">User Interface Examples appendix</a>.</p>
+</div>
+
+    <div class="section" id="api">
+    <!--OddPage--><h2><span class="secno">6. </span>WebIDL interfaces</h2>
+
+    <div class="section" id="jsexample"><h3><span class="secno">6.1 </span>Example</h3>
+      <p>After the user successfully captured or selected an existing media file, the format properties of the file can be retrieved as follow:</p>
+      <pre class="example sh_javascript_dom sh_sourceCode"><code><span class="sh_keyword">var</span> captureInput <span class="sh_symbol">=</span> <span class="sh_predef_var">document</span><span class="sh_symbol">.</span><span class="sh_function">getElementById</span><span class="sh_symbol">(</span><span class="sh_string">'capture'</span><span class="sh_symbol">);</span>
+<span class="sh_comment">// Accessing the file object from the input element with id capture</span>
+<span class="sh_keyword">var</span> file <span class="sh_symbol">=</span> captureInput<span class="sh_symbol">.</span>files<span class="sh_symbol">[</span><span class="sh_number">0</span><span class="sh_symbol">];</span>
+<span class="sh_keyword">if</span> <span class="sh_symbol">(</span>file<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_comment">// getting format data asynchronously</span>
+  file<span class="sh_symbol">.</span><a href="#widl-MediaFile-getFormatData"><span class="sh_function">getFormatData</span></a><span class="sh_symbol">(</span>displayFormatData<span class="sh_symbol">,</span> errorHandler<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_comment">// success callback when getting format data</span>
+<span class="sh_keyword">function</span> <span class="sh_function">displayFormatData</span><span class="sh_symbol">(</span>formatData<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>  
+  <span class="sh_keyword">var</span> mainType <span class="sh_symbol">=</span> file<span class="sh_symbol">.</span>type<span class="sh_symbol">.</span><span class="sh_function">split</span><span class="sh_symbol">(</span><span class="sh_string">"/"</span><span class="sh_symbol">)[</span><span class="sh_number">0</span><span class="sh_symbol">];</span> <span class="sh_comment">// "image", "video" or "audio"</span>
+  <span class="sh_keyword">var</span> mediaDescriptionNode <span class="sh_symbol">=</span> <span class="sh_predef_var">document</span><span class="sh_symbol">.</span><span class="sh_function">createElement</span><span class="sh_symbol">(</span><span class="sh_string">"p"</span><span class="sh_symbol">);</span>
+  <span class="sh_keyword">if</span> <span class="sh_symbol">(</span>mainType <span class="sh_symbol">===</span> <span class="sh_string">"image"</span><span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+    mediaDescriptionNode<span class="sh_symbol">.</span><span class="sh_function">appendChild</span><span class="sh_symbol">(</span><span class="sh_predef_var">document</span><span class="sh_symbol">.</span><span class="sh_function">createTextNode</span><span class="sh_symbol">(</span><span class="sh_string">"This is an image of dimensions "</span> <span class="sh_symbol">+</span> <a href="#widl-MediaFileData-width">formatData<span class="sh_symbol">.</span><span class="sh_predef_var">width</span></a> <span class="sh_symbol">+</span> <span class="sh_string">"x"</span> <span class="sh_symbol">+</span> <a href="#widl-MediaFileData-height">formatData<span class="sh_symbol">.</span><span class="sh_predef_var">height</span></a><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span> <span class="sh_keyword">else</span> <span class="sh_cbracket">{</span>
+    mediaDescriptionNode<span class="sh_symbol">.</span><span class="sh_function">appendChild</span><span class="sh_symbol">(</span><span class="sh_predef_var">document</span><span class="sh_symbol">.</span><span class="sh_function">createTextNode</span><span class="sh_symbol">(</span><span class="sh_string">"Duration: "</span> <span class="sh_symbol">+</span> <a href="#widl-MediaFileData-duration">formatData<span class="sh_symbol">.</span>duration</a>  <span class="sh_symbol">+</span> <span class="sh_string">"s"</span><span class="sh_symbol">);</span>
+  <span class="sh_cbracket">}</span>
+  captureInput<span class="sh_symbol">.</span>parentNode<span class="sh_symbol">.</span><span class="sh_function">insertBefore</span><span class="sh_symbol">(</span>mediaDescriptionNode<span class="sh_symbol">,</span> captureInput<span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+
+<span class="sh_comment">// error callback if getting format data fails</span>
+<span class="sh_keyword">function</span> <span class="sh_function">errorHandler</span><span class="sh_symbol">(</span>error<span class="sh_symbol">)</span> <span class="sh_cbracket">{</span>
+  <span class="sh_predef_func">alert</span><span class="sh_symbol">(</span><span class="sh_string">"Couldn’t retrieve format properties for the selected file (error code "</span> <span class="sh_symbol">+</span> <a href="#widl-MediaFileDataError-code">error<span class="sh_symbol">.</span>code</a> <span class="sh_symbol">+</span> <span class="sh_string">")"</span><span class="sh_symbol">);</span>
+<span class="sh_cbracket">}</span>
+</code></pre>
+</div>
+
+
+    <div class="section" id="formatdata"><h3><span class="secno">6.2 </span><a class="idlType" href="#idl-def-MediaFileData"><code>MediaFileData</code></a> interface</h3>
+
+    <p><code>MediaFileData</code> encapsulates format information of a media
+    file.</p>
+
+    <p class="note">The relationship between this <code>MediaFileData</code> interface and the properties made available through the API for Media Resource 1.0 [<cite><a href="#bib-MEDIAONT-API" rel="biblioentry" class="bibref">MEDIAONT-API</a></cite>] needs further investigation.</p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-MediaFileData">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">MediaFileData</span> {
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>DOMString</a></span>     <span class="idlAttrName"><a href="#widl-MediaFileData-codecs">codecs</a></span>;</span>
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>unsigned long</a></span> <span class="idlAttrName"><a href="#widl-MediaFileData-bitrate">bitrate</a></span>;</span>
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>unsigned long</a></span> <span class="idlAttrName"><a href="#widl-MediaFileData-height">height</a></span>;</span>
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>unsigned long</a></span> <span class="idlAttrName"><a href="#widl-MediaFileData-width">width</a></span>;</span>
+<span class="idlAttribute">    attribute <span class="idlAttrType"><a>float</a></span>         <span class="idlAttrName"><a href="#widl-MediaFileData-duration">duration</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes"><h4><span class="secno">6.2.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-MediaFileData-bitrate"><code>bitrate</code> of type <span class="idlAttrType"><a>unsigned long</a></span></dt><dd>The codecs attribute only specifies the profile and level of the encoded content
+      which doesn't specify the actual bitrate. It only specifies the maximum encoded 
+      bitrate, thus this bitrate attribute is the average bitrate of the content. In the case
+      of an image this attribute has value 0.<div><em>No exceptions.</em></div></dd><dt id="widl-MediaFileData-codecs"><code>codecs</code> of type <span class="idlAttrType"><a>DOMString</a></span></dt><dd>The type attribute of the Blob interface (inherited from the File interface) is not sufficient to determine the format of the
+      content since it only specifies the container type. The codecs attribute
+      represents the actual format that the audio and video of the content.
+      The codecs attribute <em title="must" class="rfc2119">must</em> conform to the [<cite><a href="#bib-RFC4281" rel="biblioentry" class="bibref">RFC4281</a></cite>].
+      For example, a valid value for H.263 video and AAC low
+      complexity would be codecs="s263, mp4a.40.2".
+	<p class="note">This <a href="http://lists.w3.org/Archives/Public/public-device-apis/2010Jul/0133.html">could be turned into a list of DOMString</a> rather than keeping it as a comma-separated values list; this needs some care with regard to the RFC ref.</p>
+<div><em>No exceptions.</em></div></dd><dt id="widl-MediaFileData-duration"><code>duration</code> of type <span class="idlAttrType"><a>float</a></span></dt><dd>The duration attribute represents length of the video or sound
+      clip in seconds. In the case of an image this attribute has value 0.<div><em>No exceptions.</em></div></dd><dt id="widl-MediaFileData-height"><code>height</code> of type <span class="idlAttrType"><a>unsigned long</a></span></dt><dd>The height attribute represents height of the image or video
+      in pixels. In the case of a sound clip this attribute has value 0.<div><em>No exceptions.</em></div></dd><dt id="widl-MediaFileData-width"><code>width</code> of type <span class="idlAttrType"><a>unsigned long</a></span></dt><dd>The width attribute represents width of the image or video
+      in pixels. In the case of a sound clip this attribute has value 0.<div><em>No exceptions.</em></div></dd></dl></div>
+
+    <p class="note">Some of the proposed attributes of the <code>MediaFileData</code> interface could possibly be integrated as parameters of the MIME type, or as MIME options object.</p>
+    
+    </div>
+
+
+    <div class="section" id="mediafile"><h3><span class="secno">6.3 </span><a class="idlType" href="#idl-def-MediaFile"><code>MediaFile</code></a> interface</h3>
+
+    <p><code>MediaFile</code> encapsulates a single photo, video or sound
+    from the device. It inherits
+    from <code><a href="http://www.w3.org/TR/FileAPI/#dfn-file">File</a></code> [<cite><a href="#bib-FILE-API" rel="biblioentry" class="bibref">FILE-API</a></cite>].</p>
+
+    <pre class="idl"><span class="idlInterface" id="idl-def-MediaFile">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">MediaFile</span> : <span class="idlSuperclass"><a>File</a></span> {
+<span class="idlMethod">    <span class="idlMethType"><a>void</a></span> <span class="idlMethName"><a href="#widl-MediaFile-getFormatData">getFormatData</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-MediaFileDataSuccessCallback"><code>MediaFileDataSuccessCallback</code></a></span> <span class="idlParamName">successCallback</span></span>, <span class="idlParam">in optional <span class="idlParamType"><a class="idlType" href="#idl-def-MediaFileDataErrorCallback"><code>MediaFileDataErrorCallback</code></a></span> <span class="idlParamName">errorCallback</span></span>);</span>
+};</span>
+</pre><div class="section" id="methods"><h4><span class="secno">6.3.1 </span>Methods</h4><dl class="methods"><dt id="widl-MediaFile-getFormatData"><code>getFormatData</code></dt><dd>The <code>getFormatData()</code> method takes one or two arguments. When called, it returns immediately and then asynchronously attempts to obtain the format data of the given media file. If the attempt is successful, the <code>successCallback</code> is invoked with a new <code>MediaFileData</code> object, reflecting the format data of the file. If the attempt fails, the <code>errorCallback</code> is invoked with a new MediaFileDataError object, reflecting the reason for the failure.
+    <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">successCallback</td><td class="prmType"><code><a class="idlType" href="#idl-def-MediaFileDataSuccessCallback"><code>MediaFileDataSuccessCallback</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc"></td></tr><tr><td class="prmName">errorCallback</td><td class="prmType"><code><a class="idlType" href="#idl-def-MediaFileDataErrorCallback"><code>MediaFileDataErrorCallback</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptTrue">✔</td><td class="prmDesc"></td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a>void</a></code></div></dd></dl></div>
+    </div>
+    <div class="section" id="mediafiledatasuccesscallback"><h3><span class="secno">6.4 </span><a class="idlType" href="#idl-def-MediaFileDataSuccessCallback"><code>MediaFileDataSuccessCallback</code></a> interface</h3>
+    <pre class="idl"><span class="idlInterface" id="idl-def-MediaFileDataSuccessCallback">[<span class="extAttr">Callback=FunctionOnly, NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">MediaFileDataSuccessCallback</span> {
+<span class="idlMethod">    <span class="idlMethType"><a>void</a></span> <span class="idlMethName"><a href="#widl-MediaFileDataSuccessCallback-onSuccess">onSuccess</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-MediaFileData"><code>MediaFileData</code></a></span> <span class="idlParamName">formatData</span></span>);</span>
+};</span>
+</pre><div class="section" id="methods-1"><h4><span class="secno">6.4.1 </span>Methods</h4><dl class="methods"><dt id="widl-MediaFileDataSuccessCallback-onSuccess"><code>onSuccess</code></dt><dd>
+        
+
+    <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">formatData</td><td class="prmType"><code><a class="idlType" href="#idl-def-MediaFileData"><code>MediaFileData</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">
+		The MediaFileData object describing the relevant properties of the given media file.
+              </td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a>void</a></code></div></dd></dl></div>
+    </div>
+    <div class="section" id="mediafiledataerrorcallback"><h3><span class="secno">6.5 </span><a class="idlType" href="#idl-def-MediaFileDataErrorCallback"><code>MediaFileDataErrorCallback</code></a> interface</h3>
+    <pre class="idl"><span class="idlInterface" id="idl-def-MediaFileDataErrorCallback">[<span class="extAttr">Callback=FunctionOnly, NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">MediaFileDataErrorCallback</span> {
+<span class="idlMethod">    <span class="idlMethType"><a>void</a></span> <span class="idlMethName"><a href="#widl-MediaFileDataErrorCallback-onError">onError</a></span> (<span class="idlParam">in <span class="idlParamType"><a class="idlType" href="#idl-def-MediaFileDataError"><code>MediaFileDataError</code></a></span> <span class="idlParamName">error</span></span>);</span>
+};</span>
+</pre><div class="section" id="methods-2"><h4><span class="secno">6.5.1 </span>Methods</h4><dl class="methods"><dt id="widl-MediaFileDataErrorCallback-onError"><code>onError</code></dt><dd>
+        
+
+    <table class="parameters"><tr><th>Parameter</th><th>Type</th><th>Nullable</th><th>Optional</th><th>Description</th></tr><tr><td class="prmName">error</td><td class="prmType"><code><a class="idlType" href="#idl-def-MediaFileDataError"><code>MediaFileDataError</code></a></code></td><td class="prmNullFalse">✘</td><td class="prmOptFalse">✘</td><td class="prmDesc">
+		The <code>MediaFileDataError</code> object describing the error encountered while retrieving the format data.
+              </td></tr></table><div><em>No exceptions.</em></div><div><em>Return type: </em><code><a>void</a></code></div></dd></dl></div>
+    </div>
+    <div class="section" id="mediafiledataerror"><h3><span class="secno">6.6 </span><a class="idlType" href="#idl-def-MediaFileDataError"><code>MediaFileDataError</code></a> interface</h3>
+<p>The <code>MediaFileDataError</code> interface encapsulates all errors in the retrieval of format data associated with a <code>MediaFile</code> object.</p>
+        <pre class="idl"><span class="idlInterface" id="idl-def-MediaFileDataError">[<span class="extAttr">NoInterfaceObject</span>]
+interface <span class="idlInterfaceID">MediaFileDataError</span> {
+<span class="idlConst">    const <span class="idlConstType"><a>unsigned short</a></span> <span class="idlConstName"><a href="#widl-MediaFileDataError-UNKNOWN_ERROR">UNKNOWN_ERROR</a></span> = <span class="idlConstValue">0</span>;</span>
+<span class="idlConst">    const <span class="idlConstType"><a>unsigned short</a></span> <span class="idlConstName"><a href="#widl-MediaFileDataError-TIMEOUT_ERROR">TIMEOUT_ERROR</a></span> = <span class="idlConstValue">1</span>;</span>
+<span class="idlAttribute">    readonly attribute <span class="idlAttrType"><a>unsigned short</a></span> <span class="idlAttrName"><a href="#widl-MediaFileDataError-code">code</a></span>;</span>
+};</span>
+</pre><div class="section" id="attributes-1"><h4><span class="secno">6.6.1 </span>Attributes</h4><dl class="attributes"><dt id="widl-MediaFileDataError-code"><code>code</code> of type <span class="idlAttrType"><a>unsigned short</a></span>, readonly</dt><dd>An error code assigned by an implementation when an error has occurred in retrieving format data.<div><em>No exceptions.</em></div></dd></dl></div><div class="section" id="constants"><h4><span class="secno">6.6.2 </span>Constants</h4><dl class="constants"><dt id="widl-MediaFileDataError-TIMEOUT_ERROR"><code>TIMEOUT_ERROR</code> of type <span class="idlConstType"><a>unsigned short</a></span></dt><dd>
+            The requested method timed out before it could be completed.
+          </dd><dt id="widl-MediaFileDataError-UNKNOWN_ERROR"><code>UNKNOWN_ERROR</code> of type <span class="idlConstType"><a>unsigned short</a></span></dt><dd>
+            An unknown error occurred.
+          </dd></dl></div>
+
+    </div>
+
+  </div>
+
+
+<div class="appendix section" id="uiexamples">
+<!--OddPage--><h2><span class="secno">A. </span>User Interface Examples</h2>
+
+<p>A media capture file picker might render as:
+
+</p><p><img alt="A File picker with camera support" src="capture-api-file-picker-concept.png"></p> 
+</div>
+
+<div class="appendix section" id="references"><!--OddPage--><h2><span class="secno">B. </span>References</h2><div class="section" id="normative-references"><h3><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography"><dt id="bib-FILE-API">[FILE-API]</dt><dd>Arun Ranganathan. <a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/"><cite>File API.</cite></a> 17 November 2009. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2009/WD-FileAPI-20091117/">http://www.w3.org/TR/2009/WD-FileAPI-20091117/</a> 
+</dd><dt id="bib-HTML5">[HTML5]</dt><dd>Ian Hickson; David Hyatt. <a href="http://www.w3.org/TR/2010/WD-html5-20100304/"><cite>HTML 5.</cite></a> 4 March 2010. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2010/WD-html5-20100304/">http://www.w3.org/TR/2010/WD-html5-20100304/</a> 
+</dd><dt id="bib-RFC2119">[RFC2119]</dt><dd>S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
+</dd><dt id="bib-RFC4281">[RFC4281]</dt><dd>R. Gellens, D. Singer, P. Frojdh. <a href="http://www.ietf.org/rfc/rfc4281.txt"><cite>The Codecs Parameter for "Bucket" Media Types</cite></a> November 2005. Internet RFC 4281. URL: <a href="http://www.ietf.org/rfc/rfc4281.txt">http://www.ietf.org/rfc/rfc4281.txt</a> 
+</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/2008/WD-WebIDL-20081219"><cite>Web IDL.</cite></a> 19 December 2008. W3C Working Draft. (Work in progress.) URL: <a href="http://www.w3.org/TR/2008/WD-WebIDL-20081219">http://www.w3.org/TR/2008/WD-WebIDL-20081219</a> 
+</dd></dl></div><div class="section" id="informative-references"><h3><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography"><dt id="bib-MEDIAONT-API">[MEDIAONT-API]</dt><dd>WonSuk Lee; Florian Stegmaier; Chris Poppe. <a href="http://www.w3.org/TR/2010/WD-mediaont-api-1.0-20100608"><cite>API for Media Resource 1.0</cite></a> 8 June 2010. W3C Working Draft (Work in progress). URL: <a href="http://www.w3.org/TR/2010/WD-mediaont-api-1.0-20100608">http://www.w3.org/TR/2010/WD-mediaont-api-1.0-20100608</a> 
+</dd></dl></div></div></body></html>
