@@ -176,6 +176,7 @@ alert(summary);
     <h3><a>Capture</a> interface</h3>
 
     <p>The <a href='#capture-interface'><code>Capture</code></a> interface exposes an interface to the camera and microphone of the hosting device.
+    </p>
 
     <p class='note'>
     The MediaFileData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
@@ -224,7 +225,7 @@ alert(summary);
       picture(s).</li>
 
       <li>If successful, invoke the associated <code>successCB</code>
-      with a <code>FileList</code> [[!FILE-API]]</a>
+      with a <code>FileList</code> [[!FILE-API]]
       argument. If the attempt fails, and the method was invoked with a
       non-null <code>errorCallback</code> argument, this method must
       invoke the <code>errorCallback</code> with a <a
@@ -369,11 +370,16 @@ alert(summary);
     <section id="capturecallback"><h3><a>CaptureCB</a> interface</h3>
 
     <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface CaptureCB" class="idl">
-      <dt>void onSuccess () </dt><dd>
-      <dl class="parameters"><dt>FileList capturedMedia </dt><dd>Sequence
-      of Files [[!FILE-API]] (implementing the MediaFile [[!HTMLMEDIACAPTURE]] interface) successfully captured by the device</dd>
-    </dd></dl>
-    </dd></dl>
+      <dt>void onSuccess () </dt>
+      <dd>
+        <dl class="parameters">
+          <dt>FileList capturedMedia </dt>
+          <dd>
+            Sequence of Files [[!FILE-API]] (implementing the MediaFile [[!HTMLMEDIACAPTURE]] interface) successfully captured by the device
+          </dd>
+        </dl>
+      </dd>
+    </dl>
 
     </section>
 
@@ -477,8 +483,7 @@ alert(summary);
 <section>
 <h2>Lifetime</h2>
   <p>User agents SHOULD discard the captured files only after the <u>top-level browsing context</u> [[HTML5]] related to the script is destroyed. In a special cases where the UA detects limited storage space, files MAY be deleted earlier.</p>
-  </p>
-<section>
+</section>
 </section>
 
 <section class='appendix' id="related">
