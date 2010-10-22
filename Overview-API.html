@@ -179,7 +179,7 @@ alert(summary);
     </p>
 
     <p class='note'>
-    The MediaFileData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
+    The MediaFile Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
     </p>   
 
     <p class='note'>
@@ -187,25 +187,25 @@ alert(summary);
     </p>
 
     <p class='note'>
-    Duration and bitrate attributes of MediaFileData object make no sense in case of supportedImageFormats. Use of more well suited interface to be considered. 
+    Duration and bitrate attributes of MediaFile object make no sense in case of supportedImageFormats. Use of more well suited interface to be considered. 
     </p>   
 
       <dl title="[Supplemental, NoInterfaceObject] interface Capture"
-      class="idl"><dt>readonly attribute MediaFileData[]
+      class="idl"><dt>readonly attribute MediaFile[]
       supportedImageFormats</dt>
 
-      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains image sizes
+      <dd>An array of MediaFile [[!HTMLMEDIACAPTURE]] objects which contains image sizes
       and formats supported by the hosting device camera.</dd>
 
-      <dt>readonly attribute MediaFileData[]
+      <dt>readonly attribute MediaFile[]
       supportedVideoFormats </dt>
-      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains video
+      <dd>An array of MediaFile [[!HTMLMEDIACAPTURE]] objects which contains video
       resolutions and formats supported by the hosting device
       camera.</dd>
 
-      <dt>readonly attribute MediaFileData[]
+      <dt>readonly attribute MediaFile[]
       supportedAudioFormats</dt>
-      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains audio
+      <dd>An array of MediaFile [[!HTMLMEDIACAPTURE]] objects which contains audio
       formats supported by the hosting device microphone.</dd>
 
       <dt>PendingOperation captureImage () </dt>
