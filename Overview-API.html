@@ -61,7 +61,7 @@ allformats = navigator.device.capture.supportedImageFormats;
 var width = 0;
 var selectedformat;
 
-// Select the format with the highest width
+// Select format which has the highest horizontal resolution
 for each (var format in allformats) {
   if (allformats.width > width) {
     width = format.width;
@@ -173,34 +173,22 @@ navigator.device.capture.captureImage(success, error, { limit: 1, format: select
     <p>The <a href='#capture-interface'><code>Capture</code></a> interface exposes an interface to the camera and microphone of the hosting device.
     </p>
 
-    <p class='note'>
-    The MediaFileData Interface contains a duration attribute. What does it mean here? Is it the max recording length?.
-    </p>   
-
-    <p class='note'>
-    Should the default audio, video, and image codec be defined that all implementations need to support? If yes, which codecs should be selected?
-    </p>
-
-    <p class='note'>
-    Duration and bitrate attributes of MediaFileData object make no sense in case of supportedImageFormats. Use of more well suited interface to be considered. 
-    </p>   
-
       <dl title="[Supplemental, NoInterfaceObject] interface Capture"
-      class="idl"><dt>readonly attribute MediaFileData[]
+      class="idl"><dt>readonly attribute ConfigurationData[]
       supportedImageFormats</dt>
 
-      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains image sizes
+      <dd>An array of ConfigurationData objects which contains image sizes
       and formats supported by the hosting device camera.</dd>
 
-      <dt>readonly attribute MediaFileData[]
+      <dt>readonly attribute ConfigurationData[]
       supportedVideoFormats </dt>
-      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains video
+      <dd>An array of ConfigurationData objects which contains video
       resolutions and formats supported by the hosting device
       camera.</dd>
 
-      <dt>readonly attribute MediaFileData[]
+      <dt>readonly attribute ConfigurationData[]
       supportedAudioFormats</dt>
-      <dd>An array of MediaFileData [[!HTMLMEDIACAPTURE]] objects which contains audio
+      <dd>An array of ConfigurationData objects which contains audio
       formats supported by the hosting device microphone.</dd>
 
       <dt>PendingOperation captureImage () </dt>
@@ -362,6 +350,25 @@ navigator.device.capture.captureImage(success, error, { limit: 1, format: select
       </dl>
     </section>
 
+    <section  id="formatdata"><h3><a>ConfigurationData</a> interface</h3>
+
+    <p><code>ConfigurationData</code> encapsulates a set of parameters that the capture device supports</p>
+
+    <dl title="[NoInterfaceObject] interface ConfigurationData" class="idl">
+
+      <dt>attribute DOMString type</dt>
+      <dd>The ASCII-encoded string in lower case representing the media type. Expressed as an RFC2046 MIME type [[RFC2046]]
+
+      <dt>attribute unsigned long height </dt>
+      <dd>The height attribute represents height of the image or video
+      in pixels. In the case of a sound clip this attribute has value 0.</dd>
+
+      <dt>attribute unsigned long width </dt>
+      <dd>The width attribute represents width of the image or video
+      in pixels. In the case of a sound clip this attribute has value 0.</dd>
+    </dl>    
+    </section>
+
     <section id="capturecallback"><h3><a>CaptureCB</a> interface</h3>
 
     <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface CaptureCB" class="idl">
@@ -418,8 +425,8 @@ navigator.device.capture.captureImage(success, error, { limit: 1, format: select
     <dl title="[NoInterfaceObject] interface CaptureImageOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of images user can take. Value MUST be equal or greater than one.</dd>
-      <dt>attribute MediaFileData format</dt>
-      <dd>The selected image format. Must match to one of the elements in <a href="#widl-Capture-supportedImageFormats"><code>supportedImageFormats</code></a> array.</dd>
+      <dt>attribute ConfigurationData format</dt>
+      <dd>The selected image format. Must match with one of the elements in <a href="#widl-Capture-supportedImageFormats"><code>supportedImageFormats</code></a> array.</dd>
 
     </dl>
 
@@ -432,7 +439,7 @@ navigator.device.capture.captureImage(success, error, { limit: 1, format: select
       <dd>Upper limit of videos user can record. Value MUST be equal or greater than one</dd>
       <dt>attribute float duration</dt>
       <dd>Maximum duration of a single video clip in seconds.</dd>
-      <dt>attribute MediaFileData format</dt>
+      <dt>attribute ConfigurationData format</dt>
       <dd>The selected video format. Must match with one of the elements in <a href="#widl-Capture-supportedVideoFormats"><code>supportedVideoFormats</code></a> array.</dd>
     </dl>
 
@@ -444,7 +451,7 @@ navigator.device.capture.captureImage(success, error, { limit: 1, format: select
       <dd>Upper limit of sound clips user can record. Value MUST be equal or greater than one</dd>
       <dt>attribute float duration</dt>
       <dd>Maximum duration of a single sound clip in seconds.</dd>
-      <dt>attribute MediaFileData format</dt>
+      <dt>attribute ConfigurationData format</dt>
       <dd>The selected audio format. Must match with one of the elements in <a href="#widl-Capture-supportedAudioFormats"><code>supportedAudioFormats</code></a> array.</dd>
     </dl>
 
