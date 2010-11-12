@@ -45,7 +45,7 @@
     microphone and camera of a hosting device. It completes the HTML Form Based Media Capturing specification [[!HTMLMEDIACAPTURE]] with a programmatic access to start a parametrized capture process.</p>
 
       <section id="examples">
-      <h2>Usage Examples</h2>
+      <h2>Usage Example</h2>
 
         <p>The following code extracts illustrate how to work with a
         camera service in the hosting device:</p>
@@ -55,6 +55,19 @@
 	pictures taken. </p>
 
         <pre class="example sh_javascript_dom">
+
+allformats = navigator.device.capture.supportedImageFormats;
+
+var width = 0;
+var selectedformat;
+
+// Select the format with the highest width
+for each (var format in allformats) {
+  if (allformats.width > width) {
+    width = format.width;
+    selectedformat = format;
+  }
+}
 
 function success(data) {
   var container = document.createElement(&quot;div&quot;);
@@ -77,28 +90,10 @@ function error(err) {
   }
 }
  
-navigator.device.capture.captureImage(success, error, { limit: 1 });
+navigator.device.capture.captureImage(success, error, { limit: 1, format: selectedformat });
 
         </pre>
         </div>
-        <div>	
-
-	<p>Example of retrieving image sizes and formats supported by hosting
-        device camera.</p>
-
-	<pre class="example sh_javascript_dom">var summary;
-
-formats = navigator.device.capture.supportedImageFormats;
-
-for (var key in formats) {
-  summary &#43;= key &#43; &quot;: &quot; &#43; formats[key] &#43; &quot;\n&quot;;
-}
-
-alert(summary);
-
-        </pre>
-        </div>
-
       </section>
 
     <section>
@@ -420,40 +415,37 @@ alert(summary);
     <p>The <a>CaptureImageOptions</a> interface encapsulates all image
     capture operation configuration options.</p>
 
-    <p class="note">Additional attributes proposed: <code>width</code>
-    and <code>height</code>.</p>
-    <p class="note">We might want to add <code>format</code> to give author control 
-    over the capture format.</p>
-
     <dl title="[NoInterfaceObject] interface CaptureImageOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of images user can take. Value MUST be equal or greater than one.</dd>
+      <dt>attribute MediaFileData format</dt>
+      <dd>The selected image format. Must match to one of the elements in <a href="#widl-Capture-supportedImageFormats"><code>supportedImageFormats</code></a> array.</dd>
+
     </dl>
 
     </section>
 
     <section id="capturevideooptions"><h3><a>CaptureVideoOptions</a> interface</h3>
 
-    <p class="note">We might want to add <code>format</code> to give author control 
-    over the capture format.</p>
-
     <dl title="[NoInterfaceObject] interface CaptureVideoOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of videos user can record. Value MUST be equal or greater than one</dd>
       <dt>attribute float duration</dt>
       <dd>Maximum duration of a single video clip in seconds.</dd>
+      <dt>attribute MediaFileData format</dt>
+      <dd>The selected video format. Must match with one of the elements in <a href="#widl-Capture-supportedVideoFormats"><code>supportedVideoFormats</code></a> array.</dd>
     </dl>
 
     </section>
 
     <section id="captureaudiooptions"><h3><a>CaptureAudioOptions</a> interface</h3>
-    <p class="note">Additional attributes proposed: <code>duration</code>.</p>
-    <p class="note">We might want to add <code>format</code> to give author control 
-    over the capture format.</p>
-
     <dl title="[NoInterfaceObject] interface CaptureAudioOptions" class="idl">
       <dt>attribute unsigned long limit</dt>
       <dd>Upper limit of sound clips user can record. Value MUST be equal or greater than one</dd>
+      <dt>attribute float duration</dt>
+      <dd>Maximum duration of a single sound clip in seconds.</dd>
+      <dt>attribute MediaFileData format</dt>
+      <dd>The selected audio format. Must match with one of the elements in <a href="#widl-Capture-supportedAudioFormats"><code>supportedAudioFormats</code></a> array.</dd>
     </dl>
 
     </section>
