@@ -128,6 +128,13 @@ navigator.device.capture.captureImage(success, error, { limit: 1, mode: selected
 
     <h3>Privacy considerations for implementers of Capture API</h3>
 
+    <p>In addition to the requirements already highlighted in the
+    [[!HTML5]] and [[!FILE-API]] specifications, implementors should
+    take care of additional leakage of privacy-sensitive data from
+    captured media. For instance, embedding the user's location in a
+    captured media metadata (e.g. EXIF) might transmit more private
+    data than the user might be expecting.</p>
+
     <p>A conforming implementation of this specification MUST provide a
     mechanism that protects the user's privacy and this mechanism SHOULD
     ensure that privacy information is not revealed without user's
