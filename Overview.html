@@ -114,7 +114,13 @@ feedback.</p>
     <p>The <code>capture</code> attribute may be added to the <code>input</code> element to provide user agents with a hint of that by the default a file picker should be in media capturing mode.</p>
 
     <p>The <code>capture</code> attribute is an enumerated attribute that can take one of the following values: <code>camera</code>, <code>camcorder</code>, <code>microphone</code>, <code>filesystem</code> (ASCII case-insensitive). These values indicate which source the file picker interface should preferably present to the user by default. Both the invalid and missing default value are <code>filesystem</code>.</p>
-    <p class="note">The values and their exact meaning are still very much in flux.</p>
+
+    <p class="issue">What to do if there is no accept attribute? What if the accept attribute is set to a value that the pre-hinted device cannot support?</p>
+
+    <dl title="[Supplemental] interface HTMLInputElement" class="idl">
+      <dt>attribute DOMString capture</dt>
+      <dd>One of <code>camera</code>, <code>camcorder</code>, <code>microphone</code>, <code>filesystem</code></dd>
+    </dl>
 
     <p>For example, the following code indicates that the user is expected to upload an image from the device camera:</p>
     <pre class="example sh_html">&lt;input type="file" accept="image/*" capture="camera" id="capture"&gt; </pre>
