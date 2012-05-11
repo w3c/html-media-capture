@@ -6,14 +6,15 @@
     <script src='../ReSpec.js/js/respec.js' class='remove'></script>
     <script class='remove'>
       var respecConfig = {
-          specStatus:           "WD",
+          specStatus:           "ED",
           shortName:            "html-media-capture",
           editors: [
-              {name: "Ilkka Oksanen", company: "Nokia"},
-              {name: "Dominique Hazaël-Massieux", company: "W3C"}
+              {name: "Anssi Kostiainen", company: "Nokia (from May 11, 2012)"},
+              {name: "Ilkka Oksanen", company: "Nokia (until May 10, 2012)"},
+              {name: "Dominique Hazaël-Massieux", company: "W3C (until May 10, 2012)"}
           ],
-          publishDate:          "2011-04-14",
-          previousPublishDate:  "2010-09-28",
+          //publishDate:          "yyyy-mm-dd",
+          previousPublishDate:  "2011-04-14",
           previousMaturity:     "WD",
           edDraftURI:           "http://dev.w3.org/2009/dap/camera/",
           // lcEnd: "2009-08-05",
@@ -64,11 +65,6 @@
         Providing streaming access to these capabilities is outside of the
         scope of this specification.
       </p>
-      <div class="note">
-        The Working Group is investigating the opportunity to specify streaming
-        access via the <a href="http://dev.w3.org/html5/html-device/">proposed
-        <code>&lt;device&gt;</code> element</a>.
-      </div>
     </section>
 
     <section id="conformance">
@@ -110,14 +106,7 @@
       <h2>Capture aware file-select control</h2>
       <p>
         This section is normative.
-      </p>      
-      <div class="note">
-        [[!HTML5]] <a href="http://dev.w3.org/html5/spec/number-state.html#file-upload-state">
-        links <code>&lt;input type="file"&gt;</code></a> to the File interface.
-        This specification defines a refined <code>MediaFile</code> interface
-        to be used when the <code>accept</code> attribute take certain values
-         — this will require coordination with the HTML5 Working Group.
-      </div>
+      </p>
       <p>
         If an input element in the File Upload state [[!HTML5]] contains
         accept attribute with values <code>image/*</code>, <code>audio/*</code>,
@@ -188,192 +177,6 @@
         account is offered in the <a href="#uiexamples">User Interface Examples
         appendix</a>.
       </p>
-    </section>
-    
-    <section id="api">
-    <h2>WebIDL interfaces</h2>
-      <section id="jsexample">
-        <h3>Example</h3>
-        <p>
-          After the user successfully captured or selected an existing media
-          file, the format properties of the file can be retrieved as follow:
-        </p>
-        <pre class="example sh_javascript_dom">
-          <code>
-          var captureInput = document.getElementById('capture');
-          // Accessing the file object from the input element with id capture
-          var file = captureInput.files[0];
-          if (file) {
-            // getting format data asynchronously
-            file.<a href="#widl-MediaFile-getFormatData">getFormatData</a>(displayFormatData, errorHandler);
-          }
-          
-          // success callback when getting format data
-          function displayFormatData(formatData) {  
-            var mainType = file.type.split("/")[0]; // "image", "video" or "audio"
-            var mediaDescriptionNode = document.createElement("p");
-            if (mainType === "image") {
-              mediaDescriptionNode.appendChild(document.createTextNode("This is an image of dimensions " +
-              <a href="#widl-MediaFileData-width">formatData.width</a> + "x" + <a href="#widl-MediaFileData-height">formatData.height</a>);
-            } else {
-              mediaDescriptionNode.appendChild(document.createTextNode("Duration: " + <a href="#widl-MediaFileData-duration">formatData.duration</a>  + "s");
-            }
-            captureInput.parentNode.insertBefore(mediaDescriptionNode, captureInput);
-          }
-          
-          // error callback if getting format data fails
-          function errorHandler(error) {
-            alert("Couldn’t retrieve format properties for the selected file (error code " + <a href="#widl-MediaFileDataError-code">error.code</a> + ")");
-          }
-          </code>
-        </pre>
-      </section>
-      <section  id="formatdata"><h3><a>MediaFileData</a> interface</h3>
-        <p>
-          <code>MediaFileData</code> encapsulates format information of a media
-          file.
-        </p>
-        <div class="note">
-          The relationship between this <code>MediaFileData</code> interface
-          and the properties made available through the API for Media Resource
-          1.0 [[MEDIAONT-API]] needs further investigation.
-        </div>
-        <dl title="[NoInterfaceObject] interface MediaFileData" class="idl">
-          <dt>attribute DOMString codecs</dt>
-          <dd>
-            The type attribute of the Blob interface (inherited from the File
-            interface) is not sufficient to determine the format of the content
-            since it only specifies the container type. The codecs attribute
-            represents the actual format that the audio and video of the content.
-            The codecs attribute MUST conform to the [[!RFC4281]]. For example,
-            a valid value for H.263 video and AAC low complexity would be 
-            codecs="s263, mp4a.40.2".
-            <div class="note">
-              This <a href="http://lists.w3.org/Archives/Public/public-device-apis/2010Jul/0133.html">
-              could be turned into a list of DOMString</a> rather than keeping
-              it as a comma-separated values list; this needs some care with
-              regard to the RFC ref.
-            </div>
-          </dd>
-          <dt>attribute unsigned long bitrate</dt>
-          <dd>
-            The codecs attribute only specifies the profile and level of the
-            encoded content which doesn't specify the actual bitrate. It only
-            specifies the maximum encoded bitrate, thus this bitrate attribute
-            is the average bitrate of the content. In the case of an image this
-            attribute has value 0.
-          </dd>
-          <dt>attribute unsigned long height</dt>
-          <dd>
-            The height attribute represents height of the image or video in
-            pixels. In the case of a sound clip this attribute has value 0.
-          </dd>
-          <dt>attribute unsigned long width </dt>
-          <dd>
-            The width attribute represents width of the image or video in
-            pixels. In the case of a sound clip this attribute has value 0.
-          </dd>
-          <dt>attribute float duration </dt>
-          <dd>
-            The duration attribute represents length of the video or sound clip
-            in seconds. In the case of an image this attribute has value 0.
-          </dd>
-        </dl>
-        <div class="note">
-          Some of the proposed attributes of the <code>MediaFileData</code>
-          interface could possibly be integrated as parameters of the MIME
-          type, or as MIME options object.
-        </div>
-      </section>
-      <section id="mediafile"><h3><a>MediaFile</a> interface</h3>
-        <p>
-          <code>MediaFile</code> encapsulates a single photo, video or sound
-          from the device. It inherits from <code>
-          <a href="http://www.w3.org/TR/FileAPI/#dfn-file">File</a></code>
-          [[!FILE-API]].
-        </p>
-        <dl title="[NoInterfaceObject] interface MediaFile : File"
-            class="idl">
-          <dt>
-            void getFormatData (in MediaFileDataSuccessCallback successCallback,
-                                in optional MediaFileDataErrorCallback errorCallback)
-          </dt>
-          <dd>
-            The <code>getFormatData()</code> method takes one or two arguments.
-            When called, it returns immediately and then asynchronously attempts
-            to obtain the format data of the given media file. If the attempt is
-            successful, the <code>successCallback</code> is invoked with a new
-            <code>MediaFileData</code> object, reflecting the format data of the
-            file. If the attempt fails, the <code>errorCallback</code> is invoked
-            with a new MediaFileDataError object, reflecting the reason for the
-            failure.
-          </dd>
-        </dl>
-      </section>
-      <section id="mediafiledatasuccesscallback">
-        <h3><a>MediaFileDataSuccessCallback</a> interface</h3>
-        <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface MediaFileDataSuccessCallback"
-            class="idl">
-          <dt>void onSuccess()</dt>
-          <dd>
-            <dl class='parameters'>
-              <dt>
-                MediaFileData formatData
-              </dt>
-              <dd>
-                The MediaFileData object describing the relevant properties of
-                the given media file.
-              </dd>
-            </dl>
-          </dd>
-        </dl>
-      </section>
-      <section id="mediafiledataerrorcallback">
-        <h3><a>MediaFileDataErrorCallback</a> interface</h3>
-        <dl title="[Callback=FunctionOnly, NoInterfaceObject] interface MediaFileDataErrorCallback"
-            class="idl">
-          <dt>void onError()</dt>
-          <dd>
-            <dl class='parameters'>
-              <dt>
-                MediaFileDataError error
-              </dt>
-              <dd>
-                The <code>MediaFileDataError</code> object describing the error
-                encountered while retrieving the format data.
-              </dd>
-            </dl>
-          </dd>
-        </dl>
-      </section>
-      <section id="mediafiledataerror">
-        <h3><a>MediaFileDataError</a> interface</h3>
-        <p>
-          The <code>MediaFileDataError</code> interface encapsulates all errors
-          in the retrieval of format data associated with a
-          <code>MediaFile</code> object.
-        </p>
-        <dl title='[NoInterfaceObject] interface MediaFileDataError'
-            class='idl'>
-          <dt>
-            const unsigned short UNKNOWN_ERROR = 0
-          </dt>
-          <dd>
-            An unknown error occurred.
-          </dd>
-          <dt>
-            const unsigned short TIMEOUT_ERROR = 1
-          </dt>
-          <dd>
-            The requested method timed out before it could be completed.
-          </dd>
-          <dt>readonly attribute unsigned short code</dt>
-          <dd>
-            An error code assigned by an implementation when an error has
-            occurred in retrieving format data.
-          </dd>
-        </dl>
-      </section>
     </section>
     
     <section class='appendix' id="uiexamples">
