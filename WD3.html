@@ -1,0 +1,1006 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html lang="en" dir="ltr">
+  
+  <head>
+    <title>HTML Media Capture</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <style type="text/css"></style>
+    <style type="text/css">
+      /*****************************************************************
+       * ReSpec CSS
+       * Robin Berjon (robin at berjon dot com)
+       * v0.05 - 2009-07-31
+       *****************************************************************/
+      /* --- INLINES --- */
+      em.rfc2119 {
+        text-transform: lowercase;
+        font-variant: small-caps;
+        font-style: normal;
+        color: #900;
+      }
+      h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym, h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+        border: none;
+      }
+      dfn {
+        font-weight: bold;
+      }
+      a.internalDFN {
+        color: inherit;
+        border-bottom: 1px solid #99c;
+        text-decoration: none;
+      }
+      a.externalDFN {
+        color: inherit;
+        border-bottom: 1px dotted #ccc;
+        text-decoration: none;
+      }
+      a.bibref {
+        text-decoration: none;
+      }
+      code {
+        color: #ff4500;
+      }
+      /* --- WEB IDL --- */
+      pre.idl {
+        border-top: 1px solid #90b8de;
+        border-bottom: 1px solid #90b8de;
+        padding: 1em;
+        line-height: 120%;
+      }
+      pre.idl::before {
+        content:"WebIDL";
+        display: block;
+        width: 150px;
+        background: #90b8de;
+        color: #fff;
+        font-family: initial;
+        padding: 3px;
+        font-weight: bold;
+        margin: -1em 0 1em -1em;
+      }
+      .idlType {
+        color: #ff4500;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      /*.idlModule*/
+      /*.idlModuleID*/
+      /*.idlInterface*/
+      .idlInterfaceID, .idlDictionaryID {
+        font-weight: bold;
+        color: #005a9c;
+      }
+      .idlSuperclass {
+        font-style: italic;
+        color: #005a9c;
+      }
+      /*.idlAttribute*/
+      .idlAttrType, .idlFieldType, .idlMemberType {
+        color: #005a9c;
+      }
+      .idlAttrName, .idlFieldName, .idlMemberName {
+        color: #ff4500;
+      }
+      .idlAttrName a, .idlFieldName a, .idlMemberName a {
+        color: #ff4500;
+        border-bottom: 1px dotted #ff4500;
+        text-decoration: none;
+      }
+      /*.idlMethod*/
+      .idlMethType {
+        color: #005a9c;
+      }
+      .idlMethName {
+        color: #ff4500;
+      }
+      .idlMethName a {
+        color: #ff4500;
+        border-bottom: 1px dotted #ff4500;
+        text-decoration: none;
+      }
+      /*.idlParam*/
+      .idlParamType {
+        color: #005a9c;
+      }
+      .idlParamName {
+        font-style: italic;
+      }
+      .extAttr {
+        color: #666;
+      }
+      /*.idlConst*/
+      .idlConstType {
+        color: #005a9c;
+      }
+      .idlConstName {
+        color: #ff4500;
+      }
+      .idlConstName a {
+        color: #ff4500;
+        border-bottom: 1px dotted #ff4500;
+        text-decoration: none;
+      }
+      /*.idlException*/
+      .idlExceptionID {
+        font-weight: bold;
+        color: #c00;
+      }
+      .idlTypedefID, .idlTypedefType {
+        color: #005a9c;
+      }
+      .idlRaises, .idlRaises a.idlType, .idlRaises a.idlType code, .excName a, .excName a code {
+        color: #c00;
+        font-weight: normal;
+      }
+      .excName a {
+        font-family: monospace;
+      }
+      .idlRaises a.idlType, .excName a.idlType {
+        border-bottom: 1px dotted #c00;
+      }
+      .excGetSetTrue, .excGetSetFalse, .prmNullTrue, .prmNullFalse, .prmOptTrue, .prmOptFalse {
+        width: 45px;
+        text-align: center;
+      }
+      .excGetSetTrue, .prmNullTrue, .prmOptTrue {
+        color: #0c0;
+      }
+      .excGetSetFalse, .prmNullFalse, .prmOptFalse {
+        color: #c00;
+      }
+      .idlImplements a {
+        font-weight: bold;
+      }
+      dl.attributes, dl.methods, dl.constants, dl.fields, dl.dictionary-members {
+        margin-left: 2em;
+      }
+      .attributes dt, .methods dt, .constants dt, .fields dt, .dictionary-members dt {
+        font-weight: normal;
+      }
+      .attributes dt code, .methods dt code, .constants dt code, .fields dt code, .dictionary-members dt code {
+        font-weight: bold;
+        color: #000;
+        font-family: monospace;
+      }
+      .attributes dt code, .fields dt code, .dictionary-members dt code {
+        background: #ffffd2;
+      }
+      .attributes dt .idlAttrType code, .fields dt .idlFieldType code, .dictionary-members dt .idlMemberType code {
+        color: #005a9c;
+        background: transparent;
+        font-family: inherit;
+        font-weight: normal;
+        font-style: italic;
+      }
+      .methods dt code {
+        background: #d9e6f8;
+      }
+      .constants dt code {
+        background: #ddffd2;
+      }
+      .attributes dd, .methods dd, .constants dd, .fields dd, .dictionary-members dd {
+        margin-bottom: 1em;
+      }
+      table.parameters, table.exceptions {
+        border-spacing: 0;
+        border-collapse: collapse;
+        margin: 0.5em 0;
+        width: 100%;
+      }
+      table.parameters {
+        border-bottom: 1px solid #90b8de;
+      }
+      table.exceptions {
+        border-bottom: 1px solid #deb890;
+      }
+      .parameters th, .exceptions th {
+        color: #fff;
+        padding: 3px 5px;
+        text-align: left;
+        font-family: initial;
+        font-weight: normal;
+        text-shadow: #666 1px 1px 0;
+      }
+      .parameters th {
+        background: #90b8de;
+      }
+      .exceptions th {
+        background: #deb890;
+      }
+      .parameters td, .exceptions td {
+        padding: 3px 10px;
+        border-top: 1px solid #ddd;
+        vertical-align: top;
+      }
+      .parameters tr:first-child td, .exceptions tr:first-child td {
+        border-top: none;
+      }
+      .parameters td.prmName, .exceptions td.excName, .exceptions td.excCodeName {
+        width: 100px;
+      }
+      .parameters td.prmType {
+        width: 120px;
+      }
+      table.exceptions table {
+        border-spacing: 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      /* --- TOC --- */
+      .toc a {
+        text-decoration: none;
+      }
+      a .secno {
+        color: #000;
+      }
+      /* --- TABLE --- */
+      table.simple {
+        border-spacing: 0;
+        border-collapse: collapse;
+        border-bottom: 3px solid #005a9c;
+      }
+      .simple th {
+        background: #005a9c;
+        color: #fff;
+        padding: 3px 5px;
+        text-align: left;
+      }
+      .simple th[scope="row"] {
+        background: inherit;
+        color: inherit;
+        border-top: 1px solid #ddd;
+      }
+      .simple td {
+        padding: 3px 10px;
+        border-top: 1px solid #ddd;
+      }
+      .simple tr:nth-child(even) {
+        background: #f0f6ff;
+      }
+      /* --- DL --- */
+      .section dd > p:first-child {
+        margin-top: 0;
+      }
+      .section dd > p:last-child {
+        margin-bottom: 0;
+      }
+      .section dd {
+        margin-bottom: 1em;
+      }
+      .section dl.attrs dd, .section dl.eldef dd {
+        margin-bottom: 0;
+      }
+      /* --- EXAMPLES --- */
+      pre.example {
+        border-top: 1px solid #ff4500;
+        border-bottom: 1px solid #ff4500;
+        padding: 1em;
+        margin-top: 1em;
+      }
+      pre.example::before {
+        content:"Example";
+        display: block;
+        width: 150px;
+        background: #ff4500;
+        color: #fff;
+        font-family: initial;
+        padding: 3px;
+        font-weight: bold;
+        margin: -1em 0 1em -1em;
+      }
+      /* --- EDITORIAL NOTES --- */
+      .issue {
+        padding: 1em;
+        margin: 1em 0em 0em;
+        border: 1px solid #f00;
+        background: #ffc;
+      }
+      .issue::before {
+        content:"Issue";
+        display: block;
+        width: 150px;
+        margin: -1.5em 0 0.5em 0;
+        font-weight: bold;
+        border: 1px solid #f00;
+        background: #fff;
+        padding: 3px 1em;
+      }
+      .note {
+        margin: 1em 0em 0em;
+        padding: 1em;
+        border: 2px solid #cff6d9;
+        background: #e2fff0;
+      }
+      .note::before {
+        content:"Note";
+        display: block;
+        width: 150px;
+        margin: -1.5em 0 0.5em 0;
+        font-weight: bold;
+        border: 1px solid #cff6d9;
+        background: #fff;
+        padding: 3px 1em;
+      }
+      /* --- Best Practices --- */
+      div.practice {
+        border: solid #bebebe 1px;
+        margin: 2em 1em 1em 2em;
+      }
+      span.practicelab {
+        margin: 1.5em 0.5em 1em 1em;
+        font-weight: bold;
+        font-style: italic;
+      }
+      span.practicelab {
+        background: #dfffff;
+      }
+      span.practicelab {
+        position: relative;
+        padding: 0 0.5em;
+        top: -1.5em;
+      }
+      p.practicedesc {
+        margin: 1.5em 0.5em 1em 1em;
+      }
+      @media screen {
+        p.practicedesc {
+          position: relative;
+          top: -2em;
+          padding: 0;
+          margin: 1.5em 0.5em -1em 1em;
+        }
+      }
+      /* --- SYNTAX HIGHLIGHTING --- */
+      pre.sh_sourceCode {
+        background-color: white;
+        color: black;
+        font-style: normal;
+        font-weight: normal;
+      }
+      pre.sh_sourceCode .sh_keyword {
+        color: #005a9c;
+        font-weight: bold;
+      }
+      /* language keywords */
+      pre.sh_sourceCode .sh_type {
+        color: #666;
+      }
+      /* basic types */
+      pre.sh_sourceCode .sh_usertype {
+        color: teal;
+      }
+      /* user defined types */
+      pre.sh_sourceCode .sh_string {
+        color: red;
+        font-family: monospace;
+      }
+      /* strings and chars */
+      pre.sh_sourceCode .sh_regexp {
+        color: orange;
+        font-family: monospace;
+      }
+      /* regular expressions */
+      pre.sh_sourceCode .sh_specialchar {
+        color: #ffc0cb;
+        font-family: monospace;
+      }
+      /* e.g., \n, \t, \\ */
+      pre.sh_sourceCode .sh_comment {
+        color: #A52A2A;
+        font-style: italic;
+      }
+      /* comments */
+      pre.sh_sourceCode .sh_number {
+        color: purple;
+      }
+      /* literal numbers */
+      pre.sh_sourceCode .sh_preproc {
+        color: #00008B;
+        font-weight: bold;
+      }
+      /* e.g., #include, import */
+      pre.sh_sourceCode .sh_symbol {
+        color: blue;
+      }
+      /* e.g., *, + */
+      pre.sh_sourceCode .sh_function {
+        color: black;
+        font-weight: bold;
+      }
+      /* function calls and declarations */
+      pre.sh_sourceCode .sh_cbracket {
+        color: red;
+      }
+      /* block brackets (e.g., {, }) */
+      pre.sh_sourceCode .sh_todo {
+        font-weight: bold;
+        background-color: #00FFFF;
+      }
+      /* TODO and FIXME */
+      /* Predefined variables and functions (for instance glsl) */
+      pre.sh_sourceCode .sh_predef_var {
+        color: #00008B;
+      }
+      pre.sh_sourceCode .sh_predef_func {
+        color: #00008B;
+        font-weight: bold;
+      }
+      /* for OOP */
+      pre.sh_sourceCode .sh_classname {
+        color: teal;
+      }
+      /* line numbers (not yet implemented) */
+      pre.sh_sourceCode .sh_linenum {
+        display: none;
+      }
+      /* Internet related */
+      pre.sh_sourceCode .sh_url {
+        color: blue;
+        text-decoration: underline;
+        font-family: monospace;
+      }
+      /* for ChangeLog and Log files */
+      pre.sh_sourceCode .sh_date {
+        color: blue;
+        font-weight: bold;
+      }
+      pre.sh_sourceCode .sh_time, pre.sh_sourceCode .sh_file {
+        color: #00008B;
+        font-weight: bold;
+      }
+      pre.sh_sourceCode .sh_ip, pre.sh_sourceCode .sh_name {
+        color: #006400;
+      }
+      /* for Prolog, Perl... */
+      pre.sh_sourceCode .sh_variable {
+        color: #006400;
+      }
+      /* for LaTeX */
+      pre.sh_sourceCode .sh_italics {
+        color: #006400;
+        font-style: italic;
+      }
+      pre.sh_sourceCode .sh_bold {
+        color: #006400;
+        font-weight: bold;
+      }
+      pre.sh_sourceCode .sh_underline {
+        color: #006400;
+        text-decoration: underline;
+      }
+      pre.sh_sourceCode .sh_fixed {
+        color: green;
+        font-family: monospace;
+      }
+      pre.sh_sourceCode .sh_argument {
+        color: #006400;
+      }
+      pre.sh_sourceCode .sh_optionalargument {
+        color: purple;
+      }
+      pre.sh_sourceCode .sh_math {
+        color: orange;
+      }
+      pre.sh_sourceCode .sh_bibtex {
+        color: blue;
+      }
+      /* for diffs */
+      pre.sh_sourceCode .sh_oldfile {
+        color: orange;
+      }
+      pre.sh_sourceCode .sh_newfile {
+        color: #006400;
+      }
+      pre.sh_sourceCode .sh_difflines {
+        color: blue;
+      }
+      /* for css */
+      pre.sh_sourceCode .sh_selector {
+        color: purple;
+      }
+      pre.sh_sourceCode .sh_property {
+        color: blue;
+      }
+      pre.sh_sourceCode .sh_value {
+        color: #006400;
+        font-style: italic;
+      }
+      /* other */
+      pre.sh_sourceCode .sh_section {
+        color: black;
+        font-weight: bold;
+      }
+      pre.sh_sourceCode .sh_paren {
+        color: red;
+      }
+      pre.sh_sourceCode .sh_attribute {
+        color: #006400;
+      }
+    </style>
+    <link href="http://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet"
+    type="text/css" charset="utf-8">
+  </head>
+  
+  <body style="display: inherit; ">
+    <div class="head">
+      <p>
+        <a href="http://www.w3.org/"><img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+      </p>
+      <h1 class="title" id="title">HTML Media Capture</h1>
+      <h2 id="w3c-working-draft-29-may-2012">
+        <acronym title="World Wide Web Consortium">W3C</acronym>Working Draft 29 May 2012</h2>
+      <dl>
+        <dt>This version:</dt>
+        <dd>
+          <a href="http://www.w3.org/TR/2012/WD-html-media-capture-20120529/">http://www.w3.org/TR/2012/WD-html-media-capture-20120529/</a>
+        </dd>
+        <dt>Latest published version:</dt>
+        <dd>
+          <a href="http://www.w3.org/TR/html-media-capture/">http://www.w3.org/TR/html-media-capture/</a>
+        </dd>
+        <dt>Latest editor's draft:</dt>
+        <dd>
+          <a href="http://dev.w3.org/2009/dap/camera/">http://dev.w3.org/2009/dap/camera/</a>
+        </dd>
+        <dt>Previous version:</dt>
+        <dd>
+          <a href="http://www.w3.org/TR/2011/WD-html-media-capture-20110414/">http://www.w3.org/TR/2011/WD-html-media-capture-20110414/</a>
+        </dd>
+        <dt>Editors:</dt>
+        <dd>
+          <span>Anssi Kostiainen</span>, Nokia</dd>
+        <dd>
+          <span>Ilkka Oksanen</span>, Nokia (until May 10, 2012)</dd>
+        <dd>
+          <span>Dominique Hazaël-Massieux</span>,
+          <acronym title="World Wide Web Consortium">W3C</acronym>(until May 10, 2012)</dd>
+      </dl>
+      <p class="copyright">
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>© 2012
+        <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a>
+        <sup>®</sup>(
+        <a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>,
+        <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>,
+        <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved.
+        <acronym title="World Wide Web Consortium">W3C</acronym>
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>and
+        <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a>rules apply.</p>
+      <hr>
+    </div>
+    <div id="abstract" class="introductory section">
+      <h2>Abstract</h2>
+      <p>The HTML Media Capture specification defines HTML form extensions that
+        facilitate users' access to media capture capabilities of the hosting device.</p>
+    </div>
+    <div id="sotd" class="introductory section">
+      <h2>Status of This Document</h2>
+      <p>
+        <em>This section describes the status of this document at the time of its
+          publication. Other documents may supersede this document. A list of current
+          <acronym
+          title="World Wide Web Consortium">W3C</acronym>publications and the latest revision of this technical report
+            can be found in the
+            <a href="http://www.w3.org/TR/"><acronym title="World Wide Web Consortium">W3C</acronym> technical reports index</a>at http://www.w3.org/TR/.</em>
+      </p>
+      <p>This document was published by the
+        <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a>as a Working Draft. This document is intended to become a
+        <acronym title="World Wide Web Consortium">W3C</acronym>Recommendation. If you wish to make comments regarding this
+        document, please send them to
+        <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a>(
+        <a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>,
+        <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>). All feedback is welcome.</p>
+      <p>Publication as a Working Draft does not imply endorsement by the
+        <acronym
+        title="World Wide Web Consortium">W3C</acronym>Membership. This is a draft document and may be updated,
+          replaced or obsoleted by other documents at any time. It is inappropriate
+          to cite this document as other than work in progress.</p>
+      <p>This document was produced by a group operating under the
+        <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <acronym title="World Wide Web Consortium">W3C</acronym> Patent Policy</a>.
+        <acronym title="World Wide Web Consortium">W3C</acronym>maintains a
+        <a href="http://www.w3.org/2004/01/pp-impl/43696/status"
+        rel="disclosure">public list of any patent disclosures</a>made in connection with the deliverables of the group; that page also
+        includes instructions for disclosing a patent. An individual who has actual
+        knowledge of a patent which the individual believes contains
+        <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a>must disclose the information in accordance with
+        <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the <acronym title="World Wide Web Consortium">W3C</acronym> Patent Policy</a>.</p>
+    </div>
+    <div id="toc" class="section">
+      <h2 class="introductory">Table of Contents</h2>
+      <ul class="toc">
+        <li class="tocline">
+          <a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a>
+        </li>
+        <li class="tocline">
+          <a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a>
+        </li>
+        <li class="tocline">
+          <a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a>
+        </li>
+        <li class="tocline">
+          <a href="#security" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a>
+        </li>
+        <li class="tocline">
+          <a href="#the-capture-attribute" class="tocxref"><span class="secno">5. </span>The capture attribute</a>
+          <ul class="toc">
+            <li class="tocline">
+              <a href="#attributes" class="tocxref"><span class="secno">5.1 </span>Attributes</a>
+            </li>
+          </ul>
+        </li>
+        <li class="tocline">
+          <a href="#examples" class="tocxref"><span class="secno">A. </span>Examples</a>
+        </li>
+        <li class="tocline">
+          <a href="#references" class="tocxref"><span class="secno">B. </span>References</a>
+          <ul class="toc">
+            <li class="tocline">
+              <a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a>
+            </li>
+            <li class="tocline">
+              <a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="informative section" id="introduction">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">1.</span>Introduction</h2>
+      <p>
+        <em>This section is non-normative.</em>
+      </p>
+      <p>This specification extends the
+        <code>
+          <a href="#dfn-htmlinputelement" class="internalDFN">HTMLInputElement</a>
+        </code>interface with a new
+        <code>
+          <a href="#dfn-capture-1" class="internalDFN">capture</a>
+        </code>attribute. The attribute enables content authors to give hints of preferred
+        means to capture local media such as images, video, and sound, that is
+        to be subsequently uploaded. Conformant user agents provide their users
+        more seamless access to the above-mentioned media capture capabilities
+        of the hosting device.</p>
+      <p>Access to media streams from the hosting device is out of scope for this
+        specification.</p>
+    </div>
+    <div id="conformance" class="section">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">2.</span>Conformance</h2>
+      <p>As well as sections marked as non-normative, all authoring guidelines,
+        diagrams, examples, and notes in this specification are non-normative.
+        Everything else in this specification is normative.</p>
+      <p>The key words
+        <em class="rfc2119" title="must">must</em>,
+        <em class="rfc2119" title="must not">must not</em>,
+        <em class="rfc2119" title="required">required</em>,
+        <em class="rfc2119" title="should">should</em>,
+        <em class="rfc2119" title="should not">should not</em>,
+        <em class="rfc2119" title="recommended">recommended</em>,
+        <em class="rfc2119" title="may">may</em>, and
+        <em class="rfc2119" title="optional">optional</em>in this specification are to be interpreted as described
+        in [
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-RFC2119">RFC2119</a>
+        </cite>].</p>
+      <p>This specification defines conformance criteria that apply to a single
+        product: the
+        <dfn id="dfn-user-agent">user agent</dfn>that implements the interfaces that it contains.</p>
+      <p>Implementations that use ECMAScript to implement the APIs defined in this
+        specification must implement them in a manner consistent with the ECMAScript
+        Bindings defined in the Web IDL specification [
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-WEBIDL">WEBIDL</a>
+        </cite>], as this specification uses that specification and terminology.</p>
+    </div>
+    <div id="terminology" class="section">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">3.</span>Terminology</h2>
+      <p>The
+        <a href="http://dev.w3.org/html5/spec/the-input-element.html#the-input-element">
+        <code><dfn id="dfn-input">input</dfn></code> element</a>and the
+        <a href="http://dev.w3.org/html5/spec/the-input-element.html#htmlinputelement">
+        <code><dfn id="dfn-htmlinputelement">HTMLInputElement</dfn></code></a>interface are defined in [
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-HTML5">HTML5</a>
+        </cite>].</p>
+      <p>The
+        <a href="http://dev.w3.org/html5/spec/states-of-the-type-attribute.html#file-upload-state-type-file">
+        <dfn id="dfn-file-upload">File Upload</dfn></a>
+        <a href="#dfn-state" class="internalDFN">state</a>is defined in [
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-HTML5">HTML5</a>
+        </cite>].</p>
+      <p>The
+        <a href="http://dev.w3.org/html5/spec/common-microsyntaxes.html#enumerated-attribute">
+        <dfn id="dfn-enumerated-attribute">enumerated attribute</dfn></a>microsyntax, and associated terms and concepts
+        <dfn id="dfn-keyword">keyword</dfn>,
+        <dfn id="dfn-state">state</dfn>,
+        <dfn id="dfn-invalid-value-default">invalid value default</dfn>, and
+        <dfn id="dfn-missing-value-default">missing value default</dfn>, are defined in [
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-HTML5">HTML5</a>
+        </cite>].</p>
+      <p>In this specification, the term
+        <dfn id="dfn-capture-control-type">capture control type</dfn>refers to a specialized type of a file picker
+        control that is optimized, for the user, for capturing media of a specified
+        type.</p>
+    </div>
+    <div id="security" class="section">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">4.</span>Security and privacy considerations</h2>
+      <p>This specification builds upon the security and privacy protections provided
+        by the
+        <code>&lt;input type="file"&gt;</code>[
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-HTML5">HTML5</a>
+        </cite>] and the [
+        <cite>
+          <a class="bibref" rel="biblioentry" href="#bib-FILE-API">FILE-API</a>
+        </cite>] specifications; in particular, it is expected that any offer to start
+        capturing content from the user’s device would require a specific user
+        interaction on an HTML element that is entirely controlled by the user
+        agent.</p>
+      <p>Implementors should take care of additional leakage of privacy-sensitive
+        data from captured media. For instance, embedding the user’s location in
+        a captured media metadata (e.g. EXIF) might transmit more private data
+        than the user might be expecting.</p>
+    </div>
+    <div id="the-capture-attribute" class="section">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">5.</span>The capture attribute</h2>
+      <p>This section is normative.</p>
+      <p>When an
+        <code>
+          <a href="#dfn-input" class="internalDFN">input</a>
+        </code>element's
+        <code>type</code>attribute is in the
+        <a href="#dfn-file-upload" class="internalDFN">File Upload</a>
+        <a href="#dfn-state" class="internalDFN">state</a>, the rules in this section apply.</p>
+      <pre class="idl">
+        <span class="idlInterface" id="idl-def-HTMLInputElement">partial interface
+          <span class="idlInterfaceID">HTMLInputElement</span>{
+          <span class="idlAttribute">attribute
+            <span class="idlAttrType">
+              <a>DOMString</a>
+            </span>
+            <span class="idlAttrName">
+              <a href="#widl-HTMLInputElement-capture">capture</a>
+            </span>;</span>};</span>
+      </pre>
+      <div id="attributes" class="section">
+        <h3>
+          <span class="secno">5.1</span>Attributes</h3>
+        <dl class="attributes">
+          <dt id="widl-HTMLInputElement-capture">
+            <code>capture</code>of type
+            <span class="idlAttrType">
+              <a>DOMString</a>
+            </span>
+          </dt>
+          <dd></dd>
+        </dl>
+      </div>
+      <p>The
+        <code>
+          <dfn id="dfn-capture-1">capture</dfn>
+        </code>attribute is used as a hint to the
+        <a href="#dfn-user-agent" class="internalDFN">user agent</a>to invoke a file picker of a specific
+        <a href="#dfn-capture-control-type"
+        class="internalDFN">capture
+        control type</a>.</p>
+      <p>The
+        <code>
+          <a href="#dfn-capture-1" class="internalDFN">capture</a>
+        </code>attribute controls the capture
+        <a href="#dfn-state" class="internalDFN">state</a>(and associated
+        <a href="#dfn-capture-control-type" class="internalDFN">capture control type</a>) of the element. It is an
+        <a href="#dfn-enumerated-attribute" class="internalDFN">enumerated attribute</a>. The following table lists the
+        <a href="#dfn-keyword" class="internalDFN">keyword</a>s,
+        <a href="#dfn-state" class="internalDFN">state</a>s, and corresponding
+        <a href="#dfn-capture-control-type" class="internalDFN">capture
+        control type</a>s for the attribute. The
+        <a href="#dfn-keyword" class="internalDFN">keyword</a>s
+        <code>
+          <dfn id="dfn-camera">camera</dfn>
+        </code>,
+        <code>
+          <dfn id="dfn-camcorder">camcorder</dfn>
+        </code>,
+        <code>
+          <dfn id="dfn-microphone">microphone</dfn>
+        </code>, and
+        <code>
+          <dfn id="dfn-filesystem">filesystem</dfn>
+        </code>map to the corresponding
+        <a href="#dfn-state" class="internalDFN">state</a>s:
+        <dfn id="dfn-image-capture">Image Capture</dfn>,
+        <dfn id="dfn-video-capture">Video Capture</dfn>,
+        <dfn id="dfn-sound-capture">Sound Capture</dfn>, and
+        <a href="#dfn-file-upload" class="internalDFN">File Upload</a>respectively.</p>
+      <table class="simple">
+        <tbody>
+          <tr>
+            <th>
+              <a href="#dfn-keyword" class="internalDFN">Keyword</a>
+            </th>
+            <th>
+              <a href="#dfn-state" class="internalDFN">State</a>
+            </th>
+            <th>
+              <a href="#dfn-capture-control-type" class="internalDFN">Capture control type</a>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <code>
+                <a href="#dfn-camera" class="internalDFN">camera</a>
+              </code>
+            </td>
+            <td>
+              <a href="#dfn-image-capture" class="internalDFN">Image Capture</a>
+            </td>
+            <td>A camera</td>
+          </tr>
+          <tr>
+            <td>
+              <code>
+                <a href="#dfn-camcorder" class="internalDFN">camcorder</a>
+              </code>
+            </td>
+            <td>
+              <a href="#dfn-video-capture" class="internalDFN">Video Capture</a>
+            </td>
+            <td>A video camera</td>
+          </tr>
+          <tr>
+            <td>
+              <code>
+                <a href="#dfn-microphone" class="internalDFN">microphone</a>
+              </code>
+            </td>
+            <td>
+              <a href="#dfn-sound-capture" class="internalDFN">Sound Capture</a>
+            </td>
+            <td>A sound recorder</td>
+          </tr>
+          <tr>
+            <td>
+              <code>
+                <a href="#dfn-filesystem" class="internalDFN">filesystem</a>
+              </code>
+            </td>
+            <td>
+              <a href="#dfn-file-upload" class="internalDFN">File Upload</a>
+            </td>
+            <td>A generic file picker</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The
+        <code>
+          <a href="#dfn-capture-1" class="internalDFN">capture</a>
+        </code>attribute's
+        <em>
+          <a href="#dfn-invalid-value-default" class="internalDFN">invalid value
+        default</a>
+        </em>and
+        <em>
+          <a href="#dfn-missing-value-default" class="internalDFN">missing value default</a>
+        </em>is the
+        <a href="#dfn-file-upload" class="internalDFN">File Upload</a>
+        <a href="#dfn-state" class="internalDFN">state</a>.</p>
+      <p>The
+        <code>HTMLInputElement</code>interface's
+        <code>accept</code>attribute takes precedence over the
+        <code>
+          <a href="#dfn-capture-1" class="internalDFN">capture</a>
+        </code>attribute. That is, if the
+        <code>accept</code>attribute's value is set to a MIME type that is not accepted
+        in a defined capture
+        <a href="#dfn-state" class="internalDFN">state</a>, the
+        <a href="#dfn-user-agent" class="internalDFN">user agent</a>
+        <em class="rfc2119" title="must">must</em>act as if there was no
+        <code>
+          <a href="#dfn-capture-1" class="internalDFN">capture
+        </a>
+        </code>attribute.</p>
+      <div class="note">This specification complements the following behavior defined in the
+        <a
+        href="#dfn-file-upload" class="internalDFN">File Upload</a>
+          <a href="#dfn-state" class="internalDFN">state</a>[
+          <cite>
+            <a class="bibref" rel="biblioentry" href="#bib-HTML5">HTML5</a>
+          </cite>]: User agents may use the value of [the
+          <code>accept</code>] attribute to display a more appropriate user interface
+          than a generic file picker. For instance, given the value
+          <code>image/*</code>, a user agent could offer the user the option of using
+          a local camera or selecting a photograph from their photo collection; given
+          the value
+          <code>audio/*,</code>a user agent could offer the user the option of recording
+          a clip using a headset microphone.</div>
+    </div>
+    <div class="appendix informative section" id="examples">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">A.</span>Examples</h2>
+      <p>
+        <em>This section is non-normative.</em>
+      </p>
+      <p>The following example gives a hint that it is preferred for the user to
+        take a picture using the device's local camera, and upload the picture
+        taken:</p>
+      <pre class="example sh_html sh_sourceCode">
+        <span class="sh_keyword">&lt;input</span>
+        <span class="sh_type">type</span>
+        <span class="sh_symbol">=</span>
+        <span class="sh_string">"file"</span>
+        <span class="sh_type">accept</span>
+        <span class="sh_symbol">=</span>
+        <span class="sh_string">"image/*"</span>
+        <span class="sh_type">capture</span>
+        <span class="sh_symbol">=</span>
+        <span class="sh_string">"camera"</span>
+        <span class="sh_keyword">&gt;</span>
+      </pre>
+      <p>When an
+        <code>
+          <a href="#dfn-input" class="internalDFN">input</a>
+        </code>element's
+        <code>
+          <a href="#dfn-capture-1" class="internalDFN">capture</a>
+        </code>attribute is in the
+        <a href="#dfn-image-capture" class="internalDFN">Image Capture</a>
+        <a href="#dfn-state" class="internalDFN">state</a>, the file picker may render as presented on the right side. When the
+        attribute is in the
+        <a href="#dfn-file-upload" class="internalDFN">File Upload</a>
+        <a href="#dfn-state" class="internalDFN">state</a>, the generic file picker may render as represented on the left side.</p>
+      <p>
+        <img alt="A File picker control in the File Upload (left) and Image
+      Capture state (right)." src="capture-api-file-picker-concept.png">
+      </p>
+    </div>
+    <div id="references" class="appendix section">
+      <!--OddPage-->
+      <h2>
+        <span class="secno">B.</span>References</h2>
+      <div id="normative-references" class="section">
+        <h3>
+          <span class="secno">B.1</span>Normative references</h3>
+        <dl class="bibliography">
+          <dt id="bib-FILE-API">[FILE-API]</dt>
+          <dd>Arun Ranganathan; Jonas Sicking.
+            <a href="http://www.w3.org/TR/2011/WD-FileAPI-20111020/"><cite>File API.</cite></a>20 October 2011. W3C Working Draft. (Work in progress.) URL:
+            <a href="http://www.w3.org/TR/2011/WD-FileAPI-20111020/">http://www.w3.org/TR/2011/WD-FileAPI-20111020/</a>
+          </dd>
+          <dt id="bib-HTML5">[HTML5]</dt>
+          <dd>Ian Hickson; David Hyatt.
+            <a href="http://www.w3.org/TR/html5"><cite>HTML5.</cite></a>25 May 2011. W3C Working Draft. (Work in progress.) URL:
+            <a href="http://www.w3.org/TR/html5">http://www.w3.org/TR/html5</a>
+          </dd>
+          <dt id="bib-RFC2119">[RFC2119]</dt>
+          <dd>S. Bradner.
+            <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a>March 1997. Internet RFC 2119. URL:
+            <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>
+          </dd>
+          <dt id="bib-WEBIDL">[WEBIDL]</dt>
+          <dd>Cameron McCormack.
+            <a href="http://www.w3.org/TR/2011/WD-WebIDL-20110927/"><cite>Web IDL.</cite></a>27 September 2011. W3C Working Draft. (Work in progress.) URL:
+            <a href="http://www.w3.org/TR/2011/WD-WebIDL-20110927/">http://www.w3.org/TR/2011/WD-WebIDL-20110927/</a>
+          </dd>
+        </dl>
+      </div>
+      <div id="informative-references" class="section">
+        <h3>
+          <span class="secno">B.2</span>Informative references</h3>
+        <p>No informative references.</p>
+      </div>
+    </div>
+  </body>
+
+</html>
