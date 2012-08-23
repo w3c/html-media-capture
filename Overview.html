@@ -80,7 +80,7 @@
       </p>
       <p>
         The 
-        <a href="http://dev.w3.org/html5/spec/states-of-the-type-attribute.html#file-upload-state-type-file">
+        <a href="http://dev.w3.org/html5/spec/states-of-the-type-attribute.html#file-upload-state-(type=file)">
         <dfn>File Upload</dfn></a> <a>state</a> is defined in [[!HTML5]].
       </p>
       <p>
@@ -100,6 +100,13 @@
     
     <section id="security">
       <h2>Security and privacy considerations</h2>
+      <p>
+        The user agent should not enable any device for media capture, such as
+        a microphone or camera, until a user interaction giving implicit
+        consent is completed. A user agent should also provide an indication
+        when such an input device is enabled and make it possible to terminate
+        such capture.
+      </p>
       <p>
         This specification builds upon the security and privacy protections
         provided by the <code>&lt;input type="file"&gt;</code> [[!HTML5]] and
@@ -201,13 +208,34 @@
     <section class="appendix informative">
     <h2>Examples</h2>
     <p>
-      The following example gives a hint that it is preferred for the user to
-      take a picture using the device's local camera, and upload the picture
-      taken:
+      The following examples demostrate how to give hints that it is preferred
+      for the user to capture media of a specific MIME type using the media
+      capture capabilities of the hosting device. To give a hint that it is
+      preferred for the user:
     </p>
-    <pre class="example sh_html">
-      &lt;input type="file" accept="image/*" capture="camera"&gt;
-    </pre>
+    <ul>
+      <li>
+        To take a picture using the device's local camera, and upload the
+        picture taken:
+        <pre class="example sh_html">
+          &lt;input type="file" accept="image/*" capture="camera"&gt;
+        </pre>
+      </li>
+      <li>
+        To capture video using the device's local video camera, and upload the
+        video file captured:
+        <pre class="example sh_html">
+          &lt;input type="file" accept="video/*" capture="camcorder"&gt;
+        </pre>
+      </li>
+      <li>
+        To capture audio using the device's local microphone, and upload the
+        audio file captured:
+        <pre class="example sh_html">
+          &lt;input type="file" accept="audio/*" capture="microphone"&gt;
+        </pre>
+      </li>
+    </ul>
     <p>
       When an <code><a>input</a></code> element's <code><a>capture</a></code>
       attribute is in the <a>Image Capture</a> <a>state</a>, the file picker
