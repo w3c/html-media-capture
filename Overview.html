@@ -3,7 +3,7 @@
   <head>
     <title>HTML Media Capture</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
-    <script src='http://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
+    <script src='http://www.w3.org/Tools/respec/respec-w3c-common' class='remove' async></script>
     <script class='remove'>
       var respecConfig = {
           specStatus:           "ED",
@@ -25,9 +25,14 @@
   <body>
     
     <section id="abstract">
-      The HTML Media Capture specification defines HTML form extensions that
-      facilitate users' access to media capture capabilities of the hosting
-      device.
+      The <cite>HTML Media Capture</cite> specification defines HTML form
+      extensions that facilitate user access to media capture capabilities of
+      the hosting device. These form extensions enable the upload of still
+      images, video, and audio directly from a device capture mechanism but
+      capture the default offered by the device, providing limited control
+      over what is captured. More detailed control, including management of
+      related streams, is provided by the
+      <cite>Media Capture and Streams</cite> specification [[GETUSERMEDIA]].
     </section>
     
     <section id="sotd">
@@ -40,17 +45,28 @@
     <section class="informative">
       <h2>Introduction</h2>
       <p>
-        This specification extends the <code><a>HTMLInputElement</a></code>
-        interface with a new <code><a>capture</a></code> attribute. The
-        attribute enables content authors to give hints of preferred means to
-        capture local media such as images, video, and sound, that is to be
-        subsequently uploaded. Conformant user agents provide their users more
-        seamless access to the above-mentioned media capture capabilities of
-        the hosting device.
+        The <cite>HTML Media Capture</cite> specification enables web page
+        authors to declaratively specify the upload of audio, video and still
+        images by adding a new attribute to the HTML <code>input</code>
+        element. This enables unified capture and upload from the device
+        capture device without requiring a user to save a file and then upload
+        it in separate steps.
       </p>
       <p>
-        Access to media streams from the hosting device is out of scope for
-        this specification.
+        Such an approach does not provide detailed user control over capture,
+        so use cases requiring correlating specific individual audio and video
+        streams may be met by using another specification, <cite>Media Capture
+        and Streams</cite> [[GETUSERMEDIA]]. Access to media streams from the
+        hosting device is out of scope for this specification.
+      </p>
+      <p>
+        This specification extends the <code><a>HTMLInputElement</a></code>
+        interface with a new <code><a>capture</a></code> attribute. The
+        <code><a>capture</a></code> attribute enables content authors to
+        indicate the media to be captured and uploaded, specifically still
+        images, video, and audio. Conformant user agents provide their users a
+        more seamless access to the above-mentioned media capture capabilities
+        of the hosting device.
       </p>
     </section>
 
@@ -203,15 +219,17 @@
         </code> attribute.
       </p>
       <div class="note">
-        This specification complements the following behavior defined in the
-        <a>File Upload</a> <a>state</a> [[!HTML5]]: User agents may use the
-        value of [the <code>accept</code>] attribute to display a more
-        appropriate user interface than a generic file picker. For instance,
-        given the value <code>image/*</code>, a user agent could offer the user
-        the option of using a local camera or selecting a photograph from their
-        photo collection; given the value <code>audio/*, </code> a user agent
-        could offer the user the option of recording a clip using a headset
-        microphone.
+        Use of the <code>capture</code> attribute as defined in
+        this specification enables integrated capture and upload of audio,
+        video and still images, and complements the following behavior defined
+        in the <a>File Upload</a> <a>state</a> [[!HTML5]]:
+        User agents may use the value of [the <code>accept</code>] attribute to
+        display a more appropriate user interface than a generic file picker.
+        For instance, given the value <code>image/*</code>, a user agent could
+        offer the user the option of using a local camera or selecting a
+        photograph from their photo collection; given the value
+        <code>audio/*,</code> a user agent could offer the user the option of
+        recording a clip using a headset microphone.
       </div>
     </section>
     
