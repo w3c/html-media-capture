@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Media Capture</title>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <script src='http://www.w3.org/Tools/respec/respec-w3c-common' class='remove' async></script>
+    <script class='remove'>
+      var respecConfig = {
+          specStatus:           "ED",
+          shortName:            "html-media-capture",
+          editors: [
+              {name: "Anssi Kostiainen", company: "Nokia"},
+              {name: "Ilkka Oksanen", company: "Nokia (until May 10, 2012)"},
+              {name: "Dominique Hazaël-Massieux", company: "W3C (until May 10, 2012)"}
+          ],
+          //publishDate:          "2012-05-29",
+          previousPublishDate:  "2012-05-29",
+          previousMaturity:     "WD",
+          edDraftURI:           "http://dev.w3.org/2009/dap/camera/",
+          // lcEnd: "2009-08-05",
+      };
+    </script>
+    <script src='../common/config.js' class='remove'></script>
+  </head>
+  <body>
+    
+    <section id="abstract">
+      The <cite>HTML Media Capture</cite> specification defines HTML form
+      extensions that facilitate user access to media capture capabilities of
+      the hosting device. These form extensions enable the upload of still
+      images, video, and audio directly from a device capture mechanism but
+      capture the default offered by the device, providing limited control
+      over what is captured. More detailed control, including management of
+      related streams, is provided by the
+      <cite>Media Capture and Streams</cite> specification [[GETUSERMEDIA]].
+    </section>
+    
+    <section id="sotd">
+      <p>
+        This specification covers a subset of the media capture functionality being worked on
+        by the DAP WG. It is specifically designed to be simple and declarative.
+      </p>
+    </section>
+    
+    <section class="informative">
+      <h2>Introduction</h2>
+      <p>
+        The <cite>HTML Media Capture</cite> specification enables web page
+        authors to declaratively specify the upload of audio, video and still
+        images by adding a new attribute to the HTML <code>input</code>
+        element. This enables unified capture and upload from the device
+        capture device without requiring a user to save a file and then upload
+        it in separate steps.
+      </p>
+      <p>
+        Such an approach does not provide detailed user control over capture,
+        so use cases requiring correlating specific individual audio and video
+        streams may be met by using another specification, <cite>Media Capture
+        and Streams</cite> [[GETUSERMEDIA]]. Access to media streams from the
+        hosting device is out of scope for this specification.
+      </p>
+      <p>
+        This specification extends the <code><a>HTMLInputElement</a></code>
+        interface with a new <code><a>capture</a></code> attribute. The
+        <code><a>capture</a></code> attribute enables content authors to
+        indicate the media to be captured and uploaded, specifically still
+        images, video, and audio. Conformant user agents provide their users a
+        more seamless access to the above-mentioned media capture capabilities
+        of the hosting device.
+      </p>
+    </section>
+
+    <section id="conformance">
+      <p>
+        This specification defines conformance criteria that apply to a single
+        product: the <dfn>user agent</dfn> that implements the interfaces that
+        it contains.
+      </p>
+      <p>
+        Implementations that use ECMAScript to implement the APIs defined in
+        this specification must implement them in a manner consistent with the
+        ECMAScript Bindings defined in the Web IDL specification [[!WEBIDL]],
+        as this specification uses that specification and terminology.
+      </p>
+    </section>
+    
+    <section>
+      <h2>Terminology</h2>
+      <p>
+        The
+        <a href="http://dev.w3.org/html5/spec/the-input-element.html#the-input-element">
+        <code><dfn>input</dfn></code> element</a> and the
+        <a href="http://dev.w3.org/html5/spec/the-input-element.html#htmlinputelement">
+        <code><dfn>HTMLInputElement</dfn></code></a> interface are defined in
+        [[!HTML5]].
+      </p>
+      <p>
+        The 
+        <a href="http://dev.w3.org/html5/spec/states-of-the-type-attribute.html#file-upload-state-(type=file)">
+        <dfn>File Upload</dfn></a> <a>state</a> is defined in [[!HTML5]].
+      </p>
+      <p>
+        The
+        <a href="http://dev.w3.org/html5/spec/common-microsyntaxes.html#enumerated-attribute">
+        <dfn>enumerated attribute</dfn></a> microsyntax, and associated terms
+        and concepts <dfn>keyword</dfn>, <dfn>state</dfn>, <dfn>invalid value
+        default</dfn>, and <dfn>missing value default</dfn>, are defined in
+        [[!HTML5]].
+      </p>
+      <p>
+        In this specification, the term <dfn>capture control type</dfn>
+        refers to a specialized type of a file picker control that is
+        optimized, for the user, for capturing media of a specified type.
+      </p>
+    </section>
+    
+    <section id="security">
+      <h2>Security and privacy considerations</h2>
+      <p>
+        The user agent should not enable any device for media capture, such as
+        a microphone or camera, until a user interaction giving implicit
+        consent is completed. A user agent should also provide an indication
+        when such an input device is enabled and make it possible to terminate
+        such capture. Similarly, the user agent should allow the user:
+        <ul>
+          <li>
+            to select the exact media capture device to be used if there exists
+            multiple devices of the same type (e.g. a front-facing camera in
+            addition to a primary camera).
+          </li>
+          <li>
+            to disable sound capture when in the video capture mode.
+          </li>
+        </ul>
+      <p>
+        This specification builds upon the security and privacy protections
+        provided by the <code>&lt;input type="file"&gt;</code> [[!HTML5]] and
+        the [[!FILE-API]] specifications; in particular, it is expected that
+        any offer to start capturing content from the user’s device would
+        require a specific user interaction on an HTML element that is entirely
+        controlled by the user agent.
+      </p>
+      <p>
+        Implementors should take care of additional leakage of privacy-sensitive
+        data from captured media. For instance, embedding the user’s location in
+        a captured media metadata (e.g. EXIF) might transmit more private data
+        than the user might be expecting.
+      </p>
+
+    </section>
+    
+    <section>
+      <h2>The capture attribute</h2>
+      <p>This section is normative.</p>
+      <p>
+        When an <code><a>input</a></code> element's <code>type</code> attribute is in
+        the <a>File Upload</a> <a>state</a>, the rules in this section apply.
+      </p>
+      <dl title="partial interface HTMLInputElement" class="idl">
+        <dt>attribute DOMString <dfn>capture</dfn></dt>
+        <dd>
+        </dd>
+      </dl>
+      <p>
+        When the <code><dfn>capture</dfn></code> attribute is specified, the
+        <a>user agent</a> SHOULD invoke a file picker of the specific
+        <a>capture control type</a>.
+      </p>
+      <p>
+        The <code><a>capture</a></code> attribute controls the capture
+        <a>state</a> (and associated <a>capture control type</a>) of the
+        element. It is an <a>enumerated attribute</a>. The following table
+        lists the <a>keyword</a>s, <a>state</a>s, and corresponding <a>capture
+        control type</a>s for the attribute. The <a>keyword</a>s
+        <code><dfn>camera</dfn></code>, <code><dfn>camcorder</dfn></code>,
+        <code><dfn>microphone</dfn></code>, and <code><dfn>filesystem
+        </dfn></code> map to the corresponding <a>state</a>s:
+        <dfn>Image Capture</dfn>, <dfn>Video Capture</dfn>, <dfn>Sound
+        Capture</dfn>, and <a>File Upload</a> respectively.
+      </p>
+      <table class="simple">
+        <tr>
+          <th><a>Keyword</a></th>
+          <th><a>State</a></th>
+          <th><a>Capture control type</a></th>
+        </tr>
+        <tr>
+          <td><code><a>camera</a></code></td>
+          <td><a>Image Capture</a></td>
+          <td>A still image capture device</td>
+        </tr>
+        <tr>
+          <td><code><a>camcorder</a></code></td>
+          <td><a>Video Capture</a></td>
+          <td>A video camera</td>
+        </tr>
+        <tr>
+          <td><code><a>microphone</a></code></td>
+          <td><a>Sound Capture</a></td>
+          <td>A sound recorder</td>
+        </tr>
+        <tr>
+          <td><code><a>filesystem</a></code></td>
+          <td><a>File Upload</a></td>
+          <td>A generic file picker</td>
+        </tr>
+      </table>
+      <div class="note">
+        A future version of this specification may define other keywords.
+      </div>
+      <p>
+        The <code><a>capture</a></code> attribute's <em><a>invalid value
+        default</a></em> and <em><a>missing value default</a></em> is the
+        <a>File Upload</a> <a>state</a>.
+      </p>
+      <p>
+        The <code>HTMLInputElement</code> interface's <code>accept</code>
+        attribute takes precedence over the <code><a>capture</a></code>
+        attribute. That is, if the <code>accept</code> attribute's value is set
+        to a MIME type that is not accepted in a defined capture <a>state</a>,
+        the <a>user agent</a> MUST act as if there was no <code><a>capture</a>
+        </code> attribute.
+      </p>
+      <div class="note">
+        Use of the <code>capture</code> attribute as defined in
+        this specification enables integrated capture and upload of audio,
+        video and still images, and complements the following behavior defined
+        in the <a>File Upload</a> <a>state</a> [[!HTML5]]:
+        User agents may use the value of [the <code>accept</code>] attribute to
+        display a more appropriate user interface than a generic file picker.
+        For instance, given the value <code>image/*</code>, a user agent could
+        offer the user the option of using a local camera or selecting a
+        photograph from their photo collection; given the value
+        <code>audio/*,</code> a user agent could offer the user the option of
+        recording a clip using a headset microphone.
+      </div>
+    </section>
+    
+    <section class="appendix informative">
+    <h2>Examples</h2>
+    <p>
+      The following examples demostrate how to give hints that it is preferred
+      for the user to capture media of a specific MIME type using the media
+      capture capabilities of the hosting device. To give a hint that it is
+      preferred for the user:
+    </p>
+    <ul>
+      <li>
+        To take a picture using the device's local camera, and upload the
+        picture taken:
+        <pre class="example sh_html">
+          &lt;input type="file" accept="image/*" capture="camera"&gt;
+        </pre>
+      </li>
+      <li>
+        To capture video using the device's local video camera, and upload the
+        video file captured:
+        <pre class="example sh_html">
+          &lt;input type="file" accept="video/*" capture="camcorder"&gt;
+        </pre>
+      </li>
+      <li>
+        To capture audio using the device's local microphone, and upload the
+        audio file captured:
+        <pre class="example sh_html">
+          &lt;input type="file" accept="audio/*" capture="microphone"&gt;
+        </pre>
+      </li>
+    </ul>
+    <p>
+      When an <code><a>input</a></code> element's <code><a>capture</a></code>
+      attribute is in the <a>Image Capture</a> <a>state</a>, the file picker
+      may render as presented on the right side. When the attribute is in the
+      <a>File Upload</a> <a>state</a>, the generic file picker may render as
+      represented on the left side.
+    </p>
+    <p>
+      <img alt="A File picker control in the File Upload (left) and Image
+      Capture state (right)." src="capture-api-file-picker-concept.png">
+    </p>
+  </section>
+  
+</body>
+</html>
