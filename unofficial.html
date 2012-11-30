@@ -243,8 +243,11 @@
           var input = document.querySelector('input[type=file]');
 
           input.onchange = function () {
-            upload(input.files[0]);
-            draw(input.files[0]);
+            var file = input.files[0];
+
+            upload(file);
+            drawOnCanvas(file);
+            displayAsImage(file);
           };
 
           function upload(file) {
@@ -257,10 +260,10 @@
           }
         </pre>
         The image can also be displayed on the client-side without uploading
-        it e.g. for client-side image editing purposes, using
-        <code>FileReader</code> and <code>canvas</code> element:
+        it e.g. for client-side image editing purposes, using the
+        <code>FileReader</code> and a <code>canvas</code> element:
         <pre class="example sh_javascript">
-          function draw(file) {
+          function drawOnCanvas(file) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
@@ -279,6 +282,22 @@
             };
 
             reader.readAsDataURL(file);
+          }
+        </pre>
+        Or alternatively, to just display the image, using the
+        <code>createObjectURL()</code> method and an <code>img</code>
+        element:
+        <pre class="example sh_javascript">
+          function displayAsImage(file) {
+            var imgURL = URL.createObjectURL(file),
+                img = document.createElement('img');
+
+            img.onload = function() {
+              URL.revokeObjectURL(imgURL);
+            };
+
+            img.src = imgURL;
+            document.body.appendChild(img);
           }
         </pre>
       </li>
