@@ -48,9 +48,8 @@
         The <cite>HTML Media Capture</cite> specification enables web page
         authors to declaratively specify the upload of audio, video and still
         images by adding a new attribute to the HTML <code>input</code>
-        element. This enables unified capture and upload from the device
-        capture device without requiring a user to save a file and then upload
-        it in separate steps.
+        element. This enables simplified capture using device capture device
+        supporting a variety of scenarios.
       </p>
       <p>
         Such an approach does not provide detailed user control over capture,
@@ -62,10 +61,8 @@
       <p>
         This specification extends the <code><a>HTMLInputElement</a></code>
         interface with a new <code><a>capture</a></code> attribute. The
-        <code><a>capture</a></code> attribute enables content authors to
-        indicate the media to be captured and uploaded. Conformant user agents
-        provide their users a more seamless access to the above-mentioned media
-        capture capabilities of the hosting device.
+        <code><a>capture</a></code> boolean attribute allows authors to
+        directly request use of the device capture mechanism.
       </p>
     </section>
 
@@ -161,7 +158,7 @@
         </dd>
       </dl>
       <p>
-        The <code><a>capture</a></code> attribute is a <a>boolean attribute</a>
+        The <code><dfn>capture</dfn></code> attribute is a <a>boolean attribute</a>
         that, if specified, indicates that the capture of media directly from
         a device capture mechanism is preferred.
       </p>
@@ -170,31 +167,16 @@
         respective content attribute of the same name.
       </p>
       <p>
-        When the <code><dfn>capture</dfn></code> attribute is specified, the
+        When the <code><a>capture</a></code> attribute is specified, the
         <a>user agent</a> SHOULD invoke a file picker of the specific
         <a>capture control type</a>.
       </p>
       <p>
-        The <code>HTMLInputElement</code> interface's <code>accept</code>
-        attribute takes precedence over the <code><a>capture</a></code>
-        attribute. That is, if the <code>accept</code> attribute's value is set
-        to a MIME type that has no associated <a>capture control type</a>,
-        the <a>user agent</a> MUST act as if there was no
+        If the <code><a>accept</a></code> attribute's value is set to a MIME
+        type that has no associated <a>capture control type</a>, the
+        <a>user agent</a> MUST act as if there was no
         <code><a>capture</a></code> attribute.
       </p>
-      <div class="note">
-        Use of the <code>capture</code> attribute as defined in
-        this specification enables integrated capture and upload of audio,
-        video and still images, and complements the following behavior defined
-        in the <a>File Upload</a> <a>state</a> [[!HTML5]]:
-        User agents may use the value of [the <code>accept</code>] attribute to
-        display a more appropriate user interface than a generic file picker.
-        For instance, given the value <code>image/*</code>, a user agent could
-        offer the user the option of using a local camera or selecting a
-        photograph from their photo collection; given the value
-        <code>audio/*,</code> a user agent could offer the user the option of
-        recording a clip using a headset microphone.
-      </div>
     </section>
     
     <section class="appendix informative">
@@ -219,35 +201,41 @@
         </pre>
       </li>
       <li>
-        To capture video using the device's local video camera:
+        Or alternatively, to capture video using the device's local video camera:
         <pre class="example sh_html">
-          &lt;input type="file" accept="video/*" capture&gt;
+          &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
+            &lt;input type="file" name="video" accept="video/*" capture&gt;
+            &lt;input type="submit" value="Upload"&gt;
+          &lt;/form&gt;
         </pre>
       </li>
       <li>
-        To capture audio using the device's local microphone:
+        Or alternatively, to capture audio using the device's local microphone:
         <pre class="example sh_html">
-          &lt;input type="file" accept="audio/*" capture&gt;
+          &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
+            &lt;input type="file" name="audio" accept="audio/*" capture&gt;
+            &lt;input type="submit" value="Upload"&gt;
+          &lt;/form&gt;
         </pre>
       </li>
       
       <li id="example-4">
         For more advanced use cases, specify the <code>capture</code> attribute
         in markup:
-        <pre class="example sh_html sh_javascript">
+        <pre class="example sh_html">
           &lt;input type="file" accept="image/*" capture&gt;
           &lt;canvas&gt;&lt;/canvas&gt;
         </pre>
         And handle the file upload in script via <code>XMLHttpRequest</code>:
         <pre class="example sh_javascript">
-          var input = document.querySelector('input[type=file]');
+          var input = document.querySelector('input[type=file]'); // see Example 4
 
           input.onchange = function () {
             var file = input.files[0];
 
             upload(file);
-            drawOnCanvas(file);
-            displayAsImage(file);
+            drawOnCanvas(file);   // see Example 6
+            displayAsImage(file); // see Example 7
           };
 
           function upload(file) {
@@ -268,7 +256,7 @@
 
             reader.onload = function (e) {
               var dataURL = e.target.result,
-                  c = document.querySelector('canvas'),
+                  c = document.querySelector('canvas'), // see Example 4
                   ctx = c.getContext('2d'),
                   img = new Image();
 
