@@ -111,11 +111,11 @@
     <section id="security">
       <h2>Security and privacy considerations</h2>
       <p>
-        The user agent should not enable any device for media capture, such as
+        The user agent SHOULD NOT enable any device for media capture, such as
         a microphone or camera, until a user interaction giving implicit
-        consent is completed. A user agent should also provide an indication
+        consent is completed. A user agent SHOULD also provide an indication
         when such an input device is enabled and make it possible to terminate
-        such capture. Similarly, the user agent should allow the user:
+        such capture. Similarly, the user agent SHOULD allow the user:
         <ul>
           <li>
             to select the exact media capture device to be used if there exists
@@ -135,7 +135,7 @@
         controlled by the user agent.
       </p>
       <p>
-        Implementors should take care of additional leakage of privacy-sensitive
+        Implementors SHOULD take care of additional leakage of privacy-sensitive
         data from captured media. For instance, embedding the user’s location in
         a captured media metadata (e.g. EXIF) might transmit more private data
         than the user might be expecting.
