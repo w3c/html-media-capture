@@ -26,43 +26,30 @@
     
     <section id="abstract">
       The <cite>HTML Media Capture</cite> specification defines an HTML form
-      extension that facilitates user access to media capture capabilities of
-      the hosting device. This form extension enables the upload of still
-      images, video, and audio directly from a device capture mechanism but
-      capture the default offered by the device, providing limited control
-      over what is captured. More detailed control, including management of
-      related streams, is provided by the
-      <cite>Media Capture and Streams</cite> specification [[GETUSERMEDIA]].
-    </section>
-    
-    <section id="sotd">
-      <p>
-        This specification covers a subset of the media capture functionality being worked on
-        by the DAP WG. It is specifically designed to be simple and declarative.
-      </p>
+      extension that facilitates user access to a device's <a>media capture
+      mechanism</a>, such as a camera, or microphone, from within a file upload
+      control.
     </section>
     
     <section class="informative">
       <h2>Introduction</h2>
       <p>
-        The <cite>HTML Media Capture</cite> specification enables web page
-        authors to declaratively specify the upload of audio, video and still
-        images by adding a new attribute to the HTML <code>input</code>
-        element. This enables simplified capture using device capture device
-        supporting a variety of scenarios.
+        The <cite>HTML Media Capture</cite> specification extends the
+        <code><a>HTMLInputElement</a></code> interface with a
+        <code><a>capture</a></code> attribute. The <code><a>capture</a></code>
+        attribute allows authors to declaratively request use of a <a>media
+        capture mechanism</a>, such as a camera or microphone, from within a
+        file upload control, for capturing media on the spot.
       </p>
       <p>
-        Such an approach does not provide detailed user control over capture,
-        so use cases requiring correlating specific individual audio and video
-        streams may be met by using another specification, <cite>Media Capture
-        and Streams</cite> [[GETUSERMEDIA]]. Access to media streams from the
-        hosting device is out of scope for this specification.
-      </p>
-      <p>
-        This specification extends the <code><a>HTMLInputElement</a></code>
-        interface with a new <code><a>capture</a></code> attribute. The
-        <code><a>capture</a></code> boolean attribute allows authors to
-        directly request use of the device capture mechanism.
+        This extension is specifically designed to be simple and declarative,
+        and covers a subset of the media capture functionality of the web
+        platform. Specifically, the extension does not provide detailed author
+        control over capture. Use cases requiring more file-grained author
+        control may be met by using another specification, <cite>Media Capture
+        and Streams</cite> [[GETUSERMEDIA]]. For example, access to real-time
+        media streams from the hosting device is out of scope for this
+        specification.
       </p>
     </section>
 
@@ -105,6 +92,10 @@
         refers to a specialized type of a file picker control that is
         optimized, for the user, for directly capturing media of a MIME type
         specified by the <code><a>accept</a></code> attribute.
+      </p>
+      <p>
+        The term <dfn>media capture mechanism</dfn> refers to a device's local
+        media capture device, such as a camera or microphone.
       </p>
     </section>
     
@@ -160,7 +151,7 @@
       <p>
         The <code><dfn>capture</dfn></code> attribute is a <a>boolean attribute</a>
         that, if specified, indicates that the capture of media directly from
-        a device capture mechanism is preferred.
+        a <a>media capture mechanism</a> is preferred.
       </p>
       <p>
         The <code><a>capture</a></code> IDL attribute MUST <a>reflect</a> the
