@@ -52,12 +52,6 @@ code {
     color:  #ff4500;
 }
 
-
-/* --- --- */
-ol.algorithm { counter-reset:numsection; list-style-type: none; }
-ol.algorithm li { margin: 0.5em 0; }
-ol.algorithm li:before { font-weight: bold; counter-increment: numsection; content: counters(numsection, ".") ") "; }
-
 /* --- TOC --- */
 .toc a, .tof a {
     text-decoration:    none;
@@ -230,6 +224,16 @@ a.idlEnumItem {
     text-decoration: none;
 }
 
+/*.idlCtor*/
+.idlCtorName {
+    color:  #ff4500;
+}
+.idlCtorName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
 /*.idlParam*/
 .idlParamType {
     color:  #005a9c;
@@ -240,6 +244,11 @@ a.idlEnumItem {
 
 .extAttr {
     color:  #666;
+}
+
+/*.idlSectionComment*/
+.idlSectionComment {
+    color: gray;
 }
 
 /*.idlConst*/
@@ -289,15 +298,15 @@ a.idlEnumItem {
     font-weight:    bold;
 }
 
-dl.attributes, dl.methods, dl.constants, dl.fields, dl.dictionary-members {
+dl.attributes, dl.methods, dl.constants, dl.constructors, dl.fields, dl.dictionary-members {
     margin-left:    2em;
 }
 
-.attributes dt, .methods dt, .constants dt, .fields dt, .dictionary-members dt {
+.attributes dt, .methods dt, .constants dt, .constructors dt, .fields dt, .dictionary-members dt {
     font-weight:    normal;
 }
 
-.attributes dt code, .methods dt code, .constants dt code, .fields dt code, .dictionary-members dt code {
+.attributes dt code, .methods dt code, .constants dt code, .constructors dt code, .fields dt code, .dictionary-members dt code {
     font-weight:    bold;
     color:  #000;
     font-family:    monospace;
@@ -323,7 +332,11 @@ dl.attributes, dl.methods, dl.constants, dl.fields, dl.dictionary-members {
     background:  #ddffd2;
 }
 
-.attributes dd, .methods dd, .constants dd, .fields dd, .dictionary-members dd {
+.constructors dt code {
+    background:  #cfc;
+}
+
+.attributes dd, .methods dd, .constants dd, .constructors dd, .fields dd, .dictionary-members dd {
     margin-bottom:  1em;
 }
 
@@ -371,19 +384,19 @@ table.exceptions table {
     width:  100%;
 }
 </style><link rel="stylesheet" href="http://www.w3.org/StyleSheets/TR/W3C-CR"><!--[if lt IE 9]><script src='http://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
-  <body><div class="head">
+  <body class="h-entry"><div class="head">
   <p>
     
       <a href="http://www.w3.org/"><img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a>
     
   </p>
-  <h1 class="title" id="title">HTML Media Capture</h1>
+  <h1 class="title p-name" id="title">HTML Media Capture</h1>
   
-  <h2 id="w3c-candidate-recommendation-26-march-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation 26 March 2013</h2>
+  <h2 id="w3c-candidate-recommendation-09-may-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation <time class="dt-published" datetime="2013-05-09">09 May 2013</time></h2>
   <dl>
     
       <dt>This version:</dt>
-      <dd><a href="http://www.w3.org/TR/2013/CR-html-media-capture-20130326/">http://www.w3.org/TR/2013/CR-html-media-capture-20130326/</a></dd>
+      <dd><a class="u-url" href="http://www.w3.org/TR/2013/CR-html-media-capture-20130509/">http://www.w3.org/TR/2013/CR-html-media-capture-20130509/</a></dd>
       <dt>Latest published version:</dt>
       <dd><a href="http://www.w3.org/TR/html-media-capture/">http://www.w3.org/TR/html-media-capture/</a></dd>
     
@@ -396,13 +409,13 @@ table.exceptions table {
     
     
       <dt>Previous version:</dt>
-      <dd><a href="http://www.w3.org/TR/2012/WD-html-media-capture-20121213/">http://www.w3.org/TR/2012/WD-html-media-capture-20121213/</a></dd>
+      <dd><a href="http://www.w3.org/TR/2013/WD-html-media-capture-20130326/">http://www.w3.org/TR/2013/WD-html-media-capture-20130326/</a></dd>
     
     
     <dt>Editors:</dt>
-    <dd><span>Anssi Kostiainen</span>, Nokia</dd>
-<dd><span>Ilkka Oksanen</span>, Nokia (until May 10, 2012)</dd>
-<dd><span>Dominique Hazaël-Massieux</span>, <abbr title="World Wide Web Consortium">W3C</abbr> (until May 10, 2012)</dd>
+    <dd class="p-author h-card vcard"><span class="p-name fn">Anssi Kostiainen</span>, Nokia</dd>
+<dd class="p-author h-card vcard"><span class="p-name fn">Ilkka Oksanen</span>, Nokia (until May 10, 2012)</dd>
+<dd class="p-author h-card vcard"><span class="p-name fn">Dominique Hazaël-Massieux</span>, <abbr title="World Wide Web Consortium">W3C</abbr> (until May 10, 2012)</dd>
 
     
   </dl>
@@ -445,20 +458,10 @@ table.exceptions table {
         </p>
         
       <p>
-        The <a href="http://dev.w3.org/cvsweb/2009/dap/camera/Overview.html">
-        following changes</a> have been made since the
-        <a href="http://www.w3.org/TR/2012/WD-html-media-capture-20120712/">
-        <abbr title="World Wide Web Consortium">W3C</abbr> Working Draft 12 July 2012</a>:
+        No  changes have been made since the
+        <a href="http://www.w3.org/TR/2013/WD-html-media-capture-20130326/">
+        <abbr title="World Wide Web Consortium">W3C</abbr> Last Call Working Draft 26 March 2013</a>.
       </p>
-      <ul>
-        <li>
-          Changed the type of the <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code> attribute from
-          an enumerated attribute into a boolean attribute.
-        </li>
-        <li>
-          Clarified use cases and examples.
-        </li>
-      </ul>
       <p>
         The <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a>
         expects to request that the Director advance this document to Proposed
@@ -487,7 +490,7 @@ table.exceptions table {
             <abbr title="World Wide Web Consortium">W3C</abbr> publishes a Candidate Recommendation to indicate that the document is believed
             to be stable and to encourage implementation by the developer community. This
             Candidate Recommendation is expected to advance to Proposed Recommendation no earlier than
-            14 May 2013.
+            18 July 2013.
           
           
         All comments are welcome.
@@ -530,8 +533,8 @@ table.exceptions table {
       <!--OddPage--><h2><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
       <p>
         The <cite>HTML Media Capture</cite> specification extends the
-        <code><a href="#dfn-htmlinputelement" class="internalDFN">HTMLInputElement</a></code> interface with a
-        <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code> attribute. The <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code>
+        <code><a href="#idl-def-HTMLInputElement" class="idlType"><code>HTMLInputElement</code></a></code> interface with a
+        <code><a href="#dfn-capture" class="internalDFN">capture</a></code> attribute. The <code><a href="#dfn-capture" class="internalDFN">capture</a></code>
         attribute allows authors to declaratively request use of a <a href="#dfn-media-capture-mechanism" class="internalDFN">media
         capture mechanism</a>, such as a camera or microphone, from within a
         file upload control, for capturing media on the spot.
@@ -650,21 +653,21 @@ table.exceptions table {
         section apply.
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-HTMLInputElement">partial interface <span class="idlInterfaceID">HTMLInputElement</span> {
-<span class="idlAttribute">             attribute <span class="idlAttrType"><a>boolean</a></span> <span class="idlAttrName"><a href="#widl-HTMLInputElement-capture">capture</a></span>;</span>
-};</span></pre><section id="attributes"><h3><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-HTMLInputElement-capture"><code>capture</code> of type <span class="idlAttrType"><a>boolean</a></span></dt><dd>
+<span class="idlAttribute">                attribute <span class="idlAttrType"><a>boolean</a></span> <span class="idlAttrName"><a href="#widl-HTMLInputElement-capture">capture</a></span>;</span>
+};</span></pre><section id="attributes"><h3><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-HTMLInputElement-capture"><code>capture</code> of type <span class="idlAttrType"><a>boolean</a></span>,            </dt><dd>
         </dd></dl></section>
       <p>
-        The <code><dfn id="dfn-capture-1">capture</dfn></code> attribute is a <a href="#dfn-boolean-attribute" class="internalDFN">boolean attribute</a>
+        The <code><dfn id="dfn-capture">capture</dfn></code> attribute is a <a href="#dfn-boolean-attribute" class="internalDFN">boolean attribute</a>
         that, if specified, indicates that the capture of media directly from
         the device's environment using a <a href="#dfn-media-capture-mechanism" class="internalDFN">media capture mechanism</a> is
         preferred.
       </p>
       <p>
-        The <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code> IDL attribute <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-reflect" class="internalDFN">reflect</a> the
+        The <code><a href="#dfn-capture" class="internalDFN">capture</a></code> IDL attribute <em class="rfc2119" title="MUST">MUST</em> <a href="#dfn-reflect" class="internalDFN">reflect</a> the
         respective content attribute of the same name.
       </p>
       <p>
-        When the <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code> attribute is specified, the
+        When the <code><a href="#dfn-capture" class="internalDFN">capture</a></code> attribute is specified, the
         <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="SHOULD">SHOULD</em> invoke a file picker of the specific
         <a href="#dfn-capture-control-type" class="internalDFN">capture control type</a>.
       </p>
@@ -672,7 +675,7 @@ table.exceptions table {
         If the <code><a href="#dfn-accept" class="internalDFN">accept</a></code> attribute's value is set to a MIME
         type that has no associated <a href="#dfn-capture-control-type" class="internalDFN">capture control type</a>, the
         <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST">MUST</em> act as if there was no
-        <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code> attribute.
+        <code><a href="#dfn-capture" class="internalDFN">capture</a></code> attribute.
       </p>
     </section>
     
@@ -775,7 +778,7 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
     </ul>
     <p>
       When an <code><a href="#dfn-input" class="internalDFN">input</a></code> element's <code>accept</code> attribute
-      is set to <code>image/*</code> and the <code><a href="#dfn-capture-1" class="internalDFN">capture</a></code>
+      is set to <code>image/*</code> and the <code><a href="#dfn-capture" class="internalDFN">capture</a></code>
       attribute is specified as in the <a href="#example-1">Example 1</a> or
       <a href="#example-4">Example 4</a>, the file picker may render as
       presented on the right side. When the attribute is not specified, the
@@ -792,6 +795,6 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
 <section id="references" class="appendix"><!--OddPage--><h2><span class="secno">B. </span>References</h2><section id="normative-references"><h3><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography"><dt id="bib-FILE-API">[FILE-API]</dt><dd>Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025"><cite>File API</cite></a>. 25 October 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025">http://www.w3.org/TR/2012/WD-FileAPI-20121025</a>
 </dd><dt id="bib-HTML5">[HTML5]</dt><dd>Robin Berjon et al. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 17 December 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd>S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
-</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/2011/WD-WebIDL-20110927/"><cite>Web IDL</cite></a>. 27 September 2011. W3C Working Draft. URL: <a href="http://www.w3.org/TR/2011/WD-WebIDL-20110927/">http://www.w3.org/TR/2011/WD-WebIDL-20110927/</a>
+</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">http://www.w3.org/TR/2012/CR-WebIDL-20120419/</a>
 </dd></dl></section><section id="informative-references"><h3><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography"><dt id="bib-GETUSERMEDIA">[GETUSERMEDIA]</dt><dd>D. Burnett; A. Narayanan. <a href="http://www.w3.org/TR/2012/WD-mediacapture-streams-20120628/"><cite>Media Capture and Streams</cite></a>. 28 June 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/2012/WD-mediacapture-streams-20120628/">http://www.w3.org/TR/2012/WD-mediacapture-streams-20120628/</a>
 </dd></dl></section></section></body></html>
