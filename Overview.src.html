@@ -18,9 +18,12 @@
           previousMaturity:     "WD",
           edDraftURI:           "http://dev.w3.org/2009/dap/camera/",
           // lcEnd: "2009-08-05",
+          wg:           "Device APIs Working Group",
+          wgURI:        "http://www.w3.org/2009/dap/",
+          wgPublicList: "public-device-apis",
+          wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/43696/status"
       };
     </script>
-    <script src='../common/config.js' class='remove'></script>
   </head>
   <body>
     
@@ -94,7 +97,7 @@
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#attr-input-accept">
         <code><dfn>accept</dfn></code> attribute</a>, and
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#file-upload-state-(type=file)">
-        <dfn>File Upload</dfn></a> <a>state</a> are defined in [[!HTML5]].
+        <dfn>File Upload</dfn></a> <dfn>state</dfn> are defined in [[!HTML5]].
       </p>
       <p>
         The term
@@ -202,7 +205,7 @@
       <li id="example-1">
         To take a picture using the device's local still image capture device,
         such as a camera, and upload the picture taken using an HTML form:
-        <pre class="example sh_html">
+        <pre class="example highlight">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="image" accept="image/*" capture&gt;
             &lt;input type="submit" value="Upload"&gt;
@@ -211,7 +214,7 @@
       </li>
       <li>
         Or alternatively, to capture video using the device's local video camera:
-        <pre class="example sh_html">
+        <pre class="example highlight">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="video" accept="video/*" capture&gt;
             &lt;input type="submit" value="Upload"&gt;
@@ -220,7 +223,7 @@
       </li>
       <li>
         Or alternatively, to capture audio using the device's local microphone:
-        <pre class="example sh_html">
+        <pre class="example highlight">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="audio" accept="audio/*" capture&gt;
             &lt;input type="submit" value="Upload"&gt;
@@ -231,12 +234,12 @@
       <li id="example-4">
         For more advanced use cases, specify the <code>capture</code> attribute
         in markup:
-        <pre class="example sh_html">
+        <pre class="example highlight">
           &lt;input type="file" accept="image/*" capture&gt;
           &lt;canvas&gt;&lt;/canvas&gt;
         </pre>
         And handle the file upload in script via <code>XMLHttpRequest</code>:
-        <pre class="example sh_javascript">
+        <pre class="example highlight">
           var input = document.querySelector('input[type=file]'); // see Example 4
 
           input.onchange = function () {
@@ -259,7 +262,7 @@
         The image can also be displayed on the client-side without uploading
         it e.g. for client-side image editing purposes, using the
         <code>FileReader</code> and a <code>canvas</code> element:
-        <pre class="example sh_javascript">
+        <pre class="example highlight">
           function drawOnCanvas(file) {
             var reader = new FileReader();
 
@@ -284,7 +287,7 @@
         Or alternatively, to just display the image, using the
         <code>createObjectURL()</code> method and an <code>img</code>
         element:
-        <pre class="example sh_javascript">
+        <pre class="example highlight">
           function displayAsImage(file) {
             var imgURL = URL.createObjectURL(file),
                 img = document.createElement('img');

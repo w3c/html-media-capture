@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
 <head>
     <title>HTML Media Capture</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    
     
     
   <style>/*****************************************************************
@@ -114,6 +113,12 @@ table.simple {
 
 .section dl.attrs dd, .section dl.eldef dd {
     margin-bottom:  0;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
 }
 </style><style>/* --- EXAMPLES --- */
 div.example-title {
@@ -383,16 +388,16 @@ table.exceptions table {
     border-collapse:    collapse;
     width:  100%;
 }
-</style><link rel="stylesheet" href="//www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='http://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
-  <body class="h-entry"><div class="head">
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
+  <body class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
   <p>
     
-      <a href="http://www.w3.org/"><img width="72" height="48" src="http://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+      <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
     
   </p>
-  <h1 class="title p-name" id="title">HTML Media Capture</h1>
+  <h1 class="title p-name" id="title" property="dcterms:title">HTML Media Capture</h1>
   
-  <h2 id="w3c-editor-s-draft-07-may-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2013-05-07">07 May 2013</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-04-28T08:14:45.000Z" id="w3c-editor-s-draft-28-april-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-04-28">28 April 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -407,15 +412,20 @@ table.exceptions table {
     
     
     
+    
       
     
     
     
     <dt>Editors:</dt>
-    <dd class="p-author h-card vcard"><span class="p-name fn">Anssi Kostiainen</span>, Intel</dd>
-<dd class="p-author h-card vcard"><span class="p-name fn">Ilkka Oksanen</span>, Nokia (until May 10, 2012)</dd>
-<dd class="p-author h-card vcard"><span class="p-name fn">Dominique Hazaël-Massieux</span>, <abbr title="World Wide Web Consortium">W3C</abbr> (until May 10, 2012)</dd>
+    <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Anssi Kostiainen</span>, Intel</span>
+</dd>
+<dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Ilkka Oksanen</span>, Nokia (until May 10, 2012)</span>
+</dd>
+<dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Dominique Hazaël-Massieux</span>, <abbr title="World Wide Web Consortium">W3C</abbr> (until May 10, 2012)</span>
+</dd>
 
+    
     
   </dl>
   
@@ -424,36 +434,42 @@ table.exceptions table {
   
     
       <p class="copyright">
-        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 
-        2013
+        <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©
+        2014
         
-        <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> 
+        <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
         (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
         <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
-        <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved.
+        <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), 
+        
+        All Rights Reserved.
+        
         <abbr title="World Wide Web Consortium">W3C</abbr> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
         <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
-        <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.
+        
+          <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a>
+        
+        rules apply.
       </p>
     
   
   <hr>
 </div>
     
-    <section id="abstract" class="introductory"><h2>Abstract</h2><p>
+    <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_abstract">Abstract</h2><p>
       The <cite>HTML Media Capture</cite> specification defines an HTML form
       extension that facilitates user access to a device's <a href="#dfn-media-capture-mechanism" class="internalDFN">media capture
       mechanism</a>, such as a camera, or microphone, from within a file upload
       control.
-    </p></section><section id="sotd" class="introductory"><h2>Status of This Document</h2>
+    </p></section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_sotd">Status of This Document</h2>
   
     
       
         <p>
-          <em>This section describes the status of this document at the time of its publication. Other
-          documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision
-          of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports
-          index</a> at http://www.w3.org/TR/.</em>
+          <em>This section describes the status of this document at the time of its publication.
+          Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the
+          latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at
+          http://www.w3.org/TR/.</em>
         </p>
         
       The <a href="http://dev.w3.org/cvsweb/2009/dap/camera/Overview.html">
@@ -474,38 +490,46 @@ table.exceptions table {
           This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a> as an Editor's Draft.
           
           
-          If you wish to make comments regarding this document, please send them to 
-          <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a> 
-          (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>,
-          <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
+            If you wish to make comments regarding this document, please send them to 
+            <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a> 
+            (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>,
+            <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
           
           
           
           
-        All comments are welcome.
+            All comments are welcome.
+          
+        </p>
         
         
-          </p><p>
-            Publication as an Editor's Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership.
-            This is a draft document and may be updated, replaced or obsoleted by other documents at 
-            any time. It is inappropriate to cite this document as other than work in progress.
+          <p>
+            Publication as an Editor's Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
+            Membership. This is a draft document and may be updated, replaced or obsoleted by other
+            documents at any time. It is inappropriate to cite this document as other than work in
+            progress.
           </p>
+        
         
         
         <p>
           
             This document was produced by a group operating under the 
-            <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+            <a id="sotd_patent" about="" rel="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+            Policy</a>.
           
           
           
             
-              <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="http://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> 
+              <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="http://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent
+              disclosures</a> 
             
-            made in connection with the deliverables of the group; that page also includes instructions for 
-            disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains
-            <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the
-            information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+            made in connection with the deliverables of the group; that page also includes
+            instructions for disclosing a patent. An individual who has actual knowledge of a patent
+            which the individual believes contains
+            <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+            Claim(s)</a> must disclose the information in accordance with
+            <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
             6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
           
           
@@ -514,12 +538,12 @@ table.exceptions table {
       
     
   
-</section><section id="toc"><h2 class="introductory">Table of Contents</h2><ul class="toc"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#the-capture-attribute" class="tocxref"><span class="secno">5. </span>The capture attribute</a><ul class="toc"><li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">5.1 </span>Attributes</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">A. </span>Examples</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></section>
+</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#the-capture-attribute" class="tocxref"><span class="secno">5. </span>The capture attribute</a><ul class="toc"><li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">5.1 </span>Attributes</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">A. </span>Examples</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></section>
     
     
     
     <section class="informative" id="introduction">
-      <!--OddPage--><h2><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
       <p>
         The <cite>HTML Media Capture</cite> specification extends the
         <code><a href="#idl-def-HTMLInputElement" class="idlType"><code>HTMLInputElement</code></a></code> interface with a
@@ -540,7 +564,7 @@ table.exceptions table {
       </p>
     </section>
 
-    <section id="conformance"><!--OddPage--><h2><span class="secno">2. </span>Conformance</h2>
+    <section id="conformance" typeof="bibo:Chapter" resource="#conformance" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_conformance"><span class="secno">2. </span>Conformance</h2>
 <p>
   As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
   and notes in this specification are non-normative. Everything else in this specification is
@@ -565,7 +589,7 @@ table.exceptions table {
     </section>
     
     <section id="terminology">
-      <!--OddPage--><h2><span class="secno">3. </span>Terminology</h2>
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_terminology"><span class="secno">3. </span>Terminology</h2>
       <p>
         The
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#the-input-element">
@@ -575,7 +599,7 @@ table.exceptions table {
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#attr-input-accept">
         <code><dfn id="dfn-accept">accept</dfn></code> attribute</a>, and
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#file-upload-state-(type=file)">
-        <dfn id="dfn-file-upload">File Upload</dfn></a> <a>state</a> are defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
+        <dfn id="dfn-file-upload">File Upload</dfn></a> <dfn id="dfn-state">state</dfn> are defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
       </p>
       <p>
         The term
@@ -597,8 +621,8 @@ table.exceptions table {
       </p>
     </section>
     
-    <section id="security">
-      <!--OddPage--><h2><span class="secno">4. </span>Security and privacy considerations</h2>
+    <section id="security" typeof="bibo:Chapter" resource="#security" rel="bibo:Chapter">
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_security"><span class="secno">4. </span>Security and privacy considerations</h2>
       <p>
         The user agent <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> enable any device for media capture, such as
         a microphone or camera, until a user interaction giving implicit
@@ -633,17 +657,17 @@ table.exceptions table {
     </section>
     
     <section id="the-capture-attribute">
-      <!--OddPage--><h2><span class="secno">5. </span>The capture attribute</h2>
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_the-capture-attribute"><span class="secno">5. </span>The capture attribute</h2>
       <p>This section is normative.</p>
       <p>
         When an <code><a href="#dfn-input" class="internalDFN">input</a></code> element's <code>type</code> attribute
-        is in the <a href="#dfn-file-upload" class="internalDFN">File Upload</a> <a>state</a>, and its
+        is in the <a href="#dfn-file-upload" class="internalDFN">File Upload</a> <a href="#dfn-state" class="internalDFN">state</a>, and its
         <code><a href="#dfn-accept" class="internalDFN">accept</a></code> attribute is specified, the rules in this
         section apply.
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-HTMLInputElement">partial interface <span class="idlInterfaceID">HTMLInputElement</span> {
-<span class="idlAttribute">                attribute <span class="idlAttrType"><a>boolean</a></span> <span class="idlAttrName"><a href="#widl-HTMLInputElement-capture">capture</a></span>;</span>
-};</span></pre><section id="attributes"><h3><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-HTMLInputElement-capture"><code>capture</code> of type <span class="idlAttrType"><a>boolean</a></span>,            </dt><dd>
+<span class="idlAttribute">                attribute <span class="idlAttrType">boolean</span> <span class="idlAttrName"><a href="#widl-HTMLInputElement-capture">capture</a></span>;</span>
+};</span></pre><section id="attributes"><h3 aria-level="2" role="heading" id="h3_attributes"><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-HTMLInputElement-capture"><code>capture</code> of type <span class="idlAttrType">boolean</span>,            </dt><dd>
         </dd></dl></section>
       <p>
         The <code><dfn id="dfn-capture">capture</dfn></code> attribute is a <a href="#dfn-boolean-attribute" class="internalDFN">boolean attribute</a>
@@ -669,7 +693,7 @@ table.exceptions table {
     </section>
     
     <section class="appendix informative" id="examples">
-    <!--OddPage--><h2><span class="secno">A. </span>Examples</h2><p><em>This section is non-normative.</em></p>
+    <!--OddPage--><h2 aria-level="1" role="heading" id="h2_examples"><span class="secno">A. </span>Examples</h2><p><em>This section is non-normative.</em></p>
     <p>
       The following examples demonstrate how to give hints that it is preferred
       for the user to capture media of a specific MIME type using the media
@@ -682,21 +706,21 @@ table.exceptions table {
       <li id="example-1">
         To take a picture using the device's local still image capture device,
         such as a camera, and upload the picture taken using an HTML form:
-        <div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example highlight prettyprint"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"server.cgi"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">enctype</span><span class="pun">=</span><span class="atv">"multipart/form-data"</span><span class="tag">&gt;</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 1</span></div><pre class="example highlight prettyprint prettyprinted"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"server.cgi"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">enctype</span><span class="pun">=</span><span class="atv">"multipart/form-data"</span><span class="tag">&gt;</span><span class="pln">
   </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"file"</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"image"</span><span class="pln"> </span><span class="atn">accept</span><span class="pun">=</span><span class="atv">"image/*"</span><span class="pln"> </span><span class="atn">capture</span><span class="tag">&gt;</span><span class="pln">
   </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"submit"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"Upload"</span><span class="tag">&gt;</span><span class="pln">
 </span><span class="tag">&lt;/form&gt;</span></pre></div>
       </li>
       <li>
         Or alternatively, to capture video using the device's local video camera:
-        <div class="example"><div class="example-title"><span>Example 2</span></div><pre class="example highlight prettyprint"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"server.cgi"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">enctype</span><span class="pun">=</span><span class="atv">"multipart/form-data"</span><span class="tag">&gt;</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 2</span></div><pre class="example highlight prettyprint prettyprinted"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"server.cgi"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">enctype</span><span class="pun">=</span><span class="atv">"multipart/form-data"</span><span class="tag">&gt;</span><span class="pln">
   </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"file"</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"video"</span><span class="pln"> </span><span class="atn">accept</span><span class="pun">=</span><span class="atv">"video/*"</span><span class="pln"> </span><span class="atn">capture</span><span class="tag">&gt;</span><span class="pln">
   </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"submit"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"Upload"</span><span class="tag">&gt;</span><span class="pln">
 </span><span class="tag">&lt;/form&gt;</span></pre></div>
       </li>
       <li>
         Or alternatively, to capture audio using the device's local microphone:
-        <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example highlight prettyprint"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"server.cgi"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">enctype</span><span class="pun">=</span><span class="atv">"multipart/form-data"</span><span class="tag">&gt;</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 3</span></div><pre class="example highlight prettyprint prettyprinted"><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">"server.cgi"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">enctype</span><span class="pun">=</span><span class="atv">"multipart/form-data"</span><span class="tag">&gt;</span><span class="pln">
   </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"file"</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"audio"</span><span class="pln"> </span><span class="atn">accept</span><span class="pun">=</span><span class="atv">"audio/*"</span><span class="pln"> </span><span class="atn">capture</span><span class="tag">&gt;</span><span class="pln">
   </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"submit"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"Upload"</span><span class="tag">&gt;</span><span class="pln">
 </span><span class="tag">&lt;/form&gt;</span></pre></div>
@@ -705,10 +729,10 @@ table.exceptions table {
       <li id="example-4">
         For more advanced use cases, specify the <code>capture</code> attribute
         in markup:
-        <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example highlight prettyprint"><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"file"</span><span class="pln"> </span><span class="atn">accept</span><span class="pun">=</span><span class="atv">"image/*"</span><span class="pln"> </span><span class="atn">capture</span><span class="tag">&gt;</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 4</span></div><pre class="example highlight prettyprint prettyprinted"><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"file"</span><span class="pln"> </span><span class="atn">accept</span><span class="pun">=</span><span class="atv">"image/*"</span><span class="pln"> </span><span class="atn">capture</span><span class="tag">&gt;</span><span class="pln">
 </span><span class="tag">&lt;canvas&gt;&lt;/canvas&gt;</span></pre></div>
         And handle the file upload in script via <code>XMLHttpRequest</code>:
-        <div class="example"><div class="example-title"><span>Example 5</span></div><pre class="example highlight prettyprint"><span class="kwd">var</span><span class="pln"> input </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'input[type=file]'</span><span class="pun">);</span><span class="pln"> </span><span class="com">// see Example 4</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 5</span></div><pre class="example highlight prettyprint prettyprinted"><span class="kwd">var</span><span class="pln"> input </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">querySelector</span><span class="pun">(</span><span class="str">'input[type=file]'</span><span class="pun">);</span><span class="pln"> </span><span class="com">// see Example 4</span><span class="pln">
 
 input</span><span class="pun">.</span><span class="pln">onchange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
   </span><span class="kwd">var</span><span class="pln"> file </span><span class="pun">=</span><span class="pln"> input</span><span class="pun">.</span><span class="pln">files</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span><span class="pln">
@@ -729,7 +753,7 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
         The image can also be displayed on the client-side without uploading
         it e.g. for client-side image editing purposes, using the
         <code>FileReader</code> and a <code>canvas</code> element:
-        <div class="example"><div class="example-title"><span>Example 6</span></div><pre class="example highlight prettyprint"><span class="kwd">function</span><span class="pln"> drawOnCanvas</span><span class="pun">(</span><span class="pln">file</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 6</span></div><pre class="example highlight prettyprint prettyprinted"><span class="kwd">function</span><span class="pln"> drawOnCanvas</span><span class="pun">(</span><span class="pln">file</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
   </span><span class="kwd">var</span><span class="pln"> reader </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">FileReader</span><span class="pun">();</span><span class="pln">
 
   reader</span><span class="pun">.</span><span class="pln">onload </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
@@ -752,7 +776,7 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
         Or alternatively, to just display the image, using the
         <code>createObjectURL()</code> method and an <code>img</code>
         element:
-        <div class="example"><div class="example-title"><span>Example 7</span></div><pre class="example highlight prettyprint"><span class="kwd">function</span><span class="pln"> displayAsImage</span><span class="pun">(</span><span class="pln">file</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        <div class="example"><div class="example-title"><span>Example 7</span></div><pre class="example highlight prettyprint prettyprinted"><span class="kwd">function</span><span class="pln"> displayAsImage</span><span class="pun">(</span><span class="pln">file</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
   </span><span class="kwd">var</span><span class="pln"> imgURL </span><span class="pun">=</span><span class="pln"> URL</span><span class="pun">.</span><span class="pln">createObjectURL</span><span class="pun">(</span><span class="pln">file</span><span class="pun">),</span><span class="pln">
       img </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">'img'</span><span class="pun">);</span><span class="pln">
 
@@ -781,9 +805,9 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
   
 
 
-<section id="references" class="appendix"><!--OddPage--><h2><span class="secno">B. </span>References</h2><section id="normative-references"><h3><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography"><dt id="bib-HTML5">[HTML5]</dt><dd>Robin Berjon et al. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 17 December 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
-</dd><dt id="bib-RFC2119">[RFC2119]</dt><dd>S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
-</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">http://www.w3.org/TR/2012/CR-WebIDL-20120419/</a>
-</dd></dl></section><section id="informative-references"><h3><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography"><dt id="bib-FILE-API">[FILE-API]</dt><dd>Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025"><cite>File API</cite></a>. 25 October 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/2012/WD-FileAPI-20121025">http://www.w3.org/TR/2012/WD-FileAPI-20121025</a>
-</dd><dt id="bib-GETUSERMEDIA">[GETUSERMEDIA]</dt><dd>D. Burnett; A. Narayanan. <a href="http://www.w3.org/TR/2012/WD-mediacapture-streams-20120628/"><cite>Media Capture and Streams</cite></a>. 28 June 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/2012/WD-mediacapture-streams-20120628/">http://www.w3.org/TR/2012/WD-mediacapture-streams-20120628/</a>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 4 February 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
+</dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
+</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
+</dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_informative-references"><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-FILE-API">[FILE-API]</dt><dd rel="dcterms:references">Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/FileAPI/"><cite>File API</cite></a>. 12 September 2013. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a>
+</dd><dt id="bib-GETUSERMEDIA">[GETUSERMEDIA]</dt><dd rel="dcterms:references">Daniel Burnett; Adam Bergkvist; Cullen Jennings; Anant Narayanan. <a href="http://www.w3.org/TR/mediacapture-streams/"><cite>Media Capture and Streams</cite></a>. 3 September 2013. W3C Working Draft. URL: <a href="http://www.w3.org/TR/mediacapture-streams/">http://www.w3.org/TR/mediacapture-streams/</a>
 </dd></dl></section></section></body></html>
