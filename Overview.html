@@ -397,7 +397,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">HTML Media Capture</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-04-28T08:14:45.000Z" id="w3c-editor-s-draft-28-april-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-04-28">28 April 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-05-22T07:22:51.000Z" id="w3c-editor-s-draft-22-may-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-05-22">22 May 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -621,37 +621,42 @@ table.exceptions table {
       </p>
     </section>
     
-    <section id="security" typeof="bibo:Chapter" resource="#security" rel="bibo:Chapter">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_security"><span class="secno">4. </span>Security and privacy considerations</h2>
+    <section id="security" class="informative" typeof="bibo:Chapter" resource="#security" rel="bibo:Chapter">
+      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_security"><span class="secno">4. </span>Security and privacy considerations</h2><p><em>This section is non-normative.</em></p>
       <p>
-        The user agent <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em> enable any device for media capture, such as
-        a microphone or camera, until a user interaction giving implicit
-        consent is completed. A user agent <em class="rfc2119" title="SHOULD">SHOULD</em> also provide an indication
-        when such an input device is enabled and make it possible to terminate
-        such capture. Similarly, the user agent <em class="rfc2119" title="SHOULD">SHOULD</em> allow the user:
-        </p><ul>
+        A User Agent implementation of this specification is advised to seek
+        user consent before initiating capture of content by microphone or
+        camera. This may be necessary to meet regulatory, legal and best
+        practice requirements related to the privacy of user data. In addition,
+        the User Agent implementation is advised to  provide an indication to
+        the user when an input device is enabled and make it possible for the
+        user to terminate such capture. Similarly, the User Agent is advised to
+        offer user control, such as to allow the user to:
+      </p>
+        <ul>
           <li>
-            to select the exact media capture device to be used if there exists
+            select the exact media capture device to be used if there exist
             multiple devices of the same type (e.g. a front-facing camera in
             addition to a primary camera).
           </li>
           <li>
-            to disable sound capture when in the video capture mode.
+            disable sound capture when in the video capture mode.
           </li>
         </ul>
       <p>
         This specification builds upon the security and privacy protections
-        provided by the <code>&lt;input type="file"&gt;</code> [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>] and
-        the [<cite><a class="bibref" href="#bib-FILE-API">FILE-API</a></cite>] specifications; in particular, it is expected that
-        any offer to start capturing content from the user’s device would
-        require a specific user interaction on an HTML element that is entirely
-        controlled by the user agent.
+        provided by the &lt;input type="file"&gt; [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>] and the [<cite><a class="bibref" href="#bib-FILE-API">FILE-API</a></cite>]
+        specifications; in particular, it is expected that any offer to start
+        capturing content from the user’s device would require a specific user
+        interaction on an HTML element that is entirely controlled by the user
+        agent.
+        
       </p>
       <p>
-        Implementors <em class="rfc2119" title="SHOULD">SHOULD</em> take care of additional leakage of privacy-sensitive
-        data from captured media. For instance, embedding the user’s location in
-        a captured media metadata (e.g. EXIF) might transmit more private data
-        than the user might be expecting.
+        Implementors should take care to prevent additional leakage of
+        privacy-sensitive data from captured media. For instance, embedding the
+        user’s location in the metadata of  captured media (e.g. EXIF) might
+        transmit more private data than the user is expecting.
       </p>
 
     </section>
@@ -805,7 +810,7 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
   
 
 
-<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 4 February 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 29 April 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
 </dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
 </dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_informative-references"><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-FILE-API">[FILE-API]</dt><dd rel="dcterms:references">Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/FileAPI/"><cite>File API</cite></a>. 12 September 2013. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a>
