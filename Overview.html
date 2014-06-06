@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
+<html lang="en" dir="ltr" typeof="bibo:Document w3p:LastCall" about="" property="dcterms:language" content="en">
 <head>
     <title>HTML Media Capture</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -388,7 +388,7 @@ table.exceptions table {
     border-collapse:    collapse;
     width:  100%;
 }
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-WD"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
   <body class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
   <p>
     
@@ -397,11 +397,11 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">HTML Media Capture</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-05-22T07:22:51.000Z" id="w3c-editor-s-draft-22-may-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-05-22">22 May 2014</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-06-18T21:00:00.000Z" id="w3c-last-call-working-draft-19-june-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Last Call Working Draft <time class="dt-published" datetime="2014-06-19">19 June 2014</time></h2>
   <dl>
     
       <dt>This version:</dt>
-      <dd><a class="u-url" href="http://dev.w3.org/2009/dap/camera/">http://dev.w3.org/2009/dap/camera/</a></dd>
+      <dd><a class="u-url" href="http://www.w3.org/TR/2014/WD-html-media-capture-20140619/">http://www.w3.org/TR/2014/WD-html-media-capture-20140619/</a></dd>
       <dt>Latest published version:</dt>
       <dd><a href="http://www.w3.org/TR/html-media-capture/">http://www.w3.org/TR/html-media-capture/</a></dd>
     
@@ -410,11 +410,15 @@ table.exceptions table {
       <dd><a href="http://dev.w3.org/2009/dap/camera/">http://dev.w3.org/2009/dap/camera/</a></dd>
     
     
+      <dt>Test suite:</dt>
+      <dd><a href="http://w3c-test.org/html-media-capture/">http://w3c-test.org/html-media-capture/</a></dd>
     
     
     
-      
     
+    
+      <dt>Previous version:</dt>
+      <dd><a rel="dcterms:replaces" href="http://www.w3.org/TR/2013/CR-html-media-capture-20130509/">http://www.w3.org/TR/2013/CR-html-media-capture-20130509/</a></dd>
     
     
     <dt>Editors:</dt>
@@ -474,20 +478,25 @@ table.exceptions table {
         
       The <a href="http://dev.w3.org/cvsweb/2009/dap/camera/Overview.html">
       following changes</a> have been made since the
-      <a href="http://www.w3.org/TR/2012/WD-html-media-capture-20120712/">
-      <abbr title="World Wide Web Consortium">W3C</abbr> Working Draft 12 July 2012</a>:
+      <a href="http://www.w3.org/TR/2013/CR-html-media-capture-20130509/">
+      <abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation 09 May 2013</a>:
       <ul>
         <li>
-          Changed the type of the <code><a href="#dfn-capture" class="internalDFN">capture</a></code> attribute from
-          an enumerated attribute into a boolean attribute.
-        </li>
-        <li>
-          Clarified use cases and examples.
+          Since the previous CR publication of this specification the Security
+          and Privacy considerations section has been revised and made
+          non-normative, based on testability and implementer feedback. Due to
+          this change in normative requirements the specification is returning
+          to Last Call for review of this change. For a detailed view of the
+          changes see the
+          <a href="http://dev.w3.org/cvsweb/2009/dap/camera/Overview.src.html.diff?r1=1.5;r2=1.6;f=h">
+          diff</a>.
         </li>
       </ul>
     
         <p>
-          This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a> as an Editor's Draft.
+          This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a> as a Last Call Working Draft.
+          
+            This document is intended to become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation.
           
           
             If you wish to make comments regarding this document, please send them to 
@@ -495,7 +504,7 @@ table.exceptions table {
             (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>,
             <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
           
-          
+          The Last Call period ends 24 July 2014.
           
           
             All comments are welcome.
@@ -504,13 +513,19 @@ table.exceptions table {
         
         
           <p>
-            Publication as an Editor's Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
+            Publication as a Last Call Working Draft does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr>
             Membership. This is a draft document and may be updated, replaced or obsoleted by other
             documents at any time. It is inappropriate to cite this document as other than work in
             progress.
           </p>
         
         
+        
+          <p>
+            This is a Last Call Working Draft and thus the Working Group has determined that this
+            document has satisfied the relevant technical requirements and is sufficiently stable to
+            advance through the Technical Recommendation process.
+          </p>
         
         <p>
           
