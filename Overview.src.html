@@ -102,6 +102,12 @@
         <dfn>File Upload</dfn></a> <dfn>state</dfn> are defined in [[!HTML5]].
       </p>
       <p>
+        The
+        <a href="http://www.w3.org/TR/FileAPI/#dfn-filelist">
+        <code><dfn>FileList</dfn></code> interface</a> is defined in
+        [[FILE-API]].
+      </p>
+      <p>
         The term
         <a href="http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#boolean-attributes">
         <dfn>boolean attribute</dfn></a> and the concept
@@ -190,6 +196,17 @@
         <a>user agent</a> SHOULD invoke a file picker of the specific
         <a>capture control type</a>.
       </p>
+      <p>
+        When the <code><a>capture</a></code> attribute is specified, the
+        <a>user agent</a> MUST NOT save the captured media to any data storage,
+        local or remote.
+      </p>
+      <div class="note">
+        When scripts gain access to the files selected from the file
+        picker (represented by a <code><a>FileList</a></code> object), they can
+        use various mechanisms to store the captured media. These mechanisms
+        are out of scope for this specification.
+      </div>
       <p>
         If the <code><a>accept</a></code> attribute's value is set to a MIME
         type that has no associated <a>capture control type</a>, the

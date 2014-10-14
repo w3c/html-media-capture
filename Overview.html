@@ -152,6 +152,45 @@ aside.example div.example {
 aside.example div.example div.example-title {
     color: #999;
 }
+</style><style>/* --- ISSUES/NOTES --- */
+div.issue-title, div.note-title {
+    padding-right:  1em;
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.issue-title { color: #e05252; }
+div.note-title { color: #2b2; }
+div.issue-title span, div.note-title span {
+    text-transform: uppercase;
+}
+div.note, div.issue {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.note > p:first-child, .issue > p:first-child { margin-top: 0 }
+.issue, .note {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+span.note, span.issue { padding: .1em .5em .15em; }
+
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+
+
 </style><style>/* HIGHLIGHTS */
 code.prettyprint {
     color:  inherit;
@@ -391,9 +430,11 @@ table.exceptions table {
 </style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-CR"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
   <body class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
   <p>
-    
-      <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
-    
+      
+        
+            <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+        
+      
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">HTML Media Capture</h1>
   
@@ -463,12 +504,12 @@ table.exceptions table {
   <hr>
 </div>
     
-    <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_abstract">Abstract</h2><p>
+    <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter"><h2 role="heading" id="h2_abstract">Abstract</h2><p>
       The <cite>HTML Media Capture</cite> specification defines an HTML form
       extension that facilitates user access to a device's <a href="#dfn-media-capture-mechanism" class="internalDFN">media capture
       mechanism</a>, such as a camera, or microphone, from within a file upload
       control.
-    </p></section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_sotd">Status of This Document</h2>
+    </p></section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter"><h2 role="heading" id="h2_sotd">Status of This Document</h2>
   
     
       
@@ -561,12 +602,12 @@ table.exceptions table {
       
     
   
-</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#the-capture-attribute" class="tocxref"><span class="secno">5. </span>The capture attribute</a><ul class="toc"><li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">5.1 </span>Attributes</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">A. </span>Examples</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></section>
+</section><section id="toc"><h2 class="introductory" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#the-capture-attribute" class="tocxref"><span class="secno">5. </span>The capture attribute</a><ul class="toc"><li class="tocline"><a href="#attributes" class="tocxref"><span class="secno">5.1 </span>Attributes</a></li></ul></li><li class="tocline"><a href="#examples" class="tocxref"><span class="secno">A. </span>Examples</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li><li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li></ul></li></ul></section>
     
     
     
     <section class="informative" id="introduction">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
+      <!--OddPage--><h2 role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
       <p>
         The <cite>HTML Media Capture</cite> specification extends the
         <code><a href="#idl-def-HTMLInputElement" class="idlType"><code>HTMLInputElement</code></a></code> interface with a
@@ -587,15 +628,14 @@ table.exceptions table {
       </p>
     </section>
 
-    <section id="conformance" typeof="bibo:Chapter" resource="#conformance" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_conformance"><span class="secno">2. </span>Conformance</h2>
+    <section id="conformance" typeof="bibo:Chapter" resource="#conformance" rel="bibo:Chapter"><!--OddPage--><h2 role="heading" id="h2_conformance"><span class="secno">2. </span>Conformance</h2>
 <p>
   As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
   and notes in this specification are non-normative. Everything else in this specification is
   normative.
 </p>
-<p>
-  The key words <em class="rfc2119" title="MUST">MUST</em>, <em class="rfc2119" title="MUST NOT">MUST NOT</em>, <em class="rfc2119" title="REQUIRED">REQUIRED</em>, <em class="rfc2119" title="SHOULD">SHOULD</em>, <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em>, <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>, <em class="rfc2119" title="MAY">MAY</em>,
-  and <em class="rfc2119" title="OPTIONAL">OPTIONAL</em> in this specification are to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
+<p id="respecRFC2119">The key words <em class="rfc2119" title="MUST">MUST</em>, <em class="rfc2119" title="MUST NOT">MUST NOT</em>, and <em class="rfc2119" title="SHOULD">SHOULD</em> are 
+  to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
 </p>
 
       <p>
@@ -612,7 +652,7 @@ table.exceptions table {
     </section>
     
     <section id="terminology">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_terminology"><span class="secno">3. </span>Terminology</h2>
+      <!--OddPage--><h2 role="heading" id="h2_terminology"><span class="secno">3. </span>Terminology</h2>
       <p>
         The
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#the-input-element">
@@ -623,6 +663,12 @@ table.exceptions table {
         <code><dfn id="dfn-accept">accept</dfn></code> attribute</a>, and
         <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#file-upload-state-(type=file)">
         <dfn id="dfn-file-upload">File Upload</dfn></a> <dfn id="dfn-state">state</dfn> are defined in [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>].
+      </p>
+      <p>
+        The
+        <a href="http://www.w3.org/TR/FileAPI/#dfn-filelist">
+        <code><dfn id="dfn-filelist">FileList</dfn></code> interface</a> is defined in
+        [<cite><a class="bibref" href="#bib-FILE-API">FILE-API</a></cite>].
       </p>
       <p>
         The term
@@ -645,7 +691,7 @@ table.exceptions table {
     </section>
     
     <section id="security" class="informative" typeof="bibo:Chapter" resource="#security" rel="bibo:Chapter">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_security"><span class="secno">4. </span>Security and privacy considerations</h2><p><em>This section is non-normative.</em></p>
+      <!--OddPage--><h2 role="heading" id="h2_security"><span class="secno">4. </span>Security and privacy considerations</h2><p><em>This section is non-normative.</em></p>
       <p>
         A User Agent implementation of this specification is advised to seek
         user consent before initiating capture of content by microphone or
@@ -685,7 +731,7 @@ table.exceptions table {
     </section>
     
     <section id="the-capture-attribute">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_the-capture-attribute"><span class="secno">5. </span>The capture attribute</h2>
+      <!--OddPage--><h2 role="heading" id="h2_the-capture-attribute"><span class="secno">5. </span>The capture attribute</h2>
       <p>This section is normative.</p>
       <p>
         When an <code><a href="#dfn-input" class="internalDFN">input</a></code> element's <code>type</code> attribute
@@ -695,7 +741,7 @@ table.exceptions table {
       </p>
       <pre class="idl"><span class="idlInterface" id="idl-def-HTMLInputElement">partial interface <span class="idlInterfaceID">HTMLInputElement</span> {
 <span class="idlAttribute">                attribute <span class="idlAttrType">boolean</span> <span class="idlAttrName"><a href="#widl-HTMLInputElement-capture">capture</a></span>;</span>
-};</span></pre><section id="attributes"><h3 aria-level="2" role="heading" id="h3_attributes"><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-HTMLInputElement-capture"><code>capture</code> of type <span class="idlAttrType">boolean</span>,            </dt><dd>
+};</span></pre><section id="attributes"><h3 role="heading" id="h3_attributes"><span class="secno">5.1 </span>Attributes</h3><dl class="attributes"><dt id="widl-HTMLInputElement-capture"><code>capture</code> of type <span class="idlAttrType">boolean</span>,            </dt><dd>
         </dd></dl></section>
       <p>
         The <code><dfn id="dfn-capture">capture</dfn></code> attribute is a <a href="#dfn-boolean-attribute" class="internalDFN">boolean attribute</a>
@@ -713,6 +759,17 @@ table.exceptions table {
         <a href="#dfn-capture-control-type" class="internalDFN">capture control type</a>.
       </p>
       <p>
+        When the <code><a href="#dfn-capture" class="internalDFN">capture</a></code> attribute is specified, the
+        <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST NOT">MUST NOT</em> save the captured media to any data storage,
+        local or remote.
+      </p>
+      <div class="note"><div class="note-title" aria-level="1" role="heading" id="h_note_1"><span>Note</span></div><div class="">
+        When scripts gain access to the files selected from the file
+        picker (represented by a <code><a href="#dfn-filelist" class="internalDFN">FileList</a></code> object), they can
+        use various mechanisms to store the captured media. These mechanisms
+        are out of scope for this specification.
+      </div></div>
+      <p>
         If the <code><a href="#dfn-accept" class="internalDFN">accept</a></code> attribute's value is set to a MIME
         type that has no associated <a href="#dfn-capture-control-type" class="internalDFN">capture control type</a>, the
         <a href="#dfn-user-agent" class="internalDFN">user agent</a> <em class="rfc2119" title="MUST">MUST</em> act as if there was no
@@ -721,7 +778,7 @@ table.exceptions table {
     </section>
     
     <section class="appendix informative" id="examples">
-    <!--OddPage--><h2 aria-level="1" role="heading" id="h2_examples"><span class="secno">A. </span>Examples</h2><p><em>This section is non-normative.</em></p>
+    <!--OddPage--><h2 role="heading" id="h2_examples"><span class="secno">A. </span>Examples</h2><p><em>This section is non-normative.</em></p>
     <p>
       The following examples demonstrate how to give hints that it is preferred
       for the user to capture media of a specific MIME type using the media
@@ -833,9 +890,9 @@ input</span><span class="pun">.</span><span class="pln">onchange </span><span cl
   
 
 
-<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Ian Hickson; Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 31 July 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 16 September 2014. W3C Proposed Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a>
 </dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
-</dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_informative-references"><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-FILE-API">[FILE-API]</dt><dd rel="dcterms:references">Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/FileAPI/"><cite>File API</cite></a>. 12 September 2013. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a>
+</dd></dl></section><section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" rel="bibo:Chapter"><h3 role="heading" id="h3_informative-references"><span class="secno">B.2 </span>Informative references</h3><dl class="bibliography" about=""><dt id="bib-FILE-API">[FILE-API]</dt><dd rel="dcterms:references">Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/FileAPI/"><cite>File API</cite></a>. 12 September 2013. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a>
 </dd><dt id="bib-GETUSERMEDIA">[GETUSERMEDIA]</dt><dd rel="dcterms:references">Daniel Burnett; Adam Bergkvist; Cullen Jennings; Anant Narayanan. <a href="http://www.w3.org/TR/mediacapture-streams/"><cite>Media Capture and Streams</cite></a>. 3 September 2013. W3C Working Draft. URL: <a href="http://www.w3.org/TR/mediacapture-streams/">http://www.w3.org/TR/mediacapture-streams/</a>
 </dd></dl></section></section></body></html>
