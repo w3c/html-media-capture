@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HTML Media Capture</title>
-    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove' async></script>
+    <title>
+      HTML Media Capture
+    </title>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class=
+    'remove' async>
+    </script>
     <script class='remove'>
       var respecConfig = {
           specStatus:           "ED",
@@ -29,31 +33,30 @@
     </script>
   </head>
   <body>
-    
     <section id="abstract">
       The <cite>HTML Media Capture</cite> specification defines an HTML form
       extension that facilitates user access to a device's <a>media capture
       mechanism</a>, such as a camera, or microphone, from within a file upload
       control.
     </section>
-    
     <section id="sotd">
       <p>
-        There have been no substantive changes since the
-        <a href="http://www.w3.org/TR/2014/WD-html-media-capture-20140619/">
-        <abbr title="World Wide Web Consortium">W3C</abbr>
-        W3C Last Call Working Draft 19 June 2014</a>.
+        There have been no substantive changes since the <a href=
+        "http://www.w3.org/TR/2014/WD-html-media-capture-20140619/"><abbr title="World Wide Web Consortium">
+        W3C</abbr> W3C Last Call Working Draft 19 June 2014</a>.
       </p>
       <p>
         The CR exit criterion is two interoperable deployed implementations of
-        each feature. No features are marked as 'at-risk'. The group will create
-        an <a href="http://www.w3.org/2009/dap/wiki/ImplementationStatus">
-        Implementation Report</a>.
+        each feature. No features are marked as 'at-risk'. The group will
+        create an <a href=
+        "http://www.w3.org/2009/dap/wiki/ImplementationStatus">Implementation
+        Report</a>.
       </p>
     </section>
-    
     <section class="informative">
-      <h2>Introduction</h2>
+      <h2>
+        Introduction
+      </h2>
       <p>
         The <cite>HTML Media Capture</cite> specification extends the
         <code><a>HTMLInputElement</a></code> interface with a
@@ -73,7 +76,6 @@
         specification.
       </p>
     </section>
-
     <section id="conformance">
       <p>
         This specification defines conformance criteria that apply to a single
@@ -87,89 +89,89 @@
         as this specification uses that specification and terminology.
       </p>
     </section>
-    
     <section>
-      <h2>Terminology</h2>
+      <h2>
+        Terminology
+      </h2>
       <p>
-        The
-        <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#the-input-element">
-        <code><dfn>input</dfn></code> element</a>,
-        <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#htmlinputelement">
-        <code><dfn>HTMLInputElement</dfn></code></a> interface,
-        <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#attr-input-accept">
-        <code><dfn>accept</dfn></code> attribute</a>, and
-        <a href="http://www.w3.org/html/wg/drafts/html/CR/forms.html#file-upload-state-(type=file)">
+        The <a href=
+        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#the-input-element">
+        <code><dfn>input</dfn></code> element</a>, <a href=
+        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#htmlinputelement"><code>
+        <dfn>HTMLInputElement</dfn></code></a> interface, <a href=
+        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#attr-input-accept">
+        <code><dfn>accept</dfn></code> attribute</a>, and <a href=
+        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#file-upload-state-(type=file)">
         <dfn>File Upload</dfn></a> <dfn>state</dfn> are defined in [[!HTML5]].
       </p>
       <p>
-        The
-        <a href="http://www.w3.org/TR/FileAPI/#dfn-filelist">
-        <code><dfn>FileList</dfn></code> interface</a> is defined in
-        [[FILE-API]].
+        The <a href=
+        "http://www.w3.org/TR/FileAPI/#dfn-filelist"><code><dfn>FileList</dfn></code>
+        interface</a> is defined in [[FILE-API]].
       </p>
       <p>
-        The term
-        <a href="http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#boolean-attributes">
-        <dfn>boolean attribute</dfn></a> and the concept
-        <a href="http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#reflect">
-        <dfn>reflect</dfn></a> are defined in [[!HTML5]].
+        The term <a href=
+        "http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#boolean-attributes">
+        <dfn>boolean attribute</dfn></a> and the concept <a href=
+        "http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#reflect"><dfn>
+        reflect</dfn></a> are defined in [[!HTML5]].
       </p>
       <p>
-        In this specification, the term <dfn>capture control type</dfn>
-        refers to a specialized type of a file picker control that is
-        optimized, for the user, for directly capturing media of a MIME type
-        specified by the <code><a>accept</a></code> attribute, using a <a>media
-        capture mechanism</a>.
+        In this specification, the term <dfn>capture control type</dfn> refers
+        to a specialized type of a file picker control that is optimized, for
+        the user, for directly capturing media of a MIME type specified by the
+        <code><a>accept</a></code> attribute, using a <a>media capture
+        mechanism</a>.
       </p>
       <p>
         The term <dfn>media capture mechanism</dfn> refers to a device's local
         media capture device, such as a camera or microphone.
       </p>
     </section>
-    
     <section id="security" class="informative">
-      <h2>Security and privacy considerations</h2>
+      <h2>
+        Security and privacy considerations
+      </h2>
       <p>
         A User Agent implementation of this specification is advised to seek
         user consent before initiating capture of content by microphone or
         camera. This may be necessary to meet regulatory, legal and best
         practice requirements related to the privacy of user data. In addition,
-        the User Agent implementation is advised to  provide an indication to
+        the User Agent implementation is advised to provide an indication to
         the user when an input device is enabled and make it possible for the
         user to terminate such capture. Similarly, the User Agent is advised to
         offer user control, such as to allow the user to:
       </p>
-        <ul>
-          <li>
-            select the exact media capture device to be used if there exist
-            multiple devices of the same type (e.g. a front-facing camera in
-            addition to a primary camera).
-          </li>
-          <li>
-            disable sound capture when in the video capture mode.
-          </li>
-        </ul>
+      <ul>
+        <li>select the exact media capture device to be used if there exist
+        multiple devices of the same type (e.g. a front-facing camera in
+        addition to a primary camera).
+        </li>
+        <li>disable sound capture when in the video capture mode.
+        </li>
+      </ul>
       <p>
         This specification builds upon the security and privacy protections
-        provided by the &lt;input type="file"&gt; [[HTML5]] and the [[FILE-API]]
-        specifications; in particular, it is expected that any offer to start
-        capturing content from the user’s device would require a specific user
-        interaction on an HTML element that is entirely controlled by the user
-        agent.
-        
+        provided by the &lt;input type="file"&gt; [[HTML5]] and the
+        [[FILE-API]] specifications; in particular, it is expected that any
+        offer to start capturing content from the user’s device would require a
+        specific user interaction on an HTML element that is entirely
+        controlled by the user agent.
       </p>
       <p>
         Implementors should take care to prevent additional leakage of
         privacy-sensitive data from captured media. For instance, embedding the
-        user’s location in the metadata of  captured media (e.g. EXIF) might
+        user’s location in the metadata of captured media (e.g. EXIF) might
         transmit more private data than the user is expecting.
       </p>
-
     </section>
-    
     <section>
-      <h2>The capture attribute</h2>
-      <p>This section is normative.</p>
+      <h2>
+        The capture attribute
+      </h2>
+      <p>
+        This section is normative.
+      </p>
       <p>
         When an <code><a>input</a></code> element's <code>type</code> attribute
         is in the <a>File Upload</a> <a>state</a>, and its
@@ -177,15 +179,16 @@
         section apply.
       </p>
       <dl title="partial interface HTMLInputElement" class="idl">
-        <dt>attribute boolean capture</dt>
-        <dd>
-        </dd>
+        <dt>
+          attribute boolean capture
+        </dt>
+        <dd></dd>
       </dl>
       <p>
-        The <code><dfn>capture</dfn></code> attribute is a <a>boolean attribute</a>
-        that, if specified, indicates that the capture of media directly from
-        the device's environment using a <a>media capture mechanism</a> is
-        preferred.
+        The <code><dfn>capture</dfn></code> attribute is a <a>boolean
+        attribute</a> that, if specified, indicates that the capture of media
+        directly from the device's environment using a <a>media capture
+        mechanism</a> is preferred.
       </p>
       <p>
         The <code><a>capture</a></code> IDL attribute MUST <a>reflect</a> the
@@ -202,68 +205,66 @@
         local or remote.
       </p>
       <div class="note">
-        When scripts gain access to the files selected from the file
-        picker (represented by a <code><a>FileList</a></code> object), they can
-        use various mechanisms to store the captured media. These mechanisms
-        are out of scope for this specification.
+        When scripts gain access to the files selected from the file picker
+        (represented by a <code><a>FileList</a></code> object), they can use
+        various mechanisms to store the captured media. These mechanisms are
+        out of scope for this specification.
       </div>
       <p>
         If the <code><a>accept</a></code> attribute's value is set to a MIME
-        type that has no associated <a>capture control type</a>, the
-        <a>user agent</a> MUST act as if there was no
-        <code><a>capture</a></code> attribute.
+        type that has no associated <a>capture control type</a>, the <a>user
+        agent</a> MUST act as if there was no <code><a>capture</a></code>
+        attribute.
       </p>
     </section>
-    
     <section class="appendix informative">
-    <h2>Examples</h2>
-    <p>
-      The following examples demonstrate how to give hints that it is preferred
-      for the user to capture media of a specific MIME type using the media
-      capture capabilities of the hosting device. Both a simple declarative
-      example using an HTML form, as well as a more advanced example including
-      scripting, are presented.
-      
-    </p>
-    <ul>
-      <li id="example-1">
-        To take a picture using the device's local still image capture device,
-        such as a camera, and upload the picture taken using an HTML form:
-        <pre class="example highlight">
+      <h2>
+        Examples
+      </h2>
+      <p>
+        The following examples demonstrate how to give hints that it is
+        preferred for the user to capture media of a specific MIME type using
+        the media capture capabilities of the hosting device. Both a simple
+        declarative example using an HTML form, as well as a more advanced
+        example including scripting, are presented.
+      </p>
+      <ul>
+        <li id="example-1">To take a picture using the device's local still
+        image capture device, such as a camera, and upload the picture taken
+        using an HTML form:
+          <pre class="example highlight">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="image" accept="image/*" capture&gt;
             &lt;input type="submit" value="Upload"&gt;
           &lt;/form&gt;
         </pre>
-      </li>
-      <li>
-        Or alternatively, to capture video using the device's local video camera:
-        <pre class="example highlight">
+        </li>
+        <li>Or alternatively, to capture video using the device's local video
+        camera:
+          <pre class="example highlight">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="video" accept="video/*" capture&gt;
             &lt;input type="submit" value="Upload"&gt;
           &lt;/form&gt;
         </pre>
-      </li>
-      <li>
-        Or alternatively, to capture audio using the device's local microphone:
-        <pre class="example highlight">
+        </li>
+        <li>Or alternatively, to capture audio using the device's local
+        microphone:
+          <pre class="example highlight">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="audio" accept="audio/*" capture&gt;
             &lt;input type="submit" value="Upload"&gt;
           &lt;/form&gt;
         </pre>
-      </li>
-      
-      <li id="example-4">
-        For more advanced use cases, specify the <code>capture</code> attribute
-        in markup:
-        <pre class="example highlight">
+        </li>
+        <li id="example-4">For more advanced use cases, specify the
+        <code>capture</code> attribute in markup:
+          <pre class="example highlight">
           &lt;input type="file" accept="image/*" capture&gt;
           &lt;canvas&gt;&lt;/canvas&gt;
-        </pre>
-        And handle the file upload in script via <code>XMLHttpRequest</code>:
-        <pre class="example highlight">
+        </pre>And handle the file upload in script via
+<code>XMLHttpRequest</code>:
+          <pre class="example highlight">
           var input = document.querySelector('input[type=file]'); // see Example 4
 
           input.onchange = function () {
@@ -282,11 +283,10 @@
             xhr.open('post', 'server.php', true);
             xhr.send(form);
           }
-        </pre>
-        The image can also be displayed on the client-side without uploading
-        it e.g. for client-side image editing purposes, using the
-        <code>FileReader</code> and a <code>canvas</code> element:
-        <pre class="example highlight">
+        </pre>The image can also be displayed on the client-side without
+uploading it e.g. for client-side image editing purposes, using the <code>
+          FileReader</code> and a <code>canvas</code> element:
+          <pre class="example highlight">
           function drawOnCanvas(file) {
             var reader = new FileReader();
 
@@ -307,11 +307,9 @@
 
             reader.readAsDataURL(file);
           }
-        </pre>
-        Or alternatively, to just display the image, using the
-        <code>createObjectURL()</code> method and an <code>img</code>
-        element:
-        <pre class="example highlight">
+        </pre>Or alternatively, to just display the image, using the <code>
+          createObjectURL()</code> method and an <code>img</code> element:
+          <pre class="example highlight">
           function displayAsImage(file) {
             var imgURL = URL.createObjectURL(file),
                 img = document.createElement('img');
@@ -324,21 +322,22 @@
             document.body.appendChild(img);
           }
         </pre>
-      </li>
-    </ul>
-    <p>
-      When an <code><a>input</a></code> element's <code>accept</code> attribute
-      is set to <code>image/*</code> and the <code><a>capture</a></code>
-      attribute is specified as in the <a href="#example-1">Example 1</a> or
-      <a href="#example-4">Example 4</a>, the file picker may render as
-      presented on the right side. When the attribute is not specified, the
-      file picker may render as represented on the left side.
-    </p>
-    <p>
-      <img alt="A File picker control in the File Upload (left) and Image
-      Capture state (right)." src="images/capture-api-file-picker-concept.png">
-    </p>
-  </section>
-  
-</body>
+        </li>
+      </ul>
+      <p>
+        When an <code><a>input</a></code> element's <code>accept</code>
+        attribute is set to <code>image/*</code> and the
+        <code><a>capture</a></code> attribute is specified as in the <a href=
+        "#example-1">Example 1</a> or <a href="#example-4">Example 4</a>, the
+        file picker may render as presented on the right side. When the
+        attribute is not specified, the file picker may render as represented
+        on the left side.
+      </p>
+      <p>
+        <img alt=
+        "A File picker control in the File Upload (left) and Image Capture state (right)."
+        src="images/capture-api-file-picker-concept.png">
+      </p>
+    </section>
+  </body>
 </html>
