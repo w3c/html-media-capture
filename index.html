@@ -57,13 +57,12 @@
       <h2>
         Introduction
       </h2>
-      <p>
+      <p link-for="HTMLInputElement">
         The <cite>HTML Media Capture</cite> specification extends the
-        <code><a>HTMLInputElement</a></code> interface with a
-        <code><a>capture</a></code> attribute. The <code><a>capture</a></code>
-        attribute allows authors to declaratively request use of a <a>media
-        capture mechanism</a>, such as a camera or microphone, from within a
-        file upload control, for capturing media on the spot.
+        <a>HTMLInputElement</a> interface with a <a>capture</a> attribute. The
+        <a>capture</a> attribute allows authors to declaratively request use of
+        a <a>media capture mechanism</a>, such as a camera or microphone, from
+        within a file upload control, for capturing media on the spot.
       </p>
       <p>
         This extension is specifically designed to be simple and declarative,
@@ -120,8 +119,7 @@
         In this specification, the term <dfn>capture control type</dfn> refers
         to a specialized type of a file picker control that is optimized, for
         the user, for directly capturing media of a MIME type specified by the
-        <code><a>accept</a></code> attribute, using a <a>media capture
-        mechanism</a>.
+        <a>accept</a> attribute, using a <a>media capture mechanism</a>.
       </p>
       <p>
         The term <dfn>media capture mechanism</dfn> refers to a device's local
@@ -152,8 +150,8 @@
       </ul>
       <p>
         This specification builds upon the security and privacy protections
-        provided by the &lt;input type="file"&gt; [[HTML5]] and the
-        [[FILE-API]] specifications; in particular, it is expected that any
+        provided by the <code>&lt;input type="file"&gt;</code> [[HTML5]] and
+        the [[FILE-API]] specifications; in particular, it is expected that any
         offer to start capturing content from the user’s device would require a
         specific user interaction on an HTML element that is entirely
         controlled by the user agent.
@@ -173,49 +171,48 @@
         This section is normative.
       </p>
       <p>
-        When an <code><a>input</a></code> element's <code>type</code> attribute
-        is in the <a>File Upload</a> <a>state</a>, and its
-        <code><a>accept</a></code> attribute is specified, the rules in this
-        section apply.
+        When an <a>input</a> element's <code>type</code> attribute is in the
+        <a>File Upload</a> <a>state</a>, and its <a>accept</a> attribute is
+        specified, the rules in this section apply.
       </p>
-      <dl title="partial interface HTMLInputElement" class="idl">
-        <dt>
-          [CEReactions] attribute boolean capture
-        </dt>
-        <dd></dd>
-      </dl>
-      <p>
-        The <code><dfn>capture</dfn></code> attribute is a <a>boolean
-        attribute</a> that, if specified, indicates that the capture of media
-        directly from the device's environment using a <a>media capture
-        mechanism</a> is preferred.
-      </p>
-      <p>
-        The <code><a>capture</a></code> IDL attribute MUST <a>reflect</a> the
-        respective content attribute of the same name.
-      </p>
-      <p>
-        When the <code><a>capture</a></code> attribute is specified, the
-        <a>user agent</a> SHOULD invoke a file picker of the specific
-        <a>capture control type</a>.
-      </p>
-      <p>
-        When the <code><a>capture</a></code> attribute is specified, the
-        <a>user agent</a> MUST NOT save the captured media to any data storage,
-        local or remote.
-      </p>
-      <div class="note">
-        When scripts gain access to the files selected from the file picker
-        (represented by a <code><a>FileList</a></code> object), they can use
-        various mechanisms to store the captured media. These mechanisms are
-        out of scope for this specification.
+      <pre class="idl">
+        partial interface HTMLInputElement {
+            [CEReactions] attribute boolean capture;
+        };
+      </pre>
+      <div link-for="HTMLInputElement">
+        <p>
+          The <a>capture</a> attribute is a <a>boolean attribute</a> that, if
+          specified, indicates that the capture of media directly from the
+          device's environment using a <a>media capture mechanism</a> is
+          preferred.
+        </p>
+        <p>
+          The <a>capture</a> IDL attribute MUST <a>reflect</a> the respective
+          content attribute of the same name.
+        </p>
+        <p>
+          When the <a>capture</a> attribute is specified, the <a>user agent</a>
+          SHOULD invoke a file picker of the specific <a>capture control
+          type</a>.
+        </p>
+        <p>
+          When the <a>capture</a> attribute is specified, the <a>user agent</a>
+          MUST NOT save the captured media to any data storage, local or
+          remote.
+        </p>
+        <div class="note">
+          When scripts gain access to the files selected from the file picker
+          (represented by a <a>FileList</a> object), they can use various
+          mechanisms to store the captured media. These mechanisms are out of
+          scope for this specification.
+        </div>
+        <p>
+          If the <a>accept</a> attribute's value is set to a MIME type that has
+          no associated <a>capture control type</a>, the <a>user agent</a> MUST
+          act as if there was no <a>capture</a> attribute.
+        </p>
       </div>
-      <p>
-        If the <code><a>accept</a></code> attribute's value is set to a MIME
-        type that has no associated <a>capture control type</a>, the <a>user
-        agent</a> MUST act as if there was no <code><a>capture</a></code>
-        attribute.
-      </p>
     </section>
     <section class="appendix informative">
       <h2>
@@ -257,8 +254,8 @@
           &lt;/form&gt;
         </pre>
         </li>
-        <li id="example-4">For more advanced use cases, specify the
-        <code>capture</code> attribute in markup:
+        <li id="example-4" link-for="HTMLInputElement">For more advanced use
+        cases, specify the <a>capture</a> attribute in markup:
           <pre class="example highlight">
           &lt;input type="file" accept="image/*" capture&gt;
           &lt;canvas&gt;&lt;/canvas&gt;
@@ -324,14 +321,13 @@ uploading it e.g. for client-side image editing purposes, using the <code>
         </pre>
         </li>
       </ul>
-      <p>
-        When an <code><a>input</a></code> element's <code>accept</code>
-        attribute is set to <code>image/*</code> and the
-        <code><a>capture</a></code> attribute is specified as in the <a href=
-        "#example-1">Example 1</a> or <a href="#example-4">Example 4</a>, the
-        file picker may render as presented on the right side. When the
-        attribute is not specified, the file picker may render as represented
-        on the left side.
+      <p link-for="HTMLInputElement">
+        When an <a>input</a> element's <a>accept</a> attribute is set to
+        <code>image/*</code> and the <a>capture</a> attribute is specified as
+        in the <a href="#example-1">Example 1</a> or <a href=
+        "#example-4">Example 4</a>, the file picker may render as presented on
+        the right side. When the attribute is not specified, the file picker
+        may render as represented on the left side.
       </p>
       <p>
         <img alt=
