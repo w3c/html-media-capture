@@ -105,7 +105,9 @@
       </h2>
       <p>
         The <dfn data-cite="!HTML#the-input-element"><code>input</code></dfn>
-        element, <dfn data-cite=
+        element, its <dfn data-cite=
+        "!HTML#attr-input-type"><code>type</code></dfn> attribute,
+        <dfn data-cite=
         "!HTML#htmlinputelement"><code>HTMLInputElement</code></dfn> interface,
         <dfn data-cite="!HTML#attr-input-accept"><code>accept</code></dfn>
         attribute, <dfn data-cite="!HTML#file-upload-state-(type=file)">File
@@ -165,29 +167,26 @@
         transmit more private data than the user is expecting.
       </p>
     </section>
-    <section>
+    <section data-dfn-for="HTMLInputElement" link-for="HTMLInputElement">
       <h2>
-        The capture attribute
+        The <dfn>capture</dfn> attribute
       </h2>
       <p>
-        This section is normative.
-      </p>
-      <p>
-        When an <a>input</a> element's <code>type</code> attribute is in the
-        <a>File Upload</a> state, and its <a>accept</a> attribute is specified,
-        the rules in this section apply.
+        When an <a>input</a> element's <a>type</a> attribute is in the <a>File
+        Upload</a> state, and its <a>accept</a> attribute is specified, the
+        rules in this section apply.
       </p>
       <pre class="idl">
         partial interface HTMLInputElement {
             [CEReactions] attribute boolean capture;
         };
       </pre>
-      <div link-for="HTMLInputElement">
+      <div>
         <p>
-          The <dfn data-dfn-for="HTMLInputElement"><code>capture</code></dfn>
-          attribute is a <a>boolean attribute</a> that, if specified, indicates
-          that the capture of media directly from the device's environment
-          using a <a>media capture mechanism</a> is preferred.
+          The <a>capture</a> attribute is a <a>boolean attribute</a> that, if
+          specified, indicates that the capture of media directly from the
+          device's environment using a <a>media capture mechanism</a> is
+          preferred.
         </p>
         <p>
           The <a>capture</a> IDL attribute MUST <a>reflect</a> the respective
