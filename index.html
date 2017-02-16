@@ -70,10 +70,11 @@
       </h2>
       <p link-for="HTMLInputElement">
         The <cite>HTML Media Capture</cite> specification extends the
-        <a>HTMLInputElement</a> interface with a <a>capture</a> attribute. The
-        <a>capture</a> attribute allows authors to declaratively request use of
-        a <a>media capture mechanism</a>, such as a camera or microphone, from
-        within a file upload control, for capturing media on the spot.
+        <code><a>HTMLInputElement</a></code> interface with a
+        <code><a>capture</a></code> attribute. The <code><a>capture</a></code>
+        attribute allows authors to declaratively request use of a <a>media
+        capture mechanism</a>, such as a camera or microphone, from within a
+        file upload control, for capturing media on the spot.
       </p>
       <p>
         This extension is specifically designed to be simple and declarative,
@@ -183,24 +184,24 @@
       </pre>
       <div>
         <p>
-          The <a>capture</a> attribute is a <a>boolean attribute</a> that, if
-          specified, indicates that the capture of media directly from the
-          device's environment using a <a>media capture mechanism</a> is
-          preferred.
+          The <code><a>capture</a></code> attribute is a <a>boolean
+          attribute</a> that, if specified, indicates that the capture of media
+          directly from the device's environment using a <a>media capture
+          mechanism</a> is preferred.
         </p>
         <p>
-          The <a>capture</a> IDL attribute MUST <a>reflect</a> the respective
-          content attribute of the same name.
+          The <code><a>capture</a></code> IDL attribute MUST <a>reflect</a> the
+          respective content attribute of the same name.
         </p>
         <p>
-          When the <a>capture</a> attribute is specified, the <a>user agent</a>
-          SHOULD invoke a file picker of the specific <a>capture control
-          type</a>.
+          When the <code><a>capture</a></code> attribute is specified, the
+          <a>user agent</a> SHOULD invoke a file picker of the specific
+          <a>capture control type</a>.
         </p>
         <p>
-          When the <a>capture</a> attribute is specified, the <a>user agent</a>
-          MUST NOT save the captured media to any data storage, local or
-          remote.
+          When the <code><a>capture</a></code> attribute is specified, the
+          <a>user agent</a> MUST NOT save the captured media to any data
+          storage, local or remote.
         </p>
         <div class="note">
           When scripts gain access to the files selected from the file picker
@@ -211,7 +212,7 @@
         <p>
           If the <a>accept</a> attribute's value is set to a MIME type that has
           no associated <a>capture control type</a>, the <a>user agent</a> MUST
-          act as if there was no <a>capture</a> attribute.
+          act as if there was no <code><a>capture</a></code> attribute.
         </p>
       </div>
     </section>
@@ -256,7 +257,7 @@
         </pre>
         </li>
         <li id="example-4" link-for="HTMLInputElement">For more advanced use
-        cases, specify the <a>capture</a> attribute in markup:
+        cases, specify the <code><a>capture</a></code> attribute in markup:
           <pre class="example">
           &lt;input type="file" accept="image/*" capture&gt;
           &lt;canvas&gt;&lt;/canvas&gt;
@@ -324,8 +325,8 @@ uploading it e.g. for client-side image editing purposes, using the <code>
       </ul>
       <p link-for="HTMLInputElement">
         When an <a>input</a> element's <a>accept</a> attribute is set to
-        <code>image/*</code> and the <a>capture</a> attribute is specified as
-        in the <a href="#example-1">Example 1</a> or <a href=
+        <code>image/*</code> and the <code><a>capture</a></code> attribute is
+        specified as in the <a href="#example-1">Example 1</a> or <a href=
         "#example-4">Example 4</a>, the file picker may render as presented on
         the right side. When the attribute is not specified, the file picker
         may render as represented on the left side.
