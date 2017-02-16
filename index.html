@@ -63,8 +63,7 @@
       mechanism</a>, such as a camera, or microphone, from within a file upload
       control.
     </section>
-    <section id="sotd">
-    </section>
+    <section id="sotd"></section>
     <section class="informative">
       <h2>
         Introduction
@@ -105,27 +104,18 @@
         Terminology
       </h2>
       <p>
-        The <a href=
-        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#the-input-element">
-        <code><dfn>input</dfn></code> element</a>, <a href=
-        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#htmlinputelement"><code>
-        <dfn>HTMLInputElement</dfn></code></a> interface, <a href=
-        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#attr-input-accept">
-        <code><dfn>accept</dfn></code> attribute</a>, and <a href=
-        "http://www.w3.org/html/wg/drafts/html/CR/forms.html#file-upload-state-(type=file)">
-        <dfn>File Upload</dfn></a> <dfn>state</dfn> are defined in [[!HTML5]].
+        The <dfn data-cite="!HTML#the-input-element"><code>input</code></dfn>
+        element, <dfn data-cite=
+        "!HTML#htmlinputelement"><code>HTMLInputElement</code></dfn> interface,
+        <dfn data-cite="!HTML#attr-input-accept"><code>accept</code></dfn>
+        attribute, <dfn data-cite="!HTML#file-upload-state-(type=file)">File
+        Upload</dfn> state, <dfn data-cite="!HTML#boolean-attributes">boolean
+        attribute</dfn>, and <dfn data-cite="!HTML#reflect">reflect</dfn> are
+        defined in [[!HTML]].
       </p>
       <p>
-        The <a href=
-        "http://www.w3.org/TR/FileAPI/#dfn-filelist"><code><dfn>FileList</dfn></code>
-        interface</a> is defined in [[FILE-API]].
-      </p>
-      <p>
-        The term <a href=
-        "http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#boolean-attributes">
-        <dfn>boolean attribute</dfn></a> and the concept <a href=
-        "http://www.w3.org/html/wg/drafts/html/CR/infrastructure.html#reflect"><dfn>
-        reflect</dfn></a> are defined in [[!HTML5]].
+        The <dfn data-cite="!FILE-API#dfn-filelist"><code>FileList</code></dfn>
+        interface is defined in [[FILE-API]].
       </p>
       <p>
         In this specification, the term <dfn>capture control type</dfn> refers
@@ -184,8 +174,8 @@
       </p>
       <p>
         When an <a>input</a> element's <code>type</code> attribute is in the
-        <a>File Upload</a> <a>state</a>, and its <a>accept</a> attribute is
-        specified, the rules in this section apply.
+        <a>File Upload</a> state, and its <a>accept</a> attribute is specified,
+        the rules in this section apply.
       </p>
       <pre class="idl">
         partial interface HTMLInputElement {
