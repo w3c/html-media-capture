@@ -68,13 +68,12 @@
       <h2>
         Introduction
       </h2>
-      <p link-for="HTMLInputElement">
+      <p data-link-for="HTMLInputElement">
         The <cite>HTML Media Capture</cite> specification extends the
-        <code><a>HTMLInputElement</a></code> interface with a
-        <code><a>capture</a></code> attribute. The <code><a>capture</a></code>
-        attribute allows authors to declaratively request use of a <a>media
-        capture mechanism</a>, such as a camera or microphone, from within a
-        file upload control, for capturing media on the spot.
+        <a>HTMLInputElement</a> interface with a <a>capture</a> attribute. The
+        <a>capture</a> attribute allows authors to declaratively request use of
+        a <a>media capture mechanism</a>, such as a camera or microphone, from
+        within a file upload control, for capturing media on the spot.
       </p>
       <p>
         This extension is specifically designed to be simple and declarative,
@@ -82,9 +81,9 @@
         platform. Specifically, the extension does not provide detailed author
         control over capture. Use cases requiring more fine-grained author
         control may be met by using another specification, <cite>Media Capture
-        and Streams</cite> [[GETUSERMEDIA]]. For example, access to real-time
-        media streams from the hosting device is out of scope for this
-        specification.
+        and Streams</cite> [[MEDIACAPTURE-STREAMS]]. For example, access to
+        real-time media streams from the hosting device is out of scope for
+        this specification.
       </p>
     </section>
     <section id="conformance">
@@ -112,9 +111,17 @@
         "!HTML#htmlinputelement"><code>HTMLInputElement</code></dfn> interface,
         <dfn data-cite="!HTML#attr-input-accept"><code>accept</code></dfn>
         attribute, <dfn data-cite="!HTML#file-upload-state-(type=file)">File
-        Upload</dfn> state, <dfn data-cite="!HTML#boolean-attributes">boolean
-        attribute</dfn>, and <dfn data-cite="!HTML#reflect">reflect</dfn> are
-        defined in [[!HTML]].
+        Upload</dfn> state, <dfn data-cite=
+        "!HTML#enumerated-attribute">enumerated attribute</dfn>,
+        <dfn data-cite="!HTML#missing-value-default">missing value
+        default</dfn>, <dfn data-cite="!HTML#invalid-value-default">invalid
+        value default</dfn>, and <dfn data-cite="!HTML#reflect">reflect</dfn>
+        are defined in [[!HTML]].
+      </p>
+      <p>
+        The <dfn data-cite=
+        "!MEDIACAPTURE-STREAMS#def-constraint-facingMode"><code>VideoFacingModeEnum</code></dfn>
+        enumeration is defined in [[!MEDIACAPTURE-STREAMS]].
       </p>
       <p>
         The <dfn data-cite="!FILE-API#dfn-filelist"><code>FileList</code></dfn>
@@ -124,11 +131,16 @@
         In this specification, the term <dfn>capture control type</dfn> refers
         to a specialized type of a file picker control that is optimized, for
         the user, for directly capturing media of a MIME type specified by the
-        <a>accept</a> attribute, using a <a>media capture mechanism</a>.
+        <a>accept</a> attribute, using a <a>media capture mechanism</a> in its
+        <a>preferred facing mode</a>.
       </p>
       <p>
         The term <dfn>media capture mechanism</dfn> refers to a device's local
         media capture device, such as a camera or microphone.
+      </p>
+      <p>
+        The <dfn>preferred facing mode</dfn> is a hint for the direction of the
+        device's <a>media capture mechanism</a> to be used.
       </p>
     </section>
     <section id="security" class="informative">
@@ -155,8 +167,8 @@
       </ul>
       <p>
         This specification builds upon the security and privacy protections
-        provided by the <code>&lt;input type="file"&gt;</code> [[HTML5]] and
-        the [[FILE-API]] specifications; in particular, it is expected that any
+        provided by the <code>&lt;input type="file"&gt;</code> [[HTML]] and the
+        [[FILE-API]] specifications; in particular, it is expected that any
         offer to start capturing content from the user’s device would require a
         specific user interaction on an HTML element that is entirely
         controlled by the user agent.
@@ -168,7 +180,7 @@
         transmit more private data than the user is expecting.
       </p>
     </section>
-    <section data-dfn-for="HTMLInputElement" link-for="HTMLInputElement">
+    <section data-dfn-for="HTMLInputElement" data-link-for="HTMLInputElement">
       <h2>
         The <dfn>capture</dfn> attribute
       </h2>
@@ -178,30 +190,47 @@
         rules in this section apply.
       </p>
       <pre class="idl">
+        enum CaptureFacingMode { "user", "environment" };
+
         partial interface HTMLInputElement {
-            [CEReactions] attribute boolean capture;
+            [CEReactions] attribute CaptureFacingMode capture;
         };
       </pre>
       <div>
         <p>
-          The <code><a>capture</a></code> attribute is a <a>boolean
-          attribute</a> that, if specified, indicates that the capture of media
-          directly from the device's environment using a <a>media capture
-          mechanism</a> is preferred.
+          The <dfn data-dfn-for="CaptureFacingMode">CaptureFacingMode</dfn>
+          enumeration is used to express the <a>preferred facing mode</a>. The
+          semantics of its keywords mirror the similarly named keywords defined
+          in <a><code>VideoFacingModeEnum</code></a>.
+        </p>
+        <p class="note">
+          If the user agent is unable to support the <a>preferred facing
+          mode</a>, it can fall back to the implementation-specific default
+          facing mode.
         </p>
         <p>
-          The <code><a>capture</a></code> IDL attribute MUST <a>reflect</a> the
-          respective content attribute of the same name.
+          The <a>capture</a> attribute is an <a>enumerated attribute</a> that
+          specifies the <a>preferred facing mode</a> for the <a>media capture
+          mechanism</a>. The attribute's keywords are <dfn data-dfn-for=
+          "CaptureFacingMode">user</dfn> and <dfn data-dfn-for=
+          "CaptureFacingMode">environment</dfn>, which map to the respective
+          states <var>user</var> and <var>environment</var>. The <a>missing
+          value default</a> is the <var>environment</var> state. The <a>invalid
+          value default</a> is also the <var>environment</var> state.
         </p>
         <p>
-          When the <code><a>capture</a></code> attribute is specified, the
-          <a>user agent</a> SHOULD invoke a file picker of the specific
-          <a>capture control type</a>.
+          The <a>capture</a> IDL attribute MUST <a>reflect</a> the respective
+          content attribute of the same name.
         </p>
         <p>
-          When the <code><a>capture</a></code> attribute is specified, the
-          <a>user agent</a> MUST NOT save the captured media to any data
-          storage, local or remote.
+          When the <a>capture</a> attribute is specified, the <a>user agent</a>
+          SHOULD invoke a file picker of the specific <a>capture control
+          type</a>.
+        </p>
+        <p>
+          When the <a>capture</a> attribute is specified, the <a>user agent</a>
+          MUST NOT save the captured media to any data storage, local or
+          remote.
         </p>
         <div class="note">
           When scripts gain access to the files selected from the file picker
@@ -212,7 +241,7 @@
         <p>
           If the <a>accept</a> attribute's value is set to a MIME type that has
           no associated <a>capture control type</a>, the <a>user agent</a> MUST
-          act as if there was no <code><a>capture</a></code> attribute.
+          act as if there was no <a>capture</a> attribute.
         </p>
       </div>
     </section>
@@ -228,27 +257,27 @@
         example including scripting, are presented.
       </p>
       <ul>
-        <li id="example-1">To take a picture using the device's local still
-        image capture device, such as a camera, and upload the picture taken
-        using an HTML form:
+        <li id="example-1">To take a picture using the device's user-facing
+        camera, and upload the picture taken using an HTML form:
           <pre class="example">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
-            &lt;input type="file" name="image" accept="image/*" capture&gt;
+            &lt;input type="file" name="image" accept="image/*" capture="user"&gt;
             &lt;input type="submit" value="Upload"&gt;
           &lt;/form&gt;
         </pre>
         </li>
         <li>Or alternatively, to capture video using the device's local video
-        camera:
+        camera facing the environment:
           <pre class="example">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
-            &lt;input type="file" name="video" accept="video/*" capture&gt;
+            &lt;input type="file" name="video" accept="video/*" capture="environment"&gt;
             &lt;input type="submit" value="Upload"&gt;
           &lt;/form&gt;
         </pre>
         </li>
         <li>Or alternatively, to capture audio using the device's local
-        microphone:
+        microphone (without <a>preferred facing mode</a> defined, defaults to
+        the environment-facing microphone, if available):
           <pre class="example">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="audio" accept="audio/*" capture&gt;
@@ -256,8 +285,8 @@
           &lt;/form&gt;
         </pre>
         </li>
-        <li id="example-4" link-for="HTMLInputElement">For more advanced use
-        cases, specify the <code><a>capture</a></code> attribute in markup:
+        <li id="example-4" data-link-for="HTMLInputElement">For more advanced
+        use cases, specify the <a>capture</a> attribute in markup:
           <pre class="example">
           &lt;input type="file" accept="image/*" capture&gt;
           &lt;canvas&gt;&lt;/canvas&gt;
@@ -323,10 +352,10 @@ uploading it e.g. for client-side image editing purposes, using the <code>
         </pre>
         </li>
       </ul>
-      <p link-for="HTMLInputElement">
+      <p data-link-for="HTMLInputElement">
         When an <a>input</a> element's <a>accept</a> attribute is set to
-        <code>image/*</code> and the <code><a>capture</a></code> attribute is
-        specified as in the <a href="#example-1">Example 1</a> or <a href=
+        <code>image/*</code> and the <a>capture</a> attribute is specified as
+        in the <a href="#example-1">Example 1</a> or <a href=
         "#example-4">Example 4</a>, the file picker may render as presented on
         the right side. When the attribute is not specified, the file picker
         may render as represented on the left side.
