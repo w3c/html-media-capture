@@ -214,9 +214,15 @@
           mechanism</a>. The attribute's keywords are <dfn data-dfn-for=
           "CaptureFacingMode">user</dfn> and <dfn data-dfn-for=
           "CaptureFacingMode">environment</dfn>, which map to the respective
-          states <var>user</var> and <var>environment</var>. The <a>missing
-          value default</a> is the <var>environment</var> state. The <a>invalid
-          value default</a> is also the <var>environment</var> state.
+          states <var>user</var> and <var>environment</var>. In addition, there
+          is a third state, the <var>implementation-specific</var> state. The
+          <a>missing value default</a> is the
+          <var>implementation-specific</var> state. The <a>invalid value
+          default</a> is also the <var>implementation-specific</var> state.
+        </p>
+        <p class="note">
+          The <var>implementation-specific</var> state indicates the
+          implementation is to act according to its default behavior.
         </p>
         <p>
           The <a>capture</a> IDL attribute MUST <a>reflect</a> the respective
