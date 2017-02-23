@@ -182,7 +182,7 @@
     </section>
     <section data-dfn-for="HTMLInputElement" data-link-for="HTMLInputElement">
       <h2>
-        The <dfn>capture</dfn> attribute
+        The <dfn><code>capture</code></dfn> attribute
       </h2>
       <p>
         When an <a>input</a> element's <a>type</a> attribute is in the <a>File
@@ -282,8 +282,8 @@
         </pre>
         </li>
         <li>Or alternatively, to capture audio using the device's local
-        microphone (without <a>preferred facing mode</a> defined, defaults to
-        the environment-facing microphone, if available):
+        microphone (without <a>preferred facing mode</a> defined, falls back to
+        the implementation-specific default facing mode):
           <pre class="example">
           &lt;form action="server.cgi" method="post" enctype="multipart/form-data"&gt;
             &lt;input type="file" name="audio" accept="audio/*" capture&gt;
