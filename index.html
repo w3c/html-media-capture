@@ -62,7 +62,13 @@
       mechanism</a>, such as a camera, or microphone, from within a file upload
       control.
     </section>
-    <section id="sotd"></section>
+    <section id="sotd">
+      <p>Since the <a href="http://www.w3.org/TR/2014/CR-html-media-capture-20140909/">previous Candidate Recommendation of this specification</a>, the following <a href="CR-diff.html">changes have been brought</a> to the document:</p>
+      <ul>
+        <li>The <code>capture</code> attribute has been changed from a boolean to an enumerated value representing the facing mode of the targeted capturing device</li>
+        <li>The WebIDL <code>capture</code> attribute has been annotated with a <code>[CEReactions]</code> extended attribute since it can change the DOM in ways that may impact custom elements</li>
+      </ul>
+    </section>
     <section class="informative">
       <h2>
         Introduction
