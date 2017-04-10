@@ -1289,7 +1289,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       <li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a>
         <ol class="toc">
           <li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li>
-          <li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.2 </span>Informative references</a></li>
         </ol>
       </li>
     </ol>
@@ -1303,7 +1302,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     <p><em>This section is non-normative.</em></p>
     <p data-link-for="HTMLInputElement">
       The <cite>HTML Media Capture</cite> specification extends the
-      <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#htmlinputelement"><code>HTMLInputElement</code></a> interface with a <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute. The
+      <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#htmlinputelement"><code>HTMLInputElement</code></a> interface with a <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute. The
       <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute allows authors to declaratively request use of a <a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">media capture mechanism</a>, such as a camera or microphone, from within a file upload control, for capturing media on the spot.
     </p>
     <p>
@@ -1336,13 +1335,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       </span>
     </h2>
     <p>
-      The <dfn data-dfn-type="dfn" id="dfn-input"><a href="https://html.spec.whatwg.org/multipage/#the-input-element"><code>input</code></a></dfn> element, its <dfn data-dfn-type="dfn" id="dfn-type"><a href="https://html.spec.whatwg.org/multipage/#attr-input-type"><code>type</code></a></dfn> attribute,
-      <dfn data-dfn-for="" data-dfn-type="dfn" id="dom-htmlinputelement" data-idl="" data-title="HTMLInputElement"><a href="https://html.spec.whatwg.org/multipage/#htmlinputelement"><code>HTMLInputElement</code></a></dfn> interface,
-      <dfn data-dfn-type="dfn" id="dfn-accept"><a href="https://html.spec.whatwg.org/multipage/#attr-input-accept"><code>accept</code></a></dfn> attribute, <dfn data-dfn-type="dfn" id="dfn-file-upload"><a href="https://html.spec.whatwg.org/multipage/#file-upload-state-(type=file)">File
-        Upload</a></dfn> state, <dfn data-dfn-type="dfn" id="dfn-enumerated-attribute"><a href="https://html.spec.whatwg.org/multipage/#enumerated-attribute">enumerated attribute</a></dfn>,
-      <dfn data-dfn-type="dfn" id="dfn-missing-value-default"><a href="https://html.spec.whatwg.org/multipage/#missing-value-default">missing value
-        default</a></dfn>, <dfn data-dfn-type="dfn" id="dfn-invalid-value-default"><a href="https://html.spec.whatwg.org/multipage/#invalid-value-default">invalid
-        value default</a></dfn>, and <dfn data-dfn-type="dfn" id="dfn-reflect"><a href="https://html.spec.whatwg.org/multipage/#reflect">reflect</a></dfn> are defined in [<cite><a class="bibref" href="#bib-HTML">HTML</a></cite>].
+      The <dfn data-dfn-type="dfn" id="dfn-input"><a href="https://www.w3.org/TR/html51/#the-input-element"><code>input</code></a></dfn> element, its <dfn data-dfn-type="dfn" id="dfn-type"><a href="https://www.w3.org/TR/html51/#attr-input-type"><code>type</code></a></dfn> attribute,
+      <dfn data-dfn-for="" data-dfn-type="dfn" id="dom-htmlinputelement" data-idl="" data-title="HTMLInputElement"><a href="https://www.w3.org/TR/html51/#htmlinputelement"><code>HTMLInputElement</code></a></dfn> interface,
+      <dfn data-dfn-type="dfn" id="dfn-accept"><a href="https://www.w3.org/TR/html51/#attr-input-accept"><code>accept</code></a></dfn> attribute, <dfn data-dfn-type="dfn" id="dfn-file-upload"><a href="https://www.w3.org/TR/html51/#file-upload-state-(type=file)">File
+        Upload</a></dfn> state, <dfn data-dfn-type="dfn" id="dfn-enumerated-attribute"><a href="https://www.w3.org/TR/html51/#enumerated-attribute">enumerated attribute</a></dfn>,
+      <dfn data-dfn-type="dfn" id="dfn-missing-value-default"><a href="https://www.w3.org/TR/html51/#missing-value-default">missing value
+        default</a></dfn>, <dfn data-dfn-type="dfn" id="dfn-invalid-value-default"><a href="https://www.w3.org/TR/html51/#invalid-value-default">invalid
+        value default</a></dfn>, and <dfn data-dfn-type="dfn" id="dfn-reflect"><a href="https://www.w3.org/TR/html51/#reflect">reflect</a></dfn> are defined in [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>].
     </p>
     <p>
       The <dfn data-dfn-type="dfn" id="dfn-videofacingmodeenum"><a href="https://www.w3.org/TR/mediacapture-streams/#def-constraint-facingMode"><code>VideoFacingModeEnum</code></a></dfn> enumeration is defined in [<cite><a class="bibref" href="#bib-MEDIACAPTURE-STREAMS">MEDIACAPTURE-STREAMS</a></cite>].
@@ -1352,7 +1351,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     </p>
     <p>
       In this specification, the term <dfn data-dfn-type="dfn" id="dfn-capture-control-type">capture control type</dfn> refers to a specialized type of a file picker control that is optimized, for the user, for directly capturing media of a MIME type specified by the
-      <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#attr-input-accept"><code>accept</code></a> attribute, using a <a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">media capture mechanism</a> in its
+      <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#attr-input-accept"><code>accept</code></a> attribute, using a <a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">media capture mechanism</a> in its
       <a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn">preferred facing mode</a>.
     </p>
     <p>
@@ -1379,7 +1378,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       </li>
     </ul>
     <p>
-      This specification builds upon the security and privacy protections provided by the <code>&lt;input type="file"&gt;</code> [<cite><a class="bibref" href="#bib-HTML">HTML</a></cite>] and the [
+      This specification builds upon the security and privacy protections provided by the <code>&lt;input type="file"&gt;</code> [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] and the [
       <cite><a class="bibref" href="#bib-FILE-API">FILE-API</a></cite>] specifications; in particular, it is expected that any offer to start capturing content from the user’s device would require a specific user interaction on an HTML element that is entirely controlled by the user agent.
     </p>
     <p>
@@ -1393,8 +1392,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       </span>
     </h2>
     <p>
-      When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#the-input-element"><code>input</code></a> element's <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#attr-input-type"><code>type</code></a> attribute is in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#file-upload-state-(type=file)">File
-        Upload</a> state, and its <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#attr-input-accept"><code>accept</code></a> attribute is specified, the rules in this section apply.
+      When an <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#the-input-element"><code>input</code></a> element's <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#attr-input-type"><code>type</code></a> attribute is in the <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#file-upload-state-(type=file)">File
+        Upload</a> state, and its <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#attr-input-accept"><code>accept</code></a> attribute is specified, the rules in this section apply.
     </p>
     <div>
       <pre class="def idl"><span class="idlEnum" id="idl-def-capturefacingmode" data-idl="" data-title="CaptureFacingMode">enum <span class="idlEnumID"><a data-lt="CaptureFacingMode" href="#dom-capturefacingmode" class="internalDFN" data-link-type="dfn" data-for=""><code>CaptureFacingMode</code></a></span> {
@@ -1402,7 +1401,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     <a href="#dom-capturefacingmode-environment" class="idlEnumItem">"environment"</a>
 };</span>
 
-<span class="idlInterface" id="idl-def-htmlinputelement-partial-1" data-idl="" data-title="HTMLInputElement">partial interface <span class="idlInterfaceID"><a data-lt="HTMLInputElement" data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#htmlinputelement" data-for=""><code>HTMLInputElement</code></a></span> {
+<span class="idlInterface" id="idl-def-htmlinputelement-partial-1" data-idl="" data-title="HTMLInputElement">partial interface <span class="idlInterfaceID"><a data-lt="HTMLInputElement" data-link-type="dfn" href="https://www.w3.org/TR/html51/#htmlinputelement" data-for=""><code>HTMLInputElement</code></a></span> {
 <span class="idlAttribute" id="idl-def-htmlinputelement-capture" data-idl="" data-title="capture" data-dfn-for="htmlinputelement">    [<span class="extAttr"><span class="extAttrName"><a href="https://www.w3.org/TR/html51/#cereactions">CEReactions</a></span></span>]
     attribute <span class="idlAttrType"><a href="#dom-capturefacingmode" class="internalDFN" data-link-type="dfn"><code>CaptureFacingMode</code></a></span> <span class="idlAttrName"><a data-lt="capture" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn" data-for="HTMLInputElement"><code>capture</code></a></span>;</span>
 };</span></pre>
@@ -1419,10 +1418,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         </p>
       </div>
       <p>
-        The <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute is an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#enumerated-attribute">enumerated attribute</a> that specifies the <a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn">preferred facing mode</a> for the <a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">media capture
+        The <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute is an <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#enumerated-attribute">enumerated attribute</a> that specifies the <a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn">preferred facing mode</a> for the <a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">media capture
           mechanism</a>. The attribute's keywords are <dfn data-dfn-for="capturefacingmode" data-dfn-type="dfn" id="dom-capturefacingmode-user" data-idl="" data-title="user"><code>user</code></dfn> and <dfn data-dfn-for="capturefacingmode" data-dfn-type="dfn" id="dom-capturefacingmode-environment" data-idl="" data-title="environment"><code>environment</code></dfn>, which map to the respective states <var>user</var> and <var>environment</var>. In addition, there is a third state, the <var>implementation-specific</var> state. The
-        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#missing-value-default">missing value default</a> is the
-        <var>implementation-specific</var> state. The <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#invalid-value-default">invalid value
+        <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#missing-value-default">missing value default</a> is the
+        <var>implementation-specific</var> state. The <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#invalid-value-default">invalid value
           default</a> is also the <var>implementation-specific</var> state.
       </p>
       <div class="note">
@@ -1432,7 +1431,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         </p>
       </div>
       <p>
-        The <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> IDL attribute <em class="rfc2119" title="MUST">MUST</em> <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#reflect">reflect</a> the respective content attribute of the same name.
+        The <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> IDL attribute <em class="rfc2119" title="MUST">MUST</em> <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#reflect">reflect</a> the respective content attribute of the same name.
       </p>
       <p>
         When the <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute is specified, the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a>
@@ -1450,7 +1449,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         </div>
       </div>
       <p>
-        If the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#attr-input-accept"><code>accept</code></a> attribute's value is set to a MIME type that has no associated <a href="#dfn-capture-control-type" class="internalDFN" data-link-type="dfn">capture control type</a>, the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> <em class="rfc2119" title="MUST">MUST</em> act as if there was no <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute.
+        If the <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#attr-input-accept"><code>accept</code></a> attribute's value is set to a MIME type that has no associated <a href="#dfn-capture-control-type" class="internalDFN" data-link-type="dfn">capture control type</a>, the <a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">user agent</a> <em class="rfc2119" title="MUST">MUST</em> act as if there was no <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute.
       </p>
     </div>
   </section>
@@ -1562,7 +1561,7 @@ input.onchange = <span class="hljs-function"><span class="hljs-keyword">function
       </li>
     </ul>
     <p data-link-for="HTMLInputElement">
-      When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#the-input-element"><code>input</code></a> element's <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/#attr-input-accept"><code>accept</code></a> attribute is set to
+      When an <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#the-input-element"><code>input</code></a> element's <a data-link-type="dfn" href="https://www.w3.org/TR/html51/#attr-input-accept"><code>accept</code></a> attribute is set to
       <code>image/*</code> and the <a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> attribute is specified as in the <a href="#example-1">Example 1</a> or <a href="#example-4">Example 4</a>, the file picker may render as presented on the right side. When the attribute is not specified, the file picker may render as represented on the left side.
     </p>
     <p>
@@ -1581,23 +1580,14 @@ input.onchange = <span class="hljs-function"><span class="hljs-keyword">function
       </h3>
       <dl class="bibliography" resource=""><dt id="bib-FILE-API">[FILE-API]</dt>
         <dd><a href="https://www.w3.org/TR/FileAPI/" property="dc:requires"><cite>File API</cite></a>. Arun Ranganathan; Jonas Sicking. W3C. 21 April 2015. W3C Working Draft. URL: <a href="https://www.w3.org/TR/FileAPI/" property="dc:requires">https://www.w3.org/TR/FileAPI/</a>
-        </dd><dt id="bib-HTML">[HTML]</dt>
-        <dd><a href="https://html.spec.whatwg.org/multipage/" property="dc:requires"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters. WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/" property="dc:requires">https://html.spec.whatwg.org/multipage/</a>
+        </dd><dt id="bib-HTML51">[HTML51]</dt>
+        <dd><a href="https://www.w3.org/TR/html51/" property="dc:requires"><cite>HTML 5.1</cite></a>. Steve Faulkner; Arron Eicholz; Travis Leithead; Alex Danilo. W3C. 1 November 2016. W3C Recommendation. URL: <a href="https://www.w3.org/TR/html51/" property="dc:requires">https://www.w3.org/TR/html51/</a>
         </dd><dt id="bib-MEDIACAPTURE-STREAMS">[MEDIACAPTURE-STREAMS]</dt>
         <dd><a href="https://www.w3.org/TR/mediacapture-streams/" property="dc:requires"><cite>Media Capture and Streams</cite></a>. Daniel Burnett; Adam Bergkvist; Cullen Jennings; Anant Narayanan; Bernard Aboba. W3C. 19 May 2016. W3C Candidate Recommendation. URL: <a href="https://www.w3.org/TR/mediacapture-streams/" property="dc:requires">https://www.w3.org/TR/mediacapture-streams/</a>
         </dd><dt id="bib-RFC2119">[RFC2119]</dt>
         <dd><a href="https://tools.ietf.org/html/rfc2119" property="dc:requires"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner. IETF. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">https://tools.ietf.org/html/rfc2119</a>
         </dd><dt id="bib-WEBIDL-1">[WEBIDL-1]</dt>
         <dd><a href="https://www.w3.org/TR/2016/REC-WebIDL-1-20161215/" property="dc:requires"><cite>WebIDL Level 1</cite></a>. Cameron McCormack. W3C. 15 December 2016. W3C Recommendation. URL: <a href="https://www.w3.org/TR/2016/REC-WebIDL-1-20161215/" property="dc:requires">https://www.w3.org/TR/2016/REC-WebIDL-1-20161215/</a>
-        </dd>
-      </dl>
-    </section>
-
-    <section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart">
-      <h3 id="h-informative-references" resource="#h-informative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.2 </span>Informative references</span>
-      </h3>
-      <dl class="bibliography" resource=""><dt id="bib-HTML51">[HTML51]</dt>
-        <dd><a href="https://www.w3.org/TR/html51/" property="dc:references"><cite>HTML 5.1</cite></a>. Steve Faulkner; Arron Eicholz; Travis Leithead; Alex Danilo. W3C. 1 November 2016. W3C Recommendation. URL: <a href="https://www.w3.org/TR/html51/" property="dc:references">https://www.w3.org/TR/html51/</a>
         </dd>
       </dl>
     </section>
