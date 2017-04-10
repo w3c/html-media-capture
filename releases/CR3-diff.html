@@ -1,0 +1,3142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" typeof="bibo:Document w3p:CR" prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta lang="" property="dc:language" content="en">
+<title>HTML Media Capture</title>
+
+<style id="respec-mainstyle" type="text/css">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-style: normal;
+      color: #900;
+    }
+
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+
+    dfn {
+      font-weight: bold;
+    }
+
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+
+    a.bibref {
+      text-decoration: none;
+    }
+
+    cite .bibref {
+      font-style: normal;
+    }
+
+    code {
+      color: #C83500;
+    }
+
+    th code {
+      color: inherit;
+    }
+    /* --- TOC --- */
+
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+
+    .section dd>p:first-child {
+      margin-top: 0;
+    }
+
+    .section dd>p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section dd {
+      margin-bottom: 1em;
+    }
+
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+</style>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-CR" type="text/css">
+<link rel="canonical" href="https://www.w3.org/TR/html-media-capture/">
+<meta name="generator" content="ReSpec 11.4.1">
+<script id="initialUserConfig" type="application/json">
+    {
+      "specStatus": "CR",
+      "shortName": "html-media-capture",
+      "editors": [
+      {
+        "name": "Anssi Kostiainen",
+        "company": "Intel"
+      },
+      {
+        "name": "Ilkka Oksanen",
+        "company": "Nokia (until May 10, 2012)"
+      },
+      {
+        "name": "Dominique Hazaël-Massieux",
+        "company": "W3C (until May 10, 2012)"
+      }],
+      "publishDate": "2017-04-20",
+      "previousPublishDate": "2014-09-09",
+      "previousMaturity": "CR",
+      "edDraftURI": "https://w3c.github.io/html-media-capture/",
+      "crEnd": "2017-06-20",
+      "wg": "Device and Sensors Working Group",
+      "wgURI": "https://www.w3.org/2009/dap/",
+      "wgPublicList": "public-device-apis",
+      "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/43696/status",
+      "testSuiteURI": "https://w3c-test.org/html-media-capture/",
+      "implementationReportURI": "https://www.w3.org/2009/dap/wiki/ImplementationStatus",
+      "otherLinks": [
+      {
+        "key": "Participate",
+        "data": [
+        {
+          "value": "public-device-apis@w3.org",
+          "href": "https://lists.w3.org/Archives/Public/public-device-apis/"
+        },
+        {
+          "value": "GitHub w3c/html-media-capture",
+          "href": "https://github.com/w3c/html-media-capture/"
+        },
+        {
+          "value": "GitHub w3c/html-media-capture/issues",
+          "href": "https://github.com/w3c/html-media-capture/issues"
+        },
+        {
+          "value": "GitHub w3c/html-media-capture/commits",
+          "href": "https://github.com/w3c/html-media-capture/commits/"
+        }]
+      }]
+    }
+</script>
+<style type='text/css'>
+.diff-old-a {
+  font-size: smaller;
+  color: red;
+}
+
+.diff-new { background-color: yellow; }
+.diff-chg { background-color: lime; }
+.diff-new:before,
+.diff-new:after
+    { content: "\2191" }
+.diff-chg:before, .diff-chg:after
+    { content: "\2195" }
+.diff-old { text-decoration: line-through; background-color: #FBB; }
+.diff-old:before,
+.diff-old:after
+    { content: "\2193" }
+</style>
+<script src="https://w3c.github.io/htmldiff-nav/index.js"></script></head>
+<body aria-busy="false" class="h-entry toc-inline" id="respecDocument">
+<div class="head" role="contentinfo" id="respecHeader">
+<p>
+<a class="logo" href="https://www.w3.org/">
+<img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C">
+</a>
+</p>
+<h1 class="title p-name" id="title" property="dcterms:title">
+HTML
+Media
+Capture
+</h1>
+<h2 id="w3c-candidate-recommendation-20-april-2017">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Candidate
+Recommendation
+<del class="diff-old">09
+September
+2014
+</del>
+<time property="dcterms:issued" class="dt-published" datetime="2017-04-20">
+<ins class="diff-chg">20
+April
+2017
+</ins>
+</time>
+</h2>
+<dl>
+<dt>
+This
+version:
+</dt>
+<dd>
+<del class="diff-old">http://www.w3.org/TR/2014/CR-html-media-capture-20140909/
+</del>
+<a class="u-url" href="https://www.w3.org/TR/2017/CR-html-media-capture-20170420/">
+<ins class="diff-chg">https://www.w3.org/TR/2017/CR-html-media-capture-20170420/
+</ins>
+</a>
+</dd>
+<dt>
+Latest
+published
+version:
+</dt>
+<dd>
+<del class="diff-old">http://www.w3.org/TR/html-media-capture/
+</del>
+<a href="https://www.w3.org/TR/html-media-capture/">
+<ins class="diff-chg">https://www.w3.org/TR/html-media-capture/
+</ins>
+</a>
+</dd>
+<dt>
+Latest
+editor's
+draft:
+</dt>
+<dd>
+<del class="diff-old">http://dev.w3.org/2009/dap/camera/
+</del>
+<a href="https://w3c.github.io/html-media-capture/">
+<ins class="diff-chg">https://w3c.github.io/html-media-capture/
+</ins>
+</a>
+</dd>
+<dt>
+Test
+suite:
+</dt>
+<dd>
+<del class="diff-old">http://w3c-test.org/html-media-capture/
+</del>
+<a href="https://w3c-test.org/html-media-capture/">
+<ins class="diff-chg">https://w3c-test.org/html-media-capture/
+</ins>
+</a>
+</dd>
+<dt>
+Implementation
+report:
+</dt>
+<dd>
+<del class="diff-old">http://www.w3.org/2009/dap/wiki/ImplementationStatus
+</del>
+<a href="https://www.w3.org/2009/dap/wiki/ImplementationStatus">
+<ins class="diff-chg">https://www.w3.org/2009/dap/wiki/ImplementationStatus
+</ins>
+</a>
+</dd>
+<dt>
+Previous
+version:
+</dt>
+<dd>
+<del class="diff-old">http://www.w3.org/TR/2014/WD-html-media-capture-20140619/
+</del>
+<a rel="dcterms:replaces" href="https://www.w3.org/TR/2014/CR-html-media-capture-20140909/">
+<ins class="diff-chg">https://www.w3.org/TR/2014/CR-html-media-capture-20140909/
+</ins>
+</a>
+</dd>
+<dt>
+Editors:
+</dt>
+<dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0">
+<span property="rdf:first" typeof="foaf:Person">
+<span property="foaf:name" class="p-name fn">
+Anssi
+Kostiainen
+</span>,
+Intel
+</span>
+</dd>
+<dd class="p-author h-card vcard" resource="_:editor1">
+<span property="rdf:first" typeof="foaf:Person">
+<span property="foaf:name" class="p-name fn">
+Ilkka
+Oksanen
+</span>,
+Nokia
+(until
+May
+10,
+2012)
+</span>
+</dd>
+<dd class="p-author h-card vcard" resource="_:editor2">
+<span property="rdf:first" typeof="foaf:Person">
+<span property="foaf:name" class="p-name fn">
+Dominique
+Hazaël-Massieux
+</span>,
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+(until
+May
+10,
+2012)
+</span>
+</dd>
+<dt>
+<ins class="diff-new">Participate:
+</ins></dt><dd><a href="https://lists.w3.org/Archives/Public/public-device-apis/"><ins class="diff-new">
+public-device-apis@w3.org
+</ins></a></dd><dd><a href="https://github.com/w3c/html-media-capture/"><ins class="diff-new">
+GitHub
+w3c/html-media-capture
+</ins></a></dd><dd><a href="https://github.com/w3c/html-media-capture/issues"><ins class="diff-new">
+GitHub
+w3c/html-media-capture/issues
+</ins></a></dd><dd><a href="https://github.com/w3c/html-media-capture/commits/"><ins class="diff-new">
+GitHub
+w3c/html-media-capture/commits
+</ins></a></dd>
+</dl>
+<p class="copyright">
+<a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">
+Copyright
+</a>
+©
+<del class="diff-old">2014
+</del>
+<ins class="diff-chg">2017
+</ins><a href="https://www.w3.org/">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+</a>
+<sup>
+®
+</sup>
+(
+<a href="https://www.csail.mit.edu/">
+<abbr title="Massachusetts Institute of Technology">
+MIT
+</abbr>
+</a>,
+<a href="https://www.ercim.eu/">
+<abbr title="European Research Consortium for Informatics and Mathematics">
+ERCIM
+</abbr>
+</a>,
+<a href="https://www.keio.ac.jp/">
+Keio
+</a>,
+<a href="http://ev.buaa.edu.cn/">
+Beihang
+</a>
+<del class="diff-old">),
+All
+Rights
+Reserved.
+</del>
+<ins class="diff-chg">).
+</ins>
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+<a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">
+liability
+</a>,
+<a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">
+trademark
+</a>
+and
+<a rel="license" href="https://www.w3.org/Consortium/Legal/copyright-documents">
+document
+use
+</a>
+rules
+apply.
+</p>
+<hr title="Separator for header">
+</div>
+<section id="abstract" class="introductory" property="dc:abstract">
+<h2 id="h-abstract" resource="#h-abstract">
+<span property="xhv:role" resource="xhv:heading">
+Abstract
+</span>
+</h2>
+<p>
+The
+<cite>
+HTML
+Media
+Capture
+</cite>
+specification
+defines
+an
+HTML
+form
+extension
+that
+facilitates
+user
+access
+to
+a
+device's
+<a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">
+media
+capture
+mechanism
+</a>,
+such
+as
+a
+camera,
+or
+microphone,
+from
+within
+a
+file
+upload
+control.
+</p>
+</section>
+<section id="sotd" class="introductory">
+<h2 id="h-sotd" resource="#h-sotd">
+<span property="xhv:role" resource="xhv:heading">
+Status
+of
+This
+Document
+</span>
+</h2>
+<p>
+<em>
+This
+section
+describes
+the
+status
+of
+this
+document
+at
+the
+time
+of
+its
+publication.
+Other
+documents
+may
+supersede
+this
+document.
+A
+list
+of
+current
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+publications
+and
+the
+latest
+revision
+of
+this
+technical
+report
+can
+be
+found
+in
+the
+<a href="https://www.w3.org/TR/">
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+technical
+reports
+index
+</a>
+at
+<del class="diff-old">http://www.w3.org/TR/.
+</del>
+<ins class="diff-chg">https://www.w3.org/TR/.
+</ins>
+</em>
+</p>
+<p>
+<del class="diff-old">There
+</del>
+<ins class="diff-chg">Since
+the
+</ins><a href="http://www.w3.org/TR/2014/CR-html-media-capture-20140909/"><ins class="diff-chg">
+previous
+Candidate
+Recommendation
+of
+this
+specification
+</ins></a>,<ins class="diff-chg">
+the
+following
+</ins><a href="CR-diff.html"><ins class="diff-chg">
+changes
+</ins>
+have
+been
+<del class="diff-old">no
+substantive
+changes
+since
+</del>
+<ins class="diff-chg">brought
+</ins></a><ins class="diff-chg">
+to
+</ins>
+the
+<del class="diff-old">W3C
+W3C
+Last
+Call
+Working
+Draft
+19
+June
+2014
+.
+</del>
+<ins class="diff-chg">document:
+</ins>
+</p>
+<ul>
+<li>
+The
+<del class="diff-old">CR
+exit
+criterion
+is
+two
+interoperable
+deployed
+implementations
+</del>
+<code>
+<ins class="diff-chg">capture
+</ins></code><ins class="diff-chg">
+attribute
+has
+been
+changed
+from
+a
+boolean
+to
+an
+enumerated
+value
+representing
+the
+facing
+mode
+</ins>
+of
+<del class="diff-old">each
+feature.
+No
+features
+are
+marked
+as
+'at-risk'.
+</del>
+<ins class="diff-chg">the
+targeted
+capturing
+device
+</ins></li><li>
+The
+<del class="diff-old">group
+will
+create
+an
+Implementation
+Report
+.
+</del>
+<ins class="diff-chg">WebIDL
+</ins><code><ins class="diff-chg">
+capture
+</ins></code><ins class="diff-chg">
+attribute
+has
+been
+annotated
+with
+a
+</ins><code><ins class="diff-chg">
+[CEReactions]
+</ins></code><ins class="diff-chg">
+extended
+attribute
+since
+it
+can
+change
+the
+DOM
+in
+ways
+that
+may
+impact
+custom
+elements
+</ins></li></ul>
+<p>
+This
+document
+was
+published
+by
+the
+<a href="https://www.w3.org/2009/dap/">
+Device
+<del class="diff-old">APIs
+</del>
+<ins class="diff-chg">and
+Sensors
+</ins>
+Working
+Group
+</a>
+as
+a
+Candidate
+Recommendation.
+This
+document
+is
+intended
+to
+become
+a
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Recommendation.
+If
+you
+wish
+to
+make
+comments
+regarding
+this
+document,
+please
+send
+them
+to
+<a href="mailto:public-device-apis@w3.org">
+public-device-apis@w3.org
+</a>
+(
+<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">
+subscribe
+</a>,
+<a href="https://lists.w3.org/Archives/Public/public-device-apis/">
+archives
+</a>
+).
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+publishes
+a
+Candidate
+Recommendation
+to
+indicate
+that
+the
+document
+is
+believed
+to
+be
+stable
+and
+to
+encourage
+implementation
+by
+the
+developer
+community.
+This
+Candidate
+Recommendation
+is
+expected
+to
+advance
+to
+Proposed
+Recommendation
+no
+earlier
+than
+<del class="diff-old">12
+November
+2014.
+</del>
+<ins class="diff-chg">20
+June
+2017.
+</ins>
+All
+comments
+are
+welcome.
+</p>
+<p>
+Please
+see
+the
+Working
+Group's
+<a href="https://www.w3.org/2009/dap/wiki/ImplementationStatus">
+implementation
+report
+</a>.
+</p>
+<p>
+Publication
+as
+a
+Candidate
+Recommendation
+does
+not
+imply
+endorsement
+by
+the
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Membership.
+This
+is
+a
+draft
+document
+and
+may
+be
+updated,
+replaced
+or
+obsoleted
+by
+other
+documents
+at
+any
+time.
+It
+is
+inappropriate
+to
+cite
+this
+document
+as
+other
+than
+work
+in
+progress.
+</p>
+<p>
+This
+document
+was
+produced
+by
+a
+group
+operating
+under
+the
+<a id="sotd_patent" property="w3p:patentRules" href="https://www.w3.org/Consortium/Patent-Policy-20040205/">
+5
+February
+2004
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Patent
+Policy
+</a>.
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+maintains
+a
+<a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">
+public
+list
+of
+any
+patent
+disclosures
+</a>
+made
+in
+connection
+with
+the
+deliverables
+of
+the
+group;
+that
+page
+also
+includes
+instructions
+for
+disclosing
+a
+patent.
+An
+individual
+who
+has
+actual
+knowledge
+of
+a
+patent
+which
+the
+individual
+believes
+contains
+<a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">
+Essential
+Claim(s)
+</a>
+must
+disclose
+the
+information
+in
+accordance
+with
+<a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">
+section
+6
+of
+the
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Patent
+Policy
+</a>.
+</p>
+<p>
+This
+document
+is
+governed
+by
+the
+<del class="diff-old">14
+October
+2005
+</del>
+<a id="w3c_process_revision" href="https://www.w3.org/2017/Process-20170301/">
+<ins class="diff-chg">1
+March
+2017
+</ins>
+<abbr title="World Wide Web Consortium">
+W3C
+</abbr>
+Process
+Document
+</a>.
+</p>
+</section>
+<nav id="toc">
+<h2 class="introductory" id="table-of-contents" resource="#table-of-contents">
+<span property="xhv:role" resource="xhv:heading">
+Table
+of
+Contents
+</span>
+</h2>
+<ol class="toc" role="directory">
+<li class="tocline">
+<a href="#introduction" class="tocxref">
+<span class="secno">
+1.
+</span>
+Introduction
+</a>
+</li>
+<li class="tocline">
+<a href="#conformance" class="tocxref">
+<span class="secno">
+2.
+</span>
+Conformance
+</a>
+</li>
+<li class="tocline">
+<a href="#terminology" class="tocxref">
+<span class="secno">
+3.
+</span>
+Terminology
+</a>
+</li>
+<li class="tocline">
+<a href="#security" class="tocxref">
+<span class="secno">
+4.
+</span>
+Security
+and
+privacy
+considerations
+</a>
+</li>
+<li class="tocline">
+<a href="#the-capture-attribute" class="tocxref">
+<span class="secno">
+5.
+</span>
+The
+<del class="diff-old">capture
+attribute
+</del>
+<span data-dfn-for="htmlinputelement" data-dfn-type="dfn" data-idl="" data-title="capture">
+<code>
+<ins class="diff-chg">capture
+</ins></code>
+<del class="diff-old">5.1
+</del>
+</span>
+<del class="diff-old">Attributes
+</del>
+<ins class="diff-chg">attribute
+</ins>
+</a>
+</li>
+<li class="tocline">
+<a href="#examples" class="tocxref">
+<span class="secno">
+A.
+</span>
+Examples
+</a>
+</li>
+<li class="tocline">
+<a href="#references" class="tocxref">
+<span class="secno">
+B.
+</span>
+References
+</a>
+<ol class="toc">
+<li class="tocline">
+<a href="#normative-references" class="tocxref">
+<span class="secno">
+B.1
+</span>
+Normative
+references
+</a>
+</li>
+<del class="diff-old">B.2
+Informative
+references
+</del>
+</ol>
+</li>
+</ol>
+</nav>
+<section class="informative" id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+<h2 id="h-introduction" resource="#h-introduction">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+1.
+</span>
+Introduction
+</span>
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p data-link-for="HTMLInputElement">
+The
+<cite>
+HTML
+Media
+Capture
+</cite>
+specification
+extends
+the
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#htmlinputelement">
+<code>
+HTMLInputElement
+</code>
+</a>
+interface
+with
+a
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute.
+The
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute
+allows
+authors
+to
+declaratively
+request
+use
+of
+a
+<a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">
+media
+capture
+mechanism
+</a>,
+such
+as
+a
+camera
+or
+microphone,
+from
+within
+a
+file
+upload
+control,
+for
+capturing
+media
+on
+the
+spot.
+</p>
+<p>
+This
+extension
+is
+specifically
+designed
+to
+be
+simple
+and
+declarative,
+and
+covers
+a
+subset
+of
+the
+media
+capture
+functionality
+of
+the
+web
+platform.
+Specifically,
+the
+extension
+does
+not
+provide
+detailed
+author
+control
+over
+capture.
+Use
+cases
+requiring
+more
+fine-grained
+author
+control
+may
+be
+met
+by
+using
+another
+specification,
+<cite>
+Media
+Capture
+and
+Streams
+</cite>
+[
+<cite>
+<del class="diff-old">GETUSERMEDIA
+</del>
+<a class="bibref" href="#bib-MEDIACAPTURE-STREAMS">
+<ins class="diff-chg">MEDIACAPTURE-STREAMS
+</ins>
+</a>
+</cite>
+].
+For
+example,
+access
+to
+real-time
+media
+streams
+from
+the
+hosting
+device
+is
+out
+of
+scope
+for
+this
+specification.
+</p>
+</section>
+<section id="conformance" typeof="bibo:Chapter" resource="#conformance" property="bibo:hasPart">
+<h2 id="h-conformance" resource="#h-conformance">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+2.
+</span>
+Conformance
+</span>
+</h2>
+<p>
+As
+well
+as
+sections
+marked
+as
+non-normative,
+all
+authoring
+guidelines,
+diagrams,
+examples,
+and
+notes
+in
+this
+specification
+are
+non-normative.
+Everything
+else
+in
+this
+specification
+is
+normative.
+</p>
+<p id="respecRFC2119">
+The
+key
+words
+<em class="rfc2119">
+MUST
+</em>,
+<em class="rfc2119">
+MUST
+NOT
+</em>,
+<del class="diff-old">REQUIRED
+,
+SHOULD
+,
+SHOULD
+NOT
+,
+RECOMMENDED
+,
+MAY
+,
+</del>
+and
+<del class="diff-old">OPTIONAL
+</del>
+<em class="rfc2119">
+<ins class="diff-chg">SHOULD
+</ins>
+</em>
+<del class="diff-old">in
+this
+specification
+</del>
+are
+to
+be
+interpreted
+as
+described
+in
+[
+<cite>
+<a class="bibref" href="#bib-RFC2119">
+RFC2119
+</a>
+</cite>
+].
+</p>
+<p>
+This
+specification
+defines
+conformance
+criteria
+that
+apply
+to
+a
+single
+product:
+the
+<dfn data-dfn-type="dfn" id="dfn-user-agent">
+user
+agent
+</dfn>
+that
+implements
+the
+interfaces
+that
+it
+contains.
+</p>
+<p>
+Implementations
+that
+use
+ECMAScript
+to
+implement
+the
+APIs
+defined
+in
+this
+specification
+must
+implement
+them
+in
+a
+manner
+consistent
+with
+the
+ECMAScript
+Bindings
+defined
+in
+the
+Web
+IDL
+specification
+[
+<cite>
+<del class="diff-old">WEBIDL
+</del>
+<a class="bibref" href="#bib-WEBIDL-1">
+<ins class="diff-chg">WEBIDL-1
+</ins>
+</a>
+</cite>
+],
+as
+this
+specification
+uses
+that
+specification
+and
+terminology.
+</p>
+</section>
+<section id="terminology" typeof="bibo:Chapter" resource="#terminology" property="bibo:hasPart">
+<h2 id="h-terminology" resource="#h-terminology">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+3.
+</span>
+Terminology
+</span>
+</h2>
+<p>
+The
+<dfn data-dfn-type="dfn" id="dfn-input">
+<a href="https://www.w3.org/TR/html51/single-page.html#the-input-element">
+<code>
+input
+</code>
+</a>
+</dfn>
+<ins class="diff-new">element,
+its
+</ins><dfn data-dfn-type="dfn" id="dfn-type">
+<del class="diff-old">element
+,
+</del>
+<a href="https://www.w3.org/TR/html51/single-page.html#attr-input-type">
+<code>
+<ins class="diff-new">type
+</ins></code></a>
+<del class="diff-old">HTMLInputElement
+</del>
+</dfn>
+<ins class="diff-new">attribute,
+</ins><dfn data-dfn-for="" data-dfn-type="dfn" id="dom-htmlinputelement" data-idl="" data-title="HTMLInputElement">
+<a href="https://www.w3.org/TR/html51/single-page.html#htmlinputelement">
+<code>
+<ins class="diff-new">HTMLInputElement
+</ins>
+</code>
+</a>
+</dfn>
+interface,
+<dfn data-dfn-type="dfn" id="dfn-accept">
+<a href="https://www.w3.org/TR/html51/single-page.html#attr-input-accept">
+<code>
+accept
+</code>
+<del class="diff-old">attribute
+,
+and
+</del>
+</a>
+</dfn>
+<ins class="diff-chg">attribute,
+</ins><dfn data-dfn-type="dfn" id="dfn-file-upload"><a href="https://www.w3.org/TR/html51/single-page.html#file-upload-state-(type=file)">
+File
+Upload
+</a>
+</dfn>
+<ins class="diff-new">state,
+</ins><dfn data-dfn-type="dfn" id="dfn-enumerated-attribute"><a href= "https://www.w3.org/TR/html51/single-page.html#enumerated-attribute"><ins class="diff-new">
+enumerated
+attribute
+</ins></a></dfn>,<dfn data-dfn-type="dfn" id="dfn-missing-value-default">
+<a href="https://www.w3.org/TR/html51/single-page.html#missing-value-default">
+<ins class="diff-new">missing
+value
+default
+</ins>
+</a>
+<del class="diff-old">state
+</del>
+</dfn>,
+<dfn data-dfn-type="dfn" id="dfn-invalid-value-default">
+<a href="https://www.w3.org/TR/html51/single-page.html#invalid-value-default">
+<ins class="diff-chg">invalid
+value
+default
+</ins></a></dfn>,<ins class="diff-chg">
+and
+</ins><dfn data-dfn-type="dfn" id="dfn-reflect"><a href="https://www.w3.org/TR/html51/single-page.html#reflect"><ins class="diff-chg">
+reflect
+</ins></a>
+</dfn>
+are
+defined
+in
+[
+<cite>
+<del class="diff-old">HTML5
+</del>
+<a class="bibref" href="#bib-HTML51">
+<ins class="diff-chg">HTML51
+</ins>
+</a>
+</cite>
+].
+</p>
+<p>
+The
+<del class="diff-old">term
+</del>
+<dfn data-dfn-type="dfn" id="dfn-videofacingmodeenum">
+<del class="diff-old">boolean
+attribute
+</del>
+<a href="https://www.w3.org/TR/mediacapture-streams/#def-constraint-facingMode">
+<code>
+<ins class="diff-chg">VideoFacingModeEnum
+</ins></code>
+</a>
+<del class="diff-old">and
+the
+concept
+</del>
+<del class="diff-old">reflect
+</del>
+</dfn>
+<ins class="diff-new">enumeration
+is
+defined
+in
+[
+</ins><cite>
+<a class="bibref" href="#bib-MEDIACAPTURE-STREAMS">
+<ins class="diff-new">MEDIACAPTURE-STREAMS
+</ins>
+</a>
+<del class="diff-old">are
+</del>
+</cite>
+<ins class="diff-chg">].
+</ins></p><p><ins class="diff-chg">
+The
+</ins><dfn data-dfn-type="dfn" id="dfn-filelist"><a href="https://www.w3.org/TR/FileAPI/#dfn-filelist"><code><ins class="diff-chg">
+FileList
+</ins></code></a></dfn><ins class="diff-chg">
+interface
+is
+</ins>
+defined
+in
+[
+<cite>
+<del class="diff-old">HTML5
+</del>
+<a class="bibref" href="#bib-FILE-API">
+<ins class="diff-chg">FILE-API
+</ins>
+</a>
+</cite>
+].
+</p>
+<p>
+In
+this
+specification,
+the
+term
+<dfn data-dfn-type="dfn" id="dfn-capture-control-type">
+capture
+control
+type
+</dfn>
+refers
+to
+a
+specialized
+type
+of
+a
+file
+picker
+control
+that
+is
+optimized,
+for
+the
+user,
+for
+directly
+capturing
+media
+of
+a
+MIME
+type
+specified
+by
+the
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#attr-input-accept">
+<code>
+accept
+</code>
+</a>
+attribute,
+using
+a
+<a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">
+media
+capture
+mechanism
+</a>
+<ins class="diff-new">in
+its
+</ins><a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn"><ins class="diff-new">
+preferred
+facing
+mode
+</ins>
+</a>.
+</p>
+<p>
+The
+term
+<dfn data-dfn-type="dfn" id="dfn-media-capture-mechanism">
+media
+capture
+mechanism
+</dfn>
+refers
+to
+a
+device's
+local
+media
+capture
+device,
+such
+as
+a
+camera
+or
+microphone.
+</p>
+<p>
+<ins class="diff-new">The
+</ins><dfn data-dfn-type="dfn" id="dfn-preferred-facing-mode"><ins class="diff-new">
+preferred
+facing
+mode
+</ins></dfn><ins class="diff-new">
+is
+a
+hint
+for
+the
+direction
+of
+the
+device's
+</ins><a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn"><ins class="diff-new">
+media
+capture
+mechanism
+</ins></a><ins class="diff-new">
+to
+be
+used.
+</ins></p>
+</section>
+<section id="security" class="informative" typeof="bibo:Chapter" resource="#security" property="bibo:hasPart">
+<h2 id="h-security" resource="#h-security">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+4.
+</span>
+Security
+and
+privacy
+considerations
+</span>
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+A
+User
+Agent
+implementation
+of
+this
+specification
+is
+advised
+to
+seek
+user
+consent
+before
+initiating
+capture
+of
+content
+by
+microphone
+or
+camera.
+This
+may
+be
+necessary
+to
+meet
+regulatory,
+legal
+and
+best
+practice
+requirements
+related
+to
+the
+privacy
+of
+user
+data.
+In
+addition,
+the
+User
+Agent
+implementation
+is
+advised
+to
+provide
+an
+indication
+to
+the
+user
+when
+an
+input
+device
+is
+enabled
+and
+make
+it
+possible
+for
+the
+user
+to
+terminate
+such
+capture.
+Similarly,
+the
+User
+Agent
+is
+advised
+to
+offer
+user
+control,
+such
+as
+to
+allow
+the
+user
+to:
+</p>
+<ul>
+<li>
+select
+the
+exact
+media
+capture
+device
+to
+be
+used
+if
+there
+exist
+multiple
+devices
+of
+the
+same
+type
+(e.g.
+a
+front-facing
+camera
+in
+addition
+to
+a
+primary
+camera).
+</li>
+<li>
+disable
+sound
+capture
+when
+in
+the
+video
+capture
+mode.
+</li>
+</ul>
+<p>
+This
+specification
+builds
+upon
+the
+security
+and
+privacy
+protections
+provided
+by
+the
+<code>
+&lt;input
+type="file"&gt;
+</code>
+[
+<cite>
+<del class="diff-old">HTML5
+</del>
+<a class="bibref" href="#bib-HTML51">
+<ins class="diff-chg">HTML51
+</ins>
+</a>
+</cite>
+]
+and
+the
+[
+<cite>
+<a class="bibref" href="#bib-FILE-API">
+FILE-API
+</a>
+</cite>
+]
+specifications;
+in
+particular,
+it
+is
+expected
+that
+any
+offer
+to
+start
+capturing
+content
+from
+the
+user’s
+device
+would
+require
+a
+specific
+user
+interaction
+on
+an
+HTML
+element
+that
+is
+entirely
+controlled
+by
+the
+user
+agent.
+</p>
+<p>
+Implementors
+should
+take
+care
+to
+prevent
+additional
+leakage
+of
+privacy-sensitive
+data
+from
+captured
+media.
+For
+instance,
+embedding
+the
+user’s
+location
+in
+the
+metadata
+of
+captured
+media
+(e.g.
+EXIF)
+might
+transmit
+more
+private
+data
+than
+the
+user
+is
+expecting.
+</p>
+</section>
+<section data-dfn-for="HTMLInputElement" data-link-for="HTMLInputElement" id="the-capture-attribute" typeof="bibo:Chapter" resource="#the-capture-attribute" property="bibo:hasPart">
+<h2 id="h-the-capture-attribute" resource="#h-the-capture-attribute">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+5.
+</span>
+The
+<dfn data-dfn-for="htmlinputelement" data-dfn-type="dfn" id="dom-htmlinputelement-capture" data-idl="" data-title="capture">
+<code>
+capture
+</code>
+</dfn>
+attribute
+</span>
+</h2>
+<p>
+<del class="diff-old">This
+section
+is
+normative.
+</del>
+When
+an
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#the-input-element">
+<code>
+input
+</code>
+</a>
+element's
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#attr-input-type">
+<code>
+type
+</code>
+</a>
+attribute
+is
+in
+the
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#file-upload-state-(type=file)">
+File
+Upload
+</a>
+<del class="diff-old">state
+,
+</del>
+<ins class="diff-chg">state,
+</ins>
+and
+its
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#attr-input-accept">
+<code>
+accept
+</code>
+</a>
+attribute
+is
+specified,
+the
+rules
+in
+this
+section
+apply.
+</p>
+<del class="diff-old"> {
+</del>
+<div>
+<pre class="def idl">
+<span class="idlEnum" id="idl-def-capturefacingmode" data-idl="" data-title="CaptureFacingMode">enum <span class="idlEnumID"><a data-lt="CaptureFacingMode" href="#dom-capturefacingmode" class="internalDFN" data-link-type="dfn" data-for=""><code>CaptureFacingMode</code></a></span> {
+    <a href="#dom-capturefacingmode-user" class="idlEnumItem">"user"</a>,
+    <a href="#dom-capturefacingmode-environment" class="idlEnumItem">"environment"</a>
+<ins class="diff-chg">};</span>
+</ins><span class="idlInterface" id="idl-def-htmlinputelement-partial-1" data-idl="" data-title="HTMLInputElement">partial interface <span class="idlInterfaceID"><a data-lt="HTMLInputElement" data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#htmlinputelement" data-for=""><code>HTMLInputElement</code></a></span> {<span class="idlAttribute" id="idl-def-htmlinputelement-capture" data-idl="" data-title="capture" data-dfn-for="htmlinputelement">    [<span class="extAttr"><span class="extAttrName"><a href="https://html.spec.whatwg.org/multipage/scripting.html#cereactions">CEReactions</a></span></span>]<ins class="diff-chg">
+    attribute <span class="idlAttrType"><a href="#dom-capturefacingmode" class="internalDFN" data-link-type="dfn"><code>CaptureFacingMode</code></a></span> <span class="idlAttrName"><a data-lt="capture" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn" data-for="HTMLInputElement"><code>capture</code></a></span>;</span>
+</ins>
+};</span>
+</pre>
+<del class="diff-old">5.1
+Attributes
+</del>
+</div>
+<div>
+<p>
+<ins class="diff-chg">The
+</ins><dfn data-dfn-for="" data-dfn-type="dfn" id="dom-capturefacingmode" data-idl="" data-title="CaptureFacingMode">
+<code>
+<del class="diff-old">capture
+</del>
+<ins class="diff-chg">CaptureFacingMode
+</ins>
+</code>
+</dfn>
+<ins class="diff-new">enumeration
+is
+used
+to
+express
+the
+</ins><a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn"><ins class="diff-new">
+preferred
+facing
+mode
+</ins></a>.<ins class="diff-new">
+The
+semantics
+</ins>
+of
+<del class="diff-old">type
+boolean
+,
+</del>
+<ins class="diff-chg">its
+keywords
+mirror
+the
+similarly
+named
+keywords
+defined
+in
+</ins><a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#def-constraint-facingMode"><code><code><ins class="diff-chg">
+VideoFacingModeEnum
+</ins></code></code></a>.</p><div class="note"><div class="note-title marker" aria-level="3" role="heading" id="h-note1"><span><ins class="diff-chg">
+Note
+</ins></span></div><p class=""><ins class="diff-chg">
+If
+the
+user
+agent
+is
+unable
+to
+support
+the
+</ins><a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn"><ins class="diff-chg">
+preferred
+facing
+mode
+</ins></a>,<ins class="diff-chg">
+it
+can
+fall
+back
+to
+the
+implementation-specific
+default
+facing
+mode.
+</ins></p></div>
+<p>
+The
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute
+is
+<del class="diff-old">a
+boolean
+</del>
+<ins class="diff-chg">an
+</ins><a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#enumerated-attribute"><ins class="diff-chg">
+enumerated
+</ins>
+attribute
+</a>
+<del class="diff-old">that,
+if
+specified,
+indicates
+</del>
+that
+<ins class="diff-new">specifies
+</ins>
+the
+<del class="diff-old">capture
+of
+media
+directly
+from
+</del>
+<a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn">
+<ins class="diff-chg">preferred
+facing
+mode
+</ins></a><ins class="diff-chg">
+for
+</ins>
+the
+<del class="diff-old">device's
+environment
+using
+a
+</del>
+<a href="#dfn-media-capture-mechanism" class="internalDFN" data-link-type="dfn">
+media
+capture
+mechanism
+</a>.
+<ins class="diff-new">The
+attribute's
+keywords
+are
+</ins><dfn data-dfn-for="capturefacingmode" data-dfn-type="dfn" id="dom-capturefacingmode-user" data-idl="" data-title="user"><code><ins class="diff-new">
+user
+</ins></code></dfn><ins class="diff-new">
+and
+</ins><dfn data-dfn-for="capturefacingmode" data-dfn-type="dfn" id="dom-capturefacingmode-environment" data-idl="" data-title="environment"><code><ins class="diff-new">
+environment
+</ins></code></dfn>,<ins class="diff-new">
+which
+map
+to
+the
+respective
+states
+</ins><var><ins class="diff-new">
+user
+</ins></var><ins class="diff-new">
+and
+</ins><var><ins class="diff-new">
+environment
+</ins></var>.<ins class="diff-new">
+In
+addition,
+there
+is
+a
+third
+state,
+the
+</ins><var><ins class="diff-new">
+implementation-specific
+</ins></var><ins class="diff-new">
+state.
+The
+</ins><a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#missing-value-default"><ins class="diff-new">
+missing
+value
+default
+</ins>
+</a>
+is
+<del class="diff-old">preferred.
+</del>
+<ins class="diff-chg">the
+</ins><var><ins class="diff-chg">
+implementation-specific
+</ins></var><ins class="diff-chg">
+state.
+The
+</ins><a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#invalid-value-default"><ins class="diff-chg">
+invalid
+value
+default
+</ins></a><ins class="diff-chg">
+is
+also
+the
+</ins><var><ins class="diff-chg">
+implementation-specific
+</ins></var><ins class="diff-chg">
+state.
+</ins>
+</p>
+<div class="note">
+<div class="note-title marker" aria-level="3" role="heading" id="h-note2">
+<span>
+<ins class="diff-new">Note
+</ins></span></div><p class=""><ins class="diff-new">
+The
+</ins><var><ins class="diff-new">
+implementation-specific
+</ins></var><ins class="diff-new">
+state
+indicates
+the
+implementation
+is
+to
+act
+according
+to
+its
+default
+behavior.
+</ins></p></div>
+<p>
+The
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+IDL
+attribute
+<em class="rfc2119" title="MUST">
+MUST
+</em>
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#reflect">
+reflect
+</a>
+the
+respective
+content
+attribute
+of
+the
+same
+name.
+</p>
+<p>
+When
+the
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute
+is
+specified,
+the
+<a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">
+user
+agent
+</a>
+<em class="rfc2119" title="SHOULD">
+SHOULD
+</em>
+invoke
+a
+file
+picker
+of
+the
+specific
+<a href="#dfn-capture-control-type" class="internalDFN" data-link-type="dfn">
+capture
+control
+type
+</a>.
+</p>
+<p>
+<del class="diff-old">If
+</del>
+<ins class="diff-chg">When
+</ins>
+the
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+<ins class="diff-new">capture
+</ins></code>
+<del class="diff-old">accept
+</del>
+</a>
+<ins class="diff-new">attribute
+is
+specified,
+the
+</ins><a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn"><ins class="diff-new">
+user
+agent
+</ins></a><em class="rfc2119" title="MUST NOT"><ins class="diff-new">
+MUST
+NOT
+</ins></em><ins class="diff-new">
+save
+the
+captured
+media
+to
+any
+data
+storage,
+local
+or
+remote.
+</ins></p><div class="note"><div class="note-title marker" aria-level="3" role="heading" id="h-note3">
+<span>
+<ins class="diff-new">Note
+</ins></span></div><div class=""><ins class="diff-new">
+When
+scripts
+gain
+access
+to
+the
+files
+selected
+from
+the
+file
+picker
+(represented
+by
+a
+</ins><a data-link-type="dfn" href="https://www.w3.org/TR/FileAPI/#dfn-filelist"><code><ins class="diff-new">
+FileList
+</ins></code></a><ins class="diff-new">
+object),
+they
+can
+use
+various
+mechanisms
+to
+store
+the
+captured
+media.
+These
+mechanisms
+are
+out
+of
+scope
+for
+this
+specification.
+</ins></div></div><p><ins class="diff-new">
+If
+the
+</ins><a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#attr-input-accept"><code><ins class="diff-new">
+accept
+</ins>
+</code>
+</a>
+attribute's
+value
+is
+set
+to
+a
+MIME
+type
+that
+has
+no
+associated
+<a href="#dfn-capture-control-type" class="internalDFN" data-link-type="dfn">
+capture
+control
+type
+</a>,
+the
+<a href="#dfn-user-agent" class="internalDFN" data-link-type="dfn">
+user
+agent
+</a>
+<em class="rfc2119" title="MUST">
+MUST
+</em>
+act
+as
+if
+there
+was
+no
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute.
+</p>
+</div>
+</section>
+<section class="appendix informative" id="examples" typeof="bibo:Chapter" resource="#examples" property="bibo:hasPart">
+<h2 id="h-examples" resource="#h-examples">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+A.
+</span>
+Examples
+</span>
+</h2>
+<p>
+<em>
+This
+section
+is
+non-normative.
+</em>
+</p>
+<p>
+The
+following
+examples
+demonstrate
+how
+to
+give
+hints
+that
+it
+is
+preferred
+for
+the
+user
+to
+capture
+media
+of
+a
+specific
+MIME
+type
+using
+the
+media
+capture
+capabilities
+of
+the
+hosting
+device.
+Both
+a
+simple
+declarative
+example
+using
+an
+HTML
+form,
+as
+well
+as
+a
+more
+advanced
+example
+including
+scripting,
+are
+presented.
+</p>
+<ul>
+<li id="example-1">
+To
+take
+a
+picture
+using
+the
+device's
+<del class="diff-old">local
+still
+image
+capture
+device,
+such
+as
+a
+</del>
+<ins class="diff-chg">user-facing
+</ins>
+camera,
+and
+upload
+the
+picture
+taken
+using
+an
+HTML
+form:
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+1
+</span>
+</div>
+<del class="diff-old">  
+  
+</del>
+<pre class="hljs xml" aria-busy="false" aria-live="polite">
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"server.cgi"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"multipart/form-data"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"file"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"image"</span> <span class="hljs-attr">accept</span>=<span class="hljs-string">"image/*"</span> <span class="hljs-attr">capture</span>=<span class="hljs-string">"user"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Upload"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</pre>
+</div>
+</li>
+<li>
+Or
+alternatively,
+to
+capture
+video
+using
+the
+device's
+local
+video
+<del class="diff-old">camera:
+</del>
+<ins class="diff-chg">camera
+facing
+the
+environment:
+</ins>
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+2
+</span>
+</div>
+<del class="diff-old">  
+  
+</del>
+<pre class="hljs xml" aria-busy="false" aria-live="polite">
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"server.cgi"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"multipart/form-data"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"file"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"video"</span> <span class="hljs-attr">accept</span>=<span class="hljs-string">"video/*"</span> <span class="hljs-attr">capture</span>=<span class="hljs-string">"environment"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Upload"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</pre>
+</div>
+</li>
+<li>
+Or
+alternatively,
+to
+capture
+audio
+using
+the
+device's
+local
+<del class="diff-old">microphone:
+</del>
+<ins class="diff-chg">microphone
+(without
+</ins><a href="#dfn-preferred-facing-mode" class="internalDFN" data-link-type="dfn"><ins class="diff-chg">
+preferred
+facing
+mode
+</ins></a><ins class="diff-chg">
+defined,
+falls
+back
+to
+the
+implementation-specific
+default
+facing
+mode):
+</ins>
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+3
+</span>
+</div>
+<del class="diff-old">  
+  
+</del>
+<pre class="hljs xml" aria-busy="false" aria-live="polite">
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"server.cgi"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span> <span class="hljs-attr">enctype</span>=<span class="hljs-string">"multipart/form-data"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"file"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"audio"</span> <span class="hljs-attr">accept</span>=<span class="hljs-string">"audio/*"</span> <span class="hljs-attr">capture</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Upload"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+</pre>
+</div>
+</li>
+<li id="example-4" data-link-for="HTMLInputElement">
+For
+more
+advanced
+use
+cases,
+specify
+the
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute
+in
+markup:
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+4
+</span>
+</div>
+<pre class="hljs javascript" aria-busy="false" aria-live="polite">
+<ins class="diff-chg">&lt;input type=<span class="hljs-string">"file"</span> accept=<span class="hljs-string">"image/*"</span> capture&gt;
+</ins><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span></span>
+</pre>
+</div>
+And
+handle
+the
+file
+upload
+in
+script
+via
+<code>
+XMLHttpRequest
+</code>:
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+5
+</span>
+</div>
+<pre class="hljs javascript" aria-busy="false" aria-live="polite">
+<span class="hljs-keyword">var</span> input = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'input[type=file]'</span>); <span class="hljs-comment">// see Example 4</span>
+<del class="diff-old">input
+  
+</del>
+<ins class="diff-chg">input.onchange = <span class="hljs-function"><span class="hljs-keyword">function</span> () </span>{
+</ins>  <span class="hljs-keyword">var</span> file = input.files[<span class="hljs-number">0</span>];
+<del class="diff-old">  upload
+  drawOnCanvas
+  displayAsImage
+</del>
+<ins class="diff-chg">  upload(file);
+  drawOnCanvas(file);   <span class="hljs-comment">// see Example 6</span>
+  displayAsImage(file); <span class="hljs-comment">// see Example 7</span>
+};
+</ins>
+<del class="diff-old">  
+      xhr 
+</del>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">upload</span>(<span class="hljs-params">file</span>) </span>{
+  <span class="hljs-keyword">var</span> form = <span class="hljs-keyword">new</span> FormData(),
+<ins class="diff-chg">      xhr = <span class="hljs-keyword">new</span> XMLHttpRequest();
+</ins>
+<del class="diff-old">  form
+  xhr
+  xhr
+</del>
+<ins class="diff-chg">  form.append(<span class="hljs-string">'image'</span>, file);
+  xhr.open(<span class="hljs-string">'post'</span>, <span class="hljs-string">'server.php'</span>, <span class="hljs-literal">true</span>);
+  xhr.send(form);
+}
+</ins>
+</pre>
+</div>
+The
+image
+can
+also
+be
+displayed
+on
+the
+client-side
+without
+uploading
+it
+e.g.
+for
+client-side
+image
+editing
+purposes,
+using
+the
+<code>
+FileReader
+</code>
+and
+a
+<code>
+canvas
+</code>
+element:
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+6
+</span>
+</div>
+<del class="diff-old">  
+</del>
+<pre class="hljs javascript" aria-busy="false" aria-live="polite">
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawOnCanvas</span>(<span class="hljs-params">file</span>) </span>{
+  <span class="hljs-keyword">var</span> reader = <span class="hljs-keyword">new</span> FileReader();
+<del class="diff-old">  reader
+    
+        c 
+        ctx 
+        img 
+</del>
+<ins class="diff-chg">  reader.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>{
+</ins>    <span class="hljs-keyword">var</span> dataURL = e.target.result,<ins class="diff-chg">
+        c = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'canvas'</span>), <span class="hljs-comment">// see Example 4</span>
+        ctx = c.getContext(<span class="hljs-string">'2d'</span>),
+        img = <span class="hljs-keyword">new</span> Image();
+</ins>
+<del class="diff-old">    img
+      c
+      c
+      ctx
+    
+</del>
+<ins class="diff-chg">    img.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>() </span>{
+      c.width = img.width;
+      c.height = img.height;
+      ctx.drawImage(img, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+    };
+</ins>
+<del class="diff-old">    img
+  
+</del>
+<ins class="diff-chg">    img.src = dataURL;
+  };
+</ins>
+<del class="diff-old">  reader
+</del>
+<ins class="diff-chg">  reader.readAsDataURL(file);
+}
+</ins>
+</pre>
+</div>
+Or
+alternatively,
+to
+just
+display
+the
+image,
+using
+the
+<code>
+createObjectURL()
+</code>
+method
+and
+an
+<code>
+img
+</code>
+element:
+<div class="example">
+<div class="example-title marker">
+<span>
+Example
+7
+</span>
+</div>
+<del class="diff-old">  
+      img 
+</del>
+<pre class="hljs javascript" aria-busy="false" aria-live="polite">
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">displayAsImage</span>(<span class="hljs-params">file</span>) </span>{
+  <span class="hljs-keyword">var</span> imgURL = URL.createObjectURL(file),
+<ins class="diff-chg">      img = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'img'</span>);
+</ins>
+<del class="diff-old">  img
+    URL
+  
+</del>
+<ins class="diff-chg">  img.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>() </span>{
+    URL.revokeObjectURL(imgURL);
+  };
+</ins>
+<del class="diff-old">  img
+  document
+</del>
+<ins class="diff-chg">  img.src = imgURL;
+</ins>  <span class="hljs-built_in">document</span>.body.appendChild(img);<ins class="diff-chg">
+}
+</ins>
+</pre>
+</div>
+</li>
+</ul>
+<p data-link-for="HTMLInputElement">
+When
+an
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#the-input-element">
+<code>
+input
+</code>
+</a>
+element's
+<a data-link-type="dfn" href="https://www.w3.org/TR/html51/single-page.html#attr-input-accept">
+<code>
+accept
+</code>
+</a>
+attribute
+is
+set
+to
+<code>
+image/*
+</code>
+and
+the
+<a href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn">
+<code>
+capture
+</code>
+</a>
+attribute
+is
+specified
+as
+in
+the
+<a href="#example-1">
+Example
+1
+</a>
+or
+<a href="#example-4">
+Example
+4
+</a>,
+the
+file
+picker
+may
+render
+as
+presented
+on
+the
+right
+side.
+When
+the
+attribute
+is
+not
+specified,
+the
+file
+picker
+may
+render
+as
+represented
+on
+the
+left
+side.
+</p>
+<p>
+<img alt="A File picker control in the File Upload (left) and Image Capture state (right)." src="images/capture-api-file-picker-concept.png">
+</p>
+</section>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart">
+<h2 id="h-references" resource="#h-references">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+B.
+</span>
+References
+</span>
+</h2>
+<section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart">
+<h3 id="h-normative-references" resource="#h-normative-references">
+<span property="xhv:role" resource="xhv:heading">
+<span class="secno">
+B.1
+</span>
+Normative
+references
+</span>
+</h3>
+<del class="diff-old">[HTML5]
+</del>
+<dl class="bibliography" resource="">
+<dt id="bib-FILE-API">
+<ins class="diff-chg">[FILE-API]
+</ins>
+</dt>
+<del class="diff-old">Ian
+Hickson;
+Robin
+Berjon;
+</del>
+<dd>
+<a href="https://www.w3.org/TR/FileAPI/" property="dc:requires">
+<cite>
+<ins class="diff-chg">File
+API
+</ins></cite></a>.<ins class="diff-chg">
+Arun
+Ranganathan;
+Jonas
+Sicking.
+W3C.
+21
+April
+2015.
+W3C
+Working
+Draft.
+URL:
+</ins><a href="https://www.w3.org/TR/FileAPI/" property="dc:requires"><ins class="diff-chg">
+https://www.w3.org/TR/FileAPI/
+</ins></a></dd><dt id="bib-HTML51"><ins class="diff-chg">
+[HTML51]
+</ins></dt><dd><a href="https://www.w3.org/TR/html51/" property="dc:requires"><cite><ins class="diff-chg">
+HTML
+5.1
+</ins></cite></a>.
+Steve
+Faulkner;
+<ins class="diff-new">Arron
+Eicholz;
+</ins>
+Travis
+Leithead;
+<del class="diff-old">Erika
+Doyle
+Navara;
+Edward
+O'Connor;
+Silvia
+Pfeiffer.
+</del>
+<ins class="diff-chg">Alex
+Danilo.
+W3C.
+1
+November
+2016.
+W3C
+Recommendation.
+URL:
+</ins><a href="https://www.w3.org/TR/html51/" property="dc:requires"><ins class="diff-chg">
+https://www.w3.org/TR/html51/
+</ins></a></dd><dt id="bib-MEDIACAPTURE-STREAMS"><ins class="diff-chg">
+[MEDIACAPTURE-STREAMS]
+</ins></dt><dd><a href="https://www.w3.org/TR/mediacapture-streams/" property="dc:requires">
+<cite>
+<del class="diff-old">HTML5
+</del>
+<ins class="diff-chg">Media
+Capture
+and
+Streams
+</ins>
+</cite>
+</a>.
+<del class="diff-old">31
+July
+2014.
+</del>
+<ins class="diff-chg">Daniel
+Burnett;
+Adam
+Bergkvist;
+Cullen
+Jennings;
+Anant
+Narayanan;
+Bernard
+Aboba.
+W3C.
+19
+May
+2016.
+</ins>
+W3C
+Candidate
+Recommendation.
+URL:
+<del class="diff-old">http://www.w3.org/TR/html5/
+</del>
+<a href="https://www.w3.org/TR/mediacapture-streams/" property="dc:requires">
+<ins class="diff-chg">https://www.w3.org/TR/mediacapture-streams/
+</ins>
+</a>
+</dd>
+<dt id="bib-RFC2119">
+[RFC2119]
+</dt>
+<del class="diff-old">S.
+Bradner.
+</del>
+<dd>
+<a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">
+<cite>
+Key
+words
+for
+use
+in
+RFCs
+to
+Indicate
+Requirement
+Levels
+</cite>
+</a>.
+<ins class="diff-new">S.
+Bradner.
+IETF.
+</ins>
+March
+1997.
+Best
+Current
+Practice.
+URL:
+<del class="diff-old">http://www.ietf.org/rfc/rfc2119.txt
+</del>
+<a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">
+<ins class="diff-chg">https://tools.ietf.org/html/rfc2119
+</ins>
+</a>
+</dd>
+<del class="diff-old">[WEBIDL]
+</del>
+<dt id="bib-WEBIDL-1">
+<ins class="diff-chg">[WEBIDL-1]
+</ins>
+</dt>
+<del class="diff-old">Cameron
+McCormack.
+</del>
+<dd>
+<a href="https://www.w3.org/TR/2016/REC-WebIDL-1-20161215/" property="dc:requires">
+<cite>
+<del class="diff-old">Web
+IDL
+</del>
+<ins class="diff-chg">WebIDL
+Level
+1
+</ins>
+</cite>
+</a>.
+<del class="diff-old">19
+April
+2012.
+</del>
+<ins class="diff-chg">Cameron
+McCormack.
+W3C.
+15
+December
+2016.
+</ins>
+W3C
+<del class="diff-old">Candidate
+</del>
+Recommendation.
+URL:
+<del class="diff-old">http://www.w3.org/TR/WebIDL/
+</del>
+<a href="https://www.w3.org/TR/2016/REC-WebIDL-1-20161215/" property="dc:requires">
+<ins class="diff-chg">https://www.w3.org/TR/2016/REC-WebIDL-1-20161215/
+</ins>
+</a>
+</dd>
+</dl>
+</section>
+<del class="diff-old">B.2
+Informative
+references
+[FILE-API]
+Arun
+Ranganathan;
+Jonas
+Sicking.
+File
+API
+.
+12
+September
+2013.
+W3C
+Last
+Call
+Working
+Draft.
+URL:
+http://www.w3.org/TR/FileAPI/
+</del>
+</section>
+<p role="navigation" id="back-to-top">
+<del class="diff-old">[GETUSERMEDIA]
+Daniel
+Burnett;
+Adam
+Bergkvist;
+Cullen
+Jennings;
+Anant
+Narayanan.
+</del>
+<a href="#toc">
+<del class="diff-old">Media
+Capture
+and
+Streams
+</del>
+<abbr title="Back to Top">
+<ins class="diff-chg">↑
+</ins></abbr>
+<del class="diff-old">.
+3
+September
+2013.
+W3C
+Working
+Draft.
+URL:
+http://www.w3.org/TR/mediacapture-streams/
+</del>
+</a>
+</p>
+<script src="https://www.w3.org/scripts/TR/2016/fixup.js" type="text/javascript">
+</script>
+</body>
+</html>
+
