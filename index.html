@@ -63,11 +63,16 @@
       control.
     </section>
     <section id="sotd">
-      <p>Since the <a href="http://www.w3.org/TR/2014/CR-html-media-capture-20140909/">previous Candidate Recommendation of this specification</a>, the following <a href="CR-diff.html">changes have been brought</a> to the document:</p>
-      <ul>
-        <li>The <code>capture</code> attribute has been changed from a boolean to an enumerated value representing the facing mode of the targeted capturing device</li>
-        <li>The WebIDL <code>capture</code> attribute has been annotated with a <code>[CEReactions]</code> extended attribute since it can change the DOM in ways that may impact custom elements</li>
-      </ul>
+      <p>
+        Since <a href=
+        "https://www.w3.org/TR/2017/CR-html-media-capture-20170504/">Candidate
+        Recommendation 04 May 2017</a>, the <a data-link-for=
+        "HTMLInputElement">capture</a> IDL attribute was changed from an
+        enumeration into a <code>DOMString</code>. This change aligns this
+        specification with the HTML specification changes that <a href=
+        "https://github.com/whatwg/html/pull/2585">removed the IDL enumeration
+        reflection</a>.
+      </p>
     </section>
     <section class="informative">
       <h2>
@@ -195,39 +200,39 @@
         rules in this section apply.
       </p>
       <pre class="idl">
-        enum CaptureFacingMode { "user", "environment" };
-
         partial interface HTMLInputElement {
-            [CEReactions] attribute CaptureFacingMode capture;
+            [CEReactions] attribute DOMString capture;
         };
       </pre>
       <div>
         <p>
-          The <dfn data-dfn-for="CaptureFacingMode">CaptureFacingMode</dfn>
-          enumeration is used to express the <a>preferred facing mode</a>. The
-          semantics of its keywords mirror the similarly named keywords defined
-          in <a><code>VideoFacingModeEnum</code></a>.
-        </p>
-        <p class="note">
-          If the user agent is unable to support the <a>preferred facing
-          mode</a>, it can fall back to the implementation-specific default
-          facing mode.
+          The <a>capture</a> attribute is an <a>enumerated attribute</a> whose
+          state specifies the <a>preferred facing mode</a> for the <a>media
+          capture mechanism</a>.
         </p>
         <p>
-          The <a>capture</a> attribute is an <a>enumerated attribute</a> that
-          specifies the <a>preferred facing mode</a> for the <a>media capture
-          mechanism</a>. The attribute's keywords are <dfn data-dfn-for=
-          "CaptureFacingMode">user</dfn> and <dfn data-dfn-for=
-          "CaptureFacingMode">environment</dfn>, which map to the respective
-          states <var>user</var> and <var>environment</var>. In addition, there
-          is a third state, the <var>implementation-specific</var> state. The
-          <a>missing value default</a> is the
+          The attribute's keywords are <dfn><code>user</code></dfn> and
+          <dfn><code>environment</code></dfn>, which map to the respective
+          states <var>user</var> and <var>environment</var>. The semantics of
+          the states <var>user</var> and <var>environment</var> mirror the
+          similarly named enumeration values defined in
+          <a><code>VideoFacingModeEnum</code></a>.
+        </p>
+        <p>
+          In addition, there is a third state, the
+          <var>implementation-specific</var> state.
+        </p>
+        <p>
+          The <a>missing value default</a> is the
           <var>implementation-specific</var> state. The <a>invalid value
           default</a> is also the <var>implementation-specific</var> state.
         </p>
         <p class="note">
-          The <var>implementation-specific</var> state indicates the
-          implementation is to act according to its default behavior.
+          If the user agent is unable to support the <a>preferred facing
+          mode</a>, it can fall back to the implementation-specific default
+          facing mode that maps to the <var>implementation-specific</var> state
+          that indicates the implementation is to act according to its default
+          behavior.
         </p>
         <p>
           The <a>capture</a> IDL attribute MUST <a>reflect</a> the respective
