@@ -67,11 +67,19 @@
         Since <a href=
         "https://www.w3.org/TR/2017/CR-html-media-capture-20170504/">Candidate
         Recommendation 04 May 2017</a>, the <a data-link-for=
-        "HTMLInputElement">capture</a> IDL attribute was changed from an
-        enumeration into a <code>DOMString</code>. This change aligns this
-        specification with the HTML specification changes that <a href=
-        "https://github.com/whatwg/html/pull/2585">removed the IDL enumeration
-        reflection</a>.
+        "HTMLInputElement">capture</a> IDL attribute was <a href=
+        "https://github.com/w3c/html-media-capture/commit/2c531e8293be61b75066188f52694ab4cef1e8a6">
+        changed</a> from an enumeration into a <code>DOMString</code>. This
+        change aligns this specification with the HTML specification changes
+        that <a href="https://github.com/whatwg/html/pull/2585">removed the IDL
+        enumeration reflection</a>.
+      </p>
+      <p>
+        The CR exit criterion is two interoperable deployed implementations of
+        each feature.
+      </p>
+      <p>
+        No features are marked as 'at-risk'.
       </p>
     </section>
     <section class="informative">
@@ -177,8 +185,8 @@
       </ul>
       <p>
         This specification builds upon the security and privacy protections
-        provided by the <code>&lt;input type="file"&gt;</code> [[HTML51]] and the
-        [[FILE-API]] specifications; in particular, it is expected that any
+        provided by the <code>&lt;input type="file"&gt;</code> [[HTML51]] and
+        the [[FILE-API]] specifications; in particular, it is expected that any
         offer to start capturing content from the user’s device would require a
         specific user interaction on an HTML element that is entirely
         controlled by the user agent.

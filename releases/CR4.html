@@ -836,7 +836,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     </style>
     <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-CR">
     <link rel="canonical" href="https://www.w3.org/TR/html-media-capture/">
-    <meta name="generator" content="ReSpec 15.8.1">
+    <meta name="generator" content="ReSpec 16.0.0">
     <script id="initialUserConfig" type="application/json">
         {
             "specStatus": "CR",
@@ -964,9 +964,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
         <p>
             Since <a href="https://www.w3.org/TR/2017/CR-html-media-capture-20170504/">Candidate
-        Recommendation 04 May 2017</a>, the <a data-link-for="HTMLInputElement" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> IDL attribute was changed from an enumeration into a <code>DOMString</code>.
-            This change aligns this specification with the HTML specification changes that <a href="https://github.com/whatwg/html/pull/2585">removed the IDL enumeration
-        reflection</a>.
+        Recommendation 04 May 2017</a>, the <a data-link-for="HTMLInputElement" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> IDL attribute was <a href="https://github.com/w3c/html-media-capture/commit/2c531e8293be61b75066188f52694ab4cef1e8a6">
+        changed</a> from an enumeration into a <code>DOMString</code>. This change aligns this specification with the HTML specification changes that <a href="https://github.com/whatwg/html/pull/2585">removed the IDL
+        enumeration reflection</a>.
+        </p>
+        <p>
+            The CR exit criterion is two interoperable deployed implementations of each feature.
+        </p>
+        <p>
+            No features are marked as 'at-risk'.
         </p>
 
         <p>
@@ -1111,9 +1117,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
             </li>
         </ul>
         <p>
-            This specification builds upon the security and privacy protections provided by the <code>&lt;input type="file"&gt;</code> [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] and the [
-            <cite><a class="bibref" href="#bib-FILE-API">FILE-API</a></cite>] specifications; in particular, it is expected that any offer to start capturing content from the user’s device would require a specific user interaction on an HTML element that
-            is entirely controlled by the user agent.
+            This specification builds upon the security and privacy protections provided by the <code>&lt;input type="file"&gt;</code> [<cite><a class="bibref" href="#bib-HTML51">HTML51</a></cite>] and the [<cite><a class="bibref" href="#bib-FILE-API">FILE-API</a></cite>]
+            specifications; in particular, it is expected that any offer to start capturing content from the user’s device would require a specific user interaction on an HTML element that is entirely controlled by the user agent.
         </p>
         <p>
             Implementors should take care to prevent additional leakage of privacy-sensitive data from captured media. For instance, embedding the user’s location in the metadata of captured media (e.g. EXIF) might transmit more private data than the user is expecting.
