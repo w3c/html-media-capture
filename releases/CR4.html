@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html dir="ltr" lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -836,7 +836,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     </style>
     <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-CR">
     <link rel="canonical" href="https://www.w3.org/TR/html-media-capture/">
-    <meta name="generator" content="ReSpec 16.2.0">
+    <meta name="generator" content="ReSpec 16.2.1">
     <script id="initialUserConfig" type="application/json">
         {
             "specStatus": "CR",
@@ -854,11 +854,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
                     "company": "W3C (until May 10, 2012)"
                 }
             ],
-            "publishDate": "2017-08-24",
             "previousPublishDate": "2017-05-04",
             "previousMaturity": "CR",
             "edDraftURI": "https://w3c.github.io/html-media-capture/",
-            "crEnd": "2017-09-21",
+            "crEnd": "2017-10-30",
             "wg": "Device and Sensors Working Group",
             "wgURI": "https://www.w3.org/2009/dap/",
             "wgPublicList": "public-device-apis",
@@ -885,8 +884,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
                     }
                 ]
             }],
-            "publishISODate": "2017-08-24T00:00:00.000Z",
-            "generatedSubtitle": "Candidate Recommendation 24 August 2017"
+            "publishDate": "2017-08-31",
+            "publishISODate": "2017-08-31T00:00:00.000Z",
+            "generatedSubtitle": "Candidate Recommendation 31 August 2017"
         }
     </script>
 </head>
@@ -894,14 +894,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 <body aria-busy="false" class="h-entry" id="respecDocument">
     <div class="head" role="contentinfo" id="respecHeader">
         <p>
-            <a class="logo" href="https://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C"></a>
+            <a class="logo" href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" height="48" width="72"></a>
         </p>
         <p></p>
         <h1 class="title p-name" id="title">HTML Media Capture</h1>
-        <h2 id="w3c-candidate-recommendation-24-august-2017"><abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation <time class="dt-published" datetime="2017-08-24">24 August 2017</time></h2>
+        <h2 id="w3c-candidate-recommendation-31-august-2017"><abbr title="World Wide Web Consortium">W3C</abbr> Candidate Recommendation <time class="dt-published" datetime="2017-08-31">31 August 2017</time></h2>
         <dl>
             <dt>This version:</dt>
-            <dd><a class="u-url" href="https://www.w3.org/TR/2017/CR-html-media-capture-20170824/">https://www.w3.org/TR/2017/CR-html-media-capture-20170824/</a></dd>
+            <dd><a class="u-url" href="https://www.w3.org/TR/2017/CR-html-media-capture-20170831/">https://www.w3.org/TR/2017/CR-html-media-capture-20170831/</a></dd>
             <dt>Latest published version:</dt>
             <dd><a href="https://www.w3.org/TR/html-media-capture/">https://www.w3.org/TR/html-media-capture/</a></dd>
             <dt>Latest editor's draft:</dt>
@@ -964,15 +964,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
         <p>
             Since <a href="https://www.w3.org/TR/2017/CR-html-media-capture-20170504/">Candidate
-        Recommendation 04 May 2017</a>, the <a data-link-for="HTMLInputElement" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> IDL attribute was <a href="https://github.com/w3c/html-media-capture/commit/2c531e8293be61b75066188f52694ab4cef1e8a6">
-        changed</a> from an enumeration into a <code>DOMString</code>. This change aligns this specification with the HTML specification changes that <a href="https://github.com/whatwg/html/pull/2585">removed the IDL
-        enumeration reflection</a>.
-        </p>
-        <p>
-            The CR exit criterion is two interoperable deployed implementations of each feature.
-        </p>
-        <p>
-            No features are marked as 'at-risk'.
+                Recommendation 04 May 2017</a>, the <a data-link-for="HTMLInputElement" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn"><code>capture</code></a> IDL attribute was <a href="https://github.com/w3c/html-media-capture/commit/2c531e8293be61b75066188f52694ab4cef1e8a6">
+                    changed</a> from an enumeration into a <code>DOMString</code>. This change aligns this specification with the HTML specification changes that <a href="https://github.com/whatwg/html/pull/2585">removed the IDL
+                    enumeration reflection</a>.
+                    </p>
+                    <p>
+                        The CR exit criterion is two interoperable deployed implementations of each feature.
+                    </p>
+                    <p>
+                        No features are marked as 'at-risk'.
         </p>
 
         <p>
@@ -981,7 +981,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
             <a href="mailto:public-device-apis@w3.org">public-device-apis@w3.org</a> (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>,
             <a href="https://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
             <abbr title="World Wide Web Consortium">W3C</abbr> publishes a Candidate Recommendation to indicate that the document is believed to be stable and to encourage implementation by the developer community. This Candidate Recommendation is expected
-            to advance to Proposed Recommendation no earlier than 21 September 2017.
+            to advance to Proposed Recommendation no earlier than 30 October 2017.
         </p>
         <p>
             Please see the Working Group's <a href="https://www.w3.org/2009/dap/wiki/ImplementationStatus">implementation
@@ -1136,7 +1136,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         </p>
         <div>
             <pre class="def idl"><span class="idlInterface" id="idl-def-htmlinputelement-partial-1" data-idl="" data-title="HTMLInputElement">partial interface <span class="idlInterfaceID"><a data-lt="HTMLInputElement" data-link-type="dfn" href="https://www.w3.org/TR/html51/sec-forms.html#htmlinputelement-htmlinputelement" data-for=""><code>HTMLInputElement</code></a></span> {
-<span class="idlAttribute" id="idl-def-htmlinputelement-capture" data-idl="" data-title="capture" data-dfn-for="htmlinputelement">    [<span class="extAttr"><span class="extAttrName"><a href="https://www.w3.org/TR/custom-elements/#cereactions">CEReactions</a></span></span>]
+<span class="idlAttribute" id="idl-def-htmlinputelement-capture" data-idl="" data-title="capture" data-dfn-for="htmlinputelement">    [<span class="extAttr"><span class="extAttrName"><a href="https://html.spec.whatwg.org/multipage/#cereactions">CEReactions</a></span></span>]
     attribute <span class="idlAttrType"><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></span> <span class="idlAttrName"><a data-lt="capture" href="#dom-htmlinputelement-capture" class="internalDFN" data-link-type="dfn" data-for="HTMLInputElement"><code>capture</code></a></span>;</span>
 };</span></pre>
         </div>
